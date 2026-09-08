@@ -4,6 +4,7 @@ import { getApp, related, categoryName, priceLabel } from '../lib/apps';
 import { verdicts, absolute, boards } from '../lib/config';
 import { one, voteCounts, posts } from '../lib/db';
 import Ticker from '../components/Ticker.astro';
+import ToolIcon from '../components/ToolIcon.astro';
 const a = getApp(Astro.params.slug || '');
 if (!a) {
   Astro.response.status = 404;
@@ -68,7 +69,7 @@ const jsonld = a
           </nav>
           <header class="detail-head">
             <>
-              <span class="tool-icon">{a.name.slice(0, 1)}</span>
+              <ToolIcon app={a} />
               <div>
                 <>
                   <h1>{a.name}</h1>
@@ -374,7 +375,7 @@ const jsonld = a
               <div class="related-grid">
                 {related(a).map((r) => (
                   <a class="related-card" href={'/' + r.slug}>
-                    <span class="tool-icon">{r.name.slice(0, 1)}</span>
+                    <ToolIcon app={r} />
                     <strong>{r.name}</strong>
                     <span class:list={['verdict', r.verdict]} style="font-size:11px">
                       {verdicts[r.verdict].en} ↗

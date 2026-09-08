@@ -28,7 +28,8 @@
     "catalog:pr": "node --env-file-if-exists=.env --import tsx scripts/catalog-pr.ts",
     "qa:summary": "node scripts/qa-summary.mjs",
     "export:public": "node scripts/export-public.mjs",
-    "test:production": "node scripts/test-production.mjs"
+    "test:production": "node scripts/test-production.mjs",
+    "icons:fetch": "node scripts/fetch-icons.mjs"
   },
   "dependencies": {
     "@astrojs/node": "11.1.5",
@@ -52,6 +53,7 @@
     "@types/better-sqlite3": "^7.6.0",
     "@types/nodemailer": "^7.0.0",
     "@types/sanitize-html": "^2.16.0",
+    "icojs": "1.0.1",
     "prettier": "^3.9.6",
     "prettier-plugin-astro": "^0.14.1",
     "tsx": "^4.20.0",

@@ -1,4 +1,20 @@
 export {};
+function iconFallback(img: HTMLImageElement) {
+  if (!img.hasAttribute('data-tool-icon-image')) return;
+  img.hidden = true;
+  img.parentElement?.classList.remove('has-image');
+  img.parentElement?.querySelector('[data-tool-icon-fallback]')?.removeAttribute('hidden');
+}
+document.addEventListener(
+  'error',
+  (event) => {
+    if (event.target instanceof HTMLImageElement) iconFallback(event.target);
+  },
+  true,
+);
+document.querySelectorAll<HTMLImageElement>('[data-tool-icon-image]').forEach((img) => {
+  if (img.complete && img.naturalWidth === 0) iconFallback(img);
+});
 const $ = <T extends Element = HTMLElement>(s: string) => document.querySelector<T>(s);
 let toastTimer: ReturnType<typeof setTimeout>;
 function toast(message: string) {

@@ -588,6 +588,19 @@ select {
   font: 600 18px var(--sans);
   border-radius: 7px;
 }
+.tool-icon.has-image {
+  background: #fff;
+  overflow: hidden;
+}
+.tool-icon > img {
+  display: block;
+  width: 78%;
+  height: 78%;
+  object-fit: contain;
+}
+.tool-icon > [hidden] {
+  display: none;
+}
 .tool-info strong {
   font-size: 0.98rem;
   display: block;

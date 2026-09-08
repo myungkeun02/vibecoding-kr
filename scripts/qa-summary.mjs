@@ -40,8 +40,14 @@ function tree(path) {
     }
   }
 }
-for (const dir of ['src', 'data/apps', 'migrations']) tree(dir);
-for (const f of ['package.json', 'pnpm-lock.yaml', 'data/categories.json', 'data/exchange.json']) {
+for (const dir of ['src', 'data/apps', 'migrations', 'public/icons']) tree(dir);
+for (const f of [
+  'package.json',
+  'pnpm-lock.yaml',
+  'data/categories.json',
+  'data/exchange.json',
+  'data/icons.json',
+]) {
   hash.update(f);
   hash.update(readFileSync(f));
 }
@@ -54,6 +60,8 @@ writeFileSync(
       scope: [
         'src/**',
         'data/apps/**',
+        'public/icons/**',
+        'data/icons.json',
         'migrations/**',
         'package.json',
         'pnpm-lock.yaml',

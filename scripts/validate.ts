@@ -1,4 +1,5 @@
-import { readFileSync, readdirSync } from 'node:fs';
+import { readFileSync, readdirSync, existsSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { AppSchema } from '../src/lib/schema';
 const cats = JSON.parse(readFileSync('data/categories.json', 'utf8'));
 const files = readdirSync('data/apps').filter((f) => f.endsWith('.json'));
@@ -31,6 +32,21 @@ const apps = files.map((f) => {
     throw new Error('Invalid catalog route ' + f);
   return a;
 });
+const icons = JSON.parse(readFileSync('data/icons.json', 'utf8'));
+for (const [slug, icon] of Object.entries(icons) as [string, { src?: string; sha256?: string }][]) {
+  if (!icon.src) continue;
+  if (
+    !apps.some((app) => app.slug === slug) ||
+    !new RegExp('^/icons/' + slug + '-[a-f0-9]{12}\\.webp$').test(icon.src) ||
+    !existsSync('public' + icon.src)
+  )
+    throw new Error('Invalid local tool icon ' + slug);
+  const hash = createHash('sha256')
+    .update(readFileSync('public' + icon.src))
+    .digest('hex');
+  if (hash !== icon.sha256 || !icon.src.endsWith('-' + hash.slice(0, 12) + '.webp'))
+    throw new Error('Tool icon hash mismatch ' + slug);
+}
 for (const a of apps) {
   for (const s of a.relatedSlugs)
     if (s === a.slug || !apps.some((b) => b.slug === s)) throw new Error('Invalid relation ' + a.slug);

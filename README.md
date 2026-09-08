@@ -49,6 +49,8 @@ E2E는 빌드된 서버를 8096 포트와 `data/test/e2e`에서 실행하고 해
 
 카탈로그의 유일한 편집 원본은 `data/apps/<slug>.json`입니다. `pnpm validate && pnpm build`로 검사하고 재배포하면 메타데이터만 동기화되며 계정·글·투표는 유지됩니다. `pnpm seed`를 반복해도 초기화되지 않습니다. 숨긴 도구는 `published:false`로 처리하며 기존 참조는 DB에 남깁니다.
 
+121개 공개 도구는 공식 출처의 아이콘을 목록·상세·관련 도구에 표시합니다. 아이콘은 `public/icons`에 저장해 제공하며 외부 이미지 서비스를 호출하지 않습니다. `pnpm icons:fetch`로 새 도구의 아이콘을 가져오고, 변경된 로고는 `pnpm icons:fetch --only=도구-slug`로 갱신합니다. 출처·갱신 방법은 [아이콘 안내](docs/licenses/TOOL-ICONS.md)에 있습니다.
+
 제안은 접수 → 관리자 채택(배포 대기) → JSON 출처 검토 → 초안 PR → CI·병합 → 재배포 순서입니다. 선택적인 `pnpm catalog:pr <제안ID> data/apps/<slug>.json --publish`는 설정된 봇 fork에서 초안 PR을 만들며, 운영 DB나 제안자의 이메일을 전송하지 않습니다. 자동 병합은 하지 않습니다.
 
 ## 문서
@@ -68,4 +70,4 @@ E2E는 빌드된 서버를 8096 포트와 `data/test/e2e`에서 실행하고 해
 
 공식 [Can I Vibecode It?](https://canivibecodeit.com)의 공개 링크로 확인한 [원본 저장소](https://github.com/canivibecodeit/canivibecodeit)를 참고했습니다. 원본 확인 커밋은 `8f2d20a31320d636c7bf9500bbbc0a6fef217280`입니다. 원본 MIT 저작권 고지는 [별도 사본](docs/licenses/ORIGINAL-MIT.txt)에 보존했습니다.
 
-이 구현의 코드는 [MIT](LICENSE)입니다. 폰트·의존성·링크한 대체 도구의 라이선스는 각각 적용됩니다. [의존성 목록](docs/licenses/dependencies.json)은 그 라이선스를 대체하지 않습니다. 실제 재구축 요청과 원본 프롬프트는 [공개 사본](public/prompts/korean-rebuild.txt) 및 서비스 푸터에 있습니다.
+이 구현의 코드는 [MIT](LICENSE)입니다. 도구 아이콘·브랜드 표시는 해당 권리자의 자산이며 코드의 MIT 라이선스 대상에서 제외됩니다. 폰트·의존성·링크한 대체 도구의 라이선스는 각각 적용됩니다. [의존성 목록](docs/licenses/dependencies.json)은 그 라이선스를 대체하지 않습니다. 실제 재구축 요청과 원본 프롬프트는 [공개 사본](public/prompts/korean-rebuild.txt) 및 서비스 푸터에 있습니다.

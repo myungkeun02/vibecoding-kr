@@ -7,6 +7,7 @@ const files = [
   'src',
   'data/apps',
   'data/categories.json',
+  'data/icons.json',
   'data/exchange.json',
   'migrations',
   'scripts',

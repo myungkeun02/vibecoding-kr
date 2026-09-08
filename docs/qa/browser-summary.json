@@ -1,18 +1,28 @@
 {
-  "startedAt": "2026-09-08T09:31:38.095Z",
-  "durationMs": 9869.836,
-  "passed": 16,
+  "startedAt": "2026-09-08T10:46:04.339Z",
+  "durationMs": 11088.932999999999,
+  "passed": 17,
   "failed": 0,
   "flaky": 0,
   "skipped": 0,
   "cases": [
+    {
+      "title": "all tool icons load locally, survive filtering and fall back after image failure",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 916
+        }
+      ]
+    },
     {
       "title": "all catalog pages, key pages, 404, sitemap and metadata render from the production server",
       "status": "expected",
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 646
+          "durationMs": 605
         }
       ]
     },
@@ -32,7 +42,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 667
+          "durationMs": 645
         }
       ]
     },
@@ -42,7 +52,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 724
+          "durationMs": 751
         }
       ]
     },
@@ -52,7 +62,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 2405
+          "durationMs": 2410
         }
       ]
     },
@@ -72,7 +82,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 113
+          "durationMs": 152
         }
       ]
     },
@@ -82,7 +92,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 70
+          "durationMs": 80
         }
       ]
     },
@@ -92,7 +102,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 16
+          "durationMs": 15
         }
       ]
     },
@@ -102,7 +112,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 129
+          "durationMs": 132
         }
       ]
     },
@@ -112,7 +122,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 95
+          "durationMs": 98
         }
       ]
     },
@@ -122,7 +132,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 89
+          "durationMs": 94
         }
       ]
     },
@@ -132,7 +142,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 1438
+          "durationMs": 1510
         }
       ]
     },
@@ -142,7 +152,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 62
+          "durationMs": 60
         }
       ]
     },
@@ -152,7 +162,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 122
+          "durationMs": 124
         }
       ]
     },
@@ -162,7 +172,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 830
+          "durationMs": 841
         }
       ]
     }

@@ -4,11 +4,13 @@
   "scope": [
     "src/**",
     "data/apps/**",
+    "public/icons/**",
+    "data/icons.json",
     "migrations/**",
     "package.json",
     "pnpm-lock.yaml",
     "data/categories.json",
     "data/exchange.json"
   ],
-  "hash": "5036b4b8510855a066bfe285193cb3248fd3cfbcce61a680a731e82c7fc71024"
+  "hash": "47293ffc70c254f1a8cea44f292a27833ac3824dc07d77ed0ab4b7896b80340d"
 }

@@ -156,6 +156,16 @@
       "description": "Babel Types is a Lodash-esque utility library for AST nodes"
     },
     {
+      "name": "@borewit/text-codec",
+      "versions": [
+        "0.2.2"
+      ],
+      "license": "MIT",
+      "author": "Borewit",
+      "homepage": "https://github.com/Borewit/text-codec#readme",
+      "description": "Text Decoder"
+    },
+    {
       "name": "@bruits/satteri-darwin-arm64",
       "versions": [
         "0.10.5"
@@ -163,6 +173,14 @@
       "license": "MIT",
       "homepage": "https://github.com/bruits/satteri#readme",
       "description": "High-performance Markdown and MDX processing"
+    },
+    {
+      "name": "@canvas/image-data",
+      "versions": [
+        "1.1.0"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/node-gfx/image-data#readme"
     },
     {
       "name": "@capsizecss/unpack",
@@ -427,6 +445,26 @@
       "author": "Frederik De Bleser",
       "homepage": "https://github.com/opentypejs/opentype.js#readme",
       "description": "OpenType font parser"
+    },
+    {
+      "name": "@tokenizer/inflate",
+      "versions": [
+        "0.4.1"
+      ],
+      "license": "MIT",
+      "author": "Borewit",
+      "homepage": "https://github.com/Borewit/tokenizer-inflate#readme",
+      "description": "Tokenized zip support"
+    },
+    {
+      "name": "@tokenizer/token",
+      "versions": [
+        "0.3.0"
+      ],
+      "license": "MIT",
+      "author": "Borewit",
+      "homepage": "https://github.com/Borewit/tokenizer-token#readme",
+      "description": "TypeScript definition for strtok3 token"
     },
     {
       "name": "@types/better-sqlite3",
@@ -733,6 +771,16 @@
       "description": "The fastest and simplest library for SQLite in Node.js."
     },
     {
+      "name": "bmp-ts",
+      "versions": [
+        "1.0.9"
+      ],
+      "license": "MIT",
+      "author": "Andrew lisowski",
+      "homepage": "https://github.com/hipstersmoothie/bmp-ts#readme",
+      "description": "A pure typescript BMP encoder and decoder"
+    },
+    {
       "name": "bowser",
       "versions": [
         "2.14.1"
@@ -958,6 +1006,22 @@
       "author": "Josh Junon",
       "homepage": "https://github.com/debug-js/debug#readme",
       "description": "Lightweight debugging utility for Node.js and the browser"
+    },
+    {
+      "name": "decode-bmp",
+      "versions": [
+        "0.2.1"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/LinusU/decode-bmp#readme"
+    },
+    {
+      "name": "decode-ico",
+      "versions": [
+        "0.4.1"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/LinusU/decode-ico#readme"
     },
     {
       "name": "deepmerge",
@@ -1241,6 +1305,16 @@
       "description": "High performance (de)compression in an 8kB package"
     },
     {
+      "name": "file-type",
+      "versions": [
+        "22.0.2"
+      ],
+      "license": "MIT",
+      "author": "Sindre Sorhus",
+      "homepage": "https://github.com/sindresorhus/file-type#readme",
+      "description": "Detect the file type of a file, stream, or data"
+    },
+    {
       "name": "find-proc",
       "versions": [
         "0.1.0"
@@ -1406,6 +1480,16 @@
       "author": "Jonathan Ong",
       "homepage": "https://github.com/jshttp/http-errors#readme",
       "description": "Create HTTP error objects"
+    },
+    {
+      "name": "icojs",
+      "versions": [
+        "1.0.1"
+      ],
+      "license": "MIT",
+      "author": "egy186",
+      "homepage": "https://egy186.github.io/icojs",
+      "description": "Decode and encode ICO files"
     },
     {
       "name": "iron-webcrypto",
@@ -1856,6 +1940,15 @@
       "description": "Blazing fast and accurate glob matcher written in JavaScript, with no dependencies and full support for standard and extended Bash glob features, including braces, extglobs, POSIX brackets, and regular expressions."
     },
     {
+      "name": "pngjs",
+      "versions": [
+        "7.0.0"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/lukeapage/pngjs",
+      "description": "PNG encoder/decoder in pure JS, supporting any bit size & interlace, async & sync with full test suite."
+    },
+    {
       "name": "postcss",
       "versions": [
         "8.5.28"
@@ -2183,6 +2276,16 @@
       "description": "Strip ANSI escape codes from a string"
     },
     {
+      "name": "strtok3",
+      "versions": [
+        "10.3.5"
+      ],
+      "license": "MIT",
+      "author": "Borewit",
+      "homepage": "https://github.com/Borewit/strtok3#readme",
+      "description": "A promise based streaming tokenizer"
+    },
+    {
       "name": "suf-log",
       "versions": [
         "2.5.3"
@@ -2253,6 +2356,14 @@
       "description": "A fast and minimal alternative to globby and fast-glob"
     },
     {
+      "name": "to-data-view",
+      "versions": [
+        "1.1.0"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/LinusU/to-data-view#readme"
+    },
+    {
       "name": "toidentifier",
       "versions": [
         "1.0.1"
@@ -2261,6 +2372,16 @@
       "author": "Douglas Christopher Wilson",
       "homepage": "https://github.com/component/toidentifier#readme",
       "description": "Convert a string of words to a JavaScript identifier"
+    },
+    {
+      "name": "token-types",
+      "versions": [
+        "6.1.2"
+      ],
+      "license": "MIT",
+      "author": "Borewit",
+      "homepage": "https://github.com/Borewit/token-types#readme",
+      "description": "Common token types for decoding and encoding numeric and string values"
     },
     {
       "name": "trim-lines",
@@ -2316,6 +2437,16 @@
       "license": "MIT",
       "homepage": "https://github.com/unjs/ufo#readme",
       "description": "URL utils for humans"
+    },
+    {
+      "name": "uint8array-extras",
+      "versions": [
+        "1.5.0"
+      ],
+      "license": "MIT",
+      "author": "Sindre Sorhus",
+      "homepage": "https://github.com/sindresorhus/uint8array-extras#readme",
+      "description": "Useful utilities for working with Uint8Array (and Buffer)"
     },
     {
       "name": "ultrahtml",
@@ -3510,6 +3641,26 @@
       "author": "Vincent Le Goff",
       "homepage": "https://github.com/fastify/fast-uri",
       "description": "Dependency-free RFC 3986 URI toolbox"
+    },
+    {
+      "name": "ieee754",
+      "versions": [
+        "1.2.1"
+      ],
+      "license": "BSD-3-Clause",
+      "author": "Feross Aboukhadijeh",
+      "homepage": "https://github.com/feross/ieee754#readme",
+      "description": "Read/write IEEE754 floating point numbers from/to a Buffer or array-like object"
+    },
+    {
+      "name": "jpeg-js",
+      "versions": [
+        "0.4.4"
+      ],
+      "license": "BSD-3-Clause",
+      "author": "Eugene Ware",
+      "homepage": "https://github.com/eugeneware/jpeg-js#readme",
+      "description": "A pure javascript JPEG encoder and decoder"
     },
     {
       "name": "smol-toml",

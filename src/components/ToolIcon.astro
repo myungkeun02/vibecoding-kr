@@ -1,0 +1,17 @@
+---
+import icons from '../../data/icons.json';
+interface Props {
+  app: { slug: string; name: string };
+}
+const { app } = Astro.props;
+const icon = (icons as Record<string, { src?: string | null }>)[app.slug];
+---
+
+<span
+  class:list={['tool-icon', { 'has-image': Boolean(icon?.src) }]}
+  data-tool-icon={app.slug}
+  aria-hidden="true"
+>
+  {icon?.src && <img data-tool-icon-image src={icon.src} alt="" width="96" height="96" decoding="async" />}
+  <span data-tool-icon-fallback hidden={Boolean(icon?.src)}>{app.name.slice(0, 1)}</span>
+</span>

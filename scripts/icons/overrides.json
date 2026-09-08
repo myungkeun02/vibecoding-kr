@@ -1,0 +1,99 @@
+{
+  "microsoft-word": {
+    "url": "https://www.microsoft.com/content/dam/microsoft/bade/images/icons/en-us/m365-app-icons-fy26/Word-Icon-FY26.svg",
+    "foundOn": "https://www.microsoft.com/microsoft-365/word"
+  },
+  "microsoft-excel": {
+    "url": "https://www.microsoft.com/content/dam/microsoft/bade/images/icons/en-us/m365-app-icons-fy26/Excel-Icon-FY26.svg",
+    "foundOn": "https://www.microsoft.com/microsoft-365/word"
+  },
+  "microsoft-powerpoint": {
+    "url": "https://www.microsoft.com/content/dam/microsoft/bade/images/icons/en-us/m365-app-icons-fy26/PowerPoint-Icon-FY26.svg",
+    "foundOn": "https://www.microsoft.com/microsoft-365/word"
+  },
+  "microsoft-teams": {
+    "url": "https://www.microsoft.com/content/dam/microsoft/bade/images/icons/en-us/m365-app-icons-fy26/Teams-Icon-FY26.svg",
+    "foundOn": "https://www.microsoft.com/microsoft-365/word"
+  },
+  "onedrive": {
+    "url": "https://www.microsoft.com/content/dam/microsoft/bade/images/icons/en-us/m365-app-icons-fy26/OneDrive-Icon-FY26.svg",
+    "foundOn": "https://www.microsoft.com/microsoft-365/word"
+  },
+  "onenote": {
+    "url": "https://www.microsoft.com/content/dam/microsoft/bade/images/icons/en-us/m365-app-icons-fy26/OneNote-Icon-FY26.svg",
+    "foundOn": "https://www.microsoft.com/microsoft-365/word"
+  },
+  "google-docs": {
+    "url": "https://www.gstatic.com/images/branding/productlogos/docs_2026/v2/web/192px.svg",
+    "foundOn": "https://workspace.google.com/products/docs/"
+  },
+  "google-sheets": {
+    "url": "https://www.gstatic.com/images/branding/productlogos/sheets_2026q3/v1/web/192px.svg",
+    "foundOn": "https://workspace.google.com/products/docs/"
+  },
+  "google-slides": {
+    "url": "https://www.gstatic.com/images/branding/productlogos/slides_2026/v2/web/192px.svg",
+    "foundOn": "https://workspace.google.com/products/docs/"
+  },
+  "google-forms": {
+    "url": "https://www.gstatic.com/images/branding/productlogos/forms_2026/v2/web/192px.svg",
+    "foundOn": "https://workspace.google.com/products/docs/"
+  },
+  "google-chat": {
+    "url": "https://www.gstatic.com/images/branding/productlogos/chat_2026/v2/web/192px.svg",
+    "foundOn": "https://workspace.google.com/products/docs/"
+  },
+  "google-calendar": {
+    "url": "https://www.gstatic.com/images/branding/productlogos/calendar_2026/v2/web/192px.svg",
+    "foundOn": "https://workspace.google.com/products/docs/"
+  },
+  "google-drive": {
+    "url": "https://www.gstatic.com/images/branding/productlogos/drive_2026/v2/web/192px.svg",
+    "foundOn": "https://workspace.google.com/products/docs/"
+  },
+  "asana": {
+    "url": "https://asana.com/assets/img/brand/asana-logo-favicon.ico",
+    "foundOn": "https://asana.com/"
+  },
+  "photoshop": {
+    "url": "https://helpx.adobe.com/content/dam/help/mnemonics/ps_cc_app_RGB.svg",
+    "foundOn": "https://helpx.adobe.com/photoshop.html"
+  },
+  "illustrator": {
+    "url": "https://helpx.adobe.com/content/dam/help/mnemonics/ai_cc_app_RGB.svg",
+    "foundOn": "https://helpx.adobe.com/illustrator.html"
+  },
+  "premiere-pro": {
+    "url": "https://helpx.adobe.com/content/dam/help/mnemonics/pr_cc_app_RGB.svg",
+    "foundOn": "https://helpx.adobe.com/premiere-pro.html"
+  },
+  "adobe-audition": {
+    "url": "https://helpx.adobe.com/content/dam/help/mnemonics/au_cc_app_RGB.svg",
+    "foundOn": "https://helpx.adobe.com/audition.html"
+  },
+  "power-bi": {
+    "url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/1068058-Icon-PowerBI?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=96&hei=96&qlt=100&fit=constrain",
+    "foundOn": "https://www.microsoft.com/power-platform/products/power-bi"
+  },
+  "power-automate": {
+    "url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Hero_PAU_icon?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=96&hei=96&qlt=100&fit=constrain",
+    "foundOn": "https://www.microsoft.com/power-platform/products/power-automate"
+  },
+  "looker-studio": {
+    "url": "https://www.gstatic.com/analytics-lego/svg/favicon_data_studio.png",
+    "foundOn": "https://lookerstudio.google.com/"
+  },
+  "figjam": {
+    "path": "scripts/icons/figjam.svg",
+    "foundOn": "https://www.figma.com/figjam/",
+    "selector": "Navigation FigJam product SVG"
+  },
+  "synology-drive": {
+    "url": "https://www.synology.com/img/dsm/drive/icon_synology_drive_01.png",
+    "foundOn": "https://www.synology.com/en-global/dsm/feature/drive"
+  },
+  "davinci-resolve": {
+    "url": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/20/2e/f2/202ef253-2cb7-164b-3a80-a1c7dfb912e5/Resolve.png/512x512bb.png",
+    "foundOn": "https://apps.apple.com/us/app/davinci-resolve/id571213070?mt=12&uo=4"
+  }
+}

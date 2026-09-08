@@ -1,0 +1,1212 @@
+{
+  "activepieces": {
+    "src": "/icons/activepieces-4bf7fe14f947.webp",
+    "sourceUrl": "https://www.activepieces.com/favicon.svg",
+    "foundOn": "https://www.activepieces.com/",
+    "kind": "official-origin-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 400,
+    "originalHeight": 400,
+    "sha256": "4bf7fe14f9473bc92cd6252f4068aa9ad89ae225f6ee389005c217e619b338b9"
+  },
+  "adobe-audition": {
+    "src": "/icons/adobe-audition-1257ffefcc99.webp",
+    "sourceUrl": "https://helpx.adobe.com/content/dam/help/mnemonics/au_cc_app_RGB.svg",
+    "foundOn": "https://helpx.adobe.com/audition.html",
+    "kind": "official-product-asset",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 234,
+    "originalHeight": 234,
+    "sha256": "1257ffefcc99df823939ca85c03802d19ac4213c642b689d906bbeb9bca62025"
+  },
+  "airtable": {
+    "src": "/icons/airtable-afe7016bb6f5.webp",
+    "sourceUrl": "https://www.airtable.com/favicon.ico",
+    "foundOn": "https://www.airtable.com/",
+    "kind": "official-origin-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 48,
+    "originalHeight": 48,
+    "sha256": "afe7016bb6f500204b7ec80bc5fbabfb02dab7b256fdefd00858ff55ad8b9050"
+  },
+  "asana": {
+    "src": "/icons/asana-16b8b1ed7671.webp",
+    "sourceUrl": "https://asana.com/assets/img/brand/asana-logo-favicon.ico",
+    "foundOn": "https://asana.com/",
+    "kind": "official-product-asset",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 100,
+    "originalHeight": 100,
+    "sha256": "16b8b1ed76711c3463fa916e1bdcafefc8b4e682893228e665adfda3d39ccad4"
+  },
+  "audacity": {
+    "src": "/icons/audacity-1cad279460bf.webp",
+    "sourceUrl": "https://www.audacityteam.org/favicon.svg",
+    "foundOn": "https://www.audacityteam.org/",
+    "kind": "official-origin-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 41,
+    "originalHeight": 42,
+    "sha256": "1cad279460bf259e12f6c7281b53ae62afc53b963eda1169357e82ffe90893ac"
+  },
+  "basecamp": {
+    "src": "/icons/basecamp-a947ff02bb32.webp",
+    "sourceUrl": "https://basecamp.com/assets/images/general/favicon.svg?v=1.5.1",
+    "foundOn": "https://basecamp.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 32,
+    "originalHeight": 32,
+    "sha256": "a947ff02bb323c2fee4b14304ab87240beeceeecb039e4b3139d4060d7f1b0b8"
+  },
+  "baserow": {
+    "src": "/icons/baserow-bc2418565b48.webp",
+    "sourceUrl": "https://baserow.io/img/favicon_192.png",
+    "foundOn": "https://baserow.io/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 192,
+    "originalHeight": 192,
+    "sha256": "bc2418565b4861163917bb0751e3fe40a63873b1c3993a0563fbcb00e43a98aa"
+  },
+  "bear": {
+    "src": "/icons/bear-26daa918d0fa.webp",
+    "sourceUrl": "https://bear.app/images/website-icons/icon.svg",
+    "foundOn": "https://bear.app/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 100,
+    "originalHeight": 100,
+    "sha256": "26daa918d0fa015b2463b0c1df73b0195f7ba6e3ceab3ddb25c03e1545f8d753"
+  },
+  "bitbucket": {
+    "src": "/icons/bitbucket-3f3285805910.webp",
+    "sourceUrl": "https://wac-cdn.atlassian.com/assets/img/favicons/bitbucket/favicon-32x32.png",
+    "foundOn": "https://bitbucket.org/product/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 32,
+    "originalHeight": 32,
+    "sha256": "3f3285805910eaee1518c9220f539680773f63b8150c06618e89e839c6af25e6"
+  },
+  "box": {
+    "src": "/icons/box-d42c7ae8dcea.webp",
+    "sourceUrl": "https://www.box.com/apple-touch-icon-precomposed.png?tktzid",
+    "foundOn": "https://www.box.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 180,
+    "originalHeight": 180,
+    "sha256": "d42c7ae8dcea537548f6e2bd7bc04f1cff6df02dfb3c70b5fe122507086bd0d2"
+  },
+  "brevo": {
+    "src": "/icons/brevo-cef272d3b97f.webp",
+    "sourceUrl": "https://corp-backend.brevo.com/wp-content/uploads/2025/07/Brevo_logo.svg",
+    "foundOn": "https://www.brevo.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 32,
+    "originalHeight": 32,
+    "sha256": "cef272d3b97f367b9cb627703fd2e9d9cfdff0289b38fbc7e81e4d6f49acea3e"
+  },
+  "bruno": {
+    "src": "/icons/bruno-4005bb98d917.webp",
+    "sourceUrl": "https://www.usebruno.com/favicon-48x48.png",
+    "foundOn": "https://www.usebruno.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 48,
+    "originalHeight": 48,
+    "sha256": "4005bb98d9174c5d332405969cb32019116d22ddb7f24ed02c600e44317cb6ee"
+  },
+  "cal-com": {
+    "src": "/icons/cal-com-c7b106ffe7de.webp",
+    "sourceUrl": "https://framerusercontent.com/images/63tSo3fa0ylcjt88Er8WTEPS6Dw.png",
+    "foundOn": "https://cal.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 1024,
+    "originalHeight": 1024,
+    "sha256": "c7b106ffe7de28918bd8fae91020bb5daeecf03e0bac53d1232a95bb3e10d0ba"
+  },
+  "calendly": {
+    "src": "/icons/calendly-81cd1736752c.webp",
+    "sourceUrl": "https://calendly.com/media/favicon/icon.svg",
+    "foundOn": "https://calendly.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 32,
+    "originalHeight": 32,
+    "sha256": "81cd1736752c9073cb111677007bd64eaa42833dcebbbb094d7260c8bbffe10a"
+  },
+  "capcut": {
+    "src": "/icons/capcut-267aecdee04e.webp",
+    "sourceUrl": "https://sf16-web-tos-buz.capcutstatic.com/obj/capcut-web-buz-sg/common/images/lv_web-2.ico",
+    "foundOn": "https://www.capcut.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 64,
+    "originalHeight": 64,
+    "sha256": "267aecdee04ef8b9197e1835b899ae0cdf93c8b272c63c37611244105e76089e"
+  },
+  "channel-talk": {
+    "src": "/icons/channel-talk-a5589c77f14e.webp",
+    "sourceUrl": "https://channel.io/logo.webp",
+    "foundOn": "https://channel.io/kr",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 241,
+    "originalHeight": 241,
+    "sha256": "a5589c77f14ed12b7b741e154d2ac1610aad9865b4a7d82f8998693d863496c2"
+  },
+  "clickup": {
+    "src": "/icons/clickup-bd70ed9f2891.webp",
+    "sourceUrl": "https://clickup.com/favicons/apple-touch-icon.png",
+    "foundOn": "https://clickup.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 192,
+    "originalHeight": 192,
+    "sha256": "bd70ed9f28913d7cdadb513cec2902312843ada2858345706a5cf5873138f5a8"
+  },
+  "clockify": {
+    "src": "/icons/clockify-769f23ae6ea1.webp",
+    "sourceUrl": "https://clockify.me/apple-touch-icon.png",
+    "foundOn": "https://clockify.me/",
+    "kind": "official-origin-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 180,
+    "originalHeight": 180,
+    "sha256": "769f23ae6ea18b33737c3bc3fb22342f1a059e9eb52c3f1493b29a83b8e04a0c"
+  },
+  "coda": {
+    "src": "/icons/coda-9736519870cd.webp",
+    "sourceUrl": "https://cdn.coda.io/icons/png/color/coda-apple-120.png",
+    "foundOn": "https://coda.io/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 120,
+    "originalHeight": 120,
+    "sha256": "9736519870cd37d1f22c7c401e253de69ddc008dd50b1b9d673e3cdad5dc64bd"
+  },
+  "craft": {
+    "src": "/icons/craft-6b28278f170d.webp",
+    "sourceUrl": "https://www.craft.do/images/favicon-large.png",
+    "foundOn": "https://www.craft.do/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 256,
+    "originalHeight": 256,
+    "sha256": "6b28278f170da11026a67c8f1f3e8da8744bad7affc5bbb5acfe6219ad6a80c2"
+  },
+  "davinci-resolve": {
+    "src": "/icons/davinci-resolve-acaec8701d2b.webp",
+    "sourceUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/20/2e/f2/202ef253-2cb7-164b-3a80-a1c7dfb912e5/Resolve.png/512x512bb.png",
+    "foundOn": "https://apps.apple.com/us/app/davinci-resolve/id571213070?mt=12&uo=4",
+    "kind": "official-product-asset",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 512,
+    "originalHeight": 512,
+    "sha256": "acaec8701d2bf0eefa94ceefd1bc354e6e7703e8cc9e24732c8693b7fd598b76"
+  },
+  "descript": {
+    "src": "/icons/descript-156d2bc2ce26.webp",
+    "sourceUrl": "https://static-cdn.descript.com/web/icons/favicon.svg",
+    "foundOn": "https://www.descript.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 256,
+    "originalHeight": 256,
+    "sha256": "156d2bc2ce26a8132c7b18eba9aec5c28a1e933541e6730c7741fd17f3d34593"
+  },
+  "diagrams-net": {
+    "src": "/icons/diagrams-net-440202a14f96.webp",
+    "sourceUrl": "https://www.drawio.com/favicon.ico",
+    "foundOn": "https://www.drawio.com/",
+    "kind": "official-origin-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 48,
+    "originalHeight": 48,
+    "sha256": "440202a14f96c405a726c1c9fdd5f8ac00eb0a125bc077b8abdaaf9dae8c1a0d"
+  },
+  "discord": {
+    "src": "/icons/discord-004d6c58388d.webp",
+    "sourceUrl": "https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/6266bc493fb42d4e27bb8393_847541504914fd33810e70a0ea73177e.ico",
+    "foundOn": "https://discord.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 256,
+    "originalHeight": 256,
+    "sha256": "004d6c58388db145c179fc7ae91809c0f7d4ae51ddd0c511559820c8e196bcd4"
+  },
+  "doodle": {
+    "src": "/icons/doodle-65611a2e6691.webp",
+    "sourceUrl": "https://marketing-cdn.doodle.com/branding/2026/favicon/favicon.svg",
+    "foundOn": "https://doodle.com/en/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 48,
+    "originalHeight": 48,
+    "sha256": "65611a2e669145a62288a91fd22a06fe3c1837fd39a0d48816e30d43cf6913e4"
+  },
+  "dooray": {
+    "src": "/icons/dooray-a0656e38c12f.webp",
+    "sourceUrl": "https://dooray.com/favicon.ico",
+    "foundOn": "https://dooray.com/main/",
+    "kind": "official-origin-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 256,
+    "originalHeight": 256,
+    "sha256": "a0656e38c12ffbb5c40174ee073f79ab393019c92ada8b05f3cdef3d9a2e9cf3"
+  },
+  "dropbox": {
+    "src": "/icons/dropbox-67af587a2eea.webp",
+    "sourceUrl": "https://cfl.dropboxstatic.com/static/metaserver/static/images/favicon.ico",
+    "foundOn": "https://www.dropbox.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 32,
+    "originalHeight": 32,
+    "sha256": "67af587a2eeabeba27294e8beef3e7b43f6e78ec859abe2ce36962b64a6c0aa3"
+  },
+  "evernote": {
+    "src": "/icons/evernote-f4ee195f7660.webp",
+    "sourceUrl": "https://evernote.com/favicon.ico",
+    "foundOn": "https://evernote.com/",
+    "kind": "official-origin-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 32,
+    "originalHeight": 32,
+    "sha256": "f4ee195f76602e64a627581e54a331f35c8d7ccab7cbffa6074a54cfb5f813f5"
+  },
+  "figjam": {
+    "src": "/icons/figjam-6aee0a3ecb8b.webp",
+    "sourceUrl": "https://www.figma.com/figjam/",
+    "foundOn": "https://www.figma.com/figjam/",
+    "kind": "official-product-asset",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 24,
+    "originalHeight": 24,
+    "sha256": "6aee0a3ecb8b4fbe08b03215b897fe96f829512c414ec83ef75dae2ef95661ac"
+  },
+  "figma": {
+    "src": "/icons/figma-30fd11b8fdde.webp",
+    "sourceUrl": "https://static.figma.com/app/icon/2/favicon.svg",
+    "foundOn": "https://www.figma.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 64,
+    "originalHeight": 64,
+    "sha256": "30fd11b8fddeef718b00f8c105273352f3239f30f825844e159ca1dfbb5977c5"
+  },
+  "flow": {
+    "src": "/icons/flow-11b5bdb80264.webp",
+    "sourceUrl": "https://framerusercontent.com/images/fklIy6qL3eQ8Rl4ohMZwxwAtX5I.png",
+    "foundOn": "https://flow.team/ko",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 448,
+    "originalHeight": 448,
+    "sha256": "11b5bdb802646592c17af3ec4bda54c590ce2ffc2ca41f005c84e512a698c734"
+  },
+  "fotor": {
+    "src": "/icons/fotor-34f9dc291f78.webp",
+    "sourceUrl": "https://static.fotor.com/web/_next/static/images/favicon-d4b8dbe4630a2bc790117e61267bbb33.png",
+    "foundOn": "https://www.fotor.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 128,
+    "originalHeight": 128,
+    "sha256": "34f9dc291f78b63a30603e680ff4abe147826de7ce0827fd1f01e97e13eb2ac0"
+  },
+  "framer": {
+    "src": "/icons/framer-250a22842a27.webp",
+    "sourceUrl": "https://framerusercontent.com/images/aXvo6HfUhqvR7oFjFL8b4AcyGfg.png",
+    "foundOn": "https://www.framer.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 180,
+    "originalHeight": 180,
+    "sha256": "250a22842a274a8884af06fc9d69238bfd2eb14bcffb9398f12132285485d3b2"
+  },
+  "freshdesk": {
+    "src": "/icons/freshdesk-f5d8a26f4b74.webp",
+    "sourceUrl": "https://www.freshworks.com/favicons/apple-touch-icon.png",
+    "foundOn": "https://www.freshworks.com/freshdesk/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 180,
+    "originalHeight": 180,
+    "sha256": "f5d8a26f4b7429b511fcc56c326d08b033e2c9fa79e207cc420bf76ec06b1075"
+  },
+  "github": {
+    "src": "/icons/github-5202a3a7c003.webp",
+    "sourceUrl": "https://github.githubassets.com/favicons/favicon.svg",
+    "foundOn": "https://github.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 32,
+    "originalHeight": 32,
+    "sha256": "5202a3a7c00354ff9a99e27f19084dae769df0b9aafc36fe29df24e66b5be79b"
+  },
+  "gitlab": {
+    "src": "/icons/gitlab-8ba2c15780d7.webp",
+    "sourceUrl": "https://about.gitlab.com/images/ico/favicon-192x192.png",
+    "foundOn": "https://about.gitlab.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 192,
+    "originalHeight": 192,
+    "sha256": "8ba2c15780d791ec1187fc290a9e5e1bc2238e1c15df27602a2cbbb4720e9db4"
+  },
+  "glide": {
+    "src": "/icons/glide-4d6287aa01d3.webp",
+    "sourceUrl": "https://www.glideapps.com/favicon.ico?favicon.050ouc-gi496w.ico",
+    "foundOn": "https://www.glideapps.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 32,
+    "originalHeight": 32,
+    "sha256": "4d6287aa01d373016d76ea71e0c3f95f5c5a7294e6b1ae83625b05787f047982"
+  },
+  "google-calendar": {
+    "src": "/icons/google-calendar-29a598e8e178.webp",
+    "sourceUrl": "https://www.gstatic.com/images/branding/productlogos/calendar_2026/v2/web/192px.svg",
+    "foundOn": "https://workspace.google.com/products/docs/",
+    "kind": "official-product-asset",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 192,
+    "originalHeight": 192,
+    "sha256": "29a598e8e1786d0decc1574cec7762c55502b19d6dcb9060c6eb234acfcf4787"
+  },
+  "google-chat": {
+    "src": "/icons/google-chat-a4b69e79834c.webp",
+    "sourceUrl": "https://www.gstatic.com/images/branding/productlogos/chat_2026/v2/web/192px.svg",
+    "foundOn": "https://workspace.google.com/products/docs/",
+    "kind": "official-product-asset",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 192,
+    "originalHeight": 192,
+    "sha256": "a4b69e79834ca1a8ba1f90ba8d70137a9ae034c0427a2f18b8db7419c2442e6d"
+  },
+  "google-docs": {
+    "src": "/icons/google-docs-aeaece5bbc30.webp",
+    "sourceUrl": "https://www.gstatic.com/images/branding/productlogos/docs_2026/v2/web/192px.svg",
+    "foundOn": "https://workspace.google.com/products/docs/",
+    "kind": "official-product-asset",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 192,
+    "originalHeight": 192,
+    "sha256": "aeaece5bbc30619eebaaad8a84195444861f00448ff6e498ddeb983bc40238cd"
+  },
+  "google-drive": {
+    "src": "/icons/google-drive-0e4c460cedc5.webp",
+    "sourceUrl": "https://www.gstatic.com/images/branding/productlogos/drive_2026/v2/web/192px.svg",
+    "foundOn": "https://workspace.google.com/products/docs/",
+    "kind": "official-product-asset",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 192,
+    "originalHeight": 192,
+    "sha256": "0e4c460cedc511ad52bbe5053b592845a3ff6978c76eadb4a8f2ffe4f1fc28e7"
+  },
+  "google-forms": {
+    "src": "/icons/google-forms-152892447c3e.webp",
+    "sourceUrl": "https://www.gstatic.com/images/branding/productlogos/forms_2026/v2/web/192px.svg",
+    "foundOn": "https://workspace.google.com/products/docs/",
+    "kind": "official-product-asset",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 192,
+    "originalHeight": 192,
+    "sha256": "152892447c3e41a852a61ecf71dfe768c352fba95d3b68f318a0a1704dbf1d2f"
+  },
+  "google-sheets": {
+    "src": "/icons/google-sheets-28c66905666d.webp",
+    "sourceUrl": "https://www.gstatic.com/images/branding/productlogos/sheets_2026q3/v1/web/192px.svg",
+    "foundOn": "https://workspace.google.com/products/docs/",
+    "kind": "official-product-asset",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 192,
+    "originalHeight": 192,
+    "sha256": "28c66905666d630b9175530103661389d96e9a8a605381b88b25a5e3d4f0a4f2"
+  },
+  "google-slides": {
+    "src": "/icons/google-slides-65b91e5556dc.webp",
+    "sourceUrl": "https://www.gstatic.com/images/branding/productlogos/slides_2026/v2/web/192px.svg",
+    "foundOn": "https://workspace.google.com/products/docs/",
+    "kind": "official-product-asset",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 192,
+    "originalHeight": 192,
+    "sha256": "65b91e5556dc8904b5031d681cbcbd49293ece02d15cb7dc815b4d7cfa9e6205"
+  },
+  "grist": {
+    "src": "/icons/grist-a48ec8a71685.webp",
+    "sourceUrl": "https://www.getgrist.com/wp-content/uploads/2023/03/cropped-Grist-Favicon-180x180.png",
+    "foundOn": "https://www.getgrist.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 180,
+    "originalHeight": 180,
+    "sha256": "a48ec8a716858213f3f30f45792fe544f189de4c7e75637d91af53dc4eb4e568"
+  },
+  "hancom-office": {
+    "src": "/icons/hancom-office-8e7278c3adc6.webp",
+    "sourceUrl": "https://www.hancom.com/favicon.ico",
+    "foundOn": "https://www.hancom.com/",
+    "kind": "official-origin-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 48,
+    "originalHeight": 48,
+    "sha256": "8e7278c3adc6daa1fd51d8bf467b0695ec991313c7ee51359b777705d69f9b48"
+  },
+  "hubspot": {
+    "src": "/icons/hubspot-2e517f2079d6.webp",
+    "sourceUrl": "https://www.hubspot.com/hubfs/HubSpot_Logos/HubSpot-Inversed-Favicon.png",
+    "foundOn": "https://www.hubspot.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 288,
+    "originalHeight": 288,
+    "sha256": "2e517f2079d6a05a94a1fffe2e6a7cb71b313804d042b47f5913c1216591cf31"
+  },
+  "ifttt": {
+    "src": "/icons/ifttt-5d8603556fb2.webp",
+    "sourceUrl": "https://web-assets.ifttt.com/builds/assets/favicon-DgWkFanB.svg",
+    "foundOn": "https://ifttt.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 32,
+    "originalHeight": 32,
+    "sha256": "5d8603556fb2b584f9e3378acbf4ba785a18004fbcf84b9a7fe4ffe719acfe32"
+  },
+  "illustrator": {
+    "src": "/icons/illustrator-a8908dde3cbd.webp",
+    "sourceUrl": "https://helpx.adobe.com/content/dam/help/mnemonics/ai_cc_app_RGB.svg",
+    "foundOn": "https://helpx.adobe.com/illustrator.html",
+    "kind": "official-product-asset",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 234,
+    "originalHeight": 234,
+    "sha256": "a8908dde3cbd8f14895dd4702773954195c49194fdab39e5aad44df49db3c980"
+  },
+  "imweb": {
+    "src": "/icons/imweb-ffb0be388523.webp",
+    "sourceUrl": "https://vendor-cdn.imweb.me/images/main/imweb-2309-favicon-120x120.png?v1",
+    "foundOn": "https://imweb.me/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 120,
+    "originalHeight": 120,
+    "sha256": "ffb0be3885233e01722fb895b730956bb59af74e379688090c21af8ffeef98be"
+  },
+  "insomnia": {
+    "src": "/icons/insomnia-514a4373a4ad.webp",
+    "sourceUrl": "https://insomnia.rest/apple-touch-icon.png",
+    "foundOn": "https://insomnia.rest/",
+    "kind": "official-origin-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 180,
+    "originalHeight": 180,
+    "sha256": "514a4373a4adab2d78b502a2f5ba9faeed5f4047bbbfdce45c86f40ad89d468e"
+  },
+  "intercom": {
+    "src": "/icons/intercom-00af6f26fa91.webp",
+    "sourceUrl": "https://www.intercom.com/intercom-marketing-site/favicons/favicon.ico",
+    "foundOn": "https://www.intercom.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 48,
+    "originalHeight": 48,
+    "sha256": "00af6f26fa91192dc6d836d8e8d6f046836557dc17a2510d7b18541fb7e0129c"
+  },
+  "jandi": {
+    "src": "/icons/jandi-786ebb02b684.webp",
+    "sourceUrl": "https://cdn.jandi.com/landing/public/apple-touch-icon.png",
+    "foundOn": "https://www.jandi.com/landing",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 180,
+    "originalHeight": 180,
+    "sha256": "786ebb02b684322715e9922ce765d4c2ba559bbfdb42a8f395edec0cacc73ff7"
+  },
+  "jira": {
+    "src": "/icons/jira-17edda5f5363.webp",
+    "sourceUrl": "https://www.atlassian.com/apple-touch-icon.png",
+    "foundOn": "https://www.atlassian.com/software/jira",
+    "kind": "official-origin-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 180,
+    "originalHeight": 180,
+    "sha256": "17edda5f5363100cb909db3c37bea05a1cef5a271d1054f3c667846d685d86e5"
+  },
+  "joplin": {
+    "src": "/icons/joplin-23487c960a5e.webp",
+    "sourceUrl": "https://joplinapp.org/favicon.ico",
+    "foundOn": "https://joplinapp.org/",
+    "kind": "official-origin-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 48,
+    "originalHeight": 48,
+    "sha256": "23487c960a5edf151b5f5a1e805f2fac0202fc35226d9c2e1920d02f11b2cf98"
+  },
+  "jotform": {
+    "src": "/icons/jotform-9319b9bdb56c.webp",
+    "sourceUrl": "https://cdn.jotfor.ms/assets/img/favicons/apple-touch-icon.png",
+    "foundOn": "https://www.jotform.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 57,
+    "originalHeight": 57,
+    "sha256": "9319b9bdb56c29229d9107d07635c42085ae1f682ff173135c81dd18c6a04070"
+  },
+  "kakaowork": {
+    "src": "/icons/kakaowork-414236082876.webp",
+    "sourceUrl": "https://t1.kakaocdn.net/kakaowork/resources/homepage/images/v3/Apple_167.png",
+    "foundOn": "https://www.kakaowork.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 167,
+    "originalHeight": 167,
+    "sha256": "414236082876556246fc698526b232ae0461b93f8589d516bbbf620260335460"
+  },
+  "linear": {
+    "src": "/icons/linear-4153dc74ae0c.webp",
+    "sourceUrl": "https://linear.app/static/favicon.svg?v=2",
+    "foundOn": "https://linear.app/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 16,
+    "originalHeight": 16,
+    "sha256": "4153dc74ae0c012a0e18373b2ed948e43bd2a00b2fb696b5603f53fabba6a5f8"
+  },
+  "logseq": {
+    "src": "/icons/logseq-55e872293b55.webp",
+    "sourceUrl": "https://asset.logseq.com/static/img/logo.png",
+    "foundOn": "https://logseq.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 192,
+    "originalHeight": 192,
+    "sha256": "55e872293b55754104e2e2ed682399120aefaa9821cbd91eb299e1a30044072c"
+  },
+  "looker-studio": {
+    "src": "/icons/looker-studio-be68afe5b6c5.webp",
+    "sourceUrl": "https://www.gstatic.com/analytics-lego/svg/favicon_data_studio.png",
+    "foundOn": "https://lookerstudio.google.com/",
+    "kind": "official-product-asset",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 40,
+    "originalHeight": 35,
+    "sha256": "be68afe5b6c53ecd9a4119b53df15323b4c550f66ef1aa739a6b2ce52b24e7ed"
+  },
+  "loom": {
+    "src": "/icons/loom-e695b405ba58.webp",
+    "sourceUrl": "https://cdn.loom.com/assets/favicons-loom/apple-touch-icon-180x180.png",
+    "foundOn": "https://www.loom.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 180,
+    "originalHeight": 180,
+    "sha256": "e695b405ba58363136a5f38a0b7e4f8dcf2984e9d765185e1ec536de481ac31a"
+  },
+  "lucidchart": {
+    "src": "/icons/lucidchart-435ed90a412c.webp",
+    "sourceUrl": "https://corporate-assets.lucid.co/co/1084dc76-813d-450a-b557-a88e3878f120.png",
+    "foundOn": "https://lucid.co/lucidchart",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 96,
+    "originalHeight": 96,
+    "sha256": "435ed90a412c4b486b20475b02499265989fa7837dfffa436cc048f7b27af6de"
+  },
+  "mailchimp": {
+    "src": "/icons/mailchimp-770958ba32cf.webp",
+    "sourceUrl": "https://digitalasset.intuit.com/render/content/dam/intuit/mc-fe/en_us/images/mailchimp-favicons/apple-touch-icon.png",
+    "foundOn": "https://mailchimp.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 180,
+    "originalHeight": 180,
+    "sha256": "770958ba32cfef9f626a7fbf7e7feb8c9c069f5a897779f5d7108caebbaa2d3c"
+  },
+  "make": {
+    "src": "/icons/make-572928b4b3a3.webp",
+    "sourceUrl": "https://www.make.com/en/apple-touch-icon.png",
+    "foundOn": "https://www.make.com/en",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 180,
+    "originalHeight": 180,
+    "sha256": "572928b4b3a307d8459a406a700a486c2047e8e33a8d564c9b1d18e6e308ac6c"
+  },
+  "mangoboard": {
+    "src": "/icons/mangoboard-89f8514ad946.webp",
+    "sourceUrl": "https://www.mangoboard.net/favicon.ico",
+    "foundOn": "https://www.mangoboard.net/",
+    "kind": "official-origin-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 32,
+    "originalHeight": 33,
+    "sha256": "89f8514ad9461857937fb73582a12e9364b31a5ff447e5bd5a4b58107b8e66ed"
+  },
+  "mattermost": {
+    "src": "/icons/mattermost-900aefa75c56.webp",
+    "sourceUrl": "https://mattermost.com/wp-content/themes/mattermost-2021/frontend/dist/img/favicon/v2/apple-touch-icon.png",
+    "foundOn": "https://mattermost.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 180,
+    "originalHeight": 180,
+    "sha256": "900aefa75c56cca441923a26ad1d424a2bf04af635e4f6fc9121592e2b3987b2"
+  },
+  "metabase": {
+    "src": "/icons/metabase-f97dfa35e141.webp",
+    "sourceUrl": "https://www.metabase.com/images/favicon.svg",
+    "foundOn": "https://www.metabase.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 256,
+    "originalHeight": 256,
+    "sha256": "f97dfa35e141a8458e2284e3e11a1b848e01072bdb66f9b8ac91cae46df7ac0c"
+  },
+  "microsoft-excel": {
+    "src": "/icons/microsoft-excel-2030a1ae2f84.webp",
+    "sourceUrl": "https://www.microsoft.com/content/dam/microsoft/bade/images/icons/en-us/m365-app-icons-fy26/Excel-Icon-FY26.svg",
+    "foundOn": "https://www.microsoft.com/microsoft-365/word",
+    "kind": "official-product-asset",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 48,
+    "originalHeight": 48,
+    "sha256": "2030a1ae2f84bb930b5e33016f96a724d69e45d19181777a50bd55969802806a"
+  },
+  "microsoft-forms": {
+    "src": "/icons/microsoft-forms-6b1a901eff31.webp",
+    "sourceUrl": "https://forms.cloud.microsoft/cdn/images/favicon.ico",
+    "foundOn": "https://forms.cloud.microsoft/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 32,
+    "originalHeight": 32,
+    "sha256": "6b1a901eff31757d447849d0dfe4a5cd7d51838eabc3efd1566347a52babbc9e"
+  },
+  "microsoft-powerpoint": {
+    "src": "/icons/microsoft-powerpoint-bf76aa26133c.webp",
+    "sourceUrl": "https://www.microsoft.com/content/dam/microsoft/bade/images/icons/en-us/m365-app-icons-fy26/PowerPoint-Icon-FY26.svg",
+    "foundOn": "https://www.microsoft.com/microsoft-365/word",
+    "kind": "official-product-asset",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 48,
+    "originalHeight": 48,
+    "sha256": "bf76aa26133c102a9718fa35101238ff391d2104e8548acb07848b0e4f8a1b3a"
+  },
+  "microsoft-teams": {
+    "src": "/icons/microsoft-teams-6b177025a41e.webp",
+    "sourceUrl": "https://www.microsoft.com/content/dam/microsoft/bade/images/icons/en-us/m365-app-icons-fy26/Teams-Icon-FY26.svg",
+    "foundOn": "https://www.microsoft.com/microsoft-365/word",
+    "kind": "official-product-asset",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 48,
+    "originalHeight": 48,
+    "sha256": "6b177025a41e2224fc8c7ab490d067dac7a10b59f667615f2c980d592cf48f07"
+  },
+  "microsoft-word": {
+    "src": "/icons/microsoft-word-c46117242fd8.webp",
+    "sourceUrl": "https://www.microsoft.com/content/dam/microsoft/bade/images/icons/en-us/m365-app-icons-fy26/Word-Icon-FY26.svg",
+    "foundOn": "https://www.microsoft.com/microsoft-365/word",
+    "kind": "official-product-asset",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 48,
+    "originalHeight": 48,
+    "sha256": "c46117242fd8adee115c77550d41dded79b2273fa5cc1205f1b7d8c7c388e742"
+  },
+  "miricanvas": {
+    "src": "/icons/miricanvas-8c535865a371.webp",
+    "sourceUrl": "https://resource.miricanvas.com/2_0/image/favicon/apple-touch-icon-57x57.png",
+    "foundOn": "https://www.miricanvas.com/en",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 57,
+    "originalHeight": 57,
+    "sha256": "8c535865a3713f5012b38a160562328d6f1ff21400fc1e50f7f5cceb1adf3d39"
+  },
+  "miro": {
+    "src": "/icons/miro-4acc99e2b59e.webp",
+    "sourceUrl": "https://framerusercontent.com/images/6FBG66PBxjV2QFaDfIdUi5mi9A.png",
+    "foundOn": "https://miro.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 128,
+    "originalHeight": 128,
+    "sha256": "4acc99e2b59eebb963a7e7e1cb820e42475746b8ec4d7f43ed30190eb58c20fb"
+  },
+  "monday": {
+    "src": "/icons/monday-2a8e1b5cea8c.webp",
+    "sourceUrl": "https://cdn.prod.website-files.com/656da6fea306219773d04208/65af6bd6e742d497b5f23f69_645898132bbaac20f1963919_256x256.png",
+    "foundOn": "https://monday.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 256,
+    "originalHeight": 256,
+    "sha256": "2a8e1b5cea8c2c30c5ccbb5b972430b4985032d6c8e067d0c0026a818eca0d3e"
+  },
+  "n8n": {
+    "src": "/icons/n8n-02595471baa3.webp",
+    "sourceUrl": "https://n8n.io/apple-touch-icon.png",
+    "foundOn": "https://n8n.io/",
+    "kind": "official-origin-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 180,
+    "originalHeight": 180,
+    "sha256": "02595471baa384164490ce961883bc88f803a453bd61340e1162168329cd0333"
+  },
+  "naver-form": {
+    "src": "/icons/naver-form-b4192a844436.webp",
+    "sourceUrl": "https://survey.pstatic.net/nform/icon/favicon.svg",
+    "foundOn": "https://form.naver.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 32,
+    "originalHeight": 32,
+    "sha256": "b4192a84443613b65f50d1550371100a5c97a91a2afa22407c04bd1a5e32592f"
+  },
+  "naver-mybox": {
+    "src": "/icons/naver-mybox-ffffd8c7da4a.webp",
+    "sourceUrl": "https://mybox.naver.com/favicon.ico?favicon.0zrhfrk352c75.ico",
+    "foundOn": "https://mybox.naver.com/main/web",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 32,
+    "originalHeight": 32,
+    "sha256": "ffffd8c7da4a26872f7671d3ec7a5b8c08352d35005aa821d5ab667a48dfb71d"
+  },
+  "naver-works": {
+    "src": "/icons/naver-works-40a2af8c35c0.webp",
+    "sourceUrl": "https://naverworksmobile.pstatic.net/wp-content/uploads/2024/07/favicon.ico",
+    "foundOn": "https://naver.worksmobile.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 512,
+    "originalHeight": 512,
+    "sha256": "40a2af8c35c0fa7a20bf3e2bcb7065668896eeaf7ee556387e95d1bf82d43417"
+  },
+  "nocodb": {
+    "src": "/icons/nocodb-47ab83e028ac.webp",
+    "sourceUrl": "https://cdn.nocodb.com/marketing-site/20260904110606/images/webclip.png",
+    "foundOn": "https://nocodb.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 256,
+    "originalHeight": 256,
+    "sha256": "47ab83e028ac459efb2a1d05149cb6b2220d36044476136ab6b39a15bce29398"
+  },
+  "notion": {
+    "src": "/icons/notion-141d444dd999.webp",
+    "sourceUrl": "https://www.notion.com/front-static/logo-ios.png",
+    "foundOn": "https://www.notion.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 512,
+    "originalHeight": 512,
+    "sha256": "141d444dd9992b943cac2fc6c66a5b318fc23cf628f94d8b6f82f6827da8f62c"
+  },
+  "obs-studio": {
+    "src": "/icons/obs-studio-3fb0a60d5904.webp",
+    "sourceUrl": "https://obsproject.com/favicon-96x96.png",
+    "foundOn": "https://obsproject.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 96,
+    "originalHeight": 96,
+    "sha256": "3fb0a60d59047224111d0a235509ef79285c5a8607621b13b33354c30d8c14d4"
+  },
+  "obsidian": {
+    "src": "/icons/obsidian-f7514a796bb2.webp",
+    "sourceUrl": "https://obsidian.md/favicon.svg",
+    "foundOn": "https://obsidian.md/",
+    "kind": "official-origin-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 256,
+    "originalHeight": 256,
+    "sha256": "f7514a796bb24069fdb99238085c0efedb3d2adbc749e4bfeec02de92c88e291"
+  },
+  "onedrive": {
+    "src": "/icons/onedrive-bb6f2f13296e.webp",
+    "sourceUrl": "https://www.microsoft.com/content/dam/microsoft/bade/images/icons/en-us/m365-app-icons-fy26/OneDrive-Icon-FY26.svg",
+    "foundOn": "https://www.microsoft.com/microsoft-365/word",
+    "kind": "official-product-asset",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 48,
+    "originalHeight": 48,
+    "sha256": "bb6f2f13296e2a84821ab1c4579bb24be73289deaddac6b3c36a20a2adbced39"
+  },
+  "onenote": {
+    "src": "/icons/onenote-982cd5fa5f89.webp",
+    "sourceUrl": "https://www.microsoft.com/content/dam/microsoft/bade/images/icons/en-us/m365-app-icons-fy26/OneNote-Icon-FY26.svg",
+    "foundOn": "https://www.microsoft.com/microsoft-365/word",
+    "kind": "official-product-asset",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 48,
+    "originalHeight": 48,
+    "sha256": "982cd5fa5f893deaf0a99533cae84f7a3765308461ff081990f16f6bdd05f15a"
+  },
+  "pcloud": {
+    "src": "/icons/pcloud-56e8ca814453.webp",
+    "sourceUrl": "https://pcdn-www.pcloud.com/ZWcqU/images/favicons/apple-icon-57x57.png",
+    "foundOn": "https://www.pcloud.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 57,
+    "originalHeight": 57,
+    "sha256": "56e8ca814453665e4f40877b7840f51b7b2870bd017d083c87573845ed5a2373"
+  },
+  "photopea": {
+    "src": "/icons/photopea-469a9cd22de0.webp",
+    "sourceUrl": "https://www.photopea.com/promo/icon512.png",
+    "foundOn": "https://www.photopea.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 512,
+    "originalHeight": 512,
+    "sha256": "469a9cd22de0d4b8668cd33350419f5899bad959926bb05b38a64c0912463e57"
+  },
+  "photoshop": {
+    "src": "/icons/photoshop-c6b2fbbca0bb.webp",
+    "sourceUrl": "https://helpx.adobe.com/content/dam/help/mnemonics/ps_cc_app_RGB.svg",
+    "foundOn": "https://helpx.adobe.com/photoshop.html",
+    "kind": "official-product-asset",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 234,
+    "originalHeight": 234,
+    "sha256": "c6b2fbbca0bb91f510ebaaa9e16c46f8d9486f92dc4a32d2f8f538b394cbf815"
+  },
+  "pipedream": {
+    "src": "/icons/pipedream-c56d744171f3.webp",
+    "sourceUrl": "https://framerusercontent.com/images/Zbos6KTLSsIOHcPx0ywm0Z06I.png",
+    "foundOn": "https://pipedream.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 32,
+    "originalHeight": 32,
+    "sha256": "c56d744171f3c79662c347ea38d08b3af6e4bcea0a28d716b7aaef579a99a1cf"
+  },
+  "polaris-office": {
+    "src": "/icons/polaris-office-dfa3b0b8f159.webp",
+    "sourceUrl": "https://www.polarisoffice.com/favicon.ico",
+    "foundOn": "https://www.polarisoffice.com/",
+    "kind": "official-origin-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 15,
+    "originalHeight": 15,
+    "sha256": "dfa3b0b8f159ffad2d13d052351cffebe4fb207cad5033434e9b26a0ec039632"
+  },
+  "postman": {
+    "src": "/icons/postman-ab6307fdb122.webp",
+    "sourceUrl": "https://www.postman.com/_mk-www-next/icons/android-chrome-192x192.png",
+    "foundOn": "https://www.postman.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 192,
+    "originalHeight": 192,
+    "sha256": "ab6307fdb122133f63401581cf7c419528c064831c3a1e3e8f841759a800c385"
+  },
+  "power-automate": {
+    "src": "/icons/power-automate-46dcc76af98a.webp",
+    "sourceUrl": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Hero_PAU_icon?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=96&hei=96&qlt=100&fit=constrain",
+    "foundOn": "https://www.microsoft.com/power-platform/products/power-automate",
+    "kind": "official-product-asset",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 96,
+    "originalHeight": 96,
+    "sha256": "46dcc76af98a3a76b40bb142ce62e4a8a5e2dd31d6bb70d3c440507c02f264d9"
+  },
+  "power-bi": {
+    "src": "/icons/power-bi-a6c5d68c1450.webp",
+    "sourceUrl": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/1068058-Icon-PowerBI?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=96&hei=96&qlt=100&fit=constrain",
+    "foundOn": "https://www.microsoft.com/power-platform/products/power-bi",
+    "kind": "official-product-asset",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 24,
+    "originalHeight": 24,
+    "sha256": "a6c5d68c1450a4525f6c0f0ead7f6bd1f82646a09f9ae066d1755406cae3c913"
+  },
+  "premiere-pro": {
+    "src": "/icons/premiere-pro-a49de9e1a215.webp",
+    "sourceUrl": "https://helpx.adobe.com/content/dam/help/mnemonics/pr_cc_app_RGB.svg",
+    "foundOn": "https://helpx.adobe.com/premiere-pro.html",
+    "kind": "official-product-asset",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 234,
+    "originalHeight": 234,
+    "sha256": "a49de9e1a215cff9763f0985d78d296e4fd7e4d8ce3c8909bbd6e02ef0d62530"
+  },
+  "redash": {
+    "src": "/icons/redash-150f010cebf8.webp",
+    "sourceUrl": "https://redash.io/assets/images/favicon-96x96.png",
+    "foundOn": "https://redash.io/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 96,
+    "originalHeight": 96,
+    "sha256": "150f010cebf83e8aaea81b7653ccba8301c225f27e4ebf012f0c670ce394180d"
+  },
+  "roam-research": {
+    "src": "/icons/roam-research-9460a4862dfa.webp",
+    "sourceUrl": "https://roamresearch.com/favicon.ico",
+    "foundOn": "https://roamresearch.com/",
+    "kind": "official-origin-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 48,
+    "originalHeight": 48,
+    "sha256": "9460a4862dfa7e582df3bbb3bdba5c1d2e7731db56f5f886391c3de55d811e7b"
+  },
+  "rows": {
+    "src": "/icons/rows-d5f6eaf90729.webp",
+    "sourceUrl": "https://rows.com/favicons/apple-touch-icon.png?v=1",
+    "foundOn": "https://rows.com/product",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 76,
+    "originalHeight": 76,
+    "sha256": "d5f6eaf907299545f4d98de9e5f360e23c20d09be84d53a76387fd82c9307602"
+  },
+  "salesforce": {
+    "src": "/icons/salesforce-0ca841e3e6fe.webp",
+    "sourceUrl": "https://www.salesforce.com/c2/public/app/favicon.ico",
+    "foundOn": "https://www.salesforce.com/kr/?ir=1",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 32,
+    "originalHeight": 32,
+    "sha256": "0ca841e3e6feef0ea0a81eab025828e1cbd3e637b4fbf9b9a9945e072b79682f"
+  },
+  "sixshop": {
+    "src": "/icons/sixshop-aeedda72272a.webp",
+    "sourceUrl": "https://www.sixshop.com/favicon.ico",
+    "foundOn": "https://www.sixshop.com/",
+    "kind": "official-origin-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 64,
+    "originalHeight": 64,
+    "sha256": "aeedda72272ae83fc23705329e21491a68ac0cd42adeee38aee091f0f93d8f25"
+  },
+  "slack": {
+    "src": "/icons/slack-349bf25d840a.webp",
+    "sourceUrl": "https://a.slack-edge.com/9cc0056/img/icons/favicon-32.png",
+    "foundOn": "https://slack.com/intl/ko-kr/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 35,
+    "originalHeight": 34,
+    "sha256": "349bf25d840a1054dac54f0a789bc7646157522dcd525a94dd8d69e4e7f3dc7f"
+  },
+  "smartsheet": {
+    "src": "/icons/smartsheet-7f781c643385.webp",
+    "sourceUrl": "https://www.smartsheet.com/sites/default/files/favicons/apple-touch-icon.png",
+    "foundOn": "https://www.smartsheet.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 180,
+    "originalHeight": 180,
+    "sha256": "7f781c643385782cb456f27e0f0fdbc068be5932ca02001397a0a4148303ad9d"
+  },
+  "softr": {
+    "src": "/icons/softr-c5fe2580c482.webp",
+    "sourceUrl": "https://cdn.prod.website-files.com/6772e8855f7859bc8df95c78/67c5520c14af2aa8657fedbd_softr_webclip.png",
+    "foundOn": "https://www.softr.io/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 256,
+    "originalHeight": 256,
+    "sha256": "c5fe2580c482478e52557ce47eb26cf2771984157df1c69e6e3e5e648bfa8e59"
+  },
+  "stibee": {
+    "src": "/icons/stibee-3b8310389395.webp",
+    "sourceUrl": "https://stibee.com/assets/images/favicon/apple-icon-57x57.png",
+    "foundOn": "https://stibee.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 57,
+    "originalHeight": 57,
+    "sha256": "3b831038939565a770e1fd34421c46ff100d653ba8c1021d005c5f9dcf9330d8"
+  },
+  "surveymonkey": {
+    "src": "/icons/surveymonkey-896e0d470397.webp",
+    "sourceUrl": "https://prod.smassets.net/assets/static/images/surveymonkey/favicon.svg",
+    "foundOn": "https://www.surveymonkey.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 102,
+    "originalHeight": 102,
+    "sha256": "896e0d47039714518fa4cc2119cf5619b915b395696607971fec422de6149388"
+  },
+  "synology-drive": {
+    "src": "/icons/synology-drive-518babd2a10b.webp",
+    "sourceUrl": "https://www.synology.com/img/dsm/drive/icon_synology_drive_01.png",
+    "foundOn": "https://www.synology.com/en-global/dsm/feature/drive",
+    "kind": "official-product-asset",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 72,
+    "originalHeight": 72,
+    "sha256": "518babd2a10b86aec13d3d2b70184c4981891c61ecf6e0634e281af684c9783f"
+  },
+  "tableau": {
+    "src": "/icons/tableau-7aebec8afec6.webp",
+    "sourceUrl": "https://www.tableau.com/c/public/exp/app/favicon.ico",
+    "foundOn": "https://www.tableau.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 32,
+    "originalHeight": 32,
+    "sha256": "7aebec8afec66d912e914a9bf2f2b29dfc737f71c8fd5135bf6fce5f202ec308"
+  },
+  "tally": {
+    "src": "/icons/tally-cf470819569c.webp",
+    "sourceUrl": "https://tally.so/favicon.svg",
+    "foundOn": "https://tally.so/",
+    "kind": "official-origin-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 128,
+    "originalHeight": 124,
+    "sha256": "cf470819569c20845ba58ac7ce9e5fefa8bc631c975bed6ae4a46abd7978182a"
+  },
+  "ticktick": {
+    "src": "/icons/ticktick-0220e7416167.webp",
+    "sourceUrl": "https://d107mjio2rjf74.cloudfront.net/web/static/img/apple-touch-icon-60x60.png",
+    "foundOn": "https://ticktick.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 60,
+    "originalHeight": 60,
+    "sha256": "0220e741616754afdf9ffbae5a3994644fca05f5d0e2c3019e80c5ac119108bd"
+  },
+  "tldraw": {
+    "src": "/icons/tldraw-8ac0b1e30888.webp",
+    "sourceUrl": "https://tldraw.dev/apple-touch-icon.png",
+    "foundOn": "https://tldraw.dev/",
+    "kind": "official-origin-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 180,
+    "originalHeight": 180,
+    "sha256": "8ac0b1e30888864b6a773a9524e2bb260d75b86f201e0bc93afecced7311ed94"
+  },
+  "todoist": {
+    "src": "/icons/todoist-2b1674d8069f.webp",
+    "sourceUrl": "https://www.todoist.com/static/favicon.ico",
+    "foundOn": "https://www.todoist.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 48,
+    "originalHeight": 48,
+    "sha256": "2b1674d8069f2bcd083411c4aa5edf919cb8c20c99e700ca032415eee540a82e"
+  },
+  "toggl-track": {
+    "src": "/icons/toggl-track-e5f23a524347.webp",
+    "sourceUrl": "https://cdn.prod.website-files.com/69d5a66e796fcbe57f498e94/69f33041c3cd5f4319432537_webClip.png",
+    "foundOn": "https://toggl.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 256,
+    "originalHeight": 256,
+    "sha256": "e5f23a5243470d9d6ff9203926304b7b496b7faedaace4d2b679c814e4681b50"
+  },
+  "trello": {
+    "src": "/icons/trello-d63fc1870b5b.webp",
+    "sourceUrl": "https://trello.com/favicon.ico",
+    "foundOn": "https://trello.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 256,
+    "originalHeight": 256,
+    "sha256": "d63fc1870b5be47de0d8d5ecbbe141efe1815370d9de90fa9e8ffbfe1f4e2d1a"
+  },
+  "typeform": {
+    "src": "/icons/typeform-b75f0acdaa94.webp",
+    "sourceUrl": "https://cdn.prod.website-files.com/66ffe2174aa8e8d5661c2708/68b6f00951eb33cd19b77288_Frame%201867174.png",
+    "foundOn": "https://www.typeform.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 256,
+    "originalHeight": 256,
+    "sha256": "b75f0acdaa94c1dcb42e958f138cfbf724839fe42480ba3ad840498b3d5cd13b"
+  },
+  "upnote": {
+    "src": "/icons/upnote-cddd1ed220d7.webp",
+    "sourceUrl": "https://getupnote.com/favicon-32x32.png",
+    "foundOn": "https://getupnote.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 32,
+    "originalHeight": 32,
+    "sha256": "cddd1ed220d73145d6aeb2cb6b5acace6f5c29142d21332fc9bfd5a8c0f30865"
+  },
+  "webflow": {
+    "src": "/icons/webflow-6bd544079157.webp",
+    "sourceUrl": "https://cdn.prod.website-files.com/686294e263eb7e215bd232f7/686d53d0446d4237b2f38c5f_webclip.png",
+    "foundOn": "https://webflow.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 256,
+    "originalHeight": 256,
+    "sha256": "6bd544079157f77c0b81c2733b27d089cee1c2409a56eec1245394096757d771"
+  },
+  "when2meet": {
+    "src": "/icons/when2meet-133fc7513eb5.webp",
+    "sourceUrl": "https://www.when2meet.com/favicon.svg",
+    "foundOn": "https://www.when2meet.com/",
+    "kind": "official-origin-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 283,
+    "originalHeight": 283,
+    "sha256": "133fc7513eb52bb4d5501fa75c1b55a49ca3005bbcba8e0ce07bbb672ba65cc6"
+  },
+  "whimsical": {
+    "src": "/icons/whimsical-a6bf98f25cef.webp",
+    "sourceUrl": "https://whimsical.com/_next_public/favicon-32.png",
+    "foundOn": "https://whimsical.com/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 32,
+    "originalHeight": 32,
+    "sha256": "a6bf98f25cef9e22589e01c2fda689a3170b86abd37514001c9910c2ef57a7a4"
+  },
+  "wix": {
+    "src": "/icons/wix-653bfdfe576d.webp",
+    "sourceUrl": "https://www.wix.com/favicon.ico",
+    "foundOn": "https://www.wix.com/",
+    "kind": "official-origin-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 192,
+    "originalHeight": 192,
+    "sha256": "653bfdfe576db7177b3c06b52f85cf55e756f6bff5799f10489de419c237029c"
+  },
+  "wordpress": {
+    "src": "/icons/wordpress-73d5af04e559.webp",
+    "sourceUrl": "https://s.w.org/images/wmark.png",
+    "foundOn": "https://wordpress.org/",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 1000,
+    "originalHeight": 1000,
+    "sha256": "73d5af04e559a284b4f9c5c3a094dbcdfdff3ef1914ce2afbb8422ea15505232"
+  },
+  "zapier": {
+    "src": "/icons/zapier-67f425b91a92.webp",
+    "sourceUrl": "https://zapier.com/favicon.ico",
+    "foundOn": "https://zapier.com/",
+    "kind": "official-origin-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 192,
+    "originalHeight": 192,
+    "sha256": "67f425b91a924c28d01d27f3d0c3ea83cf4887ce32ee5d4d9c1def0b767939ef"
+  },
+  "zendesk": {
+    "src": "/icons/zendesk-984c951ff5b7.webp",
+    "sourceUrl": "https://d1eipm3vz40hy0.cloudfront.net/images/logos/favicons/zendesk-icon.svg",
+    "foundOn": "https://www.zendesk.kr/#georedirect",
+    "kind": "official-page-icon",
+    "checkedOn": "2026-09-08",
+    "originalWidth": 20,
+    "originalHeight": 20,
+    "sha256": "984c951ff5b768fb6e97b9652c23c512fd0370c9a3a7732fb6c509b9aae83f83"
+  }
+}

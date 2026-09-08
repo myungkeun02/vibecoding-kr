@@ -18,7 +18,7 @@
 |타입·Astro|`pnpm check` — 빌드를 막는 오류 없음|**PASS**, 오류 0·경고 0|
 |단위·어댑터 계약|`pnpm test` — 데이터·중복·환산 제외·scrypt·서명·XSS·OAuth·요청 제한·PR·R2·Resend|**PASS 12개**. OAuth/PR/R2/Resend의 공급자 응답은 stub이며 실제 외부 성공이 아님|
 |빌드|`pnpm build` — Node entry와 한글 공유 이미지|**PASS** 서버 bundle + OG 122개|
-|실제 브라우저|`pnpm test:e2e` — 아래 16개 시나리오 묶음|**PASS 16개**, 실패 0. [browser-summary.json](browser-summary.json)|
+|실제 브라우저|`pnpm test:e2e` — 아래 17개 시나리오 묶음|**PASS 17개**, 실패 0. [browser-summary.json](browser-summary.json)|
 |프로세스·백업·복원|`pnpm test:persistence` — 서버 종료/시작, 세션·글·인증·금액, 온라인 백업·중지 복원·FK|**PASS**, [persistence-results.json](persistence-results.json)|
 |운영 HTTPS 정책|`pnpm test:production` — Secure/HttpOnly/Lax 세션, HTTPS 로그인, 외부 메일 미설정 거부|**PASS**, [production-results.json](production-results.json). 테스트용 자체 인증서이며 온라인 운영 배포 아님|
 |구독 다이제스트|`pnpm newsletter` — 발송 없는 로컬 미리보기|**PASS**, 무발송. 미리보기는 private 디렉터리에 보존|
@@ -46,6 +46,11 @@
 |E14|미확인 이메일 null, 계정 중복 409, 확인 메일 로컬 토큰·만료·재발급·일회성·확인 시각|PASS|
 |E15|댓글 수정·삭제, 알림 읽음, 댓글 숨김/복원, 신고 해결, 정지 계정 쓰기 차단·복구|PASS|
 |E16|360px 로그인 상태, 긴 한글·영문·코드·매우 큰 금액, JS를 끈 상태의 실제 가입 폼|PASS|
+|E17|121개 공식 아이콘 HTTP 200·96×96 WebP, 동일 회사 제품별 구분, 검색·상세·관련 도구 표시, 외부 이미지 요청 없음, 초기·검색 후 로딩 실패 대체 표시|PASS|
+
+## 아이콘 추가 검증
+
+2026-09-08: 121개 도구의 실제 아이콘을 공식 출처에서 확보해 로컬 자산으로 적용했다. 전체 아이콘은 합계 246,338바이트이며 목록·상세·관련 도구에서 같은 컴포넌트를 사용한다. 수정 후 타입 검사(오류 0·경고 0), 단위 테스트 12개, 빌드와 브라우저 시나리오 17개가 통과했다. 8095 실제 미리보기와 제품별 아이콘 모음, 모바일 다크·데스크톱 라이트 스크린샷을 직접 검토했다. 아이콘 출처는 `data/icons.json`과 [권리·갱신 안내](../licenses/TOOL-ICONS.md)에 있다. 아래 영속성·운영 정책 검증은 앞선 실행 결과이며 이번 변경은 계정·DB 동작을 수정하지 않는다.
 
 ## 시각 검토와 증거
 
