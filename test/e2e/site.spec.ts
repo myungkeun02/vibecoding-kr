@@ -100,7 +100,7 @@ test('live Korean/English search, filters, pagination and browser history restor
   await expect(page.getByLabel('도구 검색', { exact: true })).toHaveValue('옵시디언');
   await page.getByLabel('도구 검색', { exact: true }).fill('');
   await expect(page.locator('.tool-row')).toHaveCount(20);
-  await page.getByLabel('대체 판정', { exact: true }).selectOption('yes');
+  await page.getByLabel('대체 가능성', { exact: true }).selectOption('yes');
   await expect(page).toHaveURL(/verdict=yes/);
   await page.getByLabel('도구 유형', { exact: true }).selectOption('desktop');
   await expect(page).toHaveURL(/type=desktop/);
@@ -109,17 +109,17 @@ test('live Korean/English search, filters, pagination and browser history restor
   await page.goto('/?page=2');
   await expect(page.locator('.pagination [aria-current=page]')).toHaveText('2');
   await page.goto('/?q=zzzz없는도구');
-  await expect(page.getByText('아직 일치하는 도구가 없어요.')).toBeVisible();
+  await expect(page.getByText('검색 조건에 맞는 도구가 없어요.')).toBeVisible();
   await page.goto('/');
   await page.locator('.category-nav a[href*="category=notes"]').click();
   await expect(page).toHaveURL(/category=notes/);
-  await page.getByLabel('가격 모델', { exact: true }).selectOption('one-time');
+  await page.getByLabel('요금 방식', { exact: true }).selectOption('one-time');
   await expect(page.locator('.tool-row')).toHaveCount(1);
   await expect(page.locator('.tool-row')).toContainText('UpNote');
   await page.getByLabel('정렬', { exact: true }).selectOption('price');
   await expect(page).toHaveURL(/sort=price/);
   await page.reload();
-  await expect(page.getByLabel('가격 모델', { exact: true })).toHaveValue('one-time');
+  await expect(page.getByLabel('요금 방식', { exact: true })).toHaveValue('one-time');
   await page.getByLabel('정렬', { exact: true }).selectOption('newest');
   await expect(page).toHaveURL(/sort=newest/);
 });
@@ -131,11 +131,11 @@ test('agent-specific clipboard copy, FAQ, sharing and anonymous vote toggle', as
     ['Codex', 'Codex에서'],
     ['Cursor', 'Cursor의'],
   ]) {
-    await page.getByRole('button', { name: agent + ' 복사' }).click();
+    await page.getByRole('button', { name: agent + '용 복사' }).click();
     const content = await page.evaluate(() => navigator.clipboard.readText());
     expect(content).toContain(marker);
     expect(content).toContain('채널별 메시지');
-    expect(content).toContain('범위 밖');
+    expect(content).toContain('이번에 만들지 않는 기능');
   }
   await page.getByRole('button', { name: '링크 복사' }).click();
   expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(origin + '/slack');
@@ -164,7 +164,7 @@ test('UI signup, logout, login return path and profile update use real sessions'
   await page.getByLabel('닉네임', { exact: true }).fill('테스터_' + salt);
   await page.getByLabel('비밀번호', { exact: true }).fill(password);
   await page.getByRole('checkbox').first().check();
-  await page.getByRole('button', { name: '빌더로 합류하기' }).click();
+  await page.getByRole('button', { name: '가입하기' }).click();
   await expect(page).toHaveURL(/community\/new/);
   await page.goto('/me');
   await page.getByLabel('소개', { exact: true }).fill('한국어 프로필 저장 확인');
@@ -185,14 +185,14 @@ test('UI post creation, editing, comment, reply, reaction and image upload', asy
   await page.goto('/community/new');
   await page.getByLabel('제목', { exact: true }).fill('브라우저에서 작성한 제작 후기');
   await page
-    .getByLabel('본문 · Markdown 지원', { exact: true })
+    .getByLabel('본문 · 마크다운 지원', { exact: true })
     .fill('## 브라우저 QA\n\n실제 사용자 조작으로 작성과 수정, 댓글을 확인합니다.');
   await page.locator('[data-upload]').setInputFiles({
     name: 'qa.png',
     mimeType: 'image/png',
     buffer: readFileSync('public/og/default.png'),
   });
-  await expect(page.getByLabel('본문 · Markdown 지원', { exact: true })).toHaveValue(/\/media\//);
+  await expect(page.getByLabel('본문 · 마크다운 지원', { exact: true })).toHaveValue(/\/media\//);
   await page.getByRole('button', { name: '이야기 게시하기' }).click();
   await expect(
     page.getByRole('heading', { name: '브라우저에서 작성한 제작 후기', exact: true }),
@@ -575,9 +575,60 @@ test('360px authenticated long text and large totals, and no-JavaScript form sub
   await plain.getByLabel('닉네임', { exact: true }).fill('노스크립트_' + salt);
   await plain.getByLabel('비밀번호', { exact: true }).fill(randomBytes(20).toString('hex'));
   await plain.getByRole('checkbox').first().check();
-  await plain.getByRole('button', { name: '빌더로 합류하기' }).click();
+  await plain.getByRole('button', { name: '가입하기' }).click();
   await expect(plain).toHaveURL(origin + '/me');
   await plain.goto(origin + '/me');
   await expect(plain.getByRole('heading', { name: '프로필', exact: true })).toBeVisible();
   await context.close();
+});
+
+test('Korean copy covers every tool page, narrow layouts, form errors and internal labels', async ({
+  page,
+  request,
+}) => {
+  test.setTimeout(90000);
+  await page.setViewportSize({ width: 360, height: 800 });
+  for (const app of catalog) {
+    await page.goto('/' + app.slug);
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText(app.nameKo);
+    await expect(page).toHaveTitle(new RegExp(app.nameKo.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ','));
+    await expect(page.locator('.verdict-panel .verdict')).toContainText('대체');
+    const copy = await page.locator('main').innerText();
+    expect(copy, app.slug).not.toMatch(
+      /흐름을 설계할 수 있습니다|원통화|최소\s*\d+석|YOUR NEXT BUILD|NOT REALLY|KINDA/,
+    );
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), app.slug).toBe(
+      true,
+    );
+  }
+  await account(request);
+  for (const invalid of [
+    { title: '가'.repeat(141), body: '충분한 길이의 게시글 본문입니다.', board: 'general' },
+    { title: '잘못된 게시판 확인', body: '충분한 길이의 게시글 본문입니다.', board: 'unknown' },
+    { title: null, body: '충분한 길이의 게시글 본문입니다.', board: 'general' },
+  ]) {
+    const response = await action(request, 'posts/create', invalid);
+    expect(response.status()).toBe(400);
+    const { error } = await response.json();
+    expect(error).toMatch(/[가-힣]/);
+    expect(error).not.toMatch(/Too big|Invalid|expected|received/);
+  }
+  const u = await account(page.request);
+  const db = testDb();
+  db.prepare("UPDATE users SET role='admin' WHERE email=?").run(u.email);
+  db.close();
+  await page.goto('/suggest?slug=slack');
+  await expect(page.getByLabel('관련 도구 (선택)', { exact: true })).toHaveValue('slack');
+  expect(
+    await page.getByLabel('관련 도구 (선택)', { exact: true }).locator('option:checked').innerText(),
+  ).toContain('슬랙');
+  for (const path of ['/admin', '/me', '/stats', '/community/new']) {
+    await page.goto(path);
+    expect(await page.locator('main').innerText()).not.toMatch(
+      /OPERATIONS|YOUR BUILDER LOG|SELF-REPORTED|SHARE YOUR PROCESS|인증 조작/,
+    );
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), path).toBe(
+      true,
+    );
+  }
 });

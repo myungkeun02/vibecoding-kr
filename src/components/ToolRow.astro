@@ -9,11 +9,11 @@ const v = verdicts[a.verdict as keyof typeof verdicts];
 <a class="tool-row" href={'/' + a.slug}
   ><span class="tool-info"
     ><ToolIcon app={a} /><span
-      ><strong>{a.name}</strong><small
-        >{a.nameKo !== a.name ? a.nameKo + ' · ' : ''}{categoryName(a.category)}</small
+      ><strong>{a.nameKo}</strong><small
+        >{a.nameKo !== a.name ? a.name + ' · ' : ''}{categoryName(a.category)}</small
       ></span
     ></span
   ><span class="price">{priceLabel(a)}</span><span class:list={['verdict', a.verdict]}
-    ><span>{v.symbol} {v.en}</span><small>{v.label}</small></span
-  ><span class="vote-count" aria-label={`${count}명 대체 인증`}>↑ {count}</span></a
+    ><span>{v.symbol} {v.label}</span></span
+  ><span class="vote-count" aria-label={`직접 대체한 사람 ${count}명`}>↑ {count}</span></a
 >

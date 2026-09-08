@@ -39,16 +39,18 @@ const reactions =
             <div class="post-meta">
               <a href={p.user_id ? '/profile/' + p.user_id : undefined}>{p.nickname || '탈퇴한 사용자'}</a>
               <time datetime={p.created_at}>{p.created_at.slice(0, 10)}</time>
-              {p.tool_slug && <a href={'/' + p.tool_slug}>{getApp(p.tool_slug)?.name || p.tool_slug}</a>}
+              {p.tool_slug && (
+                <a href={'/' + p.tool_slug}>{getApp(p.tool_slug)?.nameKo || '공개가 종료된 도구'}</a>
+              )}
             </div>
             {p.tags && <p class="muted small">{p.tags}</p>}
           </header>
           <article class="prose" set:html={markdown(p.body)} />
           {Object.values(build).some(Boolean) && (
             <section class="meta-box">
-              <h2>이 빌드의 기록</h2>
+              <h2>제작 과정 정리</h2>
               {[
-                ['agent', '코딩 에이전트'],
+                ['agent', 'AI 코딩 도구'],
                 ['features', '만든 기능'],
                 ['difficulties', '어려웠던 점'],
                 ['scope', '실제 대체 범위'],
@@ -86,7 +88,7 @@ const reactions =
               data-post={p.id}
               aria-pressed={reactions.bookmark}
             >
-              {reactions.bookmark ? '북마크 저장됨 ✓' : '글 북마크 ☆'}
+              {reactions.bookmark ? '저장했어요 ✓' : '글 저장 ☆'}
             </button>
             <button class="button secondary" data-copy-url>
               링크 복사
@@ -146,7 +148,7 @@ const reactions =
                     ))}
                 </>
               ))}
-            {!comments.length && <p class="muted">아직 댓글이 없어요. 첫 이야기를 건네보세요.</p>}
+            {!comments.length && <p class="muted">아직 댓글이 없어요. 첫 댓글을 남겨보세요.</p>}
             {user ? (
               <form data-api action="/api/comments/create" method="post" style="margin-top:24px">
                 <input type="hidden" name="csrf" value={Astro.locals.csrf} />

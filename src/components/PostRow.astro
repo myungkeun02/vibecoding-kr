@@ -1,4 +1,21 @@
 ---
-import {boards} from '../lib/config';const {post:p}=Astro.props;
+import { boards } from '../lib/config';
+import { getApp } from '../lib/apps';
+const { post: p } = Astro.props;
+const excerpt = p.body.slice(0, 180).replace(/[#*`]/g, '');
 ---
-<a class="post-row" href={'/community/'+p.id}><div class="post-meta"><span class="badge">{p.pinned?'고정 · ':''}{boards[p.board]}</span>{p.tool_slug&&<span>{p.tool_slug}</span>}</div><h2>{p.title}</h2><p class="post-excerpt">{p.body.slice(0,180).replace(/[#*`]/g,'')}</p><div class="post-meta" style="margin-top:13px"><span>{p.nickname||'탈퇴한 사용자'}</span><time>{p.created_at.slice(0,10)}</time><span>좋아요 {p.likes||0}</span><span>댓글 {p.comments||0}</span></div></a>
+
+<a class="post-row" href={'/community/' + p.id}>
+  <div class="post-meta">
+    <span class="badge">{p.pinned ? '고정 · ' : ''}{boards[p.board]}</span>
+    {p.tool_slug && <span>{getApp(p.tool_slug)?.nameKo || '관련 도구'}</span>}
+  </div>
+  <h2>{p.title}</h2>
+  <p class="post-excerpt">{excerpt}</p>
+  <div class="post-meta" style="margin-top:13px">
+    <span>{p.nickname || '탈퇴한 사용자'}</span>
+    <time>{p.created_at.slice(0, 10)}</time>
+    <span>좋아요 {p.likes || 0}</span>
+    <span>댓글 {p.comments || 0}</span>
+  </div>
+</a>

@@ -18,7 +18,7 @@
 |타입·Astro|`pnpm check` — 빌드를 막는 오류 없음|**PASS**, 오류 0·경고 0|
 |단위·어댑터 계약|`pnpm test` — 데이터·중복·환산 제외·scrypt·서명·XSS·OAuth·요청 제한·PR·R2·Resend|**PASS 12개**. OAuth/PR/R2/Resend의 공급자 응답은 stub이며 실제 외부 성공이 아님|
 |빌드|`pnpm build` — Node entry와 한글 공유 이미지|**PASS** 서버 bundle + OG 122개|
-|실제 브라우저|`pnpm test:e2e` — 아래 17개 시나리오 묶음|**PASS 17개**, 실패 0. [browser-summary.json](browser-summary.json)|
+|실제 브라우저|`pnpm test:e2e` — 아래 18개 시나리오 묶음|**PASS 18개**, 실패 0. [browser-summary.json](browser-summary.json)|
 |프로세스·백업·복원|`pnpm test:persistence` — 서버 종료/시작, 세션·글·인증·금액, 온라인 백업·중지 복원·FK|**PASS**, [persistence-results.json](persistence-results.json)|
 |운영 HTTPS 정책|`pnpm test:production` — Secure/HttpOnly/Lax 세션, HTTPS 로그인, 외부 메일 미설정 거부|**PASS**, [production-results.json](production-results.json). 테스트용 자체 인증서이며 온라인 운영 배포 아님|
 |구독 다이제스트|`pnpm newsletter` — 발송 없는 로컬 미리보기|**PASS**, 무발송. 미리보기는 private 디렉터리에 보존|
@@ -47,6 +47,11 @@
 |E15|댓글 수정·삭제, 알림 읽음, 댓글 숨김/복원, 신고 해결, 정지 계정 쓰기 차단·복구|PASS|
 |E16|360px 로그인 상태, 긴 한글·영문·코드·매우 큰 금액, JS를 끈 상태의 실제 가입 폼|PASS|
 |E17|121개 공식 아이콘 HTTP 200·96×96 WebP, 동일 회사 제품별 구분, 검색·상세·관련 도구 표시, 외부 이미지 요청 없음, 초기·검색 후 로딩 실패 대체 표시|PASS|
+|E18|121개 상세의 한글 제목·판정·360px 넘침, 한국어 입력 오류, 도구 제안 선택, 관리자·내 활동·통계·글쓰기 문구|PASS|
+
+## 한국어 문구 전수 검토
+
+공개 도구 121개와 비공개 후보 6개의 한국어 문구를 다듬고, 홈·상세·검색·계정·커뮤니티·관리자·통계·오류·이메일·공유 이미지까지 확인했다. [상세 검토 기록](korean-copy-review.md)에 범위와 변경 이유를 남겼다. 타입 검사 오류 0·경고 0, 단위 테스트 12개, 빌드와 브라우저 검사 18개가 통과했다. E18은 121개 상세를 모두 360px 화면에서 확인하고, 오류 안내와 내부 코드의 한국어 표시를 검사한다. 실제 8095 슬랙 화면, 모바일 다크·데스크톱 라이트, 슬랙 공유 이미지를 직접 확인했다.
 
 ## 아이콘 추가 검증
 

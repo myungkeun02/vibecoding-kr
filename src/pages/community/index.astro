@@ -13,13 +13,13 @@ const link = (k: string, v: string) => {
 };
 ---
 
-<Base title="빌더 커뮤니티" noindex={Astro.url.search.length > 0}
+<Base title="만드는 사람들" noindex={Astro.url.search.length > 0}
   ><header class="page-head">
-    <div class="eyebrow">BUILD IT. BREAK IT. SHARE IT.</div><div class="flex between wrap-flex">
+    <div class="eyebrow">만들어보고, 막혀보고, 함께 나눠요</div><div class="flex between wrap-flex">
       <h1 style="margin-top:13px">혼자 만들고, 함께 배우고.</h1><a class="button" href="/community/new"
         >이야기 남기기 +</a
       >
-    </div><p>완성한 도구부터 막힌 코드까지. 직접 만드는 사람들의 작업 일지.</p>
+    </div><p>완성한 도구부터 막힌 코드까지. 직접 만드는 사람들의 이야기를 나눠요.</p>
   </header><nav class="tabs" aria-label="게시판">
     <a href="/community" class:list={{ active: !Astro.url.searchParams.get('board') }}>전체 이야기</a>{
       Object.entries(boards).map(([k, v]) => (
@@ -66,7 +66,7 @@ const link = (k: string, v: string) => {
       </nav>
     </section><aside>
       <section class="meta-box">
-        <div class="eyebrow">THE BUILDER'S NOTE</div><h3 style="margin-top:15px">
+        <div class="eyebrow">제작 후기를 남길 때</div><h3 style="margin-top:15px">
           결과만큼 과정도 궁금해요.
         </h3><p>어떤 기능을 만들었는지, 어디서 막혔는지, 실제로 대체한 범위를 함께 적어주세요.</p><a
           class="small accent"

@@ -1,7 +1,7 @@
 {
-  "startedAt": "2026-09-08T10:46:04.339Z",
-  "durationMs": 11088.932999999999,
-  "passed": 17,
+  "startedAt": "2026-09-08T11:23:16.634Z",
+  "durationMs": 16943.313000000002,
+  "passed": 18,
   "failed": 0,
   "flaky": 0,
   "skipped": 0,
@@ -12,7 +12,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 916
+          "durationMs": 671
         }
       ]
     },
@@ -22,7 +22,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 605
+          "durationMs": 496
         }
       ]
     },
@@ -32,7 +32,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 1248
+          "durationMs": 1199
         }
       ]
     },
@@ -42,7 +42,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 645
+          "durationMs": 652
         }
       ]
     },
@@ -52,7 +52,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 751
+          "durationMs": 720
         }
       ]
     },
@@ -62,7 +62,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 2410
+          "durationMs": 2459
         }
       ]
     },
@@ -72,7 +72,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 98
+          "durationMs": 97
         }
       ]
     },
@@ -82,7 +82,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 152
+          "durationMs": 105
         }
       ]
     },
@@ -92,7 +92,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 80
+          "durationMs": 64
         }
       ]
     },
@@ -102,7 +102,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 15
+          "durationMs": 14
         }
       ]
     },
@@ -112,7 +112,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 132
+          "durationMs": 124
         }
       ]
     },
@@ -122,7 +122,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 98
+          "durationMs": 91
         }
       ]
     },
@@ -132,7 +132,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 94
+          "durationMs": 77
         }
       ]
     },
@@ -142,7 +142,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 1510
+          "durationMs": 1465
         }
       ]
     },
@@ -152,7 +152,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 60
+          "durationMs": 52
         }
       ]
     },
@@ -162,7 +162,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 124
+          "durationMs": 112
         }
       ]
     },
@@ -172,7 +172,17 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 841
+          "durationMs": 775
+        }
+      ]
+    },
+    {
+      "title": "Korean copy covers every tool page, narrow layouts, form errors and internal labels",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 6632
         }
       ]
     }

@@ -21,8 +21,8 @@ const board = p?.board || Astro.url.searchParams.get('board') || 'builds';
           value={p?.title || ''}
         /></label
       ><label class="form-field"
-        ><span>본문 · Markdown 지원</span><textarea
-          aria-label="본문 · Markdown 지원"
+        ><span>본문 · 마크다운 지원</span><textarea
+          aria-label="본문 · 마크다운 지원"
           class="editor-body"
           name="body"
           required
@@ -39,7 +39,7 @@ const board = p?.board || Astro.url.searchParams.get('board') || 'builds';
       </div><pre id="markdown-preview" class="meta-box" hidden></pre><details class="section">
         <summary>제작 후기 정보를 더 남길래요 (선택)</summary><div class="stack" style="margin-top:20px">
           <label class="form-field"
-            ><span>사용한 코딩 에이전트</span><input
+            ><span>사용한 AI 코딩 도구</span><input
               name="agent"
               value={build.agent || ''}
               placeholder="Codex, Claude Code, Cursor…"
@@ -54,22 +54,22 @@ const board = p?.board || Astro.url.searchParams.get('board') || 'builds';
               >{build.difficulties || ''}</textarea
             ></label
           ><label class="form-field"
-            ><span>실제 대체한 범위</span><textarea name="scope" maxlength="2000"
+            ><span>기존 도구 대신 쓰는 기능</span><textarea name="scope" maxlength="2000"
               >{build.scope || ''}</textarea
             ></label
           ><label class="form-field"
-            ><span>적용한 프롬프트</span><textarea name="prompt" maxlength="5000"
+            ><span>사용한 프롬프트</span><textarea name="prompt" maxlength="5000"
               >{build.prompt || ''}</textarea
             ></label
           ><label class="form-field"
-            ><span>배포 주소</span><input
+            ><span>완성한 도구 주소</span><input
               name="url"
               type="url"
               value={build.url || ''}
               placeholder="https://…"
             /></label
           ><label class="form-field"
-            ><span>소스 저장소</span><input
+            ><span>소스 코드 주소</span><input
               name="repo"
               type="url"
               value={build.repo || ''}
@@ -105,7 +105,7 @@ const board = p?.board || Astro.url.searchParams.get('board') || 'builds';
                   value={a.slug}
                   selected={(p?.tool_slug || Astro.url.searchParams.get('tool')) === a.slug}
                 >
-                  {a.name}
+                  {a.nameKo} · {a.name}
                 </option>
               ))
             }</select

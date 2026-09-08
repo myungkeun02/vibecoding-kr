@@ -44,8 +44,8 @@ export const priceLabel = (a: App) =>
     ? '무료'
     : a.pricing.billing === 'one-time'
       ? a.pricing.oneTimeNative === null
-        ? '일회성 · 가격 확인 필요'
-        : `${a.pricing.currency} ${a.pricing.oneTimeNative.toLocaleString()} · 일회성`
+        ? '한 번 구매 · 가격 확인 필요'
+        : `${a.pricing.currency} ${a.pricing.oneTimeNative.toLocaleString()} · 한 번 구매`
       : a.priceMonthly === null
         ? '가격 확인 필요'
         : a.priceMonthly === 0

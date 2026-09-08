@@ -36,17 +36,17 @@ const jsonld = [
 <Base title="이 도구, 바이브코딩으로 대체할 수 있을까?" {jsonld} noindex={Astro.url.search.length > 0}
   ><section class="hero">
     <div>
-      <div class="eyebrow"><span class="status-dot"></span> LESS SUBSCRIBING. MORE BUILDING.</div><h1>
+      <div class="eyebrow"><span class="status-dot"></span> 필요한 기능부터, 직접 만들어보세요</div><h1>
         이 도구,<br /><span class="accent">직접 만들 수 있을까?</span>
       </h1><p>
-        매일 쓰는 기능만 골라, 나만의 도구로.<br />솔직한 대체 판정부터 바로 써볼 제작 프롬프트까지.
+        매일 쓰는 기능만 골라, 나만의 도구로.<br />어디까지 만들 수 있는지 살펴보고, 프롬프트로 시작해 보세요.
       </p><form action="/" role="search">
         <label class="search-box"
           ><span aria-hidden="true">&gt;</span><input
             id="search"
             name="q"
             aria-label="도구 검색"
-            placeholder={`Notion, 엑셀, 옵시디언… ${apps.length}개 도구 검색`}
+            placeholder={`노션, 엑셀, 옵시디언… ${apps.length}개 도구 검색`}
             value={Astro.url.searchParams.get('q') || ''}
             autocomplete="off"
           /><kbd aria-hidden="true">/</kbd></label
@@ -54,14 +54,15 @@ const jsonld = [
       </form>
     </div><aside>
       <div class="terminal">
-        <div class="cmd">$ can-i-vibecode --honest</div><strong>완벽한 복제보다, 필요한 기능부터.</strong><br
-        />무엇을 만들 수 있고, 무엇을 잃는지.
+        <div class="cmd">&gt; 어디까지 만들 수 있을까요?</div><strong
+          >완벽한 복제보다, 필요한 기능부터.</strong
+        ><br />만들 수 있는 기능과 어려운 부분을 함께 살펴봐요.
       </div><div style="margin-top:17px">
         {
           [
-            ['yes', 'YES', '대체 가능'],
-            ['kinda', 'KINDA', '일부 대체 가능'],
-            ['no', 'NOT REALLY', '대체 어려움'],
+            ['yes', '대체 가능', '정해진 범위는 직접 만들 만해요'],
+            ['kinda', '일부 대체 가능', '기존 도구와 함께 써야 해요'],
+            ['no', '대체 어려움', '핵심 기능까지 만들기는 어려워요'],
           ].map(([v, en, ko]) => (
             <div class="legend-row">
               <>
@@ -75,13 +76,13 @@ const jsonld = [
           ))
         }
       </div><div class="eyebrow" style="margin-top:17px">
-        {apps.length} TOOLS · 15 CATEGORIES · YOUR NEXT BUILD
+        도구 {apps.length}개 · 분야 15개 · 다음 만들거리를 찾아보세요
       </div>
     </aside>
   </section><Ticker /><Directory /><div class="home-bottom">
     <section>
       <div class="flex between">
-        <h2>빌더들의 다음 이야기</h2><a class="small muted" href="/community">커뮤니티 전체 ↗</a>
+        <h2>직접 만들어본 이야기</h2><a class="small muted" href="/community">커뮤니티 전체 ↗</a>
       </div>{
         recent.map((p) => (
           <a class="post-preview" href={'/community/' + p.id}>
@@ -98,9 +99,9 @@ const jsonld = [
         !recent.length && (
           <div class="empty">
             <>
-              <div class="mono accent">[ YOUR BUILD GOES HERE ]</div>
+              <div class="mono accent">[ 여러분의 첫 작품을 기다려요 ]</div>
               <h3 style="margin-top:16px">첫 번째 제작 이야기를 기다려요.</h3>
-              <p>작은 성공도, 막혔던 부분도 다음 빌더에게 도움이 됩니다.</p>
+              <p>작은 성공도, 막혔던 부분도 다음에 만들 사람에게 도움이 됩니다.</p>
               <a href="/community/new" class="button secondary">
                 제작 후기 남기기 ↗
               </a>

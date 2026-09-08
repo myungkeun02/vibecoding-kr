@@ -7,7 +7,7 @@ export const GET: APIRoute = async (ctx) => {
   if (!['github', 'google'].includes(p)) return new Response('페이지를 찾을 수 없어요.', { status: 404 });
   const provider = p as Provider;
   if (!oauthEnabled(provider))
-    return new Response('소셜 로그인을 준비 중입니다. /login에서 이메일로 로그인해 주세요.', {
+    return new Response('소셜 로그인은 준비 중이에요. 로그인 화면에서 이메일로 로그인해 주세요.', {
       status: 503,
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
     });

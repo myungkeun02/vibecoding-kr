@@ -22,8 +22,16 @@ function bad(message: string, status = 400): never {
   throw Object.assign(new Error(message), { status });
 }
 const postSchema = z.object({
-  title: z.string().trim().min(3, '제목은 3자 이상 입력해 주세요.').max(140),
-  body: z.string().trim().min(10, '본문은 10자 이상 입력해 주세요.').max(30000),
+  title: z
+    .string()
+    .trim()
+    .min(3, '제목은 3자 이상 입력해 주세요.')
+    .max(140, '제목은 140자 이내로 입력해 주세요.'),
+  body: z
+    .string()
+    .trim()
+    .min(10, '본문은 10자 이상 입력해 주세요.')
+    .max(30000, '본문은 30,000자 이내로 입력해 주세요.'),
   board: z.enum(['builds', 'questions', 'prompts', 'general', 'notice']),
   tags: z.string().max(150).default(''),
   tool: z.string().max(80).default(''),
@@ -109,7 +117,7 @@ export const POST: APIRoute = async (ctx) => {
       }
       case 'auth/oauth-register': {
         const payload = verified(ctx.cookies.get('oauth_pending')?.value);
-        if (!payload) bad('가입 시간이 만료됐어요. 소셜 로그인을 다시 시도해 주세요.');
+        if (!payload) bad('가입 절차를 진행할 수 있는 시간이 지났어요. 소셜 로그인을 다시 시도해 주세요.');
         const p = JSON.parse(Buffer.from(payload, 'base64url').toString());
         if (p.expires < Date.now() || !b.terms) bad('약관과 개인정보 처리 안내에 동의해 주세요.');
         const nick = String(b.nickname || '').trim();
@@ -169,7 +177,7 @@ export const POST: APIRoute = async (ctx) => {
             `30분 안에 다음 링크에서 비밀번호를 변경해 주세요.\n${absolute('/reset?token=' + token)}\n요청하지 않았다면 이 메일을 무시해 주세요.`,
           );
         }
-        result.message = '등록된 계정이라면 재설정 안내가 발송됩니다.';
+        result.message = '가입한 이메일이라면 비밀번호 재설정 안내를 보내드려요.';
         break;
       }
       case 'auth/send-verification': {
@@ -193,7 +201,7 @@ export const POST: APIRoute = async (ctx) => {
           '이메일 주소를 확인해 주세요',
           `30분 안에 링크를 열고 확인 버튼을 눌러 주세요.\n${absolute('/verify-email?token=' + token)}\n요청하지 않았다면 무시해 주세요.`,
         );
-        result.message = '이메일 확인 안내를 요청했어요. 메일의 링크에서 확인을 마쳐 주세요.';
+        result.message = '이메일 확인 안내를 준비했어요. 받은 메일의 링크를 열어 주소 확인을 마쳐 주세요.';
         break;
       }
       case 'auth/verify-email': {
@@ -356,7 +364,8 @@ export const POST: APIRoute = async (ctx) => {
         const parent = b.parent
           ? one("SELECT * FROM comments WHERE id=? AND post_id=? AND status='active'", b.parent, pid)
           : null;
-        if (b.parent && (!parent || parent.parent_id)) bad('답글은 댓글에 한 단계만 작성할 수 있어요.');
+        if (b.parent && (!parent || parent.parent_id))
+          bad('답글에는 다시 답글을 달 수 없어요. 원래 댓글에 답글을 남겨주세요.');
         const cid = id();
         db.transaction(() => {
           run(
@@ -404,7 +413,7 @@ export const POST: APIRoute = async (ctx) => {
         const pid = String(b.post);
         if (!getPost(pid)) bad('게시글을 찾을 수 없어요.', 404);
         const kind = b.kind;
-        if (!['like', 'bookmark'].includes(kind)) bad('잘못된 반응이에요.');
+        if (!['like', 'bookmark'].includes(kind)) bad('좋아요 또는 저장 버튼을 다시 눌러주세요.');
         if (one('SELECT 1 FROM reactions WHERE user_id=? AND post_id=? AND kind=?', user.id, pid, kind)) {
           run('DELETE FROM reactions WHERE user_id=? AND post_id=? AND kind=?', user.id, pid, kind);
           result.active = false;
@@ -495,7 +504,7 @@ export const POST: APIRoute = async (ctx) => {
         break;
       }
       case 'waitlist/withdraw': {
-        if (!b.token) bad('철회 링크를 확인해 주세요.');
+        if (!b.token) bad('수신 거부 링크를 확인해 주세요.');
         run(
           "UPDATE waitlist SET status='withdrawn',withdrawn_at=CURRENT_TIMESTAMP WHERE token=?",
           String(b.token),
@@ -579,7 +588,9 @@ export const POST: APIRoute = async (ctx) => {
     const status = e.status || (e instanceof z.ZodError ? 400 : 500);
     const message =
       e instanceof z.ZodError
-        ? e.issues[0]?.message
+        ? /[가-힣]/.test(e.issues[0]?.message || '')
+          ? e.issues[0].message
+          : '입력 항목과 글자 수를 확인해 주세요. 게시판도 선택해야 해요.'
         : status < 500
           ? e.message
           : '처리 중 문제가 생겼어요. 잠시 후 다시 시도해 주세요.';

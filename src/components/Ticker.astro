@@ -9,10 +9,10 @@ const tape = apps.filter((a) => a.priceMonthly !== null).slice(0, 12);
 <section class="ticker" aria-label="함께 대체한 도구의 월 비용">
   <div class="ticker-main">
     <div>
-      <div class="ticker-label">COLLECTIVE MRR REPLACED <span aria-hidden="true">↗</span></div><h2>
+      <div class="ticker-label">직접 만든 도구로 바꾼 만큼 <span aria-hidden="true">↗</span></div><h2>
         함께 대체한 도구의 월 비용
       </h2><p>
-        직접 대체했다고 남긴 <span data-total-votes>{t.votes}</span>건의 자기신고를 기준으로 계산했어요. <a
+        직접 대체했다고 알려주신 <span data-total-votes>{t.votes}</span>건의 기록을 바탕으로 계산했어요. <a
           href="/stats">집계 기준 ⓘ</a
         >
       </p>
@@ -31,10 +31,10 @@ const tape = apps.filter((a) => a.priceMonthly !== null).slice(0, 12);
       {
         [...tape, ...tape].map((a) => (
           <span>
-            {a.name} <b>{priceLabel(a)}</b>
+            {a.nameKo} <b>{priceLabel(a)}</b>
           </span>
         ))
-      }{!tape.length && <span>검증된 가격만 집계합니다 · 무료 도구도 대체 인증에 참여할 수 있어요</span>}
+      }{!tape.length && <span>검증된 가격만 집계합니다 · 무료 도구도 대체한 기록을 남길 수 있어요</span>}
     </div>
   </div>
 </section>

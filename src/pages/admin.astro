@@ -18,11 +18,25 @@ const comments = allowed
     )
   : [];
 const actions = allowed ? all('SELECT * FROM audit ORDER BY id DESC LIMIT 50') : [];
+const actionLabels: Record<string, string> = {
+  'user-suspend': '회원 이용 제한',
+  'user-restore': '회원 이용 제한 해제',
+  'post-hide': '글 숨김',
+  'post-restore': '글 복구',
+  'comment-hide': '댓글 숨김',
+  'comment-restore': '댓글 복구',
+  'post-pin': '글 고정',
+  'post-unpin': '글 고정 해제',
+  'report-resolve': '신고 처리 완료',
+  'report-dismiss': '신고 기각',
+  'suggest-accept': '제안 채택',
+  'suggest-reject': '제안 반려',
+};
 const statuses: Record<string, string> = {
   pending: '검토 대기',
   resolved: '처리 완료',
   dismissed: '기각',
-  accepted_pending_release: '채택 · 배포 대기',
+  accepted_pending_release: '채택 · 반영 대기',
   rejected: '반려',
   active: '활성',
   hidden: '숨김',
@@ -37,7 +51,7 @@ const statuses: Record<string, string> = {
         <>
           <header class="page-head">
             <>
-              <div class="eyebrow">OPERATIONS</div>
+              <div class="eyebrow">운영자 메뉴</div>
               <div class="flex between">
                 <>
                   <h1 style="margin-top:15px">커뮤니티 운영</h1>
@@ -55,7 +69,7 @@ const statuses: Record<string, string> = {
               <a href="#users">사용자</a>
               <a href="#posts">게시글</a>
               <a href="#comments">댓글</a>
-              <a href="#audit">감사 기록</a>
+              <a href="#audit">운영 기록</a>
             </>
           </nav>
           <section id="reports" class="section">
@@ -65,7 +79,7 @@ const statuses: Record<string, string> = {
                 <span class="badge">{statuses[r.status]}</span>
                 <p>{r.reason}</p>
                 <div class="muted small">
-                  {r.target_type} · {r.target_id}
+                  {r.target_type === 'post' ? '게시글' : '댓글'} · {r.target_id}
                 </div>
                 <div class="admin-actions">
                   <AdminAction target={r.id} operation="report-resolve" label="처리 완료" />
@@ -78,7 +92,8 @@ const statuses: Record<string, string> = {
           </section>
           <section id="suggestions" class="section">
             <p class="muted small">
-              채택은 검토 승인입니다. JSON 수정·검증·배포까지 완료하기 전에는 게시 완료로 표시하지 않습니다.
+              제안을 채택하면 반영 대기 상태로 바뀝니다. 도구 정보를 수정하고 확인한 뒤 사이트에 반영해야
+              게시가 완료됩니다.
             </p>
             {suggestions.map((s) => (
               <article class="admin-row">
@@ -86,7 +101,7 @@ const statuses: Record<string, string> = {
                 <h3>{s.title}</h3>
                 <pre>{s.body}</pre>
                 <div class="admin-actions">
-                  <AdminAction target={s.id} operation="suggest-accept" label="채택 · 배포 대기로" />
+                  <AdminAction target={s.id} operation="suggest-accept" label="채택 · 반영 대기로" />
                   <AdminAction target={s.id} operation="suggest-reject" label="반려" />
                 </div>
               </article>
@@ -100,7 +115,7 @@ const statuses: Record<string, string> = {
                 <strong>{u.nickname}</strong>
                 <span class="muted small">
                   {' '}
-                  · {u.email} · {u.role} · {statuses[u.status]}
+                  · {u.email} · {u.role === 'admin' ? '관리자' : '회원'} · {statuses[u.status]}
                 </span>
                 <div class="admin-actions">
                   {u.id !== Astro.locals.user.id && (
@@ -157,7 +172,7 @@ const statuses: Record<string, string> = {
             <h2>주요 조치 기록</h2>
             {actions.map((a) => (
               <div class="admin-row mono small">
-                {a.created_at} · {a.action} · {a.target}
+                {a.created_at} · {actionLabels[a.action] || a.action} · {a.target}
               </div>
             ))}
             {!actions.length && <p class="empty">운영 조치 기록이 없습니다.</p>}

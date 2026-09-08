@@ -62,6 +62,7 @@ E2E는 빌드된 서버를 8096 포트와 `data/test/e2e`에서 실행하고 해
 - [환경변수와 외부 연동 재검증](docs/environment.md)
 - [배포·백업·복원·롤백](docs/deployment.md)
 - [실제 QA 결과](docs/qa/report.md)
+- [한국어 문구 검토](docs/qa/korean-copy-review.md)
 - [기여 안내](CONTRIBUTING.md)
 
 현재 온라인 운영 배포는 완료되지 않았습니다. 로컬 production bundle 실행과 영속성은 검증했습니다. Node와 영속 볼륨을 제공하는 서버용 Dockerfile, Compose, Railway 설정을 포함합니다. 실제 외부 OAuth·메일·R2·카카오 공유는 운영 키를 등록한 뒤 [외부 검증 명세](docs/environment.md#외부-연동-재검증)에 따라 확인해야 합니다.

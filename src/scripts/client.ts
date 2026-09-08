@@ -172,7 +172,7 @@ document.addEventListener('submit', async (e) => {
       if (data.withdrawUrl) {
         const link = document.createElement('a');
         link.href = data.withdrawUrl;
-        link.textContent = ' 수신 철회 링크';
+        link.textContent = ' 수신 거부 링크';
         link.style.textDecoration = 'underline';
         status.append(link);
       }
@@ -274,17 +274,17 @@ document.addEventListener('click', async (e) => {
       const remove = b.getAttribute('aria-pressed') === 'true';
       const data = await api('/api/vote', { slug: b.dataset.slug, remove });
       b.setAttribute('aria-pressed', String(data.voted));
-      b.textContent = (data.voted ? '대체 인증 완료 ✓' : '직접 대체했어요 ↑') + ' ' + data.count;
+      b.textContent = (data.voted ? '대체 기록 남김 ✓' : '직접 대체했어요 ↑') + ' ' + data.count;
       roll(data.monthly);
       document.querySelectorAll('[data-total-votes]').forEach((el) => (el.textContent = String(data.votes)));
-      toast(data.voted ? '대체 인증을 남겼어요.' : '대체 인증을 취소했어요.');
+      toast(data.voted ? '직접 대체한 기록을 남겼어요.' : '대체 기록을 취소했어요.');
       return;
     }
     if (b.hasAttribute('data-bookmark')) {
       b.disabled = true;
       const data = await api('/api/tool/bookmark', { slug: b.dataset.slug });
       b.setAttribute('aria-pressed', String(data.active));
-      b.textContent = data.active ? '북마크 저장됨 ✓' : '도구 북마크 ☆';
+      b.textContent = data.active ? '저장했어요 ✓' : '도구 저장 ☆';
       return;
     }
     if (b.hasAttribute('data-react')) {
@@ -295,8 +295,8 @@ document.addEventListener('click', async (e) => {
         b.dataset.react === 'like'
           ? '좋아요 ' + data.count + (data.active ? ' ✓' : '')
           : data.active
-            ? '북마크 저장됨 ✓'
-            : '글 북마크 ☆';
+            ? '저장했어요 ✓'
+            : '글 저장 ☆';
       return;
     }
     if (b.hasAttribute('data-preview')) {

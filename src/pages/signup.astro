@@ -7,11 +7,13 @@ if (Astro.locals.user) return Astro.redirect(returnTo);
 
 <Base title="회원가입" noindex
   ><section class="auth-panel">
-    <div class="eyebrow">HELLO, BUILDER.</div><h1 style="margin-top:14px">함께 만드는 쪽으로.</h1><p
-      class="muted"
+    <div class="eyebrow">처음 오셨나요?</div><h1 style="margin-top:14px">
+      나만의 도구 만들기, 함께 시작해요
+    </h1><p class="muted">도구를 저장하고, 만들면서 배운 것을 나눠보세요.</p><form
+      data-api
+      action="/api/auth/register"
+      method="post"
     >
-      도구를 저장하고, 만들면서 배운 것을 나눠보세요.
-    </p><form data-api action="/api/auth/register" method="post">
       <input type="hidden" name="csrf" value={Astro.locals.csrf} /><input
         type="hidden"
         name="returnTo"
@@ -51,8 +53,7 @@ if (Astro.locals.user) return Astro.redirect(returnTo);
         ></label
       ><label class="check-label"
         ><input name="news" type="checkbox" />업데이트 소식을 이메일로 받아볼게요. (선택)</label
-      ><button type="submit" class="primary">빌더로 합류하기 ↗</button><p class="form-status" role="status">
-      </p>
+      ><button type="submit" class="primary">가입하기 ↗</button><p class="form-status" role="status"></p>
     </form><div class="auth-links">
       <span class="muted">이미 계정이 있나요?</span><a
         href={'/login?returnTo=' + encodeURIComponent(returnTo)}>로그인 ↗</a

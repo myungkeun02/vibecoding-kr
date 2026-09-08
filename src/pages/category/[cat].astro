@@ -37,8 +37,8 @@ const jsonld = cat
   {jsonld}
   noindex={!cat}
   ><div class="page-head">
-    <div class="eyebrow">EXPLORE A CATEGORY</div><h1>
+    <div class="eyebrow">분야별 도구 찾기</div><h1>
       {cat ? cat.emoji + ' ' + cat.name : '카테고리를 찾을 수 없어요'}
-    </h1><p>필요한 기능의 범위와 대체할 때 잃는 것을 비교해 보세요.</p>
+    </h1><p>직접 만들 수 있는 기능과 만들기 어려운 기능을 비교해 보세요.</p>
   </div>{cat && <Directory {params} />}</Base
 >

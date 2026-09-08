@@ -14,7 +14,7 @@ if (pending.expires < Date.now()) return Astro.redirect('/login');
 
 <Base title="소셜 계정 가입 완료" noindex
   ><section class="auth-panel">
-    <h1>빌더 프로필을 완성해요.</h1><p class="muted">
+    <h1>가입을 마무리해 주세요</h1><p class="muted">
       연결한 소셜 계정으로 가입합니다. 공개할 닉네임을 정해 주세요.
     </p><form data-api method="post" action="/api/auth/oauth-register">
       <input name="csrf" type="hidden" value={Astro.locals.csrf} /><label class="form-field"

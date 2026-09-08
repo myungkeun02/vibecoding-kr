@@ -32,7 +32,7 @@ if (!process.argv.includes('--send')) {
   );
   let n = 0;
   for (const w of audience) {
-    await sendMail(w.email, subject, body + '\n\n수신 철회: ' + absolute('/unsubscribe?token=' + w.token));
+    await sendMail(w.email, subject, body + '\n\n수신 거부: ' + absolute('/unsubscribe?token=' + w.token));
     run('INSERT INTO mail_deliveries(campaign,email) VALUES(?,?)', campaign, w.email);
     n++;
   }

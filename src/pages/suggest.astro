@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import { apps } from '../lib/apps';
 const user = Astro.locals.user;
 if (!user)
   return Astro.redirect('/login?returnTo=' + encodeURIComponent(Astro.url.pathname + Astro.url.search));
@@ -8,18 +9,21 @@ if (!user)
 <Base title="도구·정보 수정 제안" noindex
   ><section class="narrow" style="margin:auto">
     <header class="page-head">
-      <div class="eyebrow">MAKE THE DIRECTORY BETTER</div><h1 style="margin-top:15px">함께 더 정확하게.</h1><p
-      >
-        새로운 도구, 달라진 가격, 더 나은 프롬프트를 알려주세요.
-      </p>
+      <div class="eyebrow">더 정확한 정보를 함께 모아요</div><h1 style="margin-top:15px">
+        도구나 수정할 정보를 알려주세요
+      </h1><p>새로운 도구, 달라진 가격, 더 나은 프롬프트를 알려주세요.</p>
     </header><form data-api action="/api/suggest" method="post">
       <input type="hidden" name="csrf" value={Astro.locals.csrf} /><label class="form-field"
-        ><span>기존 도구 주소명 (선택)</span><input
-          name="slug"
-          value={Astro.url.searchParams.get('slug') || ''}
-          maxlength="80"
-          placeholder="notion"
-        /></label
+        ><span>관련 도구 (선택)</span><select name="slug" aria-label="관련 도구 (선택)">
+          <option value="">새 도구 제안 · 선택 안 함</option>
+          {
+            apps.map((app) => (
+              <option value={app.slug} selected={Astro.url.searchParams.get('slug') === app.slug}>
+                {app.nameKo} · {app.name}
+              </option>
+            ))
+          }
+        </select></label
       ><label class="form-field"
         ><span>제안 제목</span><input name="title" required minlength="3" maxlength="140" /></label
       ><label class="form-field"
@@ -30,7 +34,7 @@ if (!user)
           maxlength="10000"
           style="min-height:220px"></textarea></label
       ><p class="muted small">
-        제안은 운영자가 검토합니다. 채택 후에도 공식 자료 확인과 카탈로그 배포가 끝나야 게시됩니다.
+        운영자가 내용을 검토해요. 채택한 제안은 공식 자료를 확인한 뒤 도구 정보에 반영합니다.
       </p><button type="submit" class="primary">제안 보내기 ↗</button><p class="form-status" role="status">
       </p>
     </form>

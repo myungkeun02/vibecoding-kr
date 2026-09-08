@@ -43,23 +43,21 @@ for (const a of [null, ...apps]) {
           type: 'div',
           props: {
             style: { display: 'flex', marginTop: 80, fontSize: 64, lineHeight: 1.2, letterSpacing: '-3px' },
-            children: a ? a.nameKo + '을 직접 만들 수 있을까?' : '이 도구, 직접 만들 수 있을까?',
+            children: a ? a.nameKo + ', 직접 만들 수 있을까?' : '이 도구, 직접 만들 수 있을까?',
           },
         },
         {
           type: 'div',
           props: {
             style: { display: 'flex', fontSize: 34, color, marginTop: 32 },
-            children: a
-              ? verdicts[a.verdict].en + ' / ' + verdicts[a.verdict].label
-              : 'LESS SUBSCRIBING. MORE BUILDING.',
+            children: a ? verdicts[a.verdict].label : '필요한 기능부터, 직접 만들어보세요',
           },
         },
         {
           type: 'div',
           props: {
             style: { display: 'flex', fontSize: 22, color: '#9aa99e', marginTop: 'auto' },
-            children: a ? a.scope : '솔직한 대체 판정 · 바로 써볼 제작 프롬프트 · 빌더 커뮤니티',
+            children: a ? a.scope : '대체 가능성 살펴보기 · AI 제작 요청문 · 제작 경험 나누기',
           },
         },
       ],

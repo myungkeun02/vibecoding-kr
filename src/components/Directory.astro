@@ -16,7 +16,7 @@ const href = (key: string, value: string) => {
 <div class="directory-layout" id="directory">
   <aside>
     <nav class="category-nav" aria-label="도구 카테고리">
-      <div class="eyebrow">EXPLORE TOOLS</div><a
+      <div class="eyebrow">어떤 도구를 만들까요?</div><a
         href={href('category', '')}
         class:list={{ active: !params.get('category') }}
         data-filter-link>▦ 모든 도구 <small>{apps.length}</small></a
@@ -36,7 +36,7 @@ const href = (key: string, value: string) => {
     </nav>
   </aside><section class="directory-main">
     <div class="directory-head">
-      <h2>대체 인증 순위<span class="count-label">{r.total} TOOLS</span></h2><a
+      <h2>직접 만들어볼 도구<span class="count-label">{r.total}개</span></h2><a
         href="/suggest"
         class="small muted">찾는 도구가 없나요? +</a
       >
@@ -45,8 +45,8 @@ const href = (key: string, value: string) => {
         type="hidden"
         name="category"
         value={params.get('category') || ''}
-      /><select name="verdict" aria-label="대체 판정"
-        ><option value="">모든 판정</option>{
+      /><select name="verdict" aria-label="대체 가능성"
+        ><option value="">대체 가능성 전체</option>{
           [
             ['yes', '↗ 대체 가능'],
             ['kinda', '≈ 일부 가능'],
@@ -62,7 +62,7 @@ const href = (key: string, value: string) => {
           [
             ['saas', '웹 서비스'],
             ['desktop', '데스크톱'],
-            ['local-first', '로컬 우선'],
+            ['local-first', '내 기기 중심'],
             ['open-source', '오픈소스'],
           ].map(([k, v]) => (
             <option value={k} selected={params.get('type') === k}>
@@ -70,15 +70,15 @@ const href = (key: string, value: string) => {
             </option>
           ))
         }</select
-      ><select name="price" aria-label="가격 모델"
-        ><option value="">모든 가격</option>{
+      ><select name="price" aria-label="요금 방식"
+        ><option value="">요금 방식 전체</option>{
           [
             ['free', '무료'],
             ['freemium', '무료+유료'],
             ['subscription', '구독형'],
-            ['one-time', '일회성 구매'],
-            ['usage-based', '사용량형'],
-            ['contact-sales', '견적형'],
+            ['one-time', '한 번 구매'],
+            ['usage-based', '사용한 만큼 결제'],
+            ['contact-sales', '견적 문의'],
           ].map(([k, v]) => (
             <option value={k} selected={params.get('price') === k}>
               {v}
@@ -87,20 +87,20 @@ const href = (key: string, value: string) => {
         }</select
       ><select name="sort" aria-label="정렬"
         ><option value="popular" selected={!params.get('sort') || params.get('sort') === 'popular'}
-          >대체 인증순 ↓</option
-        ><option value="newest" selected={params.get('sort') === 'newest'}>최신 확인순</option><option
+          >많이 대체한 순 ↓</option
+        ><option value="newest" selected={params.get('sort') === 'newest'}>최근 확인한 순</option><option
           value="price"
-          selected={params.get('sort') === 'price'}>월 비용 낮은순</option
+          selected={params.get('sort') === 'price'}>월 비용이 낮은 순</option
         ></select
       ><noscript><button type="submit">적용</button></noscript>
     </form><div class="tool-table-head">
-      <span>도구 / 카테고리</span><span>기준 비용</span><span>바이브코딩 판정</span><span>인증</span>
+      <span>도구 / 카테고리</span><span>이용 비용</span><span>대체 가능성</span><span>대체한 사람</span>
     </div><div aria-live="polite" aria-label="검색 결과">
       {r.items.map((a) => <ToolRow app={a} count={counts[a.slug] || 0} />)}{
         !r.items.length && (
           <div class="empty">
             <>
-              <h3>아직 일치하는 도구가 없어요.</h3>
+              <h3>검색 조건에 맞는 도구가 없어요.</h3>
               <p>다른 이름으로 검색하거나 새로운 도구를 제안해 주세요.</p>
               <a href="/suggest" class="button secondary">
                 도구 제안하기
