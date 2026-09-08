@@ -1,0 +1,77 @@
+[
+  {
+    "slug": "collab",
+    "name": "협업·메신저",
+    "emoji": "💬"
+  },
+  {
+    "slug": "notes",
+    "name": "노트·지식관리",
+    "emoji": "📓"
+  },
+  {
+    "slug": "office",
+    "name": "오피스·문서",
+    "emoji": "📄"
+  },
+  {
+    "slug": "projects",
+    "name": "프로젝트·할 일",
+    "emoji": "✅"
+  },
+  {
+    "slug": "data",
+    "name": "데이터·대시보드",
+    "emoji": "📊"
+  },
+  {
+    "slug": "whiteboard",
+    "name": "화이트보드·다이어그램",
+    "emoji": "✏️"
+  },
+  {
+    "slug": "design",
+    "name": "디자인·이미지",
+    "emoji": "🎨"
+  },
+  {
+    "slug": "media",
+    "name": "영상·오디오",
+    "emoji": "🎬"
+  },
+  {
+    "slug": "forms",
+    "name": "폼·설문",
+    "emoji": "📝"
+  },
+  {
+    "slug": "automation",
+    "name": "자동화·연동",
+    "emoji": "⚡"
+  },
+  {
+    "slug": "crm",
+    "name": "고객관리·메일",
+    "emoji": "📮"
+  },
+  {
+    "slug": "scheduling",
+    "name": "일정·시간관리",
+    "emoji": "📅"
+  },
+  {
+    "slug": "files",
+    "name": "파일·클라우드",
+    "emoji": "📁"
+  },
+  {
+    "slug": "dev",
+    "name": "개발·API",
+    "emoji": "🛠️"
+  },
+  {
+    "slug": "web",
+    "name": "웹사이트·노코드",
+    "emoji": "🌐"
+  }
+]

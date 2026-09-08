@@ -1,0 +1,1018 @@
+[
+  {
+    "slug": "activepieces",
+    "url": "https://www.activepieces.com/",
+    "finalUrl": "https://www.activepieces.com/",
+    "status": 200,
+    "title": "Activepieces: unify your team&#x27;s AI",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "adobe-audition",
+    "url": "https://www.adobe.com/products/audition.html",
+    "finalUrl": "https://www.adobe.com/products/audition.html",
+    "status": 200,
+    "title": "Audio recording and editing software | Adobe Audition",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "airtable",
+    "url": "https://airtable.com/",
+    "finalUrl": "https://www.airtable.com/",
+    "status": 200,
+    "title": "Airtable: Build Enterprise-ready AI Workflows, Apps &amp; Agents | Airtable",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "asana",
+    "url": "https://asana.com/",
+    "finalUrl": "https://asana.com/",
+    "status": 200,
+    "title": "Work &amp; Project Management for Human-Agent Teams • Asana",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "audacity",
+    "url": "https://www.audacityteam.org/",
+    "finalUrl": "https://www.audacityteam.org/",
+    "status": 200,
+    "title": "Audacity ® | Free Audio editor, recorder, music making and more!",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "basecamp",
+    "url": "https://basecamp.com/",
+    "finalUrl": "https://basecamp.com/",
+    "status": 200,
+    "title": "Basecamp",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "baserow",
+    "url": "https://baserow.io/",
+    "finalUrl": "https://baserow.io/",
+    "status": 200,
+    "title": "No-code open source database &amp; application builder | Baserow",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "bear",
+    "url": "https://bear.app/",
+    "finalUrl": "https://bear.app/",
+    "status": 200,
+    "title": "Bear - Markdown Notes",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "bitbucket",
+    "url": "https://bitbucket.org/product/",
+    "finalUrl": "https://bitbucket.org/product/",
+    "status": 200,
+    "title": "Bitbucket | Git solution for teams using Jira",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "box",
+    "url": "https://www.box.com/",
+    "finalUrl": "https://www.box.com/",
+    "status": 200,
+    "title": "Box | AI-Powered Content Management, Workflow &amp; Collaboration",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "brevo",
+    "url": "https://www.brevo.com/",
+    "finalUrl": "https://www.brevo.com/",
+    "status": 200,
+    "title": "Brevo: Email &amp; SMS Marketing, CRM &amp; Automation Platform",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "bruno",
+    "url": "https://www.usebruno.com/",
+    "finalUrl": "https://www.usebruno.com/",
+    "status": 200,
+    "title": "Bruno - The Git-Native API Client",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "cafe24",
+    "url": "https://www.cafe24.com/",
+    "finalUrl": "https://www.cafe24.com/",
+    "status": 200,
+    "title": "",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "cal-com",
+    "url": "https://cal.com/",
+    "finalUrl": "https://cal.com/",
+    "status": 200,
+    "title": "Cal.com | Scheduling Software for Online Bookings",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "calendly",
+    "url": "https://calendly.com/",
+    "finalUrl": "https://calendly.com/",
+    "status": 200,
+    "title": "Meeting Scheduling Software and AI Meeting Tools | Calendly",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "canva",
+    "url": "https://www.canva.com/",
+    "finalUrl": "https://www.canva.com/",
+    "status": 200,
+    "title": "Unsupported client – Canva",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "capcut",
+    "url": "https://www.capcut.com/",
+    "finalUrl": "https://www.capcut.com/",
+    "status": 200,
+    "title": "CapCut AI Video Editor: Smart Online Video Editing with Advanced AI Tools",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "channel-talk",
+    "url": "https://channel.io/ko",
+    "finalUrl": "https://channel.io/kr",
+    "status": 200,
+    "title": "상담은 채널톡, 업무는 채널웍스에서 시작하세요",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "clickup",
+    "url": "https://clickup.com/",
+    "finalUrl": "https://clickup.com/",
+    "status": 200,
+    "title": "ClickUp™ | Maximize productivity • Software, AI, and humans converge",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "clockify",
+    "url": "https://clockify.me/",
+    "finalUrl": "https://clockify.me/",
+    "status": 200,
+    "title": "Clockify™ - Time Tracking Software",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "coda",
+    "url": "https://coda.io/",
+    "finalUrl": "https://coda.io/",
+    "status": 200,
+    "title": "Coda: Your all-in-one collaborative workspace.",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "craft",
+    "url": "https://www.craft.do/",
+    "finalUrl": "https://www.craft.do/",
+    "status": 200,
+    "title": "Craft — Productivity App for Notes, Tasks, and Docs",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "davinci-resolve",
+    "url": "https://www.blackmagicdesign.com/products/davinciresolve",
+    "finalUrl": "https://www.blackmagicdesign.com/products/davinciresolve",
+    "status": 200,
+    "title": "DaVinci Resolve | Blackmagic Design",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "descript",
+    "url": "https://www.descript.com/",
+    "finalUrl": "https://www.descript.com/",
+    "status": 200,
+    "title": "Descript: AI Video &amp; Audio Text-based Editor — Try Free",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "diagrams-net",
+    "url": "https://www.diagrams.net/",
+    "finalUrl": "https://www.drawio.com/",
+    "status": 200,
+    "title": "Security-first diagramming for teams | draw.io",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "discord",
+    "url": "https://discord.com/",
+    "finalUrl": "https://discord.com/",
+    "status": 200,
+    "title": "Discord - Group Chat That’s All Fun &amp; Games",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "doodle",
+    "url": "https://doodle.com/",
+    "finalUrl": "https://doodle.com/en/",
+    "status": 200,
+    "title": "Free online meeting scheduling tool | Doodle",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "dooray",
+    "url": "https://dooray.com/",
+    "finalUrl": "https://dooray.com/main/",
+    "status": 200,
+    "title": "올인원 협업툴 Dooray!",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "dropbox",
+    "url": "https://www.dropbox.com/",
+    "finalUrl": "https://www.dropbox.com/",
+    "status": 200,
+    "title": "Dropbox: Secure cloud storage, file sharing, and more",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "evernote",
+    "url": "https://evernote.com/",
+    "finalUrl": "https://evernote.com/",
+    "status": 200,
+    "title": "Best Note Taking App - Organize Your Notes with Evernote",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "excalidraw",
+    "url": "https://excalidraw.com/",
+    "finalUrl": "https://excalidraw.com/",
+    "status": 200,
+    "title": "Excalidraw Whiteboard",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "figjam",
+    "url": "https://www.figma.com/figjam/",
+    "finalUrl": "https://www.figma.com/figjam/",
+    "status": 200,
+    "title": "FigJam: The Online Collaborative Whiteboard for Teams",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "figma",
+    "url": "https://www.figma.com/",
+    "finalUrl": "https://www.figma.com/",
+    "status": 200,
+    "title": "Figma: The collaborative canvas for design, code, and AI",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "flow",
+    "url": "https://flow.team/",
+    "finalUrl": "https://flow.team/ko",
+    "status": 200,
+    "title": "플로우(flow) - 대한민국 No.1 AI Work OS",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "fotor",
+    "url": "https://www.fotor.com/",
+    "finalUrl": "https://www.fotor.com/",
+    "status": 200,
+    "title": "Photo Editor: Free Online Photo Editing &amp; Image Editor | Fotor",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "framer",
+    "url": "https://www.framer.com/",
+    "finalUrl": "https://www.framer.com/",
+    "status": 200,
+    "title": "Framer: AI design agent",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "freshdesk",
+    "url": "https://www.freshworks.com/freshdesk/",
+    "finalUrl": "https://www.freshworks.com/freshdesk/",
+    "status": 200,
+    "title": "AI-Powered Customer Service Software | Freshdesk | Freshworks",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "github",
+    "url": "https://github.com/",
+    "finalUrl": "https://github.com/",
+    "status": 200,
+    "title": "GitHub · Change is constant. GitHub keeps you ahead. · GitHub",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "gitlab",
+    "url": "https://about.gitlab.com/",
+    "finalUrl": "https://about.gitlab.com/",
+    "status": 200,
+    "title": "GitLab - Speed with control for agentic software engineering",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "glide",
+    "url": "https://www.glideapps.com/",
+    "finalUrl": "https://www.glideapps.com/",
+    "status": 200,
+    "title": "AI App Builder: Turn Spreadsheets into Business Apps | Glide",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "google-calendar",
+    "url": "https://workspace.google.com/products/calendar/",
+    "finalUrl": "https://workspace.google.com/products/calendar/",
+    "status": 200,
+    "title": "공유 가능한 온라인 캘린더 및 일정 예약 - Google Calendar",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "google-chat",
+    "url": "https://workspace.google.com/products/chat/",
+    "finalUrl": "https://workspace.google.com/products/chat/",
+    "status": 200,
+    "title": "소통 및 팀 협업을 위한 Gemini를 탑재한 Google Chat | Google Workspace",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "google-docs",
+    "url": "https://workspace.google.com/products/docs/",
+    "finalUrl": "https://workspace.google.com/products/docs/",
+    "status": 200,
+    "title": "Google Docs: 온라인 문서 및 PDF 편집기 | Google Workspace",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "google-drive",
+    "url": "https://workspace.google.com/products/drive/",
+    "finalUrl": "https://workspace.google.com/products/drive/",
+    "status": 200,
+    "title": "Google Drive: 안전한 클라우드 스토리지로 온라인에서 파일 공유 | Google Workspace",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "google-forms",
+    "url": "https://workspace.google.com/products/forms/",
+    "finalUrl": "https://workspace.google.com/products/forms/",
+    "status": 200,
+    "title": "Google Forms: 온라인 양식 작성 도구 | Google Workspace",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "google-sheets",
+    "url": "https://workspace.google.com/products/sheets/",
+    "finalUrl": "https://workspace.google.com/products/sheets/",
+    "status": 200,
+    "title": "Google Sheets: 온라인 스프레드시트 &amp; 템플릿 | Google Workspace",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "google-slides",
+    "url": "https://workspace.google.com/products/slides/",
+    "finalUrl": "https://workspace.google.com/products/slides/",
+    "status": 200,
+    "title": "Google Slides: 프레젠테이션 슬라이드쇼 제작 도구 | Google Workspace",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "grist",
+    "url": "https://www.getgrist.com/",
+    "finalUrl": "https://www.getgrist.com/",
+    "status": 200,
+    "title": "Spreadsheet Software to End Data Chaos | Grist",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "hancom-office",
+    "url": "https://www.hancom.com/",
+    "finalUrl": "https://www.hancom.com/",
+    "status": 200,
+    "title": "한컴(HANCOM) - AI 에이전트를 위한 기술을 연결하는 AI 오케스트레이션 기업",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "hubspot",
+    "url": "https://www.hubspot.com/",
+    "finalUrl": "https://www.hubspot.com/",
+    "status": 200,
+    "title": "HubSpot | Software &amp; Tools for your Business - Homepage",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "ifttt",
+    "url": "https://ifttt.com/",
+    "finalUrl": "https://ifttt.com/",
+    "status": 200,
+    "title": "IFTTT - Automate business &amp; home",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "illustrator",
+    "url": "https://www.adobe.com/products/illustrator.html",
+    "finalUrl": "https://www.adobe.com/products/illustrator.html",
+    "status": 200,
+    "title": "Vector Graphics Software | Adobe Illustrator",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "imweb",
+    "url": "https://imweb.me/",
+    "finalUrl": "https://imweb.me/",
+    "status": 200,
+    "title": "아임웹",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "insomnia",
+    "url": "https://insomnia.rest/",
+    "finalUrl": "https://insomnia.rest/",
+    "status": 200,
+    "title": "The Collaborative API Development Platform - Insomnia",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "intercom",
+    "url": "https://www.intercom.com/",
+    "finalUrl": "https://www.intercom.com/",
+    "status": 200,
+    "title": "Intercom | A complete system for human and AI customer service",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "jandi",
+    "url": "https://www.jandi.com/",
+    "finalUrl": "https://www.jandi.com/landing",
+    "status": 200,
+    "title": "협업툴 잔디(JANDI) - AI로 진화한 메신저 기반 업무용 협업툴",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "jira",
+    "url": "https://www.atlassian.com/software/jira",
+    "finalUrl": "https://www.atlassian.com/software/jira",
+    "status": 200,
+    "title": "Jira | Project Management for the AI Era | Atlassian",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "joplin",
+    "url": "https://joplinapp.org/",
+    "finalUrl": "https://joplinapp.org/",
+    "status": 200,
+    "title": "Joplin",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "jotform",
+    "url": "https://www.jotform.com/",
+    "finalUrl": "https://www.jotform.com/",
+    "status": 200,
+    "title": "Jotform: Free Online Form Builder | Create Forms in Seconds",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "kakaowork",
+    "url": "https://www.kakaowork.com/",
+    "finalUrl": "https://www.kakaowork.com/",
+    "status": 200,
+    "title": "카카오워크",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "linear",
+    "url": "https://linear.app/",
+    "finalUrl": "https://linear.app/",
+    "status": 200,
+    "title": "Linear – The system for product development",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "logseq",
+    "url": "https://logseq.com/",
+    "finalUrl": "https://logseq.com/",
+    "status": 200,
+    "title": "Logseq: A privacy-first, open-source knowledge base",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "looker-studio",
+    "url": "https://cloud.google.com/looker-studio",
+    "finalUrl": "https://cloud.google.com/data-studio",
+    "status": 200,
+    "title": "Data Studio: Business Insights Visualizations | Google Cloud",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "loom",
+    "url": "https://www.loom.com/",
+    "finalUrl": "https://www.loom.com/",
+    "status": 200,
+    "title": "Free screen recorder for Mac and PC | Loom",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "lucidchart",
+    "url": "https://www.lucidchart.com/",
+    "finalUrl": "https://lucid.co/lucidchart",
+    "status": 200,
+    "title": "Lucidchart | Diagramming Powered By Intelligence",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "mailchimp",
+    "url": "https://mailchimp.com/",
+    "finalUrl": "https://mailchimp.com/",
+    "status": 200,
+    "title": "Email &amp; SMS Marketing Platform | Mailchimp",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "make",
+    "url": "https://www.make.com/",
+    "finalUrl": "https://www.make.com/en",
+    "status": 200,
+    "title": "AI Workflow Automation Software &amp; Tools | Make",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "mangoboard",
+    "url": "https://www.mangoboard.net/",
+    "finalUrl": "https://www.mangoboard.net/",
+    "status": 200,
+    "title": "망고보드 공식 홈페이지 | 프리미엄 디자인 동영상 플랫폼",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "mattermost",
+    "url": "https://mattermost.com/",
+    "finalUrl": "https://mattermost.com/",
+    "status": 200,
+    "title": "Mattermost | Collaboration Platform for Mission Critical Work",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "metabase",
+    "url": "https://www.metabase.com/",
+    "finalUrl": "https://www.metabase.com/",
+    "status": 200,
+    "title": "Open source AI analytics you can verify | Metabase",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "microsoft-excel",
+    "url": "https://www.microsoft.com/microsoft-365/excel",
+    "finalUrl": "https://www.microsoft.com/ko-kr/microsoft-365/excel",
+    "status": 200,
+    "title": "Microsoft Excel | 무료 온라인 스프레드시트 소프트웨어",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "microsoft-forms",
+    "url": "https://forms.office.com/",
+    "finalUrl": "https://forms.cloud.microsoft/",
+    "status": 200,
+    "title": "Microsoft Forms - Free tool to create online surveys, forms, polls, and quizzes",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "microsoft-powerpoint",
+    "url": "https://www.microsoft.com/microsoft-365/powerpoint",
+    "finalUrl": "https://www.microsoft.com/ko-kr/microsoft-365/powerpoint",
+    "status": 200,
+    "title": "PowerPoint | 온라인 프레젠테이션 및 슬라이드 | Microsoft 365",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "microsoft-teams",
+    "url": "https://www.microsoft.com/microsoft-teams/group-chat-software",
+    "finalUrl": "https://www.microsoft.com/ko-kr/microsoft-teams/group-chat-software",
+    "status": 200,
+    "title": "화상 회의, 모임, 통화 | Microsoft Teams",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "microsoft-word",
+    "url": "https://www.microsoft.com/microsoft-365/word",
+    "finalUrl": "https://www.microsoft.com/ko-kr/microsoft-365/word",
+    "status": 200,
+    "title": "Microsoft Word의 무료 온라인 문서 편집 | Microsoft 365",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "miricanvas",
+    "url": "https://www.miricanvas.com/",
+    "finalUrl": "https://www.miricanvas.com/en",
+    "status": 200,
+    "title": "MiriCanvas | Free design tool with unique templates",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "miro",
+    "url": "https://miro.com/",
+    "finalUrl": "https://miro.com/",
+    "status": 200,
+    "title": "AI Innovation Workspace | Miro",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "monday",
+    "url": "https://monday.com/",
+    "finalUrl": "https://monday.com/",
+    "status": 200,
+    "title": "The AI Work Platform for People &amp; Agents | monday.com",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "n8n",
+    "url": "https://n8n.io/",
+    "finalUrl": "https://n8n.io/",
+    "status": 200,
+    "title": "AI Workflow Automation Platform - n8n",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "naver-calendar",
+    "url": "https://calendar.naver.com/",
+    "finalUrl": "https://calendar.naver.com/main",
+    "status": 200,
+    "title": "",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "naver-form",
+    "url": "https://form.naver.com/",
+    "finalUrl": "https://form.naver.com/",
+    "status": 200,
+    "title": "네이버 폼",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "naver-mybox",
+    "url": "https://mybox.naver.com/",
+    "finalUrl": "https://mybox.naver.com/main/web",
+    "status": 200,
+    "title": "네이버 MYBOX",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "naver-works",
+    "url": "https://naver.worksmobile.com/",
+    "finalUrl": "https://naver.worksmobile.com/",
+    "status": 200,
+    "title": "네이버웍스, 일이 쉬워진다",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "nocodb",
+    "url": "https://nocodb.com/",
+    "finalUrl": "https://nocodb.com/",
+    "status": 200,
+    "title": "NocoDB Cloud",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "notion",
+    "url": "https://www.notion.com/",
+    "finalUrl": "https://www.notion.com/",
+    "status": 200,
+    "title": "The AI workspace that works for you. | Notion",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "obs-studio",
+    "url": "https://obsproject.com/",
+    "finalUrl": "https://obsproject.com/",
+    "status": 200,
+    "title": "Open Broadcaster Software | OBS",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "obsidian",
+    "url": "https://obsidian.md/",
+    "finalUrl": "https://obsidian.md/",
+    "status": 200,
+    "title": "Obsidian - Sharpen your thinking",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "onedrive",
+    "url": "https://www.microsoft.com/microsoft-365/onedrive/online-cloud-storage",
+    "finalUrl": "https://www.microsoft.com/ko-kr/microsoft-365/onedrive/online-cloud-storage",
+    "status": 200,
+    "title": "개인 파일 공유 및 클라우드 스토리지 | Microsoft OneDrive",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "onenote",
+    "url": "https://www.onenote.com/",
+    "finalUrl": "https://onenote.cloud.microsoft/",
+    "status": 200,
+    "title": "Take notes anywhere for free | Microsoft OneNote for the Web",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "pcloud",
+    "url": "https://www.pcloud.com/",
+    "finalUrl": "https://www.pcloud.com/",
+    "status": 200,
+    "title": "pCloud - Secure Cloud Storage for Files, Photos &amp; Documents",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "photopea",
+    "url": "https://www.photopea.com/",
+    "finalUrl": "https://www.photopea.com/",
+    "status": 200,
+    "title": "Photopea | Online Photo Editor",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "photoshop",
+    "url": "https://www.adobe.com/products/photoshop.html",
+    "finalUrl": "https://www.adobe.com/products/photoshop.html",
+    "status": 200,
+    "title": "Official Adobe Photoshop | Free Trial and Online Photo &#x26; Design App",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "pipedream",
+    "url": "https://pipedream.com/",
+    "finalUrl": "https://pipedream.com/",
+    "status": 200,
+    "title": "Pipedream | Connect APIs, AI, databases and more",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "polaris-office",
+    "url": "https://www.polarisoffice.com/",
+    "finalUrl": "https://www.polarisoffice.com/en",
+    "status": 200,
+    "title": "Easier document work with AI | Polaris Office",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "postman",
+    "url": "https://www.postman.com/",
+    "finalUrl": "https://www.postman.com/",
+    "status": 200,
+    "title": "Postman: The World&#x27;s Leading API Platform | Sign Up for Free",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "power-automate",
+    "url": "https://www.microsoft.com/power-platform/products/power-automate",
+    "finalUrl": "https://www.microsoft.com/ko-kr/power-platform/products/power-automate",
+    "status": 200,
+    "title": "Power Automate: 비즈니스 프로세스 워크플로 자동화 | Microsoft Power Platform",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "power-bi",
+    "url": "https://www.microsoft.com/power-platform/products/power-bi",
+    "finalUrl": "https://www.microsoft.com/ko-kr/power-platform/products/power-bi",
+    "status": 200,
+    "title": "Power BI - 데이터 시각화 | Microsoft Power Platform",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "premiere-pro",
+    "url": "https://www.adobe.com/products/premiere.html",
+    "finalUrl": "https://www.adobe.com/products/premiere.html",
+    "status": 200,
+    "title": "Professional video editing software | Adobe Premiere",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "redash",
+    "url": "https://redash.io/",
+    "finalUrl": "https://redash.io/",
+    "status": 200,
+    "title": "Redash helps you make sense of your data",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "roam-research",
+    "url": "https://roamresearch.com/",
+    "finalUrl": "https://roamresearch.com/",
+    "status": 200,
+    "title": "Roam Research – A note taking tool for networked thought.",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "rows",
+    "url": "https://rows.com/",
+    "finalUrl": "https://rows.com/product",
+    "status": 200,
+    "title": "Rows - Your new AI Data Analyst",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "salesforce",
+    "url": "https://www.salesforce.com/",
+    "finalUrl": "https://www.salesforce.com/kr/?ir=1",
+    "status": 200,
+    "title": "Salesforce: 세계 최고의 Agentic CRM 솔루션 | Salesforce KR",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "sixshop",
+    "url": "https://www.sixshop.com/",
+    "finalUrl": "https://www.sixshop.com/",
+    "status": 200,
+    "title": "홈페이지 제작, AI 웹빌더로 쇼핑몰 웹사이트 만들기 | 식스샵 프로",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "slack",
+    "url": "https://slack.com/intl/ko-kr/",
+    "finalUrl": "https://slack.com/intl/ko-kr/",
+    "status": 200,
+    "title": "Slack | AI 업무 플랫폼 및 생산성 도구",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "smartsheet",
+    "url": "https://www.smartsheet.com/",
+    "finalUrl": "https://www.smartsheet.com/",
+    "status": 200,
+    "title": "Intelligent Work Management Platform | Smartsheet",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "softr",
+    "url": "https://www.softr.io/",
+    "finalUrl": "https://www.softr.io/",
+    "status": 200,
+    "title": "Build Custom AI Business Apps, Portals &amp; Internal Tools with No Code | Softr",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "stibee",
+    "url": "https://stibee.com/",
+    "finalUrl": "https://stibee.com/",
+    "status": 200,
+    "title": "스티비",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "streamlabs",
+    "url": "https://streamlabs.com/",
+    "finalUrl": "https://streamlabs.com/",
+    "status": 200,
+    "title": "",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "surveymonkey",
+    "url": "https://www.surveymonkey.com/",
+    "finalUrl": "https://www.surveymonkey.com/",
+    "status": 200,
+    "title": "SurveyMonkey: The World’s Most Popular Survey Platform",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "synology-drive",
+    "url": "https://www.synology.com/dsm/feature/drive",
+    "finalUrl": "https://www.synology.com/en-global/dsm/feature/drive",
+    "status": 200,
+    "title": "Synology Drive | Your private cloud for file management and sharing anywhere | Synology Inc.",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "tableau",
+    "url": "https://www.tableau.com/",
+    "finalUrl": "https://www.tableau.com/",
+    "status": 200,
+    "title": "Business Intelligence and Analytics Software | Tableau",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "tally",
+    "url": "https://tally.so/",
+    "finalUrl": "https://tally.so/",
+    "status": 200,
+    "title": "Tally - Create Beautiful Forms for Free | Unlimited Forms &amp; Submissions",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "ticktick",
+    "url": "https://ticktick.com/",
+    "finalUrl": "https://ticktick.com/",
+    "status": 200,
+    "title": "TickTick: A To-Do List and Calendar to keep you organized",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "tldraw",
+    "url": "https://tldraw.dev/",
+    "finalUrl": "https://tldraw.dev/",
+    "status": 200,
+    "title": "tldraw: Infinite Canvas SDK for React",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "todoist",
+    "url": "https://todoist.com/",
+    "finalUrl": "https://www.todoist.com/",
+    "status": 200,
+    "title": "Todoist | A To-Do List to Organize Your Work &amp; Life",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "toggl-track",
+    "url": "https://toggl.com/track/",
+    "finalUrl": "https://toggl.com/",
+    "status": 200,
+    "title": "Toggl: Time Tracking Software &amp; Capacity Planning Tool",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "trello",
+    "url": "https://trello.com/",
+    "finalUrl": "https://trello.com/",
+    "status": 200,
+    "title": "Capture, organize, and tackle your to-dos from anywhere",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "typeform",
+    "url": "https://www.typeform.com/",
+    "finalUrl": "https://www.typeform.com/",
+    "status": 200,
+    "title": "Form Builder with AI Automation | Typeform",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "upnote",
+    "url": "https://getupnote.com/",
+    "finalUrl": "https://getupnote.com/",
+    "status": 200,
+    "title": "Best Notes App - Write and Organize with UpNote",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "vrew",
+    "url": "https://vrew.ai/",
+    "finalUrl": "https://vrew.ai/",
+    "status": 503,
+    "title": "ERROR: The request could not be satisfied",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "webflow",
+    "url": "https://webflow.com/",
+    "finalUrl": "https://webflow.com/",
+    "status": 200,
+    "title": "Webflow: The agentic web platform for modern businesses",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "when2meet",
+    "url": "https://www.when2meet.com/",
+    "finalUrl": "https://www.when2meet.com/",
+    "status": 200,
+    "title": "When2meet",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "whimsical",
+    "url": "https://whimsical.com/",
+    "finalUrl": "https://whimsical.com/",
+    "status": 200,
+    "title": "Whimsical — The whiteboard for product builders",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "wix",
+    "url": "https://www.wix.com/",
+    "finalUrl": "https://www.wix.com/",
+    "status": 200,
+    "title": "Website Builder - Create a Free Website In Minutes | Wix.com",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "wordpress",
+    "url": "https://wordpress.org/",
+    "finalUrl": "https://wordpress.org/",
+    "status": 200,
+    "title": "Blog Tool, Publishing Platform, and CMS &#8211; WordPress.org",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "zapier",
+    "url": "https://zapier.com/",
+    "finalUrl": "https://zapier.com/",
+    "status": 200,
+    "title": "Zapier: Automate AI Workflows, Agents, and Apps",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "slug": "zendesk",
+    "url": "https://www.zendesk.com/",
+    "finalUrl": "https://www.zendesk.com/",
+    "status": 200,
+    "title": "AI-Powered Customer Service Platform | Zendesk",
+    "checkedOn": "2026-09-08"
+  }
+]

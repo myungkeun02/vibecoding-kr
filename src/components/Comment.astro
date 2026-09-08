@@ -1,0 +1,83 @@
+---
+const { comment: c } = Astro.props;
+const user = Astro.locals.user;
+const active = c.status === 'active';
+---
+
+<article class:list={['comment', { reply: c.parent_id }]} id={'comment-' + c.id}>
+  <div class="post-meta">
+    <a href={c.user_id ? '/profile/' + c.user_id : undefined}>{c.nickname || '탈퇴한 사용자'}</a><time
+      >{c.created_at.slice(0, 10)}</time
+    >
+  </div><p>
+    {active ? c.body : c.status === 'hidden' ? '운영 정책에 따라 숨겨진 댓글입니다.' : '삭제된 댓글입니다.'}
+  </p>{
+    active && user && (
+      <div class="flex wrap-flex">
+        {!c.parent_id && (
+          <details>
+            <summary>답글 쓰기</summary>
+            <form data-api action="/api/comments/create" method="post">
+              <input type="hidden" name="csrf" value={Astro.locals.csrf} />
+              <input type="hidden" name="post" value={c.post_id} />
+              <input type="hidden" name="parent" value={c.id} />
+              <label class="form-field">
+                <span>답글</span>
+                <textarea name="body" required maxlength="3000" />
+              </label>
+              <button type="submit" class="button secondary small">
+                답글 등록
+              </button>
+              <p class="form-status" role="status" />
+            </form>
+          </details>
+        )}
+        {c.user_id === user.id ? (
+          <>
+            <details>
+              <summary>댓글 수정</summary>
+              <form data-api action="/api/comments/update" method="post">
+                <input type="hidden" name="csrf" value={Astro.locals.csrf} />
+                <input type="hidden" name="id" value={c.id} />
+                <label class="form-field">
+                  <span>수정할 댓글</span>
+                  <textarea name="body" required maxlength="3000">
+                    {c.body}
+                  </textarea>
+                </label>
+                <button class="button secondary small" type="submit">
+                  수정 저장
+                </button>
+                <p class="form-status" role="status" />
+              </form>
+            </details>
+            <form data-api data-confirm="이 댓글을 삭제할까요?" action="/api/comments/delete" method="post">
+              <input type="hidden" name="csrf" value={Astro.locals.csrf} />
+              <input type="hidden" name="id" value={c.id} />
+              <button class="text-button" type="submit">
+                댓글 삭제
+              </button>
+            </form>
+          </>
+        ) : (
+          <details>
+            <summary>댓글 신고</summary>
+            <form data-api action="/api/report" method="post">
+              <input type="hidden" name="csrf" value={Astro.locals.csrf} />
+              <input type="hidden" name="type" value="comment" />
+              <input type="hidden" name="target" value={c.id} />
+              <label class="form-field">
+                <span>신고 사유</span>
+                <textarea name="reason" required minlength="5" maxlength="1000" />
+              </label>
+              <button class="button secondary small" type="submit">
+                신고 접수
+              </button>
+              <p class="form-status" role="status" />
+            </form>
+          </details>
+        )}
+      </div>
+    )
+  }
+</article>

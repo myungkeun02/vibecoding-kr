@@ -1,0 +1,30 @@
+---
+import Base from '../layouts/Base.astro';
+import { mailAvailable } from '../lib/mail';
+---
+
+<Base title="비밀번호 재설정 요청" noindex
+  ><section class="auth-panel">
+    <h1>비밀번호를 잊으셨나요?</h1><p class="muted">가입한 이메일로 재설정 안내를 보내드려요.</p>{
+      mailAvailable() ? (
+        <form data-api action="/api/auth/forgot" method="post">
+          <>
+            <input type="hidden" name="csrf" value={Astro.locals.csrf} />
+            <label class="form-field">
+              <>
+                <span>이메일</span>
+                <input type="email" name="email" required />
+              </>
+            </label>
+            <button type="submit" class="primary">
+              재설정 안내 요청
+            </button>
+            <p class="form-status" role="status" />
+          </>
+        </form>
+      ) : (
+        <p class="empty">이메일 발송 설정을 준비 중입니다.</p>
+      )
+    }<a href="/login" class="small">로그인으로 돌아가기</a>
+  </section></Base
+>

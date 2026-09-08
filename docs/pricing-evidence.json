@@ -1,0 +1,290 @@
+[
+  {
+    "slug": "slack",
+    "url": "https://slack.com/intl/ko-kr/pricing",
+    "status": 200,
+    "review": {
+      "model": "subscription",
+      "currency": "USD",
+      "plan": "Pro · 정가 (신규 프로모션 제외)",
+      "perSeat": true,
+      "minimumSeats": 1,
+      "billing": "monthly",
+      "monthlyNative": 8.75,
+      "annualMonthlyNative": 7.25,
+      "oneTimeNative": null,
+      "source": {
+        "url": "https://slack.com/intl/ko-kr/pricing",
+        "status": "verified",
+        "checkedOn": "2026-09-08",
+        "note": "사용자 1명 기준, 세금과 일시적 할인 제외."
+      },
+      "exchange": {
+        "rate": 1347.93,
+        "date": "2026-09-07",
+        "source": "https://api.frankfurter.dev/v1/2026-09-07?base=USD&symbols=KRW"
+      }
+    }
+  },
+  {
+    "slug": "notion",
+    "url": "https://www.notion.com/pricing",
+    "status": 200,
+    "review": {
+      "model": "freemium",
+      "currency": "USD",
+      "plan": "기준 플랜 확인 필요",
+      "perSeat": false,
+      "minimumSeats": 1,
+      "billing": "unknown",
+      "monthlyNative": null,
+      "annualMonthlyNative": null,
+      "oneTimeNative": null,
+      "source": {
+        "url": "https://www.notion.com/",
+        "checkedOn": "2026-09-08",
+        "status": "unverified",
+        "note": "정확한 기준 플랜과 결제액을 확정하지 못해 월 비용 합산에서 제외합니다."
+      },
+      "exchange": null
+    }
+  },
+  {
+    "slug": "obsidian",
+    "url": "https://obsidian.md/pricing",
+    "status": 200,
+    "review": {
+      "model": "free",
+      "currency": "USD",
+      "plan": "기본 소프트웨어 / 개인 무료 이용",
+      "perSeat": false,
+      "minimumSeats": 1,
+      "billing": "free",
+      "monthlyNative": 0,
+      "annualMonthlyNative": null,
+      "oneTimeNative": null,
+      "source": {
+        "url": "https://obsidian.md/",
+        "checkedOn": "2026-09-08",
+        "status": "verified",
+        "note": "무료 기본 소프트웨어 기준. 선택 클라우드·유료 기능 제외."
+      },
+      "exchange": null
+    }
+  },
+  {
+    "slug": "upnote",
+    "url": "https://getupnote.com/",
+    "status": 200,
+    "review": {
+      "model": "one-time",
+      "currency": "USD",
+      "plan": "Premium Lifetime",
+      "perSeat": false,
+      "minimumSeats": 1,
+      "billing": "one-time",
+      "monthlyNative": null,
+      "annualMonthlyNative": null,
+      "oneTimeNative": 39.99,
+      "source": {
+        "url": "https://getupnote.com/",
+        "status": "verified",
+        "checkedOn": "2026-09-08",
+        "note": "일회성 Lifetime 기준. 별도 월 구독 1.99 USD도 제공. 지역 세금에 따라 상이."
+      },
+      "exchange": null
+    }
+  },
+  {
+    "slug": "trello",
+    "url": "https://trello.com/pricing",
+    "status": 200,
+    "review": {
+      "model": "freemium",
+      "currency": "USD",
+      "plan": "Standard",
+      "perSeat": true,
+      "minimumSeats": 1,
+      "billing": "monthly",
+      "monthlyNative": 6,
+      "annualMonthlyNative": 5,
+      "oneTimeNative": null,
+      "source": {
+        "url": "https://trello.com/pricing",
+        "status": "verified",
+        "checkedOn": "2026-09-08",
+        "note": "사용자 1명 기준, 세금과 일시적 할인 제외."
+      },
+      "exchange": {
+        "rate": 1347.93,
+        "date": "2026-09-07",
+        "source": "https://api.frankfurter.dev/v1/2026-09-07?base=USD&symbols=KRW"
+      }
+    }
+  },
+  {
+    "slug": "todoist",
+    "url": "https://todoist.com/pricing",
+    "status": 200,
+    "review": {
+      "model": "freemium",
+      "currency": "USD",
+      "plan": "기준 플랜 확인 필요",
+      "perSeat": false,
+      "minimumSeats": 1,
+      "billing": "unknown",
+      "monthlyNative": null,
+      "annualMonthlyNative": null,
+      "oneTimeNative": null,
+      "source": {
+        "url": "https://todoist.com/",
+        "checkedOn": "2026-09-08",
+        "status": "unverified",
+        "note": "정확한 기준 플랜과 결제액을 확정하지 못해 월 비용 합산에서 제외합니다."
+      },
+      "exchange": null
+    }
+  },
+  {
+    "slug": "calendly",
+    "url": "https://calendly.com/pricing",
+    "status": 200,
+    "review": {
+      "model": "freemium",
+      "currency": "USD",
+      "plan": "기준 플랜 확인 필요",
+      "perSeat": false,
+      "minimumSeats": 1,
+      "billing": "unknown",
+      "monthlyNative": null,
+      "annualMonthlyNative": null,
+      "oneTimeNative": null,
+      "source": {
+        "url": "https://calendly.com/",
+        "checkedOn": "2026-09-08",
+        "status": "unverified",
+        "note": "정확한 기준 플랜과 결제액을 확정하지 못해 월 비용 합산에서 제외합니다."
+      },
+      "exchange": null
+    }
+  },
+  {
+    "slug": "linear",
+    "url": "https://linear.app/pricing",
+    "status": 200,
+    "review": {
+      "model": "freemium",
+      "currency": "USD",
+      "plan": "Basic · 연간 결제 기준",
+      "perSeat": true,
+      "minimumSeats": 1,
+      "billing": "annual",
+      "monthlyNative": null,
+      "annualMonthlyNative": 10,
+      "oneTimeNative": null,
+      "source": {
+        "url": "https://linear.app/pricing",
+        "status": "verified",
+        "checkedOn": "2026-09-08",
+        "note": "연 결제의 월 환산값. 실제 월 결제액은 미확인."
+      },
+      "exchange": {
+        "rate": 1347.93,
+        "date": "2026-09-07",
+        "source": "https://api.frankfurter.dev/v1/2026-09-07?base=USD&symbols=KRW"
+      }
+    }
+  },
+  {
+    "slug": "jandi",
+    "url": "https://www.jandi.com/landing/kr/pricing",
+    "status": 200,
+    "review": {
+      "model": "subscription",
+      "currency": "USD",
+      "plan": "기준 플랜 확인 필요",
+      "perSeat": false,
+      "minimumSeats": 1,
+      "billing": "unknown",
+      "monthlyNative": null,
+      "annualMonthlyNative": null,
+      "oneTimeNative": null,
+      "source": {
+        "url": "https://www.jandi.com/",
+        "checkedOn": "2026-09-08",
+        "status": "unverified",
+        "note": "정확한 기준 플랜과 결제액을 확정하지 못해 월 비용 합산에서 제외합니다."
+      },
+      "exchange": null
+    }
+  },
+  {
+    "slug": "flow",
+    "url": "https://flow.team/kr/price",
+    "status": 404,
+    "review": {
+      "model": "subscription",
+      "currency": "KRW",
+      "plan": "기준 플랜 확인 필요",
+      "perSeat": false,
+      "minimumSeats": 1,
+      "billing": "unknown",
+      "monthlyNative": null,
+      "annualMonthlyNative": null,
+      "oneTimeNative": null,
+      "source": {
+        "url": "https://flow.team/",
+        "checkedOn": "2026-09-08",
+        "status": "unverified",
+        "note": "정확한 기준 플랜과 결제액을 확정하지 못해 월 비용 합산에서 제외합니다."
+      },
+      "exchange": null
+    }
+  },
+  {
+    "slug": "tally",
+    "url": "https://tally.so/pricing",
+    "status": 200,
+    "review": {
+      "model": "freemium",
+      "currency": "USD",
+      "plan": "기준 플랜 확인 필요",
+      "perSeat": false,
+      "minimumSeats": 1,
+      "billing": "unknown",
+      "monthlyNative": null,
+      "annualMonthlyNative": null,
+      "oneTimeNative": null,
+      "source": {
+        "url": "https://tally.so/",
+        "checkedOn": "2026-09-08",
+        "status": "unverified",
+        "note": "정확한 기준 플랜과 결제액을 확정하지 못해 월 비용 합산에서 제외합니다."
+      },
+      "exchange": null
+    }
+  },
+  {
+    "slug": "make",
+    "url": "https://www.make.com/en/pricing",
+    "status": 403,
+    "review": {
+      "model": "freemium",
+      "currency": "USD",
+      "plan": "기준 플랜 확인 필요",
+      "perSeat": false,
+      "minimumSeats": 1,
+      "billing": "unknown",
+      "monthlyNative": null,
+      "annualMonthlyNative": null,
+      "oneTimeNative": null,
+      "source": {
+        "url": "https://www.make.com/",
+        "checkedOn": "2026-09-08",
+        "status": "unverified",
+        "note": "정확한 기준 플랜과 결제액을 확정하지 못해 월 비용 합산에서 제외합니다."
+      },
+      "exchange": null
+    }
+  }
+]

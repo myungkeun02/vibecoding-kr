@@ -1,0 +1,46 @@
+---
+import Base from '../layouts/Base.astro';
+import { all } from '../lib/db';
+const user = Astro.locals.user;
+if (!user) return Astro.redirect('/login?returnTo=/notifications');
+const items = all(
+  "SELECT n.*,p.title FROM notifications n JOIN posts p ON p.id=n.post_id LEFT JOIN comments c ON c.id=n.comment_id WHERE n.user_id=? AND p.status='active' AND (c.id IS NULL OR c.status='active') ORDER BY n.created_at DESC",
+  user.id,
+);
+---
+
+<Base title="내 알림" noindex
+  ><section class="narrow" style="margin:auto">
+    <header class="page-head">
+      <div class="flex between">
+        <h1>새로운 소식</h1><form data-api method="post" action="/api/notifications/read">
+          <input name="csrf" type="hidden" value={Astro.locals.csrf} /><button
+            class="button secondary small"
+            type="submit">모두 읽음</button
+          >
+        </form>
+      </div>
+    </header>{
+      items.map((n) => (
+        <article class="post-preview">
+          <a href={'/community/' + n.post_id + (n.comment_id ? '#comment-' + n.comment_id : '')}>
+            <>
+              <span class="small accent">{n.is_read ? '읽음' : '● 새 알림'}</span>
+              <h3>{n.label}</h3>
+              <p>{n.title}</p>
+            </>
+          </a>
+          {!n.is_read && (
+            <form data-api method="post" action="/api/notifications/read">
+              <input name="csrf" type="hidden" value={Astro.locals.csrf} />
+              <input name="id" type="hidden" value={n.id} />
+              <button class="text-button" type="submit">
+                읽음 표시
+              </button>
+            </form>
+          )}
+        </article>
+      ))
+    }{!items.length && <p class="empty">새 알림이 없어요. 댓글과 답글이 달리면 알려드릴게요.</p>}
+  </section></Base
+>

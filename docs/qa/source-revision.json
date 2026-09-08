@@ -1,0 +1,14 @@
+{
+  "version": "1.0.0",
+  "algorithm": "SHA-256",
+  "scope": [
+    "src/**",
+    "data/apps/**",
+    "migrations/**",
+    "package.json",
+    "pnpm-lock.yaml",
+    "data/categories.json",
+    "data/exchange.json"
+  ],
+  "hash": "5036b4b8510855a066bfe285193cb3248fd3cfbcce61a680a731e82c7fc71024"
+}

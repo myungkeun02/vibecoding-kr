@@ -1,0 +1,124 @@
+---
+import { apps } from '../lib/apps';
+import { boards } from '../lib/config';
+const { post: p } = Astro.props;
+const build = p ? JSON.parse(p.build) : {};
+const board = p?.board || Astro.url.searchParams.get('board') || 'builds';
+---
+
+<form data-api action={p ? '/api/posts/update' : '/api/posts/create'} method="post">
+  <input type="hidden" name="csrf" value={Astro.locals.csrf} />{
+    p && <input type="hidden" name="id" value={p.id} />
+  }<div class="editor-grid">
+    <div>
+      <label class="form-field"
+        ><span>제목</span><input
+          name="title"
+          placeholder="어떤 이야기를 나누고 싶으세요?"
+          required
+          minlength="3"
+          maxlength="140"
+          value={p?.title || ''}
+        /></label
+      ><label class="form-field"
+        ><span>본문 · Markdown 지원</span><textarea
+          aria-label="본문 · Markdown 지원"
+          class="editor-body"
+          name="body"
+          required
+          minlength="10"
+          maxlength="30000"
+          placeholder="만든 과정, 궁금한 점, 배운 것을 편하게 적어주세요. 제목은 ##, 코드는 ```로 작성할 수 있어요."
+          >{p?.body || ''}</textarea
+        ></label
+      ><div class="flex wrap-flex">
+        <button type="button" class="button secondary small" data-preview>본문 펼쳐보기</button><label
+          class="button secondary small"
+          >이미지 첨부<input type="file" accept="image/png,image/jpeg,image/webp" data-upload hidden /></label
+        ><span class="muted small">PNG·JPEG·WebP, 최대 5MB</span>
+      </div><pre id="markdown-preview" class="meta-box" hidden></pre><details class="section">
+        <summary>제작 후기 정보를 더 남길래요 (선택)</summary><div class="stack" style="margin-top:20px">
+          <label class="form-field"
+            ><span>사용한 코딩 에이전트</span><input
+              name="agent"
+              value={build.agent || ''}
+              placeholder="Codex, Claude Code, Cursor…"
+              maxlength="80"
+            /></label
+          ><label class="form-field"
+            ><span>실제로 만든 기능</span><textarea name="features" maxlength="2000"
+              >{build.features || ''}</textarea
+            ></label
+          ><label class="form-field"
+            ><span>어려웠던 점</span><textarea name="difficulties" maxlength="2000"
+              >{build.difficulties || ''}</textarea
+            ></label
+          ><label class="form-field"
+            ><span>실제 대체한 범위</span><textarea name="scope" maxlength="2000"
+              >{build.scope || ''}</textarea
+            ></label
+          ><label class="form-field"
+            ><span>적용한 프롬프트</span><textarea name="prompt" maxlength="5000"
+              >{build.prompt || ''}</textarea
+            ></label
+          ><label class="form-field"
+            ><span>배포 주소</span><input
+              name="url"
+              type="url"
+              value={build.url || ''}
+              placeholder="https://…"
+            /></label
+          ><label class="form-field"
+            ><span>소스 저장소</span><input
+              name="repo"
+              type="url"
+              value={build.repo || ''}
+              placeholder="https://github.com/…"
+            /></label
+          >
+        </div>
+      </details><p class="form-status" role="status"></p><div class="flex">
+        <button class="primary" type="submit">{p ? '수정 내용 저장' : '이야기 게시하기'} ↗</button><a
+          class="muted small"
+          href={p ? '/community/' + p.id : '/community'}>취소</a
+        >
+      </div>
+    </div><aside>
+      <section class="meta-box">
+        <label class="form-field"
+          ><span>게시판</span><select name="board"
+            >{
+              Object.entries(boards)
+                .filter(([k]) => k !== 'notice' || Astro.locals.user?.role === 'admin')
+                .map(([k, v]) => (
+                  <option value={k} selected={board === k}>
+                    {v}
+                  </option>
+                ))
+            }</select
+          ></label
+        ><label class="form-field"
+          ><span>관련 도구 (선택)</span><select name="tool"
+            ><option value="">도구 선택 안 함</option>{
+              apps.map((a) => (
+                <option
+                  value={a.slug}
+                  selected={(p?.tool_slug || Astro.url.searchParams.get('tool')) === a.slug}
+                >
+                  {a.name}
+                </option>
+              ))
+            }</select
+          ></label
+        ><label class="form-field"
+          ><span>태그 (선택)</span><input
+            name="tags"
+            value={p?.tags || ''}
+            maxlength="150"
+            placeholder="쉼표로 구분해 주세요"
+          /></label
+        ><p>이 글은 누구나 읽을 수 있어요. 비밀번호나 개인 연락처는 포함하지 마세요.</p>
+      </section>
+    </aside>
+  </div>
+</form>

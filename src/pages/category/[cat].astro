@@ -1,0 +1,44 @@
+---
+import Base from '../../layouts/Base.astro';
+import Directory from '../../components/Directory.astro';
+import { categories, apps } from '../../lib/apps';
+import { absolute } from '../../lib/config';
+const cat = categories.find((c) => c.slug === Astro.params.cat);
+if (!cat) Astro.response.status = 404;
+const params = new URLSearchParams(Astro.url.searchParams);
+if (cat) params.set('category', cat.slug);
+const list = apps.filter((a) => a.category === cat?.slug).slice(0, 20);
+const jsonld = cat
+  ? [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: '도구 탐색', item: absolute('/') },
+          { '@type': 'ListItem', position: 2, name: cat.name, item: absolute('/category/' + cat.slug) },
+        ],
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'ItemList',
+        itemListElement: list.map((a, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          name: a.name,
+          url: absolute('/' + a.slug),
+        })),
+      },
+    ]
+  : [];
+---
+
+<Base
+  title={cat ? cat.name + ' 도구, 직접 만들 수 있을까?' : '카테고리를 찾을 수 없어요'}
+  {jsonld}
+  noindex={!cat}
+  ><div class="page-head">
+    <div class="eyebrow">EXPLORE A CATEGORY</div><h1>
+      {cat ? cat.emoji + ' ' + cat.name : '카테고리를 찾을 수 없어요'}
+    </h1><p>필요한 기능의 범위와 대체할 때 잃는 것을 비교해 보세요.</p>
+  </div>{cat && <Directory {params} />}</Base
+>

@@ -1,0 +1,62 @@
+---
+import Base from '../layouts/Base.astro';
+import { safeReturn } from '../lib/security';
+const returnTo = safeReturn(Astro.url.searchParams.get('returnTo'));
+if (Astro.locals.user) return Astro.redirect(returnTo);
+---
+
+<Base title="회원가입" noindex
+  ><section class="auth-panel">
+    <div class="eyebrow">HELLO, BUILDER.</div><h1 style="margin-top:14px">함께 만드는 쪽으로.</h1><p
+      class="muted"
+    >
+      도구를 저장하고, 만들면서 배운 것을 나눠보세요.
+    </p><form data-api action="/api/auth/register" method="post">
+      <input type="hidden" name="csrf" value={Astro.locals.csrf} /><input
+        type="hidden"
+        name="returnTo"
+        value={returnTo}
+      /><label class="form-field"
+        ><span>이메일</span><input
+          name="email"
+          type="email"
+          autocomplete="email"
+          required
+          maxlength="254"
+        /></label
+      ><label class="form-field"
+        ><span>닉네임</span><input
+          name="nickname"
+          autocomplete="nickname"
+          required
+          minlength="2"
+          maxlength="24"
+          placeholder="한글·영문·숫자 2~24자"
+        /></label
+      ><label class="form-field"
+        ><span>비밀번호</span><input
+          name="password"
+          type="password"
+          autocomplete="new-password"
+          required
+          minlength="10"
+          maxlength="128"
+          placeholder="10자 이상 입력해 주세요"
+        /></label
+      ><label class="check-label"
+        ><input name="terms" type="checkbox" required /><span
+          ><a href="/terms" target="_blank">이용약관</a>과 <a href="/privacy" target="_blank"
+            >개인정보 처리 안내</a
+          >를 읽고 동의해요. (필수)</span
+        ></label
+      ><label class="check-label"
+        ><input name="news" type="checkbox" />업데이트 소식을 이메일로 받아볼게요. (선택)</label
+      ><button type="submit" class="primary">빌더로 합류하기 ↗</button><p class="form-status" role="status">
+      </p>
+    </form><div class="auth-links">
+      <span class="muted">이미 계정이 있나요?</span><a
+        href={'/login?returnTo=' + encodeURIComponent(returnTo)}>로그인 ↗</a
+      >
+    </div>
+  </section></Base
+>

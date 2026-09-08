@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "at": "2026-09-08T09:26:34.519Z",
+  "checks": [
+    "real process restart",
+    "session persists",
+    "posts persist",
+    "votes and totals persist",
+    "SQLite live backup",
+    "restore after stopped server",
+    "integrity and foreign keys"
+  ]
+}

@@ -1,0 +1,178 @@
+---
+import Base from '../layouts/Base.astro';
+import AdminAction from '../components/AdminAction.astro';
+import { all } from '../lib/db';
+const allowed = Astro.locals.user?.role === 'admin';
+if (!allowed) Astro.response.status = 403;
+const reports = allowed ? all('SELECT * FROM reports ORDER BY id DESC LIMIT 100') : [];
+const suggestions = allowed ? all('SELECT * FROM suggestions ORDER BY id DESC LIMIT 100') : [];
+const users = allowed
+  ? all('SELECT id,nickname,email,status,role FROM users ORDER BY created_at DESC LIMIT 100')
+  : [];
+const posts = allowed
+  ? all("SELECT id,title,status,pinned FROM posts WHERE status<>'deleted' ORDER BY created_at DESC LIMIT 100")
+  : [];
+const comments = allowed
+  ? all(
+      "SELECT id,body,status,post_id FROM comments WHERE status<>'deleted' ORDER BY created_at DESC LIMIT 100",
+    )
+  : [];
+const actions = allowed ? all('SELECT * FROM audit ORDER BY id DESC LIMIT 50') : [];
+const statuses: Record<string, string> = {
+  pending: '검토 대기',
+  resolved: '처리 완료',
+  dismissed: '기각',
+  accepted_pending_release: '채택 · 배포 대기',
+  rejected: '반려',
+  active: '활성',
+  hidden: '숨김',
+  suspended: '이용 제한',
+};
+---
+
+<Base title="운영 관리" noindex
+  >{
+    allowed ? (
+      <>
+        <>
+          <header class="page-head">
+            <>
+              <div class="eyebrow">OPERATIONS</div>
+              <div class="flex between">
+                <>
+                  <h1 style="margin-top:15px">커뮤니티 운영</h1>
+                  <a class="button" href="/community/new?board=notice">
+                    공지 작성 +
+                  </a>
+                </>
+              </div>
+            </>
+          </header>
+          <nav class="tabs">
+            <>
+              <a href="#reports">신고</a>
+              <a href="#suggestions">도구 제안</a>
+              <a href="#users">사용자</a>
+              <a href="#posts">게시글</a>
+              <a href="#comments">댓글</a>
+              <a href="#audit">감사 기록</a>
+            </>
+          </nav>
+          <section id="reports" class="section">
+            <h2>신고 접수</h2>
+            {reports.map((r) => (
+              <article class="admin-row">
+                <span class="badge">{statuses[r.status]}</span>
+                <p>{r.reason}</p>
+                <div class="muted small">
+                  {r.target_type} · {r.target_id}
+                </div>
+                <div class="admin-actions">
+                  <AdminAction target={r.id} operation="report-resolve" label="처리 완료" />
+                  <AdminAction target={r.id} operation="report-dismiss" label="기각" />
+                  <AdminAction target={r.target_id} operation={r.target_type + '-hide'} label="콘텐츠 숨김" />
+                </div>
+              </article>
+            ))}
+            {!reports.length && <p class="empty">접수된 신고가 없습니다.</p>}
+          </section>
+          <section id="suggestions" class="section">
+            <p class="muted small">
+              채택은 검토 승인입니다. JSON 수정·검증·배포까지 완료하기 전에는 게시 완료로 표시하지 않습니다.
+            </p>
+            {suggestions.map((s) => (
+              <article class="admin-row">
+                <span class="badge">{statuses[s.status] || s.status}</span>
+                <h3>{s.title}</h3>
+                <pre>{s.body}</pre>
+                <div class="admin-actions">
+                  <AdminAction target={s.id} operation="suggest-accept" label="채택 · 배포 대기로" />
+                  <AdminAction target={s.id} operation="suggest-reject" label="반려" />
+                </div>
+              </article>
+            ))}
+            {!suggestions.length && <p class="empty">검토할 제안이 없습니다.</p>}
+          </section>
+          <section id="users" class="section">
+            <h2>사용자</h2>
+            {users.map((u) => (
+              <article class="admin-row">
+                <strong>{u.nickname}</strong>
+                <span class="muted small">
+                  {' '}
+                  · {u.email} · {u.role} · {statuses[u.status]}
+                </span>
+                <div class="admin-actions">
+                  {u.id !== Astro.locals.user.id && (
+                    <AdminAction
+                      target={u.id}
+                      operation={u.status === 'active' ? 'user-suspend' : 'user-restore'}
+                      label={u.status === 'active' ? '이용 제한' : '제한 해제'}
+                    />
+                  )}
+                </div>
+              </article>
+            ))}
+          </section>
+          <section id="posts" class="section">
+            <h2>게시글</h2>
+            {posts.map((p) => (
+              <article class="admin-row">
+                <a href={'/community/' + p.id}>{p.title}</a>
+                <span class="badge">{statuses[p.status]}</span>
+                <div class="admin-actions">
+                  <AdminAction
+                    target={p.id}
+                    operation={p.status === 'active' ? 'post-hide' : 'post-restore'}
+                    label={p.status === 'active' ? '숨김' : '복구'}
+                  />
+                  <AdminAction
+                    target={p.id}
+                    operation={p.pinned ? 'post-unpin' : 'post-pin'}
+                    label={p.pinned ? '고정 해제' : '고정'}
+                  />
+                </div>
+              </article>
+            ))}
+            {!posts.length && <p class="empty">게시글이 없습니다.</p>}
+          </section>
+          <section id="comments" class="section">
+            <h2>댓글</h2>
+            {comments.map((c) => (
+              <article class="admin-row">
+                <a href={'/community/' + c.post_id + '#comment-' + c.id}>{c.body}</a>
+                <span class="badge">{statuses[c.status]}</span>
+                <div class="admin-actions">
+                  <AdminAction
+                    target={c.id}
+                    operation={c.status === 'active' ? 'comment-hide' : 'comment-restore'}
+                    label={c.status === 'active' ? '숨김' : '복구'}
+                  />
+                </div>
+              </article>
+            ))}
+            {!comments.length && <p class="empty">댓글이 없습니다.</p>}
+          </section>
+          <section id="audit" class="section">
+            <h2>주요 조치 기록</h2>
+            {actions.map((a) => (
+              <div class="admin-row mono small">
+                {a.created_at} · {a.action} · {a.target}
+              </div>
+            ))}
+            {!actions.length && <p class="empty">운영 조치 기록이 없습니다.</p>}
+          </section>
+        </>
+      </>
+    ) : (
+      <section class="page-head empty">
+        <>
+          <h1>관리자만 접근할 수 있어요.</h1>
+          <a href="/" class="button secondary">
+            홈으로 돌아가기
+          </a>
+        </>
+      </section>
+    )
+  }</Base
+>

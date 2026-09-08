@@ -1,0 +1,403 @@
+---
+import Base from '../layouts/Base.astro';
+import { getApp, related, categoryName, priceLabel } from '../lib/apps';
+import { verdicts, absolute, boards } from '../lib/config';
+import { one, voteCounts, posts } from '../lib/db';
+import Ticker from '../components/Ticker.astro';
+const a = getApp(Astro.params.slug || '');
+if (!a) {
+  Astro.response.status = 404;
+}
+const v = a ? verdicts[a.verdict] : null;
+const user = Astro.locals.user;
+const voted = a
+  ? Boolean(
+      one(
+        'SELECT id FROM votes WHERE slug=? AND ' + (user ? 'user_id=?' : 'anonymous=?'),
+        a.slug,
+        user?.id || Astro.locals.anon,
+      ),
+    )
+  : false;
+const bookmarked =
+  a && user ? Boolean(one('SELECT 1 FROM bookmarks WHERE user_id=? AND slug=?', user.id, a.slug)) : false;
+const count = a ? voteCounts()[a.slug] || 0 : 0;
+const builds = a ? posts(new URLSearchParams({ tool: a.slug })).items.slice(0, 4) : [];
+const jsonld = a
+  ? [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: a.faq.map((f) => ({
+          '@type': 'Question',
+          name: f.q,
+          acceptedAnswer: { '@type': 'Answer', text: f.a },
+        })),
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { name: '도구 탐색', url: '/' },
+          { name: categoryName(a.category), url: '/category/' + a.category },
+          { name: a.name, url: '/' + a.slug },
+        ].map((x, i) => ({ '@type': 'ListItem', position: i + 1, name: x.name, item: absolute(x.url) })),
+      },
+    ]
+  : [];
+---
+
+<Base
+  title={a ? `${a.nameKo}을 바이브코딩으로 대체할 수 있을까?` : '도구를 찾을 수 없어요'}
+  description={a ? a.scope + ' — ' + a.verdictReason : undefined}
+  og={a ? '/og/' + a.slug + '.png' : undefined}
+  {jsonld}
+  noindex={!a}
+  >{
+    a && v ? (
+      <>
+        <>
+          <nav class="crumbs" aria-label="현재 위치">
+            <>
+              <a href="/">도구 탐색</a>
+              <span>/</span>
+              <a href={'/category/' + a.category}>{categoryName(a.category)}</a>
+              <span>/</span>
+              <span>{a.name}</span>
+            </>
+          </nav>
+          <header class="detail-head">
+            <>
+              <span class="tool-icon">{a.name.slice(0, 1)}</span>
+              <div>
+                <>
+                  <h1>{a.name}</h1>
+                  <p class="muted">
+                    {a.nameKo !== a.name ? a.nameKo + ' · ' : ''}
+                    {a.summary}{' '}
+                    <a
+                      href={a.officialUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${a.name} 공식 사이트`}
+                    >
+                      ↗
+                    </a>
+                  </p>
+                </>
+              </div>
+            </>
+          </header>
+          <div class="detail-grid">
+            <>
+              <div>
+                <>
+                  <section class:list={['verdict-panel', a.verdict]}>
+                    <>
+                      <span class:list={['verdict', 'big', a.verdict]}>
+                        {v.symbol} {v.en}
+                      </span>
+                      <span style="margin-left:16px" class="muted small">
+                        {v.label}
+                      </span>
+                      <p>{a.verdictReason}</p>
+                      <div class="scope">
+                        <br />
+                        {a.scope}
+                      </div>
+                    </>
+                  </section>
+                  <section class="section">
+                    <>
+                      <div class="flex between wrap-flex">
+                        <>
+                          <h2>직접 만들어볼 프롬프트</h2>
+                          <span class="badge">v{a.promptVersion} · 편집 검토</span>
+                        </>
+                      </div>
+                      <p class="muted small">
+                        {a.verdict === 'no'
+                          ? '아래는 원본의 완전 대체가 아닌 제한적 보조 도구를 만드는 지침입니다.'
+                          : '복사한 뒤 코딩 에이전트에서 프로젝트를 열어 시작하세요.'}{' '}
+                        실제 제작 결과는 검증하지 않았습니다.
+                      </p>
+                      <div class="prompt-block">
+                        <>
+                          <div class="prompt-toolbar">
+                            <>
+                              <span class="mono">build-{a.slug}.prompt</span>
+                              <div class="prompt-buttons">
+                                {[
+                                  ['claude', 'Claude Code'],
+                                  ['codex', 'Codex'],
+                                  ['cursor', 'Cursor'],
+                                ].map(([agent, label]) => (
+                                  <button data-copy="build-prompt" data-agent={agent} data-slug={a.slug}>
+                                    {label} 복사 ↗
+                                  </button>
+                                ))}
+                              </div>
+                            </>
+                          </div>
+                          <div class="prompt-code">
+                            <pre id="build-prompt" tabindex="0" set:text={a.prompt} />
+                          </div>
+                        </>
+                      </div>
+                      <div class="small muted" style="margin-top:12px">
+                        변경 이력: {a.history.map((h) => `${h.date} · ${h.note}`).join(' / ')}
+                      </div>
+                    </>
+                  </section>
+                  <section class="section">
+                    <>
+                      <h2>만들 수 있는 것</h2>
+                      <ul class="fact-list">
+                        {a.features.map((f) => (
+                          <li>{f}</li>
+                        ))}
+                      </ul>
+                    </>
+                  </section>
+                  <section class="section divider">
+                    <>
+                      <h2>솔직히, 이런 기능은 잃어요.</h2>
+                      <ul class="fact-list">
+                        {a.whatYouLose.map((f) => (
+                          <li>{f}</li>
+                        ))}
+                      </ul>
+                      <p class="muted small" style="margin-top:20px">
+                        원본을 계속 사용하는 이유가 여기에 있다면, 그 기능을 먼저 비교해 보세요.
+                      </p>
+                    </>
+                  </section>
+                  <section class="section divider">
+                    <h2>이미 만들어진 대안</h2>
+                    {a.priorArt.length ? (
+                      <ul>
+                        {a.priorArt.map((p) => (
+                          <li>
+                            <a href={p.url} target="_blank" rel="noopener noreferrer">
+                              {p.name} ↗
+                            </a>
+                            <br />
+                            <span class="muted small">
+                              {p.license} {p.verified ? '· 공식 라이선스 확인' : '· 라이선스 확인 필요'}
+                            </span>
+                            {p.licenseUrl && (
+                              <a
+                                class="small muted"
+                                href={p.licenseUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                {' '}
+                                · 라이선스 원문
+                              </a>
+                            )}
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p class="muted">
+                        확인된 선행 사례를 보완 중입니다.{' '}
+                        <a href={'/suggest?slug=' + a.slug}>대안을 제안해 주세요 ↗</a>
+                      </p>
+                    )}
+                  </section>
+                  <section class="section faq">
+                    <h2>자주 묻는 질문</h2>
+                    {a.faq.map((f) => (
+                      <details>
+                        <summary>{f.q}</summary>
+                        <p>{f.a}</p>
+                      </details>
+                    ))}
+                  </section>
+                  <section class="section">
+                    <div class="flex between wrap-flex">
+                      <>
+                        <h2>{a.nameKo} 제작 이야기</h2>
+                        <a class="small" href={'/community/new?tool=' + a.slug}>
+                          글 쓰기 ↗
+                        </a>
+                      </>
+                    </div>
+                    {builds.length ? (
+                      builds.map((p) => (
+                        <a class="post-preview" href={'/community/' + p.id}>
+                          <span class="badge">{boards[p.board]}</span>
+                          <h3>{p.title}</h3>
+                          <span class="muted small">
+                            {p.nickname} · 댓글 {p.comments}
+                          </span>
+                        </a>
+                      ))
+                    ) : (
+                      <div class="empty">아직 연결된 글이 없어요. 직접 시도한 과정을 남겨보세요.</div>
+                    )}
+                  </section>
+                </>
+              </div>
+              <aside>
+                <>
+                  <div class="meta-box">
+                    <>
+                      <div class="eyebrow">YOUR NEXT BUILD</div>
+                      <h3 style="margin-top:14px">직접 대체해 보셨나요?</h3>
+                      <p>명시된 기능을 직접 만들어 사용 중이라면 인증을 남겨주세요.</p>
+                      <button
+                        class="primary"
+                        style="width:100%"
+                        data-vote
+                        data-slug={a.slug}
+                        aria-pressed={voted}
+                      >
+                        {voted ? '대체 인증 완료 ✓' : '직접 대체했어요 ↑'} {count}
+                      </button>
+                      <button
+                        class="button secondary"
+                        data-bookmark
+                        data-slug={a.slug}
+                        aria-pressed={bookmarked}
+                      >
+                        {bookmarked ? '북마크 저장됨 ✓' : '도구 북마크 ☆'}
+                      </button>
+                      <p class="small" style="margin:12px 0 0">
+                        비회원도 참여할 수 있어요. 인증은 사용자 자기신고입니다.
+                      </p>
+                    </>
+                  </div>
+                  <div class="meta-box">
+                    <dl>
+                      <>
+                        <dt>기준 비용</dt>
+                        <dd>{priceLabel(a)}</dd>
+                        <dt>기준 플랜</dt>
+                        <dd>{a.pricing.plan}</dd>
+                        <dt>원통화</dt>
+                        <dd>{a.pricing.currency}</dd>
+                        <dt>월 결제액</dt>
+                        <dd>{a.pricing.monthlyNative === null ? '확인 필요' : a.pricing.monthlyNative}</dd>
+                        <dt>연간 월 환산</dt>
+                        <dd>{a.pricing.annualMonthlyNative ?? '확인 필요'}</dd>
+                        <dt>과금 단위</dt>
+                        <dd>
+                          {a.pricing.perSeat ? '사용자당' : '개인 / 기준 플랜'} · 최소{' '}
+                          {a.pricing.minimumSeats}석
+                        </dd>
+                        <dt>확인 날짜</dt>
+                        <dd>{a.pricing.source.checkedOn}</dd>
+                        <dt>가격 출처</dt>
+                        <dd>
+                          <a href={a.pricing.source.url} target="_blank" rel="noopener noreferrer">
+                            공식 안내 ↗
+                          </a>
+                        </dd>
+                        <dt>검증 상태</dt>
+                        <dd>
+                          {a.pricing.source.status === 'verified' ? '가격 기준 확인' : '가격 확인 필요'}
+                        </dd>
+                        <dt>제작 난도</dt>
+                        <dd>{a.difficulty}</dd>
+                      </>
+                    </dl>
+                    {a.pricing.exchange && (
+                      <p style="margin:16px 0 0">
+                        환산: 1 {a.pricing.currency} = {a.pricing.exchange.rate.toLocaleString()}원 ·{' '}
+                        {a.pricing.exchange.date} <a href={a.pricing.exchange.source}>출처 ↗</a>
+                      </p>
+                    )}
+                    <p class="small" style="margin:16px 0 0">
+                      {a.pricing.source.note}
+                    </p>
+                  </div>
+                  <div class="meta-box">
+                    <>
+                      <h3>직접 운영할 때</h3>
+                      <ul>
+                        {a.operations.map((o) => (
+                          <li>{o}</li>
+                        ))}
+                      </ul>
+                      <p>외부 의존성: {a.dependencies.join(', ') || '기본 로컬 구현에는 필요 없음'}</p>
+                    </>
+                  </div>
+                  <div class="meta-box">
+                    <>
+                      <h3>함께 살펴보기</h3>
+                      <div class="stack">
+                        <>
+                          <a
+                            class="button secondary"
+                            href={
+                              'https://x.com/intent/post?' +
+                              new URLSearchParams({
+                                text: `${a.nameKo}, 직접 만들 수 있을까? ${v.label}`,
+                                url: absolute('/' + a.slug),
+                              })
+                            }
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            X에 공유 ↗
+                          </a>
+                          <button class="button secondary" data-copy-url>
+                            링크 복사 ↗
+                          </button>
+                          {process.env.KAKAO_JAVASCRIPT_KEY && (
+                            <button
+                              class="button secondary"
+                              data-kakao-key={process.env.KAKAO_JAVASCRIPT_KEY}
+                            >
+                              카카오톡 공유 ↗
+                            </button>
+                          )}
+                          <button class="button secondary" data-native-share>
+                            기기로 공유 ↗
+                          </button>
+                          <a href={'/suggest?slug=' + a.slug} class="small muted">
+                            정보 수정 제안 ↗
+                          </a>
+                        </>
+                      </div>
+                    </>
+                  </div>
+                </>
+              </aside>
+            </>
+          </div>
+          <section class="section">
+            <>
+              <h2>이 도구도 살펴보세요.</h2>
+              <div class="related-grid">
+                {related(a).map((r) => (
+                  <a class="related-card" href={'/' + r.slug}>
+                    <span class="tool-icon">{r.name.slice(0, 1)}</span>
+                    <strong>{r.name}</strong>
+                    <span class:list={['verdict', r.verdict]} style="font-size:11px">
+                      {verdicts[r.verdict].en} ↗
+                    </span>
+                  </a>
+                ))}
+              </div>
+            </>
+          </section>
+          <Ticker />
+        </>
+      </>
+    ) : (
+      <section class="page-head empty">
+        <>
+          <div class="eyebrow">404 / NOT FOUND</div>
+          <h1>아직 이 도구를 찾지 못했어요.</h1>
+          <p>이름을 다시 검색하거나 도구를 제안해 주세요.</p>
+          <a class="button" href="/">
+            도구 탐색으로 돌아가기
+          </a>
+        </>
+      </section>
+    )
+  }</Base
+>

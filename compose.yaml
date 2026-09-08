@@ -1,0 +1,20 @@
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8095:8095"
+    env_file:
+      - .env
+    environment:
+      HOST: 0.0.0.0
+      PORT: "8095"
+      SITE_URL: ${SITE_URL:?Set public HTTPS URL}
+      SESSION_SECRET: ${SESSION_SECRET:?Generate 32+ random characters}
+      DATA_DIR: /data
+      APP_ENV: production
+      TRUST_PROXY: "1"
+    volumes:
+      - site-data:/data
+volumes:
+  site-data:

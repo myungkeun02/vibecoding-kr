@@ -1,0 +1,137 @@
+[
+  {
+    "category": "collab",
+    "repo": "mattermost/mattermost",
+    "status": 200,
+    "license": "NOASSERTION",
+    "licenseUrl": "https://github.com/mattermost/mattermost/blob/master/LICENSE.txt",
+    "name": "mattermost",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "category": "notes",
+    "repo": "laurent22/joplin",
+    "status": 200,
+    "license": "NOASSERTION",
+    "licenseUrl": "https://github.com/laurent22/joplin/blob/dev/LICENSE",
+    "name": "joplin",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "category": "office",
+    "repo": "ONLYOFFICE/DocumentServer",
+    "status": 200,
+    "license": "AGPL-3.0",
+    "licenseUrl": "https://github.com/ONLYOFFICE/DocumentServer/blob/master/LICENSE",
+    "name": "DocumentServer",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "category": "projects",
+    "repo": "kanboard/kanboard",
+    "status": 200,
+    "license": "MIT",
+    "licenseUrl": "https://github.com/kanboard/kanboard/blob/main/LICENSE",
+    "name": "kanboard",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "category": "data",
+    "repo": "metabase/metabase",
+    "status": 200,
+    "license": "NOASSERTION",
+    "licenseUrl": "https://github.com/metabase/metabase/blob/master/LICENSE.txt",
+    "name": "metabase",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "category": "whiteboard",
+    "repo": "excalidraw/excalidraw",
+    "status": 200,
+    "license": "MIT",
+    "licenseUrl": "https://github.com/excalidraw/excalidraw/blob/master/LICENSE",
+    "name": "excalidraw",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "category": "design",
+    "repo": "photopea/photopea",
+    "status": 404,
+    "license": "NOASSERTION",
+    "licenseUrl": null,
+    "name": "photopea",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "category": "media",
+    "repo": "obsproject/obs-studio",
+    "status": 200,
+    "license": "GPL-2.0",
+    "licenseUrl": "https://github.com/obsproject/obs-studio/blob/master/COPYING",
+    "name": "obs-studio",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "category": "forms",
+    "repo": "heyform/heyform",
+    "status": 200,
+    "license": "AGPL-3.0",
+    "licenseUrl": "https://github.com/heyform/heyform/blob/next/LICENSE",
+    "name": "heyform",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "category": "automation",
+    "repo": "activepieces/activepieces",
+    "status": 200,
+    "license": "NOASSERTION",
+    "licenseUrl": "https://github.com/activepieces/activepieces/blob/main/LICENSE",
+    "name": "activepieces",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "category": "crm",
+    "repo": "chatwoot/chatwoot",
+    "status": 200,
+    "license": "NOASSERTION",
+    "licenseUrl": "https://github.com/chatwoot/chatwoot/blob/develop/LICENSE",
+    "name": "chatwoot",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "category": "scheduling",
+    "repo": "calcom/cal.com",
+    "status": 200,
+    "license": "MIT",
+    "licenseUrl": "https://github.com/calcom/cal.diy/blob/main/LICENSE",
+    "name": "cal.com",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "category": "files",
+    "repo": "nextcloud/server",
+    "status": 200,
+    "license": "AGPL-3.0",
+    "licenseUrl": "https://github.com/nextcloud/server/blob/master/COPYING",
+    "name": "server",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "category": "dev",
+    "repo": "usebruno/bruno",
+    "status": 200,
+    "license": "MIT",
+    "licenseUrl": "https://github.com/usebruno/bruno/blob/main/license.md",
+    "name": "bruno",
+    "checkedOn": "2026-09-08"
+  },
+  {
+    "category": "web",
+    "repo": "WordPress/WordPress",
+    "status": 200,
+    "license": "NOASSERTION",
+    "licenseUrl": "https://github.com/WordPress/WordPress/blob/master/license.txt",
+    "name": "WordPress",
+    "checkedOn": "2026-09-08"
+  }
+]

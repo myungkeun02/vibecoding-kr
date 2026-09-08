@@ -1,0 +1,12 @@
+.git
+node_modules
+dist
+.astro
+.env*
+data/private
+data/test
+reference
+test-results
+playwright-report
+docs/qa/screenshots
+docs/superpowers

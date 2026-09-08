@@ -1,0 +1,15 @@
+---
+import Base from '../../../layouts/Base.astro';
+import PostEditor from '../../../components/PostEditor.astro';
+import { getPost } from '../../../lib/db';
+if (!Astro.locals.user) return Astro.redirect('/login?returnTo=' + encodeURIComponent(Astro.url.pathname));
+const p = getPost(Astro.params.id || '');
+const allowed = p && p.user_id === Astro.locals.user.id;
+if (!allowed) Astro.response.status = p ? 403 : 404;
+---
+
+<Base title="이야기 수정" noindex
+  ><header class="page-head"><h1>{allowed ? '이야기 수정' : '이 글을 수정할 수 없어요.'}</h1></header>{
+    allowed && <PostEditor post={p} />
+  }</Base
+>

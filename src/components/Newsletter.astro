@@ -1,0 +1,28 @@
+---
+const { csrf } = Astro.locals;
+---
+
+<section class="newsletter">
+  <div class="eyebrow">BUILD MORE. KNOW MORE.</div><h2 style="margin-top:12px">
+    다음엔 무엇을<br />직접 만들어볼까요?
+  </h2><p>새 도구와 제작 프롬프트, 업데이트 소식을 받아보세요.</p><form
+    data-api
+    action="/api/waitlist"
+    method="post"
+  >
+    <input type="hidden" name="csrf" value={csrf} /><label class="honeypot" aria-hidden="true"
+      >홈페이지<input name="website" tabindex="-1" autocomplete="off" /></label
+    ><label class="form-field"
+      ><span>이메일</span><input
+        type="email"
+        name="email"
+        placeholder="you@example.com"
+        required
+        autocomplete="email"
+      /></label
+    ><label class="check-label"
+      ><input type="checkbox" name="consent" required />업데이트 이메일 수신에 동의해요. 언제든 철회할 수
+      있어요.</label
+    ><button class="primary" type="submit">소식 받아보기 ↗</button><p class="form-status" role="status"></p>
+  </form>
+</section>

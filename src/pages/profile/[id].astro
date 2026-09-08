@@ -1,0 +1,31 @@
+---
+import Base from '../../layouts/Base.astro';
+import PostRow from '../../components/PostRow.astro';
+import { one, all, postSelect } from '../../lib/db';
+const u = one(
+  "SELECT id,nickname,bio,created_at FROM users WHERE id=? AND status='active'",
+  Astro.params.id || '',
+);
+if (!u) Astro.response.status = 404;
+const items = u
+  ? all(postSelect + " WHERE p.user_id=? AND p.status='active' ORDER BY p.created_at DESC", u.id)
+  : [];
+---
+
+<Base title={u ? u.nickname + '님의 프로필' : '프로필을 찾을 수 없어요'} noindex={!u}
+  ><section class="page-head narrow">
+    <div class="eyebrow">BUILDER PROFILE</div><h1 style="margin-top:15px">
+      {u?.nickname || '프로필을 찾을 수 없어요'}
+    </h1><p>{u?.bio || '함께 만드는 빌더입니다.'}</p>
+  </section>{
+    u && (
+      <section class="narrow">
+        <h2>공유한 이야기</h2>
+        {items.map((p) => (
+          <PostRow post={p} />
+        ))}
+        {!items.length && <p class="empty">아직 공개한 이야기가 없어요.</p>}
+      </section>
+    )
+  }</Base
+>

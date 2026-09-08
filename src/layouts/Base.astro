@@ -1,0 +1,104 @@
+---
+import '../styles/global.css';
+import { brand, absolute } from '../lib/config';
+import { one } from '../lib/db';
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  og?: string;
+  jsonld?: any[];
+  noindex?: boolean;
+}
+const {
+  title = brand.name,
+  description = brand.description,
+  canonical = Astro.url.pathname,
+  og = '/og/default.png',
+  jsonld = [],
+  noindex = false,
+} = Astro.props;
+const user = Astro.locals.user;
+const unread = user
+  ? one(
+      "SELECT COUNT(*) AS n FROM notifications n JOIN posts p ON p.id=n.post_id LEFT JOIN comments c ON c.id=n.comment_id WHERE n.user_id=? AND n.is_read=0 AND p.status='active' AND (c.id IS NULL OR c.status='active')",
+      user.id,
+    )!.n
+  : 0;
+const structured = [
+  { '@context': 'https://schema.org', '@type': 'Organization', name: brand.name, url: absolute('/') },
+  ...jsonld,
+];
+---
+
+<!doctype html>
+<html lang="ko" data-theme="dark">
+  <head
+    ><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>
+      {title === brand.name ? title : title + ' · ' + brand.name}
+    </title><meta name="description" content={description} /><link
+      rel="canonical"
+      href={absolute(canonical)}
+    /><meta property="og:title" content={title} /><meta
+      property="og:description"
+      content={description}
+    /><meta property="og:type" content="website" /><meta property="og:locale" content="ko_KR" /><meta
+      property="og:url"
+      content={absolute(canonical)}
+    /><meta property="og:image" content={absolute(og)} /><meta
+      name="twitter:card"
+      content="summary_large_image"
+    /><meta name="csrf-token" content={Astro.locals.csrf} />{
+      noindex && <meta name="robots" content="noindex,follow" />
+    }<link rel="icon" href="/favicon.svg" /><script is:inline src="/theme.js"></script>{
+      structured.map((s) => (
+        <script is:inline type="application/ld+json" set:html={JSON.stringify(s).replace(/</g, '\u003c')} />
+      ))
+    }</head
+  >
+  <body
+    ><a href="#main" class="skip">본문으로 건너뛰기</a><header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="/"><span class="brand-mark">&gt;_</span>{brand.name}</a><nav
+          class="nav"
+          aria-label="주 메뉴"
+        >
+          <a href="/" aria-current={Astro.url.pathname === '/' ? 'page' : undefined}>도구 탐색</a><a
+            href="/community"
+            aria-current={Astro.url.pathname.startsWith('/community') ? 'page' : undefined}>빌더 커뮤니티</a
+          ><a href="/stats">대체 현황 ↗</a>
+        </nav><div class="header-actions">
+          <button class="icon-button" data-theme-toggle aria-label="화면 테마 전환">◐</button>{
+            user ? (
+              <>
+                <a href="/notifications" aria-label={`알림 ${unread}개`}>
+                  알림{unread > 0 && <span class="accent"> {unread}</span>}
+                </a>
+                <a href="/me">내 활동</a>
+                {user.role === 'admin' && <a href="/admin">관리</a>}
+              </>
+            ) : (
+              <a class="button secondary small" href="/login">
+                로그인 ↗
+              </a>
+            )
+          }
+        </div>
+      </div>
+    </header><main id="main" class="wrap"><slot /></main><footer class="site-footer">
+      <div class="wrap">
+        <div class="flex between wrap-flex">
+          <a href="/" class="brand">&gt;_ {brand.name}</a><div class="flex wrap-flex">
+            <a href="/rebuild-prompt">이 사이트를 만든 프롬프트 ↗</a><a href="/suggest">도구 제안</a><a
+              href="/privacy">개인정보</a
+            ><a href="/terms">이용약관</a>
+          </div>
+        </div><p class="footer-note">
+          Can I Vibecode It? KR · MIT · 자체 집계만 사용합니다. 대체 판정은 명시된 사용 사례에 대한 편집
+          의견입니다.
+        </p>
+      </div>
+    </footer><div id="toast" class="toast" role="status" hidden></div><script src="../scripts/client.ts"
+    ></script></body
+  >
+</html>

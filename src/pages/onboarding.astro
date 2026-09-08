@@ -1,0 +1,31 @@
+---
+import Base from '../layouts/Base.astro';
+import { verified } from '../lib/security';
+const signed = verified(Astro.cookies.get('oauth_pending')?.value);
+if (!signed) return Astro.redirect('/login');
+let pending;
+try {
+  pending = JSON.parse(Buffer.from(signed, 'base64url').toString());
+} catch {
+  return Astro.redirect('/login');
+}
+if (pending.expires < Date.now()) return Astro.redirect('/login');
+---
+
+<Base title="소셜 계정 가입 완료" noindex
+  ><section class="auth-panel">
+    <h1>빌더 프로필을 완성해요.</h1><p class="muted">
+      연결한 소셜 계정으로 가입합니다. 공개할 닉네임을 정해 주세요.
+    </p><form data-api method="post" action="/api/auth/oauth-register">
+      <input name="csrf" type="hidden" value={Astro.locals.csrf} /><label class="form-field"
+        ><span>닉네임</span><input name="nickname" required minlength="2" maxlength="24" /></label
+      ><label class="check-label"
+        ><input type="checkbox" name="terms" required /><span
+          ><a href="/terms" target="_blank">이용약관</a>과 <a href="/privacy" target="_blank"
+            >개인정보 처리 안내</a
+          >를 읽고 동의합니다.</span
+        ></label
+      ><button type="submit" class="primary">가입 완료 ↗</button><p role="status" class="form-status"></p>
+    </form>
+  </section></Base
+>

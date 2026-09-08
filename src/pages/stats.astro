@@ -1,0 +1,132 @@
+---
+import Base from '../layouts/Base.astro';
+import Ticker from '../components/Ticker.astro';
+import { totals, all, voteCounts } from '../lib/db';
+import { apps, priceLabel } from '../lib/apps';
+import fx from '../../data/exchange.json';
+const eventLabels: Record<string, string> = {
+  pageview: '페이지 열람',
+  search: '검색',
+  copy: '프롬프트 복사',
+  vote: '인증 조작',
+  signup: '가입',
+  post: '글 작성',
+  share: '공유',
+};
+const t = totals(),
+  counts = voteCounts();
+const days = all(
+  "SELECT day,SUM(count) AS n FROM analytics WHERE event='pageview' AND day>=date('now','-30 days') GROUP BY day ORDER BY day DESC",
+);
+const events = all(
+  "SELECT event,SUM(count) AS n FROM analytics WHERE day>=date('now','-30 days') GROUP BY event",
+);
+const popular = all(
+  "SELECT path,SUM(count) AS n FROM analytics WHERE event='pageview' AND day>=date('now','-30 days') GROUP BY path ORDER BY n DESC LIMIT 20",
+);
+const subscribers = all("SELECT COUNT(*) AS n FROM waitlist WHERE status='active'")[0].n;
+---
+
+<Base title="함께 만든 대체 현황"
+  ><header class="page-head">
+    <div class="eyebrow">SELF-REPORTED. OPENLY COUNTED.</div><h1 style="margin-top:15px">
+      함께 만든 변화.
+    </h1><p>가짜 활동 수치 없이, 사용자가 남긴 대체 인증을 집계합니다.</p>
+  </header><Ticker /><div class="stat-grid">
+    <article><span class="muted small">대체 인증</span><strong>{t.votes}건</strong></article><article>
+      <span class="muted small">공개 도구</span><strong>{apps.length}개</strong>
+    </article><article>
+      <span class="muted small">비용 미합산 인증</span><strong>{t.excluded}건</strong>
+    </article>
+  </div><section class="section narrow prose">
+    <h2>숫자를 읽는 방법</h2><p>
+      월 비용 추정 합계 = Σ (도구의 확인된 기준 플랜 월 비용 × 유효한 대체 인증 수). 1회 인증은 해당 도구의
+      기준 플랜 1개, 사용자당 과금이면 최소 좌석 수를 기준으로 합니다.
+    </p><p>
+      이 숫자는 자기신고입니다. 실제 절약액이나 원본 회사의 MRR 감소액을 검증한 값이 아니며, 서버·모델
+      API·유지보수 비용을 뺀 순절감액도 아닙니다.
+    </p><ul>
+      <li>무료 소프트웨어는 인증 순위에 포함하지만 금액을 더하지 않습니다.</li><li>
+        일회성 구매, 확인되지 않은 가격, 견적형·사용량형 비용은 합산하지 않습니다.
+      </li><li>
+        월 결제액과 연 결제의 월 환산액을 구분합니다. 합계는 각 도구 페이지에 명시한 기준만 적용합니다.
+      </li><li>
+        USD 환산 기준: {fx.date}, 1 USD = {fx.rates.KRW} KRW. <a href={fx.source}
+          >Frankfurter 공개 환율 API ↗</a
+        >
+      </li><li>
+        회원은 계정별 도구당 1회, 비회원은 서명된 브라우저 식별자와 요청 제한을 적용합니다. 로그인하면 같은
+        브라우저의 인증을 연결합니다.
+      </li><li>
+        비회원의 쿠키 삭제·기기 변경까지 완전한 1인 1표를 보장하지는 못합니다. 원본 IP를 저장하지 않고 날짜별
+        HMAC 요청 제한 키를 짧게 보관합니다.
+      </li>
+    </ul>
+  </section><section class="section">
+    <h2>공개 페이지 유형별 열람</h2>
+    <p class="muted small">소식 수신 동의가 유지된 주소 {subscribers}개 · 개인 주소는 공개하지 않습니다.</p>
+    <div class="table-scroll">
+      <table class="data-table">
+        <thead><tr><th>페이지 유형</th><th>최근 30일 열람</th></tr></thead><tbody
+          >{
+            popular.map((p) => (
+              <tr>
+                <>
+                  <td>{p.path}</td>
+                  <td>{p.n}</td>
+                </>
+              </tr>
+            ))
+          }</tbody>
+      </table>
+    </div>
+    {!popular.length && <p class="muted">아직 집계된 열람이 없어요.</p>}
+  </section><section class="section">
+    <h2>집계에 적용하는 기준 가격</h2><div class="prose">
+      <table>
+        <thead><tr><th>도구</th><th>기준 가격</th><th>인증</th><th>집계</th></tr></thead><tbody
+          >{
+            apps
+              .filter((a) => a.priceMonthly !== null || (counts[a.slug] || 0) > 0)
+              .map((a) => (
+                <tr>
+                  <>
+                    <td>
+                      <a href={'/' + a.slug}>{a.name}</a>
+                    </td>
+                    <td>{priceLabel(a)}</td>
+                    <td>{counts[a.slug] || 0}</td>
+                    <td>
+                      {a.priceMonthly === null
+                        ? '제외'
+                        : a.priceMonthly === 0
+                          ? '무료 · 금액 0'
+                          : '월 비용 합산'}
+                    </td>
+                  </>
+                </tr>
+              ))
+          }</tbody
+        >
+      </table>
+    </div>
+  </section><section class="section">
+    <h2>최근 30일 자체 통계</h2><p class="muted small">
+      개인정보와 검색어 원문을 수집하지 않는 이벤트 횟수입니다. 페이지 경로는 유형별로 묶습니다.
+    </p><div class="tabs">
+      {
+        events.map((e) => (
+          <span class="badge">
+            {eventLabels[e.event] || e.event} {e.n}
+          </span>
+        ))
+      }
+    </div>{
+      days.map((d) => (
+        <div class="admin-row mono small">
+          {d.day} · 페이지 열람 {d.n}회
+        </div>
+      ))
+    }
+  </section></Base
+>

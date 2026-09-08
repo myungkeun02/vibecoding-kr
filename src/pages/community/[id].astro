@@ -1,0 +1,191 @@
+---
+import Base from '../../layouts/Base.astro';
+import Comment from '../../components/Comment.astro';
+import { getPost, getComments, one } from '../../lib/db';
+import { markdown, plainText } from '../../lib/markdown';
+import { boards } from '../../lib/config';
+import { getApp } from '../../lib/apps';
+const p = getPost(Astro.params.id || '');
+if (!p) Astro.response.status = 404;
+const user = Astro.locals.user;
+const comments = p ? getComments(p.id) : [];
+const build = p ? JSON.parse(p.build) : {};
+const reactions =
+  p && user
+    ? {
+        like: Boolean(
+          one("SELECT 1 FROM reactions WHERE user_id=? AND post_id=? AND kind='like'", user.id, p.id),
+        ),
+        bookmark: Boolean(
+          one("SELECT 1 FROM reactions WHERE user_id=? AND post_id=? AND kind='bookmark'", user.id, p.id),
+        ),
+      }
+    : { like: false, bookmark: false };
+---
+
+<Base
+  title={p?.title || '게시글을 찾을 수 없어요'}
+  description={p ? plainText(p.body).slice(0, 150) : undefined}
+  noindex={!p}
+  ><div class="narrow" style="margin:auto">
+    {
+      p ? (
+        <>
+          <header class="page-head">
+            <a class="eyebrow" href={'/community?board=' + p.board}>
+              {boards[p.board as keyof typeof boards]}
+            </a>
+            <h1>{p.title}</h1>
+            <div class="post-meta">
+              <a href={p.user_id ? '/profile/' + p.user_id : undefined}>{p.nickname || '탈퇴한 사용자'}</a>
+              <time datetime={p.created_at}>{p.created_at.slice(0, 10)}</time>
+              {p.tool_slug && <a href={'/' + p.tool_slug}>{getApp(p.tool_slug)?.name || p.tool_slug}</a>}
+            </div>
+            {p.tags && <p class="muted small">{p.tags}</p>}
+          </header>
+          <article class="prose" set:html={markdown(p.body)} />
+          {Object.values(build).some(Boolean) && (
+            <section class="meta-box">
+              <h2>이 빌드의 기록</h2>
+              {[
+                ['agent', '코딩 에이전트'],
+                ['features', '만든 기능'],
+                ['difficulties', '어려웠던 점'],
+                ['scope', '실제 대체 범위'],
+                ['prompt', '사용한 프롬프트'],
+              ].map(
+                ([k, label]) =>
+                  build[k] && (
+                    <div style="margin:18px 0">
+                      <h3>{label}</h3>
+                      <pre>{build[k]}</pre>
+                    </div>
+                  ),
+              )}
+              <div class="flex wrap-flex">
+                {build.url && (
+                  <a class="button secondary" href={build.url} target="_blank" rel="nofollow ugc noopener">
+                    작품 보기 ↗
+                  </a>
+                )}
+                {build.repo && (
+                  <a class="button secondary" href={build.repo} target="_blank" rel="nofollow ugc noopener">
+                    소스 보기 ↗
+                  </a>
+                )}
+              </div>
+            </section>
+          )}
+          <div class="flex wrap-flex">
+            <button class="button secondary" data-react="like" data-post={p.id} aria-pressed={reactions.like}>
+              좋아요 {p.likes}
+            </button>
+            <button
+              class="button secondary"
+              data-react="bookmark"
+              data-post={p.id}
+              aria-pressed={reactions.bookmark}
+            >
+              {reactions.bookmark ? '북마크 저장됨 ✓' : '글 북마크 ☆'}
+            </button>
+            <button class="button secondary" data-copy-url>
+              링크 복사
+            </button>
+            {p.user_id === user?.id && (
+              <>
+                <a class="small" href={'/community/' + p.id + '/edit'}>
+                  글 수정
+                </a>
+                <form
+                  class="inline-form"
+                  data-api
+                  data-confirm="이 글과 댓글을 삭제할까요?"
+                  action="/api/posts/delete"
+                  method="post"
+                >
+                  <input name="csrf" type="hidden" value={Astro.locals.csrf} />
+                  <input name="id" type="hidden" value={p.id} />
+                  <button class="text-button danger" type="submit">
+                    글 삭제
+                  </button>
+                </form>
+              </>
+            )}
+          </div>
+          {user && (
+            <details class="section">
+              <summary class="small muted">게시글 신고하기</summary>
+              <form data-api action="/api/report" method="post" style="margin-top:15px">
+                <input type="hidden" name="csrf" value={Astro.locals.csrf} />
+                <input type="hidden" name="type" value="post" />
+                <input type="hidden" name="target" value={p.id} />
+                <label class="form-field">
+                  <span>신고 사유</span>
+                  <textarea name="reason" required minlength="5" maxlength="1000" />
+                </label>
+                <button type="submit" class="button secondary">
+                  신고 접수
+                </button>
+                <p class="form-status" role="status" />
+              </form>
+            </details>
+          )}
+          <section class="section divider">
+            <h2>
+              함께 나누는 이야기 <span class="count-label">{p.comments}</span>
+            </h2>
+            {comments
+              .filter((c) => !c.parent_id)
+              .map((c) => (
+                <>
+                  <Comment comment={c} />
+                  {comments
+                    .filter((r) => r.parent_id === c.id)
+                    .map((r) => (
+                      <Comment comment={r} />
+                    ))}
+                </>
+              ))}
+            {!comments.length && <p class="muted">아직 댓글이 없어요. 첫 이야기를 건네보세요.</p>}
+            {user ? (
+              <form data-api action="/api/comments/create" method="post" style="margin-top:24px">
+                <input type="hidden" name="csrf" value={Astro.locals.csrf} />
+                <input type="hidden" name="post" value={p.id} />
+                <label class="form-field">
+                  <span>댓글 남기기</span>
+                  <textarea
+                    name="body"
+                    required
+                    maxlength="3000"
+                    placeholder="궁금한 점이나 응원을 남겨주세요."
+                  />
+                </label>
+                <button type="submit" class="primary">
+                  댓글 등록 ↗
+                </button>
+                <p class="form-status" role="status" />
+              </form>
+            ) : (
+              <a
+                class="button secondary"
+                href={'/login?returnTo=' + encodeURIComponent('/community/' + p.id)}
+              >
+                로그인하고 댓글 남기기 ↗
+              </a>
+            )}
+          </section>
+        </>
+      ) : (
+        <section class="page-head empty">
+          <>
+            <h1>게시글을 찾을 수 없어요.</h1>
+            <p>삭제되었거나 운영 정책에 따라 숨겨진 글입니다.</p>
+            <a class="button" href="/community">
+              커뮤니티로 돌아가기
+            </a>
+          </>
+        </section>
+      )
+    }
+  </div></Base
+>

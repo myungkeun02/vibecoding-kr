@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="새 비밀번호 설정" noindex
+  ><section class="auth-panel">
+    <h1>새 비밀번호 설정</h1><form data-api action="/api/auth/reset" method="post">
+      <input type="hidden" name="csrf" value={Astro.locals.csrf} /><input
+        type="hidden"
+        name="token"
+        value={Astro.url.searchParams.get('token') || ''}
+      /><label class="form-field"
+        ><span>새 비밀번호</span><input
+          type="password"
+          name="password"
+          autocomplete="new-password"
+          required
+          minlength="10"
+          maxlength="128"
+        /></label
+      ><button type="submit" class="primary">비밀번호 변경</button><p class="form-status" role="status"></p>
+    </form>
+  </section></Base
+>

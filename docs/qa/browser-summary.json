@@ -1,0 +1,170 @@
+{
+  "startedAt": "2026-09-08T09:31:38.095Z",
+  "durationMs": 9869.836,
+  "passed": 16,
+  "failed": 0,
+  "flaky": 0,
+  "skipped": 0,
+  "cases": [
+    {
+      "title": "all catalog pages, key pages, 404, sitemap and metadata render from the production server",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 646
+        }
+      ]
+    },
+    {
+      "title": "live Korean/English search, filters, pagination and browser history restore URL state",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 1248
+        }
+      ]
+    },
+    {
+      "title": "agent-specific clipboard copy, FAQ, sharing and anonymous vote toggle",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 667
+        }
+      ]
+    },
+    {
+      "title": "UI signup, logout, login return path and profile update use real sessions",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 724
+        }
+      ]
+    },
+    {
+      "title": "UI post creation, editing, comment, reply, reaction and image upload",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 2405
+        }
+      ]
+    },
+    {
+      "title": "duplicate identity votes, anonymous-to-member merge, free/one-time/unknown pricing",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 98
+        }
+      ]
+    },
+    {
+      "title": "ownership enforcement, XSS, notifications, deletion and bookmarks remain consistent",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 113
+        }
+      ]
+    },
+    {
+      "title": "admin permissions, moderation restore, pinned notice, suggestion status and audit",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 70
+        }
+      ]
+    },
+    {
+      "title": "waitlist normalizes, dedupes, hides existing withdrawal token, honeypot and unsubscribe",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 16
+        }
+      ]
+    },
+    {
+      "title": "CSRF, origin, input limits, bad passwords, session expiry and local reset delivery",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 129
+        }
+      ]
+    },
+    {
+      "title": "local production bundle handles absent OAuth, invalid uploads and account withdrawal",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 95
+        }
+      ]
+    },
+    {
+      "title": "rate limiting rejects excessive anonymous votes",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 89
+        }
+      ]
+    },
+    {
+      "title": "responsive dark/light layouts, reduced motion, keyboard and clean browser console",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 1438
+        }
+      ]
+    },
+    {
+      "title": "email verification tokens expire, are single use and never mark an unverified account verified",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 62
+        }
+      ]
+    },
+    {
+      "title": "comment update/delete, report resolution, notification read and account suspension",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 122
+        }
+      ]
+    },
+    {
+      "title": "360px authenticated long text and large totals, and no-JavaScript form submission",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 830
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+# QA 보고서 · 2026-09-08
+
+## 대상과 실행 환경
+
+제품 버전 **1.0.0**, 테스트한 코드·카탈로그의 SHA-256은 [source-revision.json](source-revision.json)에 남겼다. macOS arm64, Node 22.14.0, pnpm 10.30.1, Astro 7.3.1, Node adapter 11.1.5, better-sqlite3 13.x, Vitest 5, Playwright 1.63 계열 Chromium을 사용했다. 실제 설치 버전은 pnpm-lock.yaml로 고정한다.
+
+- 로컬 사용자 미리보기: `http://localhost:8095` (production bundle / 로컬 환경 정책)
+- 자동 브라우저: `http://127.0.0.1:8096` (별도 테스트 DB)
+- 실제 프로세스 재시작·복원: `http://127.0.0.1:8097` (별도 새 테스트 DB)
+- 운영 쿠키·메일 정책: `https://127.0.0.1:8099` (APP_ENV=production, 테스트 전용 self-signed TLS → 8098 Node)
+- 테스트 계정: 무작위 `@example.test`, 무작위 비밀번호. 관리자 권한은 전용 테스트 DB에서만 부여했다. 실제 외부 수신함·SNS·사용자 DB를 사용하지 않았다.
+
+## 실행 결과
+
+|검증|명령·기대 결과|실제 결과·증거|
+|---|---|---|
+|전체 데이터|`pnpm validate` — 필드·slug·카테고리·관계·가격 정책·100개 이상|**PASS** 121개 공개 / 127 JSON / 15개 카테고리|
+|타입·Astro|`pnpm check` — 빌드를 막는 오류 없음|**PASS**, 오류 0·경고 0|
+|단위·어댑터 계약|`pnpm test` — 데이터·중복·환산 제외·scrypt·서명·XSS·OAuth·요청 제한·PR·R2·Resend|**PASS 12개**. OAuth/PR/R2/Resend의 공급자 응답은 stub이며 실제 외부 성공이 아님|
+|빌드|`pnpm build` — Node entry와 한글 공유 이미지|**PASS** 서버 bundle + OG 122개|
+|실제 브라우저|`pnpm test:e2e` — 아래 16개 시나리오 묶음|**PASS 16개**, 실패 0. [browser-summary.json](browser-summary.json)|
+|프로세스·백업·복원|`pnpm test:persistence` — 서버 종료/시작, 세션·글·인증·금액, 온라인 백업·중지 복원·FK|**PASS**, [persistence-results.json](persistence-results.json)|
+|운영 HTTPS 정책|`pnpm test:production` — Secure/HttpOnly/Lax 세션, HTTPS 로그인, 외부 메일 미설정 거부|**PASS**, [production-results.json](production-results.json). 테스트용 자체 인증서이며 온라인 운영 배포 아님|
+|구독 다이제스트|`pnpm newsletter` — 발송 없는 로컬 미리보기|**PASS**, 무발송. 미리보기는 private 디렉터리에 보존|
+|환경·배포 설정|`pnpm env:check`, 임시 비밀값을 사용한 `docker compose config --quiet`|**PASS**, 로컬 설정 확인·Compose 문법 검사|
+|Docker 실행|실제 이미지 빌드·컨테이너 시작|**BLOCKED_ACCESS**, 로컬 Docker 엔진 미실행|
+|외부 공급자·온라인 호스팅|OAuth, 실제 메일, R2, Kakao, 봇 fork, HTTPS 영속 호스팅|**BLOCKED_ENV**, [외부 재검증 명세](../environment.md#외부-연동-재검증)|
+
+## 브라우저 시나리오
+
+|ID|실제로 검증한 흐름|상태|
+|---|---|---|
+|E01|공개 도구 121개 상세와 각각의 OG HTTP 200, 주요 페이지, 404·관리자 403, canonical·FAQ JSON-LD·sitemap·robots·중복 검색 noindex|PASS|
+|E02|한글·영문·별칭 검색, 실시간 결과, 카테고리·판정·유형·가격 모델 필터·가격/최신 정렬, URL 뒤로가기·새로고침, 페이지 2, 빈 검색|PASS|
+|E03|Claude Code·Codex·Cursor 실제 클립보드 내용, URL 복사와 X 링크, FAQ, 익명 인증/취소·reload·금액 갱신|PASS|
+|E04|브라우저 회원가입→원래 글쓰기 복귀, 프로필 저장·reload, 로그아웃·재로그인|PASS|
+|E05|브라우저 글 작성·유효 이미지 업로드·읽기·수정, 댓글·답글, 좋아요·북마크|PASS|
+|E06|회원 중복 인증, 익명→로그인 병합, 무료·일회성·미확인 가격의 월 집계 제외|PASS|
+|E07|타인 글 수정/삭제 403, 악성 Markdown 무력화, 댓글 알림·타인 댓글 삭제 거부, 글 삭제와 하위 상태 일관성|PASS|
+|E08|일반 사용자 관리자 API 403, 공지·고정·글 숨김/복원, 제안 채택이 배포 대기로 남는지, 감사 기록|PASS|
+|E09|waitlist 정규화·중복, 기존 철회 토큰 유출 방지, honeypot, 철회|PASS|
+|E10|CSRF·출처 거부, 과도한 요청 본문 413, 잘못된 비밀번호·세션 만료, 로컬 메일로 reset·일회성|PASS|
+|E11|키 없는 OAuth 비활성/503, 잘못된 SVG 업로드 거부, 탈퇴와 계정 제거|PASS|
+|E12|익명 인증 반복 요청 제한 429|PASS|
+|E13|390·768·1440px 홈/상세/커뮤니티/로그인 넘침 없음, 다크·라이트 저장, reduced motion, 키보드 검색, JS·네트워크 오류와 깨진 이미지 없음|PASS|
+|E14|미확인 이메일 null, 계정 중복 409, 확인 메일 로컬 토큰·만료·재발급·일회성·확인 시각|PASS|
+|E15|댓글 수정·삭제, 알림 읽음, 댓글 숨김/복원, 신고 해결, 정지 계정 쓰기 차단·복구|PASS|
+|E16|360px 로그인 상태, 긴 한글·영문·코드·매우 큰 금액, JS를 끈 상태의 실제 가입 폼|PASS|
+
+## 시각 검토와 증거
+
+실제 내장 브라우저에서 최종 8095 홈페이지와 Notion 상세를 열어 검토했다. 자동 테스트의 모바일·라이트 스크린샷과 생성된 한글 Notion OG도 이미지로 직접 확인했다. 모바일 숫자 롤링 도중 캡처된 중간 자릿수는 애니메이션을 끝낸 캡처로 교체했다. 테스트 스크린샷의 글·계정·인증은 격리된 QA 데이터이며 운영 콘텐츠가 아니다.
+
+- [모바일 다크](screenshots/home-dark-390.png)
+- [태블릿 다크](screenshots/home-dark-768.png)
+- [데스크톱 다크](screenshots/home-dark-1440.png)
+- [데스크톱 라이트](screenshots/home-light-1440.png)
+- 실제 공유 이미지: `public/og/notion.png`, `public/og/default.png`
+
+처음 발견했던 게시글 헤더·반응 버튼 누락, 이미지 테스트 fixture 오류, 댓글 등록 후 동일 페이지 hash 이동만 되어 새 내용이 보이지 않던 문제, 프로필 입력 레이블 식별, 메타 설명에 Markdown 원문이 남는 문제를 수정했다. 제목·태그·댓글을 새로고침 후 다시 읽는 흐름으로 재검증했다.
+
+실패 trace와 원본 Playwright 결과는 로컬 private/test-results 또는 무시한 결과 파일에 남기고 공개 저장소에는 민감값 없는 요약과 스크린샷만 넣는다. 공개 source hash는 테스트 대상 코드·JSON을 식별하며 문서·테스트 스크립트의 설명 변경과 구분한다.
+
+## 남은 제약과 상태 구분
+
+주요 로컬 사용 흐름에 남은 **FAIL은 없다**. 실제 외부 키·공급자 계정이 필요한 연동과 실제 인터넷 운영 배포는 완료로 보고하지 않는다. Docker 엔진 실행과 영속 볼륨의 실제 호스팅 확인이 필요하다. 별도 공개 도메인 없이 기존 로컬 미리보기를 인터넷 배포라고 부르지 않는다.
+
+도구 가격 대부분은 확인 필요로 남겨 두었고, 공식 페이지 확인 실패 후보 6개는 정식 카탈로그에서 제외했다. 121개 제작 프롬프트의 결과물을 실제로 만드는 작업은 **NOT_RUN**이며 화면에도 편집 검토로 명시한다. 익명 쿠키 삭제에 의한 동일인 재인증을 완벽히 막지는 못한다. SQLite는 단일 프로세스 운영 기준이며 부하·침투·법적 적합성의 인증을 주장하지 않는다. 정책의 운영 주체·연락처를 실제 배포 전에 확정해야 한다.

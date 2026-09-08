@@ -1,0 +1,17 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="업데이트 수신 철회" noindex
+  ><section class="auth-panel">
+    <h1>업데이트 수신 철회</h1><p class="muted">
+      아래 버튼을 누르면 더 이상 업데이트 소식을 보내지 않아요.
+    </p><form data-api action="/api/waitlist/withdraw" method="post">
+      <input name="csrf" type="hidden" value={Astro.locals.csrf} /><input
+        name="token"
+        type="hidden"
+        value={Astro.url.searchParams.get('token') || ''}
+      /><button class="primary" type="submit">수신 철회하기</button><p class="form-status" role="status"></p>
+    </form>
+  </section></Base
+>

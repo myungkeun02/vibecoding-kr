@@ -1,0 +1,14 @@
+---
+const { target, operation, label } = Astro.props;
+---
+
+<form data-api action="/api/admin/action" method="post">
+  <input name="csrf" type="hidden" value={Astro.locals.csrf} /><input
+    name="target"
+    type="hidden"
+    value={target}
+  /><input name="operation" type="hidden" value={operation} /><button
+    type="submit"
+    class="button secondary small">{label}</button
+  >
+</form>

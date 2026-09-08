@@ -1,0 +1,23 @@
+name: Verify
+on: [push, pull_request]
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.30.1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm validate && pnpm check && pnpm test && pnpm build
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm test:e2e && pnpm test:persistence && pnpm test:production && pnpm qa:summary
+      - uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: browser-qa
+          path: docs/qa/
