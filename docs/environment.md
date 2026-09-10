@@ -28,12 +28,14 @@
 
 ## C. 선택적 외부 연동
 
+로컬 OAuth 앱에 `http://localhost:4321/api/auth/callback/github`와 `http://localhost:4321/api/auth/callback/google`을 등록했다면 비공개 `.env`의 `SITE_URL=http://localhost:4321`, `PORT=4321`을 함께 설정한다. 개발 서버와 빌드한 서버 모두 이 포트를 사용한다. 기본 예제 포트는 8095다. 공급자 설정과 접속 주소의 호스트·포트·경로를 맞추며 `localhost`와 `127.0.0.1`을 섞지 않는다. 이전 `/auth/:provider/callback` 경로도 처리하지만 새 인증 요청은 `/api/auth/callback/:provider`를 사용한다.
+
 각 행의 변수들은 모두 런타임에서 읽으므로 설정 후 재시작한다. OAuth client ID와 카카오 JavaScript 키는 공개 식별자이며 나머지 secret/token은 서버 전용이다. 부분 입력이면 관련 기능만 비활성화하거나 공급자 오류를 반환한다.
 
 |변수명|기능 / 읽는 코드|발급·설정 / 형식·callback|미설정 동작·확인|
 |---|---|---|---|
-|GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET|GitHub 로그인 / `src/lib/oauth.ts`, `src/pages/auth/[...path].ts`|GitHub Settings → Developer settings → OAuth Apps. callback `SITE_URL/auth/github/callback`. 홈페이지는 SITE_URL. ID/secret 문자열|로그인 버튼 비활성·직접 호출 503. 로컬용 OAuth 앱과 운영용 분리. EXT-OAUTH-GH|
-|GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET|Google 로그인 / 같은 파일|Google Cloud → Google Auth Platform → OAuth client Web application. redirect `SITE_URL/auth/google/callback`, scope openid email profile. ID `….apps.googleusercontent.com`|로그인 버튼 비활성·503. 테스트 사용자를 consent screen에 추가. EXT-OAUTH-GOOGLE|
+|GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET|GitHub 로그인 / `src/lib/oauth.ts`, `src/pages/auth/[...path].ts`|GitHub Settings → Developer settings → OAuth Apps. callback `SITE_URL/api/auth/callback/github`. 홈페이지는 SITE_URL. ID/secret 문자열|로그인 버튼 비활성·직접 호출 503. 로컬용 OAuth 앱과 운영용 분리. EXT-OAUTH-GH|
+|GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET|Google 로그인 / 같은 파일|Google Cloud → Google Auth Platform → OAuth client Web application. redirect `SITE_URL/api/auth/callback/google`, scope openid email profile. ID `….apps.googleusercontent.com`|로그인 버튼 비활성·503. 테스트 사용자를 consent screen에 추가. EXT-OAUTH-GOOGLE|
 |SMTP_URL|확인·재설정·뉴스레터 / `src/lib/mail.ts`|메일 공급자의 SMTP 자격, `smtps://user:password@host:465` (값 내 특수문자 URL 인코딩)|MAIL_FROM과 함께 사용. Resend가 있으면 Resend 우선. 로컬 outbox, 운영 발송 503. EXT-MAIL|
 |RESEND_API_KEY|같은 기능·파일|Resend API Keys, 발신 도메인 검증. 비밀 문자열|MAIL_FROM 필요. 로컬 outbox와 실제 전송 상태를 구분. EXT-MAIL|
 |MAIL_FROM|발신자 / mail.ts|검증된 발신 주소, `서비스 이름 <sender@your-domain>`|공급자 키만 있고 발신자가 없으면 외부 메일 비활성|
@@ -47,12 +49,12 @@
 
 ## 외부 연동 재검증
 
-공통 시작: 테스트용 외부 계정·별도 DB/도메인을 준비 → 해당 변수 등록 → `pnpm env:check` → `pnpm build && pnpm start`. 운영 모드에서는 HTTPS를 통해 접근한다. 실제 개인 SNS 게시나 실제 구독자 일괄 발송은 QA에 포함하지 않는다. 아래는 **구현 있음 / 실제 연동은 BLOCKED_ENV**다. 공급자 stub 통과를 실제 성공으로 바꾸지 않는다.
+공통 시작: 테스트용 외부 계정·별도 DB/도메인을 준비 → 해당 변수 등록 → `pnpm env:check` → `pnpm build && pnpm start`. 운영 모드에서는 HTTPS를 통해 접근한다. 실제 개인 SNS 게시나 실제 구독자 일괄 발송은 QA에 포함하지 않는다. 공급자 stub 통과를 실제 성공으로 바꾸지 않는다. 2026-09-10 로컬 OAuth는 비공개 자격 설정과 양쪽 공급자의 로그인 화면 도착까지 확인했다. 실제 계정의 인증·동의와 가입 완료는 아직 미검증이며, 다른 외부 연동은 환경 준비가 필요하다.
 
 |ID / 보류 이유|준비·실행·브라우저 순서|기대 결과|정리|
 |---|---|---|---|
-|EXT-OAUTH-GH / 앱 자격 없음|GitHub ID/secret와 callback 설정. `/login` → GitHub → 테스트 계정 동의 → `/onboarding` 약관·닉네임 → 원래 페이지. 로그아웃 후 재로그인. 동의 취소·state 변조·기존 로컬 이메일 충돌도 시도|새 identity 1개, 동의 기록·검증 이메일·세션; 기존 계정 자동 병합 없음; 거부는 정상 오류|테스트 계정 탈퇴, GitHub 승인 철회, 테스트 OAuth 앱 자격 폐기|
-|EXT-OAUTH-GOOGLE / 앱 자격 없음|Google client와 테스트 사용자 설정. GitHub와 같은 흐름을 Google 버튼으로 수행|검증된 email만 사용, 동의 이전 users 생성 없음, 중복 subject 방지|테스트 계정 탈퇴, Google 연결 제거|
+|EXT-OAUTH-GH / 실제 계정 인증 미검증|GitHub ID/secret와 callback 설정. `/login` → GitHub → 테스트 계정 동의 → `/onboarding` 약관·닉네임 → 원래 페이지. 로그아웃 후 재로그인. 동의 취소·state 변조·기존 로컬 이메일 충돌도 시도|새 identity 1개, 동의 기록·검증 이메일·세션; 기존 계정 자동 병합 없음; 거부는 정상 오류|테스트 계정 탈퇴, GitHub 승인 철회, 테스트 OAuth 앱 자격 폐기|
+|EXT-OAUTH-GOOGLE / 실제 계정 인증 미검증|Google client와 테스트 사용자 설정. GitHub와 같은 흐름을 Google 버튼으로 수행|검증된 email만 사용, 동의 이전 users 생성 없음, 중복 subject 방지|테스트 계정 탈퇴, Google 연결 제거|
 |EXT-MAIL / 발송 키·통제 수신함 없음|SMTP+MAIL_FROM 또는 Resend+MAIL_FROM, `/me` 확인 메일 요청 → 실제 수신함 → 확인 버튼. `/forgot` → 실제 재설정 링크 → 새 비밀번호 로그인. 만료·재사용도 확인|실제 받은 한국어 메일·정확한 HTTPS 링크, 확인 전 verified=null, 확인 후 기록, reset 후 세션 폐기. 발송 장애는 성공으로 표시하지 않음|통제 계정 탈퇴, 메일 삭제, 테스트 발송 키 회수|
 |EXT-R2 / bucket 자격 없음|R2 네 값 설정, 회원으로 `/community/new` → png 업로드 → 글 게시 → 로그아웃 후 공개 이미지 → 서버 재시작 후 재확인. 미게시 파일 타 계정 접근 시도|bucket webp 객체, 공개 글 이미지 정상, 미게시 파일 404, invalid SVG/초과 크기 거부|테스트 글·계정 삭제, 테스트 bucket 객체와 로컬 테스트 DB 정리|
 |EXT-KAKAO / 앱 키·허용 도메인 없음|키·Web 플랫폼 도메인 설정 → 도구 상세 카카오 버튼 → 공유 대상 선택 화면까지만 확인하고 취소|도구명·판정 설명·해당 OG·canonical URL 일치; 네트워크/CSP 오류 없음|SNS에 게시하지 않고 선택창 닫기, 테스트 앱 키 제거|

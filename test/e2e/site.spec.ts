@@ -376,6 +376,9 @@ test('local production bundle handles absent OAuth, invalid uploads and account 
 }) => {
   expect((await request.get('/auth/github')).status()).toBe(503);
   expect((await request.get('/auth/google/callback')).status()).toBe(503);
+  expect((await request.get('/api/auth/callback/github')).status()).toBe(503);
+  expect((await request.get('/api/auth/callback/google')).status()).toBe(503);
+  expect((await request.get('/api/auth/callback/unknown')).status()).toBe(404);
   const u = await account(request);
   await post(request);
   const csrf = await token(request);

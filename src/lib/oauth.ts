@@ -6,7 +6,7 @@ export function oauthConfig(provider: Provider) {
   return {
     clientId: process.env[prefix + '_CLIENT_ID'],
     clientSecret: process.env[prefix + '_CLIENT_SECRET'],
-    redirect: absolute('/auth/' + provider + '/callback'),
+    redirect: absolute('/api/auth/callback/' + provider),
   };
 }
 export const oauthEnabled = (provider: Provider) => {
