@@ -30,7 +30,6 @@ const files = [
   'playwright.config.ts',
   'Dockerfile',
   'compose.yaml',
-  'railway.toml',
 ];
 mkdirSync(dest, { recursive: true });
 for (const file of files) cpSync(file, join(dest, file), { recursive: true });

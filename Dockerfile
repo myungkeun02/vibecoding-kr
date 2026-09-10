@@ -26,7 +26,6 @@ COPY --from=build --chown=node:node /app/src/lib/postgres.mjs ./src/lib/postgres
 COPY --from=build /app/scripts/container-entrypoint.sh /usr/local/bin/vibepan-entrypoint
 RUN chmod 755 /usr/local/bin/vibepan-entrypoint && mkdir -p /data && chown node:node /data
 ENV HOST=0.0.0.0 PORT=8095 DATA_DIR=/data APP_ENV=production NODE_ENV=production
-VOLUME ["/data"]
 EXPOSE 8095
 HEALTHCHECK --interval=30s --timeout=5s CMD node -e "fetch('http://127.0.0.1:'+process.env.PORT+'/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
 ENTRYPOINT ["vibepan-entrypoint"]

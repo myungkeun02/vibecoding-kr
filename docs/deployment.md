@@ -2,7 +2,7 @@
 
 ## 현재 상태
 
-2026-09-10 PostgreSQL 전환 후 로컬 Node production bundle과 실제 브라우저·재시작·백업/복원을 검증했다. Railway PostgreSQL을 생성했으며 웹 서비스 배포를 준비 중이다. 실제 공개 URL 검증 전에는 온라인 운영 완료로 보고하지 않는다.
+2026-09-10 PostgreSQL 전환 후 로컬 Node production bundle과 실제 브라우저·재시작·백업/복원을 검증했다. Railway PostgreSQL과 웹 서비스·업로드 볼륨을 생성했으며 첫 배포를 검증 중이다. 실제 공개 URL 검증 전에는 온라인 운영 완료로 보고하지 않는다.
 
 ## Node 서버
 
@@ -32,7 +32,7 @@ docker compose logs --tail=50 app
 
 ## Railway에 올리는 경우
 
-`railway.toml`은 Dockerfile 빌드, `/api/health`, 단일 replica를 지정한다. 같은 프로젝트에 PostgreSQL과 웹 서비스를 만든다. 웹 서비스의 DATABASE_URL은 `${{Postgres.DATABASE_URL}}`로 내부 연결을 참조하고 DATABASE_POOL_MAX=5를 유지한다. 공개 GitHub 소스를 연결하고 **웹 서비스에 `/data` 볼륨을 먼저 장착**한다. `DATA_DIR=/data`, production 설정, 실제 도메인·OAuth callback을 등록한다. 볼륨 UID/GID가 컨테이너의 node(1000) 사용자에게 쓰기 가능한지 확인한다. 권한이 맞지 않으면 권한을 준비한 뒤 시작하며 임시 경로로 우회하지 않는다.
+Railway의 새 서비스는 기존 `railway.toml` 방식 대신 서비스 설정 또는 Infrastructure as Code로 관리한다. 이 배포는 서비스 설정에서 Builder=Dockerfile, Dockerfile Path=Dockerfile, Healthcheck Path=/api/health, Timeout=90초, Replica=1을 지정한다. Dockerfile의 VOLUME 선언은 Railway에서 지원하지 않으므로 사용하지 않고 실제 Railway 볼륨을 장착한다. 같은 프로젝트에 PostgreSQL과 웹 서비스를 만든다. 웹 서비스의 DATABASE_URL은 `${{Postgres.DATABASE_URL}}`로 내부 연결을 참조하고 DATABASE_POOL_MAX=5를 유지한다. 공개 GitHub 소스를 연결하고 **웹 서비스에 `/data` 볼륨을 먼저 장착**한다. `DATA_DIR=/data`, production 설정, 실제 도메인·OAuth callback을 등록한다. 볼륨 UID/GID가 컨테이너의 node(1000) 사용자에게 쓰기 가능한지 확인한다. 권한이 맞지 않으면 권한을 준비한 뒤 시작하며 임시 경로로 우회하지 않는다.
 
 볼륨은 런타임에 장착되므로 DB 마이그레이션을 build 단계에 넣지 않는다. 배포 후 테스트 계정과 글·인증·이미지를 만들고 재배포하여 그대로 남는지 확인한다. 실제 서비스의 restart 테스트 전 별도 백업을 확보한다. [Railway 볼륨 공식 문서](https://docs.railway.com/volumes)와 [Dockerfile 공식 문서](https://docs.railway.com/builds/dockerfiles)를 2026-09-08 확인했다.
 
