@@ -13,7 +13,7 @@ export const POST: APIRoute = async (ctx) => {
       ctx.request.headers.get('x-csrf-token') !== ctx.locals.csrf
     )
       return Response.json({ error: '요청을 확인할 수 없어요.' }, { status: 403 });
-    if (!rate('upload:' + ctx.locals.user.id, 20, 3600))
+    if (!(await rate('upload:' + ctx.locals.user.id, 20, 3600)))
       return Response.json({ error: '이미지 업로드는 시간당 20개까지 가능해요.' }, { status: 429 });
     if (Number(ctx.request.headers.get('content-length') || 0) > 5.1 * 1024 * 1024)
       return Response.json({ error: '파일은 5MB 이하로 올려주세요.' }, { status: 413 });
@@ -37,7 +37,7 @@ export const POST: APIRoute = async (ctx) => {
       .toBuffer();
     const uid = id(),
       storage = await saveImage(uid, bytes);
-    run(
+    await run(
       'INSERT INTO uploads(id,user_id,mime,size,storage) VALUES(?,?,?,?,?)',
       uid,
       ctx.locals.user.id,

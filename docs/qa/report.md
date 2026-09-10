@@ -1,8 +1,8 @@
-# QA 보고서 · 2026-09-08
+# QA 보고서 · 2026-09-10
 
 ## 대상과 실행 환경
 
-제품 버전 **1.0.0**, 테스트한 코드·카탈로그의 SHA-256은 [source-revision.json](source-revision.json)에 남겼다. macOS arm64, Node 22.14.0, pnpm 10.30.1, Astro 7.3.1, Node adapter 11.1.5, better-sqlite3 13.x, Vitest 5, Playwright 1.63 계열 Chromium을 사용했다. 실제 설치 버전은 pnpm-lock.yaml로 고정한다.
+제품 버전 **1.0.0**, 테스트한 코드·카탈로그의 SHA-256은 [source-revision.json](source-revision.json)에 남겼다. macOS arm64, Node 22.14.0, pnpm 10.30.1, Astro 7.3.1, Node adapter 11.1.5, PostgreSQL 15 (로컬), pg 8.23, Vitest 5, Playwright 1.63 계열 Chromium을 사용했다. 실제 설치 버전은 pnpm-lock.yaml로 고정한다.
 
 - 로컬 사용자 미리보기: `http://localhost:8095` (production bundle / 로컬 환경 정책)
 - 자동 브라우저: `http://127.0.0.1:8096` (별도 테스트 DB)
@@ -16,9 +16,9 @@
 |---|---|---|
 |전체 데이터|`pnpm validate` — 필드·slug·카테고리·관계·가격 정책·100개 이상|**PASS** 121개 공개 / 127 JSON / 15개 카테고리|
 |타입·Astro|`pnpm check` — 빌드를 막는 오류 없음|**PASS**, 오류 0·경고 0|
-|단위·어댑터 계약|`pnpm test` — 데이터·중복·환산 제외·scrypt·서명·XSS·OAuth·요청 제한·PR·R2·Resend|**PASS 12개**. OAuth/PR/R2/Resend의 공급자 응답은 stub이며 실제 외부 성공이 아님|
+|단위·어댑터 계약|`pnpm test` — 데이터·중복·환산 제외·scrypt·서명·XSS·OAuth·요청 제한·PR·R2·Resend|**PASS 24개**. OAuth/PR/R2/Resend의 공급자 응답은 stub이며 실제 외부 성공이 아님|
 |빌드|`pnpm build` — Node entry와 한글 공유 이미지|**PASS** 서버 bundle + OG 122개|
-|실제 브라우저|`pnpm test:e2e` — 아래 18개 시나리오 묶음|**PASS 18개**, 실패 0. [browser-summary.json](browser-summary.json)|
+|실제 브라우저|`pnpm test:e2e` — 아래 19개 시나리오 묶음|**PASS 19개**, 실패 0. [browser-summary.json](browser-summary.json)|
 |프로세스·백업·복원|`pnpm test:persistence` — 서버 종료/시작, 세션·글·인증·금액, 온라인 백업·중지 복원·FK|**PASS**, [persistence-results.json](persistence-results.json)|
 |운영 HTTPS 정책|`pnpm test:production` — Secure/HttpOnly/Lax 세션, HTTPS 로그인, 외부 메일 미설정 거부|**PASS**, [production-results.json](production-results.json). 테스트용 자체 인증서이며 온라인 운영 배포 아님|
 |구독 다이제스트|`pnpm newsletter` — 발송 없는 로컬 미리보기|**PASS**, 무발송. 미리보기는 private 디렉터리에 보존|
@@ -49,6 +49,12 @@
 |E17|121개 공식 아이콘 HTTP 200·96×96 WebP, 동일 회사 제품별 구분, 검색·상세·관련 도구 표시, 외부 이미지 요청 없음, 초기·검색 후 로딩 실패 대체 표시|PASS|
 |E18|121개 상세의 한글 제목·판정·360px 넘침, 한국어 입력 오류, 도구 제안 선택, 관리자·내 활동·통계·글쓰기 문구|PASS|
 
+|E19|동시 이메일 확인 요청에서 토큰 한 번만 사용, 동시 중복 가입 한 번만 성공|PASS|
+
+## PostgreSQL 전환 검사
+
+2026-09-10 PostgreSQL에서 단위 24개, 브라우저 19개, 실제 프로세스 재시작·pg_dump 백업·pg_restore 복원·운영 HTTPS 정책 검사가 통과했다. SQLite 시험 데이터를 PostgreSQL로 옮겨 전체 값·관계·식별자·세션을 비교했으며 비어 있지 않은 대상에 재실행하면 기존 데이터를 덮어쓰지 않고 거부한다. 동시 투표·요청 제한·이메일 토큰과 트랜잭션 롤백을 추가 검사했다. 테스트는 사용자 DB와 별도의 무작위 스키마에서 수행했다.
+
 ## 한국어 문구 전수 검토
 
 공개 도구 121개와 비공개 후보 6개의 한국어 문구를 다듬고, 홈·상세·검색·계정·커뮤니티·관리자·통계·오류·이메일·공유 이미지까지 확인했다. [상세 검토 기록](korean-copy-review.md)에 범위와 변경 이유를 남겼다. 타입 검사 오류 0·경고 0, 단위 테스트 12개, 빌드와 브라우저 검사 18개가 통과했다. E18은 121개 상세를 모두 360px 화면에서 확인하고, 오류 안내와 내부 코드의 한국어 표시를 검사한다. 실제 8095 슬랙 화면, 모바일 다크·데스크톱 라이트, 슬랙 공유 이미지를 직접 확인했다.
@@ -75,7 +81,7 @@
 
 주요 로컬 사용 흐름에 남은 **FAIL은 없다**. 실제 외부 키·공급자 계정이 필요한 연동과 실제 인터넷 운영 배포는 완료로 보고하지 않는다. Docker 엔진 실행과 영속 볼륨의 실제 호스팅 확인이 필요하다. 별도 공개 도메인 없이 기존 로컬 미리보기를 인터넷 배포라고 부르지 않는다.
 
-도구 가격 대부분은 확인 필요로 남겨 두었고, 공식 페이지 확인 실패 후보 6개는 정식 카탈로그에서 제외했다. 121개 제작 프롬프트의 결과물을 실제로 만드는 작업은 **NOT_RUN**이며 화면에도 편집 검토로 명시한다. 익명 쿠키 삭제에 의한 동일인 재인증을 완벽히 막지는 못한다. SQLite는 단일 프로세스 운영 기준이며 부하·침투·법적 적합성의 인증을 주장하지 않는다. 정책의 운영 주체·연락처를 실제 배포 전에 확정해야 한다.
+도구 가격 대부분은 확인 필요로 남겨 두었고, 공식 페이지 확인 실패 후보 6개는 정식 카탈로그에서 제외했다. 121개 제작 프롬프트의 결과물을 실제로 만드는 작업은 **NOT_RUN**이며 화면에도 편집 검토로 명시한다. 익명 쿠키 삭제에 의한 동일인 재인증을 완벽히 막지는 못한다. PostgreSQL과 업로드 볼륨을 사용하는 단일 웹 인스턴스 운영 기준이며 부하·침투·법적 적합성의 인증을 주장하지 않는다. 정책의 운영 주체·연락처를 실제 배포 전에 확정해야 한다.
 
 ## 2026-09-10 로컬 소셜 로그인 연결
 

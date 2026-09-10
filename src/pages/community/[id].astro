@@ -5,19 +5,23 @@ import { getPost, getComments, one } from '../../lib/db';
 import { markdown, plainText } from '../../lib/markdown';
 import { boards } from '../../lib/config';
 import { getApp } from '../../lib/apps';
-const p = getPost(Astro.params.id || '');
+const p = await getPost(Astro.params.id || '');
 if (!p) Astro.response.status = 404;
 const user = Astro.locals.user;
-const comments = p ? getComments(p.id) : [];
+const comments = p ? await getComments(p.id) : [];
 const build = p ? JSON.parse(p.build) : {};
 const reactions =
   p && user
     ? {
         like: Boolean(
-          one("SELECT 1 FROM reactions WHERE user_id=? AND post_id=? AND kind='like'", user.id, p.id),
+          await one("SELECT 1 FROM reactions WHERE user_id=? AND post_id=? AND kind='like'", user.id, p.id),
         ),
         bookmark: Boolean(
-          one("SELECT 1 FROM reactions WHERE user_id=? AND post_id=? AND kind='bookmark'", user.id, p.id),
+          await one(
+            "SELECT 1 FROM reactions WHERE user_id=? AND post_id=? AND kind='bookmark'",
+            user.id,
+            p.id,
+          ),
         ),
       }
     : { like: false, bookmark: false };

@@ -3,6 +3,7 @@ import { oauthEnabled } from '../src/lib/oauth';
 import { mailAvailable } from '../src/lib/mail';
 import { r2Enabled } from '../src/lib/storage';
 console.log({
+  database: process.env.DATABASE_URL ? 'postgresql-configured' : 'missing',
   mode: production ? 'production' : 'local',
   siteUrl,
   dataDir,

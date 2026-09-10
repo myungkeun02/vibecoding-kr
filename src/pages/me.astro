@@ -5,21 +5,24 @@ import { all, postSelect } from '../lib/db';
 import { getApp } from '../lib/apps';
 const user = Astro.locals.user;
 if (!user) return Astro.redirect('/login?returnTo=/me');
-const mine = all(postSelect + " WHERE p.user_id=? AND p.status='active' ORDER BY p.created_at DESC", user.id);
-const comments = all(
+const mine = await all(
+  postSelect + " WHERE p.user_id=? AND p.status='active' ORDER BY p.created_at DESC",
+  user.id,
+);
+const comments = await all(
   "SELECT c.*,p.title FROM comments c JOIN posts p ON p.id=c.post_id WHERE c.user_id=? AND c.status='active' AND p.status='active' ORDER BY c.created_at DESC",
   user.id,
 );
-const saved = all('SELECT slug FROM bookmarks WHERE user_id=?', user.id)
+const saved = (await all('SELECT slug FROM bookmarks WHERE user_id=?', user.id))
   .map((x) => getApp(x.slug))
   .filter(Boolean);
-const voted = all('SELECT slug,created_at FROM votes WHERE user_id=?', user.id);
-const savedPosts = all(
+const voted = await all('SELECT slug,created_at FROM votes WHERE user_id=?', user.id);
+const savedPosts = await all(
   postSelect +
     " JOIN reactions r ON r.post_id=p.id WHERE r.user_id=? AND r.kind='bookmark' AND p.status='active'",
   user.id,
 );
-const suggestions = all('SELECT * FROM suggestions WHERE user_id=? ORDER BY created_at DESC', user.id);
+const suggestions = await all('SELECT * FROM suggestions WHERE user_id=? ORDER BY created_at DESC', user.id);
 const labels: Record<string, string> = {
   pending: '검토 대기',
   accepted_pending_release: '채택 · 반영 대기',

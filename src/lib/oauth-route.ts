@@ -36,20 +36,21 @@ export async function handleOAuth(ctx: APIContext, provider: Provider, callback:
     )
       throw new Error('OAUTH_STATE');
     const profile = await exchangeOAuth(provider, ctx.url.searchParams.get('code')!, state.verifier);
-    let u = one(
+    let u = await one(
       "SELECT u.* FROM identities i JOIN users u ON u.id=i.user_id WHERE i.provider=? AND i.subject=? AND u.status='active'",
       provider,
       profile.subject,
     );
     if (!u) {
-      if (one('SELECT id FROM users WHERE email=?', profile.email)) throw new Error('OAUTH_EXISTING_EMAIL');
+      if (await one('SELECT id FROM users WHERE lower(email)=lower(?)', profile.email))
+        throw new Error('OAUTH_EXISTING_EMAIL');
       const pending = Buffer.from(
         JSON.stringify({ ...profile, provider, returnTo: state.returnTo, expires: Date.now() + 600000 }),
       ).toString('base64url');
       ctx.cookies.set('oauth_pending', sign(pending), { ...cookieOpts, maxAge: 600 });
       return ctx.redirect('/onboarding');
     }
-    login(ctx, u.id);
+    await login(ctx, u.id);
     return ctx.redirect(state.returnTo);
   } catch {
     console.error('oauth_failed', provider);

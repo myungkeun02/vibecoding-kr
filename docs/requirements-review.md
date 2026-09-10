@@ -11,13 +11,13 @@
 |기존 결정 또는 충돌|최종 결정과 이유|
 |---|---|
 |바이브코딩가능? 브랜드, 개발 도구 분위기|유지. 중앙 `src/lib/config.ts`에서 이름·설명·주소 관리|
-|Astro server / Node / SQLite / vanilla JS|유지. 공식 최신 호환 문서를 확인해 Astro 7.3.1, Node adapter 11.1.5 선택|
+|Astro server / Node / PostgreSQL / vanilla JS|2026-09-10 사용자 선택에 따라 PostgreSQL로 전환. 공식 최신 호환 문서를 확인해 Astro 7.3.1, Node adapter 11.1.5 선택|
 |1단계 85~87개 SaaS 중심|121개 정식 도구·15개 카테고리, 설치형·무료·오픈소스·일회성 포함. 출처 실패 6개 비공개|
 |No accounts, 계정·커뮤니티는 후속 단계|현재 요청에 따라 지금 구현. 로컬 계정·서버 세션 + 기존 제공자 Google/GitHub OAuth|
 |Better Auth 예정|외부 공급자 없이 테스트 가능한 scrypt·서버 세션과 공식 OAuth 코드 흐름 구현. 불필요한 두 인증 체계 병행을 피하고 권한·토큰·동의를 통합|
 |고정 USD×1,400, 모르는 가격도 수치화|확인한 기준일 환율로만 환산. null과 0 구분, 월·연·일회성 구분|
 |단일 프롬프트로 SaaS 완전 대체 주장|개인·5명 이하 사용 사례와 손실 명시. 판정은 편집 의견이며 실제 제작 미실행 표시|
-|투표 localStorage와 IP 제한 중심|서명된 익명 쿠키 + 회원 고유키, SQLite 중복 제약·로그인 병합. UI의 테마만 localStorage|
+|투표 localStorage와 IP 제한 중심|서명된 익명 쿠키 + 회원 고유키, PostgreSQL 중복 제약·로그인 병합. UI의 테마만 localStorage|
 |검색어 원문 저장·상위 검색어 공개|민감한 검색어 수집 금지에 따라 횟수만 집계. 인기 도구 순위는 실제 인증 기반|
 |해시 필터와 전체 목록|query URL에 모든 상태를 보존하고 SSR 페이지 단위 결과로 점진적 갱신|
 |자동 제안→봇 fork PR|접수·채택 DB와 검토된 JSON의 초안 PR 어댑터/CLI 구현. 미검증 AI 데이터를 자동 발행하지 않도록 출처·스키마 검증 필수|

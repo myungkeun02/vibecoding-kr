@@ -4,7 +4,7 @@
 
 Astro server output + Node standalone adapter가 HTML을 렌더링한다. `src/middleware.ts`가 서명된 익명/CSRF 쿠키와 서버 세션을 읽고 보안 헤더·최소 이벤트를 처리한다. 주요 화면은 JS 없이 읽을 수 있고 가입 등 기본 폼 제출도 작동한다. `src/scripts/client.ts`가 검색 결과 갱신·클립보드·인증·반응·업로드를 점진적으로 추가한다.
 
-프로덕션은 **Node 프로세스 1개 + 로컬 영속 디스크**다. better-sqlite3 WAL, foreign_keys, busy_timeout 5초, 짧은 트랜잭션과 바인딩을 사용한다. 파일 시스템을 공유하지 않는 수평 복제는 지원하지 않는다. 별도 DB로 바꾸기 전에는 replica를 늘리지 않는다.
+프로덕션은 **Node 웹 서비스 + PostgreSQL + 업로드용 영속 볼륨**이다. pg 연결 풀은 기본 5개이며 트랜잭션 안의 질의는 같은 연결을 사용한다. 외래 키·고유 제약·원자적 요청 제한과 일회성 인증 토큰 행 잠금으로 동시 요청의 일관성을 지킨다. 업로드를 로컬 볼륨에 보관하므로 웹 서비스는 한 인스턴스로 운영한다. 마이그레이션은 `migrations/postgres`에서 적용한다.
 
 ## 편집 데이터와 런타임 데이터
 

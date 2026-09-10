@@ -6,8 +6,8 @@ import Newsletter from '../components/Newsletter.astro';
 import { apps, filterApps } from '../lib/apps';
 import { absolute, boards } from '../lib/config';
 import { posts, voteCounts } from '../lib/db';
-const recent = posts(new URLSearchParams()).items.slice(0, 3);
-const r = filterApps(Astro.url.searchParams, voteCounts());
+const recent = (await posts(new URLSearchParams())).items.slice(0, 3);
+const r = filterApps(Astro.url.searchParams, await voteCounts());
 const jsonld = [
   {
     '@context': 'https://schema.org',

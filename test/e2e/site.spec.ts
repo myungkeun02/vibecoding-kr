@@ -1,5 +1,5 @@
 import { test, expect, request as requestFactory, type APIRequestContext } from '@playwright/test';
-import Database from 'better-sqlite3';
+import { connectE2EDatabase } from '../../scripts/test-database.mjs';
 import { readdirSync, readFileSync, mkdirSync } from 'node:fs';
 import { randomBytes } from 'node:crypto';
 const origin = 'http://127.0.0.1:8096';
@@ -7,7 +7,7 @@ const catalog = readdirSync('data/apps')
   .map((f) => JSON.parse(readFileSync('data/apps/' + f, 'utf8')))
   .filter((a) => a.published);
 function testDb() {
-  return new Database('data/test/e2e/site.db');
+  return connectE2EDatabase();
 }
 async function token(api: APIRequestContext, path = '/login') {
   const r = await api.get(path);
@@ -42,10 +42,10 @@ async function post(api: APIRequestContext, extra = {}) {
   expect(r.status()).toBe(200);
   return (await r.json()).id;
 }
-test.beforeEach(() => {
+test.beforeEach(async () => {
   const db = testDb();
-  db.prepare('DELETE FROM rate_limits').run();
-  db.close();
+  await db.run('DELETE FROM rate_limits');
+  await db.close();
 });
 test('all catalog pages, key pages, 404, sitemap and metadata render from the production server', async ({
   request,
@@ -225,22 +225,22 @@ test('duplicate identity votes, anonymous-to-member merge, free/one-time/unknown
   await action(request, 'vote', { slug: 'trello' });
   await action(request, 'vote', { slug: 'trello' });
   const db = testDb();
-  const uid = db.prepare('SELECT id FROM users WHERE email=?').get(who.email) as any;
+  const uid = (await db.one('SELECT id FROM users WHERE email=?', who.email)) as any;
   expect(
-    (db.prepare('SELECT COUNT(*) AS n FROM votes WHERE user_id=? AND slug=?').get(uid.id, 'trello') as any).n,
+    ((await db.one('SELECT COUNT(*) AS n FROM votes WHERE user_id=? AND slug=?', uid.id, 'trello')) as any).n,
   ).toBe(1);
   await action(request, 'auth/logout', {});
   await action(request, 'vote', { slug: 'trello' });
   await action(request, 'auth/login', { email: who.email, password: who.password });
   expect(
-    (db.prepare('SELECT COUNT(*) AS n FROM votes WHERE user_id=? AND slug=?').get(uid.id, 'trello') as any).n,
+    ((await db.one('SELECT COUNT(*) AS n FROM votes WHERE user_id=? AND slug=?', uid.id, 'trello')) as any).n,
   ).toBe(1);
   const before = await (await request.get('/api/totals')).json();
   for (const slug of ['obsidian', 'upnote', 'microsoft-excel']) await action(request, 'vote', { slug });
   const after = await (await request.get('/api/totals')).json();
   expect(after.monthly).toBe(before.monthly);
   expect(after.excluded).toBe(before.excluded + 2);
-  db.close();
+  await db.close();
 });
 test('ownership enforcement, XSS, notifications, deletion and bookmarks remain consistent', async ({
   request,
@@ -282,10 +282,10 @@ test('admin permissions, moderation restore, pinned notice, suggestion status an
   const u = await account(request);
   expect((await action(request, 'admin/action', { operation: 'post-hide', target: 'x' })).status()).toBe(403);
   const db = testDb();
-  db.prepare("UPDATE users SET role='admin' WHERE email=?").run(u.email);
+  await db.run("UPDATE users SET role='admin' WHERE email=?", u.email);
   const pid = await post(request, { board: 'notice', title: '운영 공지 테스트입니다' });
   await action(request, 'admin/action', { operation: 'post-pin', target: pid });
-  expect((db.prepare('SELECT pinned FROM posts WHERE id=?').get(pid) as any).pinned).toBe(1);
+  expect(((await db.one('SELECT pinned FROM posts WHERE id=?', pid)) as any).pinned).toBe(1);
   await action(request, 'report', { type: 'post', target: pid, reason: '관리자 신고 처리 흐름 점검' });
   await action(request, 'admin/action', { operation: 'post-hide', target: pid });
   expect((await request.get('/community/' + pid)).status()).toBe(404);
@@ -296,14 +296,14 @@ test('admin permissions, moderation restore, pinned notice, suggestion status an
     title: 'Slack 가격 출처 개선',
     body: '공식 가격 페이지와 비교한 수정 제안입니다.',
   });
-  const s = db.prepare('SELECT id FROM suggestions ORDER BY id DESC LIMIT 1').get() as any;
+  const s = (await db.one('SELECT id FROM suggestions ORDER BY id DESC LIMIT 1')) as any;
   await action(request, 'admin/action', { operation: 'suggest-accept', target: String(s.id) });
-  expect((db.prepare('SELECT status FROM suggestions WHERE id=?').get(s.id) as any).status).toBe(
+  expect(((await db.one('SELECT status FROM suggestions WHERE id=?', s.id)) as any).status).toBe(
     'accepted_pending_release',
   );
   expect((await request.get('/admin')).status()).toBe(200);
-  expect((db.prepare('SELECT COUNT(*) AS n FROM audit').get() as any).n).toBeGreaterThan(2);
-  db.close();
+  expect(((await db.one('SELECT COUNT(*) AS n FROM audit')) as any).n).toBeGreaterThan(2);
+  await db.close();
 });
 test('waitlist normalizes, dedupes, hides existing withdrawal token, honeypot and unsubscribe', async ({
   request,
@@ -316,16 +316,16 @@ test('waitlist normalizes, dedupes, hides existing withdrawal token, honeypot an
   r = await action(request, 'waitlist', { email: address, consent: true });
   expect((await r.json()).withdrawUrl).toBeUndefined();
   const db = testDb();
-  expect((db.prepare('SELECT COUNT(*) AS n FROM waitlist WHERE email=?').get(address) as any).n).toBe(1);
+  expect(((await db.one('SELECT COUNT(*) AS n FROM waitlist WHERE email=?', address)) as any).n).toBe(1);
   await action(request, 'waitlist', { email: 'bot@example.test', consent: true, website: 'spam' });
-  expect(db.prepare('SELECT 1 FROM waitlist WHERE email=?').get('bot@example.test')).toBeUndefined();
+  expect(await db.one('SELECT 1 FROM waitlist WHERE email=?', 'bot@example.test')).toBeUndefined();
   await action(request, 'waitlist/withdraw', {
     token: new URL(result.withdrawUrl, origin).searchParams.get('token'),
   });
-  expect((db.prepare('SELECT status FROM waitlist WHERE email=?').get(address) as any).status).toBe(
+  expect(((await db.one('SELECT status FROM waitlist WHERE email=?', address)) as any).status).toBe(
     'withdrawn',
   );
-  db.close();
+  await db.close();
 });
 test('CSRF, origin, input limits, bad passwords, session expiry and local reset delivery', async ({
   request,
@@ -366,10 +366,10 @@ test('CSRF, origin, input limits, bad passwords, session expiry and local reset 
   expect((await action(request, 'auth/reset', { token: resetToken, password: pw })).status()).toBe(400);
   await action(request, 'auth/login', { email: u.email, password: pw });
   const db = testDb();
-  db.prepare('UPDATE sessions SET expires=0 WHERE user_id=(SELECT id FROM users WHERE email=?)').run(u.email);
+  await db.run('UPDATE sessions SET expires=0 WHERE user_id=(SELECT id FROM users WHERE email=?)', u.email);
   const res = await request.get('/me', { maxRedirects: 0 });
   expect(res.status()).toBe(302);
-  db.close();
+  await db.close();
 });
 test('local production bundle handles absent OAuth, invalid uploads and account withdrawal', async ({
   request,
@@ -400,8 +400,8 @@ test('local production bundle handles absent OAuth, invalid uploads and account 
   expect(result.status()).toBe(200);
   expect((await action(request, 'auth/login', { email: u.email, password: u.password })).status()).toBe(401);
   const db = testDb();
-  expect(db.prepare('SELECT 1 FROM users WHERE email=?').get(u.email)).toBeUndefined();
-  db.close();
+  expect(await db.one('SELECT 1 FROM users WHERE email=?', u.email)).toBeUndefined();
+  await db.close();
 });
 test('rate limiting rejects excessive anonymous votes', async ({ request }) => {
   let status = 0;
@@ -467,7 +467,7 @@ test('email verification tokens expire, are single use and never mark an unverif
   const u = await account(request),
     db = testDb();
   expect(
-    (db.prepare('SELECT email_verified_at FROM users WHERE email=?').get(u.email) as any).email_verified_at,
+    ((await db.one('SELECT email_verified_at FROM users WHERE email=?', u.email)) as any).email_verified_at,
   ).toBeNull();
   expect((await action(request, 'auth/register', u)).status()).toBe(409);
   expect((await action(request, 'auth/send-verification', {})).status()).toBe(200);
@@ -478,7 +478,7 @@ test('email verification tokens expire, are single use and never mark an unverif
       .at(-1)
       .text.match(/token=([a-f0-9]+)/)[1];
   const expired = readToken();
-  db.prepare("UPDATE auth_tokens SET expires=0 WHERE kind='verify'").run();
+  await db.run("UPDATE auth_tokens SET expires=0 WHERE kind='verify'");
   expect((await action(request, 'auth/verify-email', { token: expired })).status()).toBe(400);
   await action(request, 'auth/send-verification', {});
   const allMail = readdirSync('data/test/e2e/outbox')
@@ -487,10 +487,10 @@ test('email verification tokens expire, are single use and never mark an unverif
   const valid = allMail.map((m) => m.text.match(/token=([a-f0-9]+)/)[1]).find((t) => t !== expired);
   expect((await action(request, 'auth/verify-email', { token: valid })).status()).toBe(200);
   expect(
-    (db.prepare('SELECT email_verified_at FROM users WHERE email=?').get(u.email) as any).email_verified_at,
+    ((await db.one('SELECT email_verified_at FROM users WHERE email=?', u.email)) as any).email_verified_at,
   ).toBeTruthy();
   expect((await action(request, 'auth/verify-email', { token: valid })).status()).toBe(400);
-  db.close();
+  await db.close();
 });
 test('comment update/delete, report resolution, notification read and account suspension', async ({
   request,
@@ -506,23 +506,23 @@ test('comment update/delete, report resolution, notification read and account su
   expect(await (await request.get('/community/' + pid)).text()).toContain('수정한 댓글 내용');
   expect((await action(request, 'notifications/read', {})).status()).toBe(200);
   const db = testDb(),
-    uid = (db.prepare('SELECT id FROM users WHERE email=?').get(author.email) as any).id;
+    uid = ((await db.one('SELECT id FROM users WHERE email=?', author.email)) as any).id;
   expect(
-    (db.prepare('SELECT COUNT(*) AS n FROM notifications WHERE user_id=? AND is_read=0').get(uid) as any).n,
+    ((await db.one('SELECT COUNT(*) AS n FROM notifications WHERE user_id=? AND is_read=0', uid)) as any).n,
   ).toBe(0);
-  db.prepare("UPDATE users SET role='admin' WHERE id=?").run(uid);
+  await db.run("UPDATE users SET role='admin' WHERE id=?", uid);
   await action(request, 'report', { type: 'comment', target: cr.id, reason: '댓글 관리 기능 검증' });
   await action(request, 'admin/action', { operation: 'comment-hide', target: cr.id });
   expect(await (await request.get('/community/' + pid)).text()).not.toContain('수정한 댓글 내용');
   await action(request, 'admin/action', { operation: 'comment-restore', target: cr.id });
   expect(await (await request.get('/community/' + pid)).text()).toContain('수정한 댓글 내용');
-  const report = (db.prepare('SELECT id FROM reports WHERE target_id=?').get(cr.id) as any).id;
+  const report = ((await db.one('SELECT id FROM reports WHERE target_id=?', cr.id)) as any).id;
   expect(
     (await action(request, 'admin/action', { operation: 'report-resolve', target: String(report) })).status(),
   ).toBe(200);
-  expect((db.prepare('SELECT status FROM reports WHERE id=?').get(report) as any).status).toBe('resolved');
+  expect(((await db.one('SELECT status FROM reports WHERE id=?', report)) as any).status).toBe('resolved');
   expect((await action(other, 'comments/delete', { id: cr.id })).status()).toBe(200);
-  const otherId = (db.prepare('SELECT user_id FROM comments WHERE id=?').get(cr.id) as any).user_id;
+  const otherId = ((await db.one('SELECT user_id FROM comments WHERE id=?', cr.id)) as any).user_id;
   expect(
     (await action(request, 'admin/action', { operation: 'user-suspend', target: otherId })).status(),
   ).toBe(200);
@@ -539,7 +539,7 @@ test('comment update/delete, report resolution, notification read and account su
     (await action(request, 'admin/action', { operation: 'user-restore', target: otherId })).status(),
   ).toBe(200);
   await other.dispose();
-  db.close();
+  await db.close();
 });
 test('360px authenticated long text and large totals, and no-JavaScript form submission', async ({
   page,
@@ -560,16 +560,17 @@ test('360px authenticated long text and large totals, and no-JavaScript form sub
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
   }
   const db = testDb();
-  db.prepare("UPDATE tools SET price=987654321098 WHERE slug='slack'").run();
+  await db.run("UPDATE tools SET price=987654321098 WHERE slug='slack'");
   await page.goto('/slack');
   await page.locator('[data-vote]').click();
   await expect(page.locator('[data-odometer]')).toHaveAttribute('data-odometer', /9876543/);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
-  db.prepare('UPDATE tools SET price=? WHERE slug=?').run(
+  await db.run(
+    'UPDATE tools SET price=? WHERE slug=?',
     catalog.find((a) => a.slug === 'slack').priceMonthly,
     'slack',
   );
-  db.close();
+  await db.close();
   const context = await browser.newContext({ javaScriptEnabled: false });
   const plain = await context.newPage();
   await plain.goto(origin + '/signup');
@@ -618,8 +619,8 @@ test('Korean copy covers every tool page, narrow layouts, form errors and intern
   }
   const u = await account(page.request);
   const db = testDb();
-  db.prepare("UPDATE users SET role='admin' WHERE email=?").run(u.email);
-  db.close();
+  await db.run("UPDATE users SET role='admin' WHERE email=?", u.email);
+  await db.close();
   await page.goto('/suggest?slug=slack');
   await expect(page.getByLabel('관련 도구 (선택)', { exact: true })).toHaveValue('slack');
   expect(
@@ -634,4 +635,34 @@ test('Korean copy covers every tool page, narrow layouts, form errors and intern
       true,
     );
   }
+});
+
+test('concurrent PostgreSQL requests enforce one-use email tokens and account uniqueness', async ({
+  request,
+}) => {
+  const u = await account(request);
+  await action(request, 'auth/send-verification', {});
+  const mail = readdirSync('data/test/e2e/outbox')
+    .map((f) => JSON.parse(readFileSync('data/test/e2e/outbox/' + f, 'utf8')))
+    .find((m) => m.to === u.email && m.subject.includes('이메일 주소'));
+  const verifyToken = mail.text.match(/token=([a-f0-9]+)/)[1];
+  const csrf = await token(request);
+  const replies = await Promise.all(
+    Array.from({ length: 2 }, () => action(request, 'auth/verify-email', { token: verifyToken }, csrf)),
+  );
+  expect(replies.map((r) => r.status()).sort()).toEqual([200, 400]);
+  const other = await requestFactory.newContext({ baseURL: origin });
+  const otherCsrf = await token(other);
+  const unique = randomBytes(6).toString('hex');
+  const body = {
+    email: unique + '@example.test',
+    nickname: '동시가입_' + unique,
+    password: randomBytes(20).toString('hex'),
+    terms: true,
+  };
+  const registered = await Promise.all(
+    Array.from({ length: 2 }, () => action(other, 'auth/register', body, otherCsrf)),
+  );
+  expect(registered.map((r) => r.status()).sort()).toEqual([200, 409]);
+  await other.dispose();
 });

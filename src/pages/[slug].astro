@@ -13,7 +13,7 @@ const v = a ? verdicts[a.verdict] : null;
 const user = Astro.locals.user;
 const voted = a
   ? Boolean(
-      one(
+      await one(
         'SELECT id FROM votes WHERE slug=? AND ' + (user ? 'user_id=?' : 'anonymous=?'),
         a.slug,
         user?.id || Astro.locals.anon,
@@ -21,9 +21,11 @@ const voted = a
     )
   : false;
 const bookmarked =
-  a && user ? Boolean(one('SELECT 1 FROM bookmarks WHERE user_id=? AND slug=?', user.id, a.slug)) : false;
-const count = a ? voteCounts()[a.slug] || 0 : 0;
-const builds = a ? posts(new URLSearchParams({ tool: a.slug })).items.slice(0, 4) : [];
+  a && user
+    ? Boolean(await one('SELECT 1 FROM bookmarks WHERE user_id=? AND slug=?', user.id, a.slug))
+    : false;
+const count = a ? (await voteCounts())[a.slug] || 0 : 0;
+const builds = a ? (await posts(new URLSearchParams({ tool: a.slug }))).items.slice(0, 4) : [];
 const jsonld = a
   ? [
       {

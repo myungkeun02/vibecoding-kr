@@ -3,12 +3,15 @@ import { randomBytes } from 'node:crypto';
 import { mkdtempSync, mkdirSync, writeFileSync } from 'node:fs';
 import { resolve, join } from 'node:path';
 import { request, expect } from '@playwright/test';
-import Database from 'better-sqlite3';
+import { createTestDatabase } from './test-database.mjs';
+const database = await createTestDatabase('persistence');
 mkdirSync('data/test', { recursive: true });
 const dir = mkdtempSync(resolve('data/test/restart-')),
   origin = 'http://127.0.0.1:8097';
 const env = {
   ...process.env,
+  DATABASE_URL: database.connectionString,
+  DATABASE_SCHEMA: database.schema,
   DATA_DIR: dir,
   APP_ENV: 'test',
   SESSION_SECRET: randomBytes(48).toString('hex'),
@@ -65,7 +68,7 @@ try {
   });
   await action('vote', { slug: 'slack' });
   const before = await (await api.get('/api/totals')).json();
-  const backup = join(dir, 'backup.db');
+  const backup = join(dir, 'backup.dump');
   ops(['backup', backup]);
   await stop();
   await start();
@@ -73,9 +76,7 @@ try {
   expect(await (await api.get('/api/totals')).json()).toEqual(before);
   expect((await api.get('/me')).url()).toBe(origin + '/me');
   await stop();
-  const db = new Database(join(dir, 'site.db'));
-  db.prepare('DELETE FROM votes').run();
-  db.close();
+  await database.run('DELETE FROM votes');
   ops(['restore', backup, '--server-stopped']);
   await start();
   expect(await (await api.get('/api/totals')).json()).toEqual(before);
@@ -92,7 +93,7 @@ try {
           'session persists',
           'posts persist',
           'votes and totals persist',
-          'SQLite live backup',
+          'PostgreSQL live pg_dump backup',
           'restore after stopped server',
           'integrity and foreign keys',
         ],
@@ -105,4 +106,5 @@ try {
 } finally {
   await api.dispose();
   await stop();
+  await database.cleanup();
 }

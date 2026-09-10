@@ -3,7 +3,7 @@ import Base from '../../../layouts/Base.astro';
 import PostEditor from '../../../components/PostEditor.astro';
 import { getPost } from '../../../lib/db';
 if (!Astro.locals.user) return Astro.redirect('/login?returnTo=' + encodeURIComponent(Astro.url.pathname));
-const p = getPost(Astro.params.id || '');
+const p = await getPost(Astro.params.id || '');
 const allowed = p && p.user_id === Astro.locals.user.id;
 if (!allowed) Astro.response.status = p ? 403 : 404;
 ---

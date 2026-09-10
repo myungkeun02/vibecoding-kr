@@ -1,12 +1,12 @@
 {
   "status": "PASS",
-  "at": "2026-09-08T09:26:34.519Z",
+  "at": "2026-09-10T11:00:53.229Z",
   "checks": [
     "real process restart",
     "session persists",
     "posts persist",
     "votes and totals persist",
-    "SQLite live backup",
+    "PostgreSQL live pg_dump backup",
     "restore after stopped server",
     "integrity and foreign keys"
   ]

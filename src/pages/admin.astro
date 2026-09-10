@@ -4,20 +4,22 @@ import AdminAction from '../components/AdminAction.astro';
 import { all } from '../lib/db';
 const allowed = Astro.locals.user?.role === 'admin';
 if (!allowed) Astro.response.status = 403;
-const reports = allowed ? all('SELECT * FROM reports ORDER BY id DESC LIMIT 100') : [];
-const suggestions = allowed ? all('SELECT * FROM suggestions ORDER BY id DESC LIMIT 100') : [];
+const reports = allowed ? await all('SELECT * FROM reports ORDER BY id DESC LIMIT 100') : [];
+const suggestions = allowed ? await all('SELECT * FROM suggestions ORDER BY id DESC LIMIT 100') : [];
 const users = allowed
-  ? all('SELECT id,nickname,email,status,role FROM users ORDER BY created_at DESC LIMIT 100')
+  ? await all('SELECT id,nickname,email,status,role FROM users ORDER BY created_at DESC LIMIT 100')
   : [];
 const posts = allowed
-  ? all("SELECT id,title,status,pinned FROM posts WHERE status<>'deleted' ORDER BY created_at DESC LIMIT 100")
+  ? await all(
+      "SELECT id,title,status,pinned FROM posts WHERE status<>'deleted' ORDER BY created_at DESC LIMIT 100",
+    )
   : [];
 const comments = allowed
-  ? all(
+  ? await all(
       "SELECT id,body,status,post_id FROM comments WHERE status<>'deleted' ORDER BY created_at DESC LIMIT 100",
     )
   : [];
-const actions = allowed ? all('SELECT * FROM audit ORDER BY id DESC LIMIT 50') : [];
+const actions = allowed ? await all('SELECT * FROM audit ORDER BY id DESC LIMIT 50') : [];
 const actionLabels: Record<string, string> = {
   'user-suspend': '회원 이용 제한',
   'user-restore': '회원 이용 제한 해제',

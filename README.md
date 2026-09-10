@@ -1,21 +1,22 @@
 # >_ 바이브코딩가능?
 
-“내가 쓰는 기능만 직접 만들 수 있을까?”를 탐색하고 제작 경험을 나누는 한국어 서비스입니다. Astro SSR, Node, SQLite, vanilla JavaScript로 실제 계정·커뮤니티·대체 인증을 제공합니다. 결제나 광고는 없습니다.
+“내가 쓰는 기능만 직접 만들 수 있을까?”를 탐색하고 제작 경험을 나누는 한국어 서비스입니다. Astro SSR, Node, PostgreSQL, vanilla JavaScript로 실제 계정·커뮤니티·대체 인증을 제공합니다. 결제나 광고는 없습니다.
 
 현재 카탈로그는 **121개 공개 도구 / 15개 카테고리**입니다. 공식 페이지를 확인하지 못한 후보 6개는 공개 목록에서 제외했습니다. 가격·판정의 검증 수준은 서로 다르며 모든 제작 프롬프트는 **편집 검토** 상태입니다. 121개 결과물을 실제 제작했다는 뜻이 아닙니다.
 
 ## 시작하기
 
-Node 22.14 이상(22 LTS 권장), pnpm 10.30.1이 필요합니다. Linux에서 native 모듈 빌드 시 Python 3, make, C++ 컴파일러가 필요할 수 있습니다.
+Node 22.14 이상(22 LTS 권장), pnpm 10.30.1, PostgreSQL 15 이상이 필요합니다. Linux에서 native 모듈 빌드 시 Python 3, make, C++ 컴파일러가 필요할 수 있습니다.
 
 ```sh
 corepack enable
 pnpm install --frozen-lockfile
 cp .env.example .env
+# .env의 DATABASE_URL을 준비한 PostgreSQL 주소로 설정
 pnpm dev
 ```
 
-[로컬 서비스](http://localhost:8095)에서 가입하고 글을 작성할 수 있습니다. `.env` 기본값은 로컬 전용입니다. 세션 키를 비워두면 `data/private/.session-secret`에 무작위 키를 생성하며, DB와 업로드는 `data/private`에 보존됩니다. Astro 7 개발 서버는 백그라운드로 실행됩니다. 종료는 `pnpm exec astro dev stop`, 로그는 `pnpm exec astro dev logs`입니다.
+[로컬 서비스](http://localhost:8095)에서 가입하고 글을 작성할 수 있습니다. `.env` 기본값은 로컬 전용입니다. 세션 키를 비워두면 `data/private/.session-secret`에 무작위 키를 생성하며, 계정·글·세션은 PostgreSQL에, 업로드는 `data/private/uploads`에 보존됩니다. Astro 7 개발 서버는 백그라운드로 실행됩니다. 종료는 `pnpm exec astro dev stop`, 로그는 `pnpm exec astro dev logs`입니다.
 
 ```sh
 pnpm build
@@ -39,12 +40,12 @@ pnpm test:persistence
 pnpm test:production
 ```
 
-E2E는 빌드된 서버를 8096 포트와 `data/test/e2e`에서 실행하고 해당 테스트 폴더만 초기화합니다. 재시작·복원 테스트는 8097 포트와 별도 새 테스트 폴더를 사용합니다. 8095의 사용자 데이터는 건드리지 않습니다. 실패 추적 파일과 테스트 DB는 공개 대상에서 제외합니다.
+검사 전 전용 PostgreSQL의 `TEST_DATABASE_URL`을 설정합니다. 운영 `DATABASE_URL`은 테스트 대상으로 사용하지 않습니다. 각 검사는 무작위 PostgreSQL 스키마를 생성하고 해당 스키마만 정리합니다. E2E는 빌드된 서버를 8096 포트와 `data/test/e2e`에서 실행하고 해당 테스트 폴더만 초기화합니다. 재시작·복원 테스트는 8097 포트와 별도 새 테스트 폴더를 사용합니다. 8095의 사용자 데이터는 건드리지 않습니다. 실패 추적 파일과 테스트 DB는 공개 대상에서 제외합니다.
 
 ## 관리자와 콘텐츠 운영
 
 1. 서비스에서 운영자 본인의 계정을 만듭니다.
-2. 같은 DB 경로로 `pnpm admin 운영자이메일`을 실행합니다.
+2. 같은 DATABASE_URL로 `pnpm admin 운영자이메일`을 실행합니다.
 3. 다시 로그인하여 `/admin`에 접근합니다. 세션은 권한 부여 시 폐기됩니다.
 
 카탈로그의 유일한 편집 원본은 `data/apps/<slug>.json`입니다. `pnpm validate && pnpm build`로 검사하고 재배포하면 메타데이터만 동기화되며 계정·글·투표는 유지됩니다. `pnpm seed`를 반복해도 초기화되지 않습니다. 숨긴 도구는 `published:false`로 처리하며 기존 참조는 DB에 남깁니다.

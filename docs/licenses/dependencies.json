@@ -5,6 +5,9 @@
       "versions": [
         "0.9.10"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@astrojs+check@0.9.10_prettier-plugin-astro@0.14.1_prettier@3.9.6_typescript@5.9.3/node_modules/@astrojs/check"
+      ],
       "license": "MIT",
       "author": "withastro",
       "homepage": "https://github.com/withastro/astro/tree/main/packages/language-tools/astro-check",
@@ -15,6 +18,9 @@
       "versions": [
         "2.13.1"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@astrojs+compiler@2.13.1/node_modules/@astrojs/compiler"
+      ],
       "license": "MIT",
       "author": "withastro",
       "homepage": "https://astro.build"
@@ -23,6 +29,9 @@
       "name": "@astrojs/compiler-binding",
       "versions": [
         "0.4.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@astrojs+compiler-binding@0.4.0_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3/node_modules/@astrojs/compiler-binding"
       ],
       "license": "MIT",
       "author": "Astro contributors",
@@ -34,6 +43,9 @@
       "versions": [
         "0.4.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@astrojs+compiler-binding-darwin-arm64@0.4.0/node_modules/@astrojs/compiler-binding-darwin-arm64"
+      ],
       "license": "MIT",
       "author": "Astro contributors",
       "homepage": "https://astro.build",
@@ -44,6 +56,9 @@
       "versions": [
         "0.4.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@astrojs+compiler-rs@0.4.0_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3/node_modules/@astrojs/compiler-rs"
+      ],
       "license": "MIT",
       "author": "withastro",
       "homepage": "https://astro.build"
@@ -52,6 +67,9 @@
       "name": "@astrojs/internal-helpers",
       "versions": [
         "0.11.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@astrojs+internal-helpers@0.11.0/node_modules/@astrojs/internal-helpers"
       ],
       "license": "MIT",
       "author": "withastro",
@@ -63,6 +81,9 @@
       "versions": [
         "2.16.16"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@astrojs+language-server@2.16.16_prettier-plugin-astro@0.14.1_prettier@3.9.6_typescript@5.9.3/node_modules/@astrojs/language-server"
+      ],
       "license": "MIT",
       "author": "withastro",
       "homepage": "https://github.com/withastro/astro#readme"
@@ -72,6 +93,9 @@
       "versions": [
         "0.4.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@astrojs+markdown-satteri@0.4.0/node_modules/@astrojs/markdown-satteri"
+      ],
       "license": "MIT",
       "author": "withastro",
       "homepage": "https://astro.build"
@@ -80,6 +104,9 @@
       "name": "@astrojs/node",
       "versions": [
         "11.1.5"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@astrojs+node@11.1.5_astro@7.3.1_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.5.0_tsx@4.23.13_yaml@2.9.0_/node_modules/@astrojs/node"
       ],
       "license": "MIT",
       "author": "withastro",
@@ -91,6 +118,9 @@
       "versions": [
         "4.0.2"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@astrojs+prism@4.0.2/node_modules/@astrojs/prism"
+      ],
       "license": "MIT",
       "author": "withastro",
       "homepage": "https://docs.astro.build/en/reference/api-reference/#prism-",
@@ -101,6 +131,9 @@
       "versions": [
         "3.3.3"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@astrojs+telemetry@3.3.3/node_modules/@astrojs/telemetry"
+      ],
       "license": "MIT",
       "author": "withastro",
       "homepage": "https://astro.build"
@@ -109,6 +142,9 @@
       "name": "@astrojs/yaml2ts",
       "versions": [
         "0.2.4"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@astrojs+yaml2ts@0.2.4/node_modules/@astrojs/yaml2ts"
       ],
       "license": "MIT",
       "author": "",
@@ -120,6 +156,9 @@
       "versions": [
         "7.29.7"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@babel+helper-string-parser@7.29.7/node_modules/@babel/helper-string-parser"
+      ],
       "license": "MIT",
       "author": "The Babel Team",
       "homepage": "https://babel.dev/docs/en/next/babel-helper-string-parser",
@@ -129,6 +168,9 @@
       "name": "@babel/helper-validator-identifier",
       "versions": [
         "7.29.7"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@babel+helper-validator-identifier@7.29.7/node_modules/@babel/helper-validator-identifier"
       ],
       "license": "MIT",
       "author": "The Babel Team",
@@ -140,6 +182,9 @@
       "versions": [
         "7.29.8"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@babel+parser@7.29.8/node_modules/@babel/parser"
+      ],
       "license": "MIT",
       "author": "The Babel Team",
       "homepage": "https://babel.dev/docs/en/next/babel-parser",
@@ -149,6 +194,9 @@
       "name": "@babel/types",
       "versions": [
         "7.29.8"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@babel+types@7.29.8/node_modules/@babel/types"
       ],
       "license": "MIT",
       "author": "The Babel Team",
@@ -160,6 +208,9 @@
       "versions": [
         "0.2.2"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@borewit+text-codec@0.2.2/node_modules/@borewit/text-codec"
+      ],
       "license": "MIT",
       "author": "Borewit",
       "homepage": "https://github.com/Borewit/text-codec#readme",
@@ -170,6 +221,9 @@
       "versions": [
         "0.10.5"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@bruits+satteri-darwin-arm64@0.10.5/node_modules/@bruits/satteri-darwin-arm64"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/bruits/satteri#readme",
       "description": "High-performance Markdown and MDX processing"
@@ -179,6 +233,9 @@
       "versions": [
         "1.1.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@canvas+image-data@1.1.0/node_modules/@canvas/image-data"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/node-gfx/image-data#readme"
     },
@@ -186,6 +243,9 @@
       "name": "@capsizecss/unpack",
       "versions": [
         "4.0.1"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@capsizecss+unpack@4.0.1/node_modules/@capsizecss/unpack"
       ],
       "license": "MIT",
       "author": "Michael Taranto",
@@ -197,6 +257,9 @@
       "versions": [
         "1.5.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@clack+core@1.5.0/node_modules/@clack/core"
+      ],
       "license": "MIT",
       "author": "Nate Moore",
       "homepage": "https://github.com/bombshell-dev/clack/tree/main/packages/core#readme"
@@ -206,6 +269,9 @@
       "versions": [
         "1.8.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@clack+prompts@1.8.0/node_modules/@clack/prompts"
+      ],
       "license": "MIT",
       "author": "Nate Moore",
       "homepage": "https://github.com/bombshell-dev/clack/tree/main/packages/prompts#readme"
@@ -214,6 +280,9 @@
       "name": "@emmetio/abbreviation",
       "versions": [
         "2.3.3"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@emmetio+abbreviation@2.3.3/node_modules/@emmetio/abbreviation"
       ],
       "license": "MIT",
       "author": "Sergey Chikuyonok",
@@ -225,6 +294,9 @@
       "versions": [
         "2.1.8"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@emmetio+css-abbreviation@2.1.8/node_modules/@emmetio/css-abbreviation"
+      ],
       "license": "MIT",
       "author": "Sergey Chikuyonok",
       "homepage": "https://github.com/emmetio/emmet#readme",
@@ -234,6 +306,9 @@
       "name": "@emmetio/css-parser",
       "versions": [
         "0.4.1"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@emmetio+css-parser@0.4.1/node_modules/@emmetio/css-parser"
       ],
       "license": "MIT",
       "author": "Sergey Chikuyonok",
@@ -245,6 +320,9 @@
       "versions": [
         "1.0.4"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@emmetio+scanner@1.0.4/node_modules/@emmetio/scanner"
+      ],
       "license": "MIT",
       "author": "Sergey Chikuyonok",
       "homepage": "https://github.com/emmetio/emmet#readme",
@@ -254,6 +332,9 @@
       "name": "@emmetio/stream-reader",
       "versions": [
         "2.2.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@emmetio+stream-reader@2.2.0/node_modules/@emmetio/stream-reader"
       ],
       "license": "MIT",
       "author": "Sergey Chikuyonok",
@@ -265,6 +346,9 @@
       "versions": [
         "0.1.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@emmetio+stream-reader-utils@0.1.0/node_modules/@emmetio/stream-reader-utils"
+      ],
       "license": "MIT",
       "author": "Sergey Chikuyonok",
       "homepage": "https://github.com/emmetio/stream-reader-utils#readme",
@@ -275,6 +359,9 @@
       "versions": [
         "0.28.2"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@esbuild+darwin-arm64@0.28.2/node_modules/@esbuild/darwin-arm64"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/evanw/esbuild#readme",
       "description": "The macOS ARM 64-bit binary for esbuild, a JavaScript bundler."
@@ -284,6 +371,9 @@
       "versions": [
         "1.1.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@img+colour@1.1.0/node_modules/@img/colour"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/lovell/colour#readme",
       "description": "The ESM-only 'color' package made compatible for use with CommonJS runtimes"
@@ -292,6 +382,9 @@
       "name": "@jridgewell/resolve-uri",
       "versions": [
         "3.1.2"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@jridgewell+resolve-uri@3.1.2/node_modules/@jridgewell/resolve-uri"
       ],
       "license": "MIT",
       "author": "Justin Ridgewell",
@@ -303,6 +396,9 @@
       "versions": [
         "1.6.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@jridgewell+sourcemap-codec@1.6.0/node_modules/@jridgewell/sourcemap-codec"
+      ],
       "license": "MIT",
       "author": "Justin Ridgewell",
       "homepage": "https://github.com/jridgewell/sourcemaps/tree/main/packages/sourcemap-codec",
@@ -312,6 +408,9 @@
       "name": "@jridgewell/trace-mapping",
       "versions": [
         "0.3.31"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@jridgewell+trace-mapping@0.3.31/node_modules/@jridgewell/trace-mapping"
       ],
       "license": "MIT",
       "author": "Justin Ridgewell",
@@ -323,6 +422,9 @@
       "versions": [
         "1.1.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@oslojs+encoding@1.1.0/node_modules/@oslojs/encoding"
+      ],
       "license": "MIT",
       "author": "pilcrowOnPaper",
       "homepage": "https://github.com/oslo-project/encoding#readme",
@@ -332,6 +434,9 @@
       "name": "@oxc-project/types",
       "versions": [
         "0.148.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@oxc-project+types@0.148.0/node_modules/@oxc-project/types"
       ],
       "license": "MIT",
       "author": "Boshen and oxc contributors",
@@ -343,6 +448,9 @@
       "versions": [
         "1.2.7"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@rolldown+binding-darwin-arm64@1.2.7/node_modules/@rolldown/binding-darwin-arm64"
+      ],
       "license": "MIT",
       "homepage": "https://rolldown.rs/",
       "description": "Fast JavaScript/TypeScript bundler in Rust with Rollup-compatible API."
@@ -352,6 +460,9 @@
       "versions": [
         "1.0.1"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@rolldown+pluginutils@1.0.1/node_modules/@rolldown/pluginutils"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/rolldown/plugins/tree/main/packages/pluginutils#readme",
       "description": "Plugin utilities for Rolldown"
@@ -360,6 +471,9 @@
       "name": "@shikijs/core",
       "versions": [
         "4.4.3"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@shikijs+core@4.4.3/node_modules/@shikijs/core"
       ],
       "license": "MIT",
       "author": "Pine Wu",
@@ -371,6 +485,9 @@
       "versions": [
         "4.4.3"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@shikijs+engine-javascript@4.4.3/node_modules/@shikijs/engine-javascript"
+      ],
       "license": "MIT",
       "author": "Anthony Fu",
       "homepage": "https://github.com/shikijs/shiki#readme",
@@ -380,6 +497,9 @@
       "name": "@shikijs/engine-oniguruma",
       "versions": [
         "4.4.3"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@shikijs+engine-oniguruma@4.4.3/node_modules/@shikijs/engine-oniguruma"
       ],
       "license": "MIT",
       "author": "Anthony Fu",
@@ -391,6 +511,9 @@
       "versions": [
         "4.4.3"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@shikijs+langs@4.4.3/node_modules/@shikijs/langs"
+      ],
       "license": "MIT",
       "author": "Anthony Fu",
       "homepage": "https://github.com/shikijs/shiki#readme",
@@ -400,6 +523,9 @@
       "name": "@shikijs/primitive",
       "versions": [
         "4.4.3"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@shikijs+primitive@4.4.3/node_modules/@shikijs/primitive"
       ],
       "license": "MIT",
       "author": "Anthony Fu",
@@ -411,6 +537,9 @@
       "versions": [
         "4.4.3"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@shikijs+themes@4.4.3/node_modules/@shikijs/themes"
+      ],
       "license": "MIT",
       "author": "Anthony Fu",
       "homepage": "https://github.com/shikijs/shiki#readme",
@@ -420,6 +549,9 @@
       "name": "@shikijs/types",
       "versions": [
         "4.4.3"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@shikijs+types@4.4.3/node_modules/@shikijs/types"
       ],
       "license": "MIT",
       "author": "Anthony Fu",
@@ -431,6 +563,9 @@
       "versions": [
         "10.0.2"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@shikijs+vscode-textmate@10.0.2/node_modules/@shikijs/vscode-textmate"
+      ],
       "license": "MIT",
       "author": "Microsoft Corporation",
       "homepage": "https://github.com/shikijs/vscode-textmate#readme",
@@ -440,6 +575,9 @@
       "name": "@shuding/opentype.js",
       "versions": [
         "1.4.0-beta.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@shuding+opentype.js@1.4.0-beta.0/node_modules/@shuding/opentype.js"
       ],
       "license": "MIT",
       "author": "Frederik De Bleser",
@@ -451,6 +589,9 @@
       "versions": [
         "0.4.1"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@tokenizer+inflate@0.4.1/node_modules/@tokenizer/inflate"
+      ],
       "license": "MIT",
       "author": "Borewit",
       "homepage": "https://github.com/Borewit/tokenizer-inflate#readme",
@@ -460,6 +601,9 @@
       "name": "@tokenizer/token",
       "versions": [
         "0.3.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@tokenizer+token@0.3.0/node_modules/@tokenizer/token"
       ],
       "license": "MIT",
       "author": "Borewit",
@@ -471,6 +615,9 @@
       "versions": [
         "7.6.13"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@types+better-sqlite3@7.6.13/node_modules/@types/better-sqlite3"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/better-sqlite3",
       "description": "TypeScript definitions for better-sqlite3"
@@ -479,6 +626,9 @@
       "name": "@types/chai",
       "versions": [
         "5.2.3"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@types+chai@5.2.3/node_modules/@types/chai"
       ],
       "license": "MIT",
       "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/chai",
@@ -489,6 +639,9 @@
       "versions": [
         "4.0.2"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@types+deep-eql@4.0.2/node_modules/@types/deep-eql"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/deep-eql",
       "description": "TypeScript definitions for deep-eql"
@@ -497,6 +650,9 @@
       "name": "@types/estree",
       "versions": [
         "1.0.9"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@types+estree@1.0.9/node_modules/@types/estree"
       ],
       "license": "MIT",
       "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/estree",
@@ -507,6 +663,9 @@
       "versions": [
         "1.0.5"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@types+estree-jsx@1.0.5/node_modules/@types/estree-jsx"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/estree-jsx",
       "description": "TypeScript definitions for estree-jsx"
@@ -515,6 +674,9 @@
       "name": "@types/hast",
       "versions": [
         "3.0.5"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@types+hast@3.0.5/node_modules/@types/hast"
       ],
       "license": "MIT",
       "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/hast",
@@ -525,6 +687,9 @@
       "versions": [
         "4.0.4"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@types+mdast@4.0.4/node_modules/@types/mdast"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/mdast",
       "description": "TypeScript definitions for mdast"
@@ -533,6 +698,9 @@
       "name": "@types/nlcst",
       "versions": [
         "2.0.3"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@types+nlcst@2.0.3/node_modules/@types/nlcst"
       ],
       "license": "MIT",
       "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/nlcst",
@@ -543,6 +711,9 @@
       "versions": [
         "26.5.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@types+node@26.5.0/node_modules/@types/node"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/node",
       "description": "TypeScript definitions for node"
@@ -552,14 +723,32 @@
       "versions": [
         "7.0.12"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@types+nodemailer@7.0.12/node_modules/@types/nodemailer"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/nodemailer",
       "description": "TypeScript definitions for nodemailer"
     },
     {
+      "name": "@types/pg",
+      "versions": [
+        "8.23.1"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@types+pg@8.23.1/node_modules/@types/pg"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/pg",
+      "description": "TypeScript definitions for pg"
+    },
+    {
       "name": "@types/sanitize-html",
       "versions": [
         "2.16.1"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@types+sanitize-html@2.16.1/node_modules/@types/sanitize-html"
       ],
       "license": "MIT",
       "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/sanitize-html",
@@ -570,6 +759,9 @@
       "versions": [
         "3.0.3"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@types+unist@3.0.3/node_modules/@types/unist"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/unist",
       "description": "TypeScript definitions for unist"
@@ -578,6 +770,9 @@
       "name": "@vitest/mocker",
       "versions": [
         "5.0.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@vitest+mocker@5.0.0_vite@8.2.2_@types+node@26.5.0_esbuild@0.28.2_tsx@4.23.13_yaml@2.9.0_/node_modules/@vitest/mocker"
       ],
       "license": "MIT",
       "homepage": "https://github.com/vitest-dev/vitest/tree/main/packages/mocker",
@@ -588,6 +783,9 @@
       "versions": [
         "5.0.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@vitest+spy@5.0.0/node_modules/@vitest/spy"
+      ],
       "license": "MIT",
       "homepage": "https://vitest.dev/api/mock",
       "description": "Lightweight Jest compatible spy implementation"
@@ -597,6 +795,9 @@
       "versions": [
         "2.4.28"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@volar+kit@2.4.28_typescript@5.9.3/node_modules/@volar/kit"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/volarjs/volar.js#readme"
     },
@@ -604,6 +805,9 @@
       "name": "@volar/language-core",
       "versions": [
         "2.4.28"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@volar+language-core@2.4.28/node_modules/@volar/language-core"
       ],
       "license": "MIT",
       "homepage": "https://github.com/volarjs/volar.js#readme"
@@ -613,6 +817,9 @@
       "versions": [
         "2.4.28"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@volar+language-server@2.4.28/node_modules/@volar/language-server"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/volarjs/volar.js#readme"
     },
@@ -620,6 +827,9 @@
       "name": "@volar/language-service",
       "versions": [
         "2.4.28"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@volar+language-service@2.4.28/node_modules/@volar/language-service"
       ],
       "license": "MIT",
       "homepage": "https://github.com/volarjs/volar.js#readme"
@@ -629,6 +839,9 @@
       "versions": [
         "2.4.28"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@volar+source-map@2.4.28/node_modules/@volar/source-map"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/volarjs/volar.js#readme"
     },
@@ -637,6 +850,9 @@
       "versions": [
         "2.4.28"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@volar+typescript@2.4.28/node_modules/@volar/typescript"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/volarjs/volar.js#readme"
     },
@@ -644,6 +860,9 @@
       "name": "@vscode/emmet-helper",
       "versions": [
         "2.11.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@vscode+emmet-helper@2.11.0/node_modules/@vscode/emmet-helper"
       ],
       "license": "MIT",
       "author": "Microsoft Corporation",
@@ -655,6 +874,9 @@
       "versions": [
         "0.0.18"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@vscode+l10n@0.0.18/node_modules/@vscode/l10n"
+      ],
       "license": "MIT",
       "author": "Microsoft Corporation",
       "homepage": "https://github.com/Microsoft/vscode-l10n#readme",
@@ -664,6 +886,9 @@
       "name": "ajv",
       "versions": [
         "8.20.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/ajv@8.20.0/node_modules/ajv"
       ],
       "license": "MIT",
       "author": "Evgeny Poberezkin",
@@ -675,6 +900,9 @@
       "versions": [
         "1.0.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/ajv-draft-04@1.0.0_ajv@8.20.0/node_modules/ajv-draft-04"
+      ],
       "license": "MIT",
       "author": "Evgeny Poberezkin",
       "homepage": "https://github.com/ajv-validator/ajv-draft-04#readme",
@@ -684,6 +912,9 @@
       "name": "ajv-i18n",
       "versions": [
         "4.2.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/ajv-i18n@4.2.0_ajv@8.20.0/node_modules/ajv-i18n"
       ],
       "license": "MIT",
       "author": "Evgeny Poberezkin",
@@ -695,6 +926,9 @@
       "versions": [
         "0.4.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/am-i-vibing@0.4.0/node_modules/am-i-vibing"
+      ],
       "license": "MIT",
       "author": "Matt Kane",
       "homepage": "https://github.com/ascorbic/am-i-vibing",
@@ -704,6 +938,9 @@
       "name": "ansi-regex",
       "versions": [
         "6.3.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/ansi-regex@6.3.0/node_modules/ansi-regex"
       ],
       "license": "MIT",
       "author": "Sindre Sorhus",
@@ -715,6 +952,9 @@
       "versions": [
         "6.2.3"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/ansi-styles@6.2.3/node_modules/ansi-styles"
+      ],
       "license": "MIT",
       "author": "Sindre Sorhus",
       "homepage": "https://github.com/chalk/ansi-styles#readme",
@@ -724,6 +964,9 @@
       "name": "assertion-error",
       "versions": [
         "2.0.1"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/assertion-error@2.0.1/node_modules/assertion-error"
       ],
       "license": "MIT",
       "author": "Jake Luer",
@@ -735,6 +978,9 @@
       "versions": [
         "7.3.1"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/astro@7.3.1_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.5.0_tsx@4.23.13_yaml@2.9.0/node_modules/astro"
+      ],
       "license": "MIT",
       "author": "withastro",
       "homepage": "https://astro.build",
@@ -744,6 +990,9 @@
       "name": "bail",
       "versions": [
         "2.0.2"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/bail@2.0.2/node_modules/bail"
       ],
       "license": "MIT",
       "author": "Titus Wormer",
@@ -755,6 +1004,9 @@
       "versions": [
         "0.0.8"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/base64-js@0.0.8/node_modules/base64-js"
+      ],
       "license": "MIT",
       "author": "T. Jameson Little",
       "homepage": "https://github.com/beatgammit/base64-js#readme",
@@ -764,6 +1016,9 @@
       "name": "better-sqlite3",
       "versions": [
         "13.0.3"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/better-sqlite3@13.0.3/node_modules/better-sqlite3"
       ],
       "license": "MIT",
       "author": "Joshua Wise",
@@ -775,6 +1030,9 @@
       "versions": [
         "1.0.9"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/bmp-ts@1.0.9/node_modules/bmp-ts"
+      ],
       "license": "MIT",
       "author": "Andrew lisowski",
       "homepage": "https://github.com/hipstersmoothie/bmp-ts#readme",
@@ -784,6 +1042,9 @@
       "name": "bowser",
       "versions": [
         "2.14.1"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/bowser@2.14.1/node_modules/bowser"
       ],
       "license": "MIT",
       "author": "Dustin Diaz",
@@ -795,6 +1056,9 @@
       "versions": [
         "1.0.1"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/camelize@1.0.1/node_modules/camelize"
+      ],
       "license": "MIT",
       "author": "James Halliday",
       "homepage": "https://github.com/ljharb/camelize",
@@ -804,6 +1068,9 @@
       "name": "ccount",
       "versions": [
         "2.0.1"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/ccount@2.0.1/node_modules/ccount"
       ],
       "license": "MIT",
       "author": "Titus Wormer",
@@ -815,6 +1082,9 @@
       "versions": [
         "6.2.2"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/chai@6.2.2/node_modules/chai"
+      ],
       "license": "MIT",
       "author": "Jake Luer",
       "homepage": "http://chaijs.com",
@@ -825,6 +1095,9 @@
       "versions": [
         "2.1.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/character-entities-html4@2.1.0/node_modules/character-entities-html4"
+      ],
       "license": "MIT",
       "author": "Titus Wormer",
       "homepage": "https://github.com/wooorm/character-entities-html4#readme",
@@ -834,6 +1107,9 @@
       "name": "character-entities-legacy",
       "versions": [
         "3.0.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/character-entities-legacy@3.0.0/node_modules/character-entities-legacy"
       ],
       "license": "MIT",
       "author": "Titus Wormer",
@@ -846,6 +1122,10 @@
         "4.0.3",
         "5.0.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/chokidar@4.0.3/node_modules/chokidar",
+        "<workspace>/node_modules/.pnpm/chokidar@5.0.0/node_modules/chokidar"
+      ],
       "license": "MIT",
       "author": "Paul Miller",
       "homepage": "https://github.com/paulmillr/chokidar",
@@ -855,6 +1135,9 @@
       "name": "ci-info",
       "versions": [
         "4.4.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/ci-info@4.4.0/node_modules/ci-info"
       ],
       "license": "MIT",
       "author": "Thomas Watson Steen",
@@ -866,6 +1149,9 @@
       "versions": [
         "2.1.1"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/clsx@2.1.1/node_modules/clsx"
+      ],
       "license": "MIT",
       "author": "Luke Edwards",
       "homepage": "https://github.com/lukeed/clsx#readme",
@@ -875,6 +1161,9 @@
       "name": "color-name",
       "versions": [
         "1.1.4"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/color-name@1.1.4/node_modules/color-name"
       ],
       "license": "MIT",
       "author": "DY",
@@ -886,6 +1175,9 @@
       "versions": [
         "2.0.3"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/comma-separated-tokens@2.0.3/node_modules/comma-separated-tokens"
+      ],
       "license": "MIT",
       "author": "Titus Wormer",
       "homepage": "https://github.com/wooorm/comma-separated-tokens#readme",
@@ -895,6 +1187,9 @@
       "name": "commander",
       "versions": [
         "11.1.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/commander@11.1.0/node_modules/commander"
       ],
       "license": "MIT",
       "author": "TJ Holowaychuk",
@@ -906,6 +1201,9 @@
       "versions": [
         "2.0.1"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/cookie@2.0.1/node_modules/cookie"
+      ],
       "license": "MIT",
       "author": "Roman Shtylman",
       "homepage": "https://github.com/jshttp/cookie#readme",
@@ -916,6 +1214,9 @@
       "versions": [
         "1.2.3"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/cookie-es@1.2.3/node_modules/cookie-es"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/unjs/cookie-es#readme"
     },
@@ -923,6 +1224,9 @@
       "name": "crossws",
       "versions": [
         "0.3.5"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/crossws@0.3.5/node_modules/crossws"
       ],
       "license": "MIT",
       "homepage": "https://crossws.h3.dev",
@@ -932,6 +1236,9 @@
       "name": "css-background-parser",
       "versions": [
         "0.1.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/css-background-parser@0.1.0/node_modules/css-background-parser"
       ],
       "license": "MIT",
       "author": "Gilmore Davidson",
@@ -943,6 +1250,9 @@
       "versions": [
         "1.0.0-3"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/css-box-shadow@1.0.0-3/node_modules/css-box-shadow"
+      ],
       "license": "MIT",
       "author": "Brent Jackson",
       "description": "CSS box-shadow parser and stringifier"
@@ -952,6 +1262,9 @@
       "versions": [
         "0.0.17"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/css-gradient-parser@0.0.17/node_modules/css-gradient-parser"
+      ],
       "license": "MIT",
       "author": "Lynnnnnnxx",
       "description": "a css gradient parser"
@@ -960,6 +1273,9 @@
       "name": "css-to-react-native",
       "versions": [
         "3.2.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/css-to-react-native@3.2.0/node_modules/css-to-react-native"
       ],
       "license": "MIT",
       "author": "Jacob Parker",
@@ -972,6 +1288,10 @@
         "2.2.1",
         "3.2.1"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/css-tree@2.2.1/node_modules/css-tree",
+        "<workspace>/node_modules/.pnpm/css-tree@3.2.1/node_modules/css-tree"
+      ],
       "license": "MIT",
       "author": "Roman Dvornov",
       "homepage": "https://github.com/csstree/csstree#readme",
@@ -981,6 +1301,9 @@
       "name": "csso",
       "versions": [
         "5.0.5"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/csso@5.0.5/node_modules/csso"
       ],
       "license": "MIT",
       "author": "Sergey Kryzhanovsky",
@@ -992,6 +1315,9 @@
       "versions": [
         "1.11.23"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/dayjs@1.11.23/node_modules/dayjs"
+      ],
       "license": "MIT",
       "author": "iamkun",
       "homepage": "https://day.js.org",
@@ -1001,6 +1327,9 @@
       "name": "debug",
       "versions": [
         "4.4.3"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/debug@4.4.3/node_modules/debug"
       ],
       "license": "MIT",
       "author": "Josh Junon",
@@ -1012,6 +1341,9 @@
       "versions": [
         "0.2.1"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/decode-bmp@0.2.1/node_modules/decode-bmp"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/LinusU/decode-bmp#readme"
     },
@@ -1020,6 +1352,9 @@
       "versions": [
         "0.4.1"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/decode-ico@0.4.1/node_modules/decode-ico"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/LinusU/decode-ico#readme"
     },
@@ -1027,6 +1362,9 @@
       "name": "deepmerge",
       "versions": [
         "4.3.1"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/deepmerge@4.3.1/node_modules/deepmerge"
       ],
       "license": "MIT",
       "homepage": "https://github.com/TehShrike/deepmerge",
@@ -1037,6 +1375,9 @@
       "versions": [
         "6.1.7"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/defu@6.1.7/node_modules/defu"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/unjs/defu#readme",
       "description": "Recursively assign default properties. Lightweight and Fast!"
@@ -1045,6 +1386,9 @@
       "name": "depd",
       "versions": [
         "2.0.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/depd@2.0.0/node_modules/depd"
       ],
       "license": "MIT",
       "author": "Douglas Christopher Wilson",
@@ -1056,6 +1400,9 @@
       "versions": [
         "2.0.3"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/dequal@2.0.3/node_modules/dequal"
+      ],
       "license": "MIT",
       "author": "Luke Edwards",
       "homepage": "https://github.com/lukeed/dequal#readme",
@@ -1066,6 +1413,9 @@
       "versions": [
         "2.0.5"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/destr@2.0.5/node_modules/destr"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/unjs/destr#readme",
       "description": "A faster, secure and convenient alternative for JSON.parse"
@@ -1075,6 +1425,9 @@
       "versions": [
         "5.9.2"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/devalue@5.9.2/node_modules/devalue"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/sveltejs/devalue#readme",
       "description": "Gets the job done when JSON.stringify can't"
@@ -1083,6 +1436,9 @@
       "name": "devlop",
       "versions": [
         "1.1.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/devlop@1.1.0/node_modules/devlop"
       ],
       "license": "MIT",
       "author": "Titus Wormer",
@@ -1095,6 +1451,10 @@
         "2.0.0",
         "3.1.1"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/dom-serializer@2.0.0/node_modules/dom-serializer",
+        "<workspace>/node_modules/.pnpm/dom-serializer@3.1.1/node_modules/dom-serializer"
+      ],
       "license": "MIT",
       "author": "Felix Boehm",
       "homepage": "https://github.com/cheeriojs/dom-serializer#readme",
@@ -1104,6 +1464,9 @@
       "name": "dset",
       "versions": [
         "3.1.4"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/dset@3.1.4/node_modules/dset"
       ],
       "license": "MIT",
       "author": "Luke Edwards",
@@ -1115,6 +1478,9 @@
       "versions": [
         "1.1.1"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/ee-first@1.1.1/node_modules/ee-first"
+      ],
       "license": "MIT",
       "author": "Jonathan Ong",
       "homepage": "https://github.com/jonathanong/ee-first#readme",
@@ -1124,6 +1490,9 @@
       "name": "emmet",
       "versions": [
         "2.4.11"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/emmet@2.4.11/node_modules/emmet"
       ],
       "license": "MIT",
       "author": "Sergey Chikuyonok",
@@ -1135,6 +1504,9 @@
       "versions": [
         "10.6.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/emoji-regex@10.6.0/node_modules/emoji-regex"
+      ],
       "license": "MIT",
       "author": "Mathias Bynens",
       "homepage": "https://mths.be/emoji-regex",
@@ -1144,6 +1516,9 @@
       "name": "emoji-regex-xs",
       "versions": [
         "2.0.1"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/emoji-regex-xs@2.0.1/node_modules/emoji-regex-xs"
       ],
       "license": "MIT",
       "author": "Steven Levithan",
@@ -1155,6 +1530,9 @@
       "versions": [
         "2.0.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/encodeurl@2.0.0/node_modules/encodeurl"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/pillarjs/encodeurl#readme",
       "description": "Encode a URL to a percent-encoded form, excluding already-encoded sequences"
@@ -1163,6 +1541,9 @@
       "name": "es-module-lexer",
       "versions": [
         "2.3.2"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/es-module-lexer@2.3.2/node_modules/es-module-lexer"
       ],
       "license": "MIT",
       "author": "Guy Bedford",
@@ -1174,6 +1555,9 @@
       "versions": [
         "0.28.2"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/esbuild@0.28.2/node_modules/esbuild"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/evanw/esbuild#readme",
       "description": "An extremely fast JavaScript and CSS bundler and minifier."
@@ -1182,6 +1566,9 @@
       "name": "escalade",
       "versions": [
         "3.2.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/escalade@3.2.0/node_modules/escalade"
       ],
       "license": "MIT",
       "author": "Luke Edwards",
@@ -1193,6 +1580,9 @@
       "versions": [
         "1.0.3"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/escape-html@1.0.3/node_modules/escape-html"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/component/escape-html#readme",
       "description": "Escape string for use in HTML"
@@ -1201,6 +1591,9 @@
       "name": "escape-string-regexp",
       "versions": [
         "4.0.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/escape-string-regexp@4.0.0/node_modules/escape-string-regexp"
       ],
       "license": "MIT",
       "author": "Sindre Sorhus",
@@ -1212,6 +1605,9 @@
       "versions": [
         "3.0.3"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/estree-walker@3.0.3/node_modules/estree-walker"
+      ],
       "license": "MIT",
       "author": "Rich Harris",
       "homepage": "https://github.com/Rich-Harris/estree-walker#readme",
@@ -1222,6 +1618,9 @@
       "versions": [
         "1.8.1"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/etag@1.8.1/node_modules/etag"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/jshttp/etag#readme",
       "description": "Create simple HTTP ETags"
@@ -1230,6 +1629,9 @@
       "name": "eventemitter3",
       "versions": [
         "5.0.4"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/eventemitter3@5.0.4/node_modules/eventemitter3"
       ],
       "license": "MIT",
       "author": "Arnout Kazemier",
@@ -1241,6 +1643,9 @@
       "versions": [
         "3.0.2"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/extend@3.0.2/node_modules/extend"
+      ],
       "license": "MIT",
       "author": "Stefan Thomas",
       "homepage": "https://github.com/justmoon/node-extend#readme",
@@ -1250,6 +1655,9 @@
       "name": "fast-deep-equal",
       "versions": [
         "3.1.3"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/fast-deep-equal@3.1.3/node_modules/fast-deep-equal"
       ],
       "license": "MIT",
       "author": "Evgeny Poberezkin",
@@ -1261,6 +1669,9 @@
       "versions": [
         "3.0.3"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/fast-string-truncated-width@3.0.3/node_modules/fast-string-truncated-width"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/fabiospampinato/fast-string-truncated-width#readme",
       "description": "A fast function for calculating where a string should be truncated, given an optional width limit and an ellipsis string."
@@ -1270,6 +1681,9 @@
       "versions": [
         "3.0.2"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/fast-string-width@3.0.2/node_modules/fast-string-width"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/fabiospampinato/fast-string-width#readme",
       "description": "A fast function for calculating the visual width of a string once printed to the terminal."
@@ -1278,6 +1692,9 @@
       "name": "fast-wrap-ansi",
       "versions": [
         "0.2.2"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/fast-wrap-ansi@0.2.2/node_modules/fast-wrap-ansi"
       ],
       "license": "MIT",
       "author": "James Garbutt",
@@ -1289,6 +1706,9 @@
       "versions": [
         "6.5.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/fdir@6.5.0_picomatch@4.0.7/node_modules/fdir"
+      ],
       "license": "MIT",
       "author": "thecodrr",
       "homepage": "https://github.com/thecodrr/fdir#readme",
@@ -1298,6 +1718,9 @@
       "name": "fflate",
       "versions": [
         "0.7.3"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/fflate@0.7.3/node_modules/fflate"
       ],
       "license": "MIT",
       "author": "Arjun Barrett",
@@ -1309,6 +1732,9 @@
       "versions": [
         "22.0.2"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/file-type@22.0.2/node_modules/file-type"
+      ],
       "license": "MIT",
       "author": "Sindre Sorhus",
       "homepage": "https://github.com/sindresorhus/file-type#readme",
@@ -1319,6 +1745,9 @@
       "versions": [
         "0.1.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/find-proc@0.1.0/node_modules/find-proc"
+      ],
       "license": "MIT",
       "author": "gameroman",
       "homepage": "https://github.com/gameroman-npm/find-proc#readme"
@@ -1327,6 +1756,9 @@
       "name": "flattie",
       "versions": [
         "1.1.1"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/flattie@1.1.1/node_modules/flattie"
       ],
       "license": "MIT",
       "author": "Luke Edwards",
@@ -1338,6 +1770,9 @@
       "versions": [
         "0.4.1"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/fontace@0.4.1/node_modules/fontace"
+      ],
       "license": "MIT",
       "author": "delucis",
       "homepage": "https://github.com/delucis/fontace#readme",
@@ -1348,6 +1783,9 @@
       "versions": [
         "1.0.3"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/fontkitten@1.0.3/node_modules/fontkitten"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/delucis/fontkitten#readme",
       "description": "A lightweight font data library — fontkit’s little sibling"
@@ -1356,6 +1794,9 @@
       "name": "fresh",
       "versions": [
         "2.0.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/fresh@2.0.0/node_modules/fresh"
       ],
       "license": "MIT",
       "author": "TJ Holowaychuk",
@@ -1367,6 +1808,9 @@
       "versions": [
         "2.3.3"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/fsevents@2.3.3/node_modules/fsevents"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/fsevents/fsevents",
       "description": "Native Access to MacOS FSEvents"
@@ -1375,6 +1819,9 @@
       "name": "get-east-asian-width",
       "versions": [
         "1.6.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/get-east-asian-width@1.6.0/node_modules/get-east-asian-width"
       ],
       "license": "MIT",
       "author": "Sindre Sorhus",
@@ -1386,6 +1833,9 @@
       "versions": [
         "5.0.0-beta.4"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/get-tsconfig@5.0.0-beta.4/node_modules/get-tsconfig"
+      ],
       "license": "MIT",
       "author": "Hiroki Osame",
       "homepage": "https://github.com/privatenumber/get-tsconfig#readme",
@@ -1396,6 +1846,9 @@
       "versions": [
         "1.15.11"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/h3@1.15.11/node_modules/h3"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/h3js/h3#readme",
       "description": "Minimal H(TTP) framework built for high performance and portability."
@@ -1404,6 +1857,9 @@
       "name": "harfbuzzjs",
       "versions": [
         "0.10.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/harfbuzzjs@0.10.0/node_modules/harfbuzzjs"
       ],
       "license": "MIT",
       "author": "Ebrahim Byagowi",
@@ -1415,6 +1871,9 @@
       "versions": [
         "9.0.5"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/hast-util-to-html@9.0.5/node_modules/hast-util-to-html"
+      ],
       "license": "MIT",
       "author": "Titus Wormer",
       "homepage": "https://github.com/syntax-tree/hast-util-to-html#readme",
@@ -1424,6 +1883,9 @@
       "name": "hast-util-whitespace",
       "versions": [
         "3.0.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/hast-util-whitespace@3.0.0/node_modules/hast-util-whitespace"
       ],
       "license": "MIT",
       "author": "Titus Wormer",
@@ -1435,6 +1897,9 @@
       "versions": [
         "4.3.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/hex-rgb@4.3.0/node_modules/hex-rgb"
+      ],
       "license": "MIT",
       "author": "Sindre Sorhus",
       "homepage": "https://github.com/sindresorhus/hex-rgb#readme",
@@ -1445,6 +1910,9 @@
       "versions": [
         "3.0.3"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/html-escaper@3.0.3/node_modules/html-escaper"
+      ],
       "license": "MIT",
       "author": "Andrea Giammarchi",
       "homepage": "https://github.com/WebReflection/html-escaper",
@@ -1454,6 +1922,9 @@
       "name": "html-void-elements",
       "versions": [
         "3.0.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/html-void-elements@3.0.0/node_modules/html-void-elements"
       ],
       "license": "MIT",
       "author": "Titus Wormer",
@@ -1466,6 +1937,10 @@
         "10.1.0",
         "12.0.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/htmlparser2@10.1.0/node_modules/htmlparser2",
+        "<workspace>/node_modules/.pnpm/htmlparser2@12.0.0/node_modules/htmlparser2"
+      ],
       "license": "MIT",
       "author": "Felix Boehm",
       "homepage": "https://github.com/fb55/htmlparser2#readme",
@@ -1475,6 +1950,9 @@
       "name": "http-errors",
       "versions": [
         "2.0.1"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/http-errors@2.0.1/node_modules/http-errors"
       ],
       "license": "MIT",
       "author": "Jonathan Ong",
@@ -1486,6 +1964,9 @@
       "versions": [
         "1.0.1"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/icojs@1.0.1/node_modules/icojs"
+      ],
       "license": "MIT",
       "author": "egy186",
       "homepage": "https://egy186.github.io/icojs",
@@ -1495,6 +1976,9 @@
       "name": "iron-webcrypto",
       "versions": [
         "1.2.1"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/iron-webcrypto@1.2.1/node_modules/iron-webcrypto"
       ],
       "license": "MIT",
       "author": "Divyansh Singh",
@@ -1506,6 +1990,9 @@
       "versions": [
         "4.0.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/is-docker@4.0.0/node_modules/is-docker"
+      ],
       "license": "MIT",
       "author": "Sindre Sorhus",
       "homepage": "https://github.com/sindresorhus/is-docker#readme",
@@ -1515,6 +2002,9 @@
       "name": "is-plain-obj",
       "versions": [
         "4.1.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/is-plain-obj@4.1.0/node_modules/is-plain-obj"
       ],
       "license": "MIT",
       "author": "Sindre Sorhus",
@@ -1526,6 +2016,9 @@
       "versions": [
         "5.1.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/is-plain-object@5.1.0/node_modules/is-plain-object"
+      ],
       "license": "MIT",
       "author": "Jon Schlinkert",
       "homepage": "https://github.com/jonschlinkert/is-plain-object",
@@ -1536,6 +2029,9 @@
       "versions": [
         "4.3.2"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/js-yaml@4.3.2/node_modules/js-yaml"
+      ],
       "license": "MIT",
       "author": "Vladimir Zapparov",
       "homepage": "https://github.com/nodeca/js-yaml#readme",
@@ -1545,6 +2041,9 @@
       "name": "json-schema-traverse",
       "versions": [
         "1.0.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/json-schema-traverse@1.0.0/node_modules/json-schema-traverse"
       ],
       "license": "MIT",
       "author": "Evgeny Poberezkin",
@@ -1557,6 +2056,10 @@
         "2.3.1",
         "3.3.1"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/jsonc-parser@2.3.1/node_modules/jsonc-parser",
+        "<workspace>/node_modules/.pnpm/jsonc-parser@3.3.1/node_modules/jsonc-parser"
+      ],
       "license": "MIT",
       "author": "Microsoft Corporation",
       "homepage": "https://github.com/microsoft/node-jsonc-parser#readme",
@@ -1566,6 +2069,9 @@
       "name": "kleur",
       "versions": [
         "4.1.5"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/kleur@4.1.5/node_modules/kleur"
       ],
       "license": "MIT",
       "author": "Luke Edwards",
@@ -1577,6 +2083,9 @@
       "versions": [
         "1.7.1"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/launder@1.7.1/node_modules/launder"
+      ],
       "license": "MIT",
       "author": "Apostrophe Technologies, Inc.",
       "homepage": "https://github.com/apostrophecms/apostrophe/tree/main/packages/launder#readme",
@@ -1586,6 +2095,9 @@
       "name": "linebreak",
       "versions": [
         "1.1.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/linebreak@1.1.0/node_modules/linebreak"
       ],
       "license": "MIT",
       "author": "Devon Govett",
@@ -1597,6 +2109,9 @@
       "versions": [
         "1.2.3"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/magic-string@1.2.3/node_modules/magic-string"
+      ],
       "license": "MIT",
       "author": "Rich Harris",
       "homepage": "https://github.com/Rich-Harris/magic-string#readme",
@@ -1607,6 +2122,9 @@
       "versions": [
         "0.5.4"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/magicast@0.5.4/node_modules/magicast"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/unjs/magicast#readme",
       "description": "Modify a JS/TS file and write back magically just like JSON!"
@@ -1615,6 +2133,9 @@
       "name": "marked",
       "versions": [
         "17.0.6"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/marked@17.0.6/node_modules/marked"
       ],
       "license": "MIT",
       "author": "Christopher Jeffrey",
@@ -1626,6 +2147,9 @@
       "versions": [
         "13.2.1"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/mdast-util-to-hast@13.2.1/node_modules/mdast-util-to-hast"
+      ],
       "license": "MIT",
       "author": "Titus Wormer",
       "homepage": "https://github.com/syntax-tree/mdast-util-to-hast#readme",
@@ -1635,6 +2159,9 @@
       "name": "micromark-util-character",
       "versions": [
         "2.1.1"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/micromark-util-character@2.1.1/node_modules/micromark-util-character"
       ],
       "license": "MIT",
       "author": "Titus Wormer",
@@ -1646,6 +2173,9 @@
       "versions": [
         "2.0.1"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/micromark-util-encode@2.0.1/node_modules/micromark-util-encode"
+      ],
       "license": "MIT",
       "author": "Titus Wormer",
       "homepage": "https://github.com/micromark/micromark/tree/main#readme",
@@ -1655,6 +2185,9 @@
       "name": "micromark-util-sanitize-uri",
       "versions": [
         "2.0.1"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/micromark-util-sanitize-uri@2.0.1/node_modules/micromark-util-sanitize-uri"
       ],
       "license": "MIT",
       "author": "Titus Wormer",
@@ -1666,6 +2199,9 @@
       "versions": [
         "2.0.1"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/micromark-util-symbol@2.0.1/node_modules/micromark-util-symbol"
+      ],
       "license": "MIT",
       "author": "Titus Wormer",
       "homepage": "https://github.com/micromark/micromark/tree/main#readme",
@@ -1675,6 +2211,9 @@
       "name": "micromark-util-types",
       "versions": [
         "2.0.2"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/micromark-util-types@2.0.2/node_modules/micromark-util-types"
       ],
       "license": "MIT",
       "author": "Titus Wormer",
@@ -1686,6 +2225,9 @@
       "versions": [
         "1.54.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/mime-db@1.54.0/node_modules/mime-db"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/jshttp/mime-db#readme",
       "description": "Media Type Database"
@@ -1695,6 +2237,9 @@
       "versions": [
         "3.0.2"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/mime-types@3.0.2/node_modules/mime-types"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/jshttp/mime-types#readme",
       "description": "The ultimate javascript content-type utility."
@@ -1703,6 +2248,9 @@
       "name": "mrmime",
       "versions": [
         "2.0.1"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/mrmime@2.0.1/node_modules/mrmime"
       ],
       "license": "MIT",
       "author": "Luke Edwards",
@@ -1714,6 +2262,9 @@
       "versions": [
         "2.1.3"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/ms@2.1.3/node_modules/ms"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/vercel/ms#readme",
       "description": "Tiny millisecond conversion utility"
@@ -1723,6 +2274,9 @@
       "versions": [
         "0.4.1"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/muggle-string@0.4.1/node_modules/muggle-string"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/johnsoncodehk/muggle-string#readme"
     },
@@ -1730,6 +2284,9 @@
       "name": "nanoid",
       "versions": [
         "3.3.18"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/nanoid@3.3.18/node_modules/nanoid"
       ],
       "license": "MIT",
       "author": "Andrey Sitnik",
@@ -1741,6 +2298,9 @@
       "versions": [
         "1.0.1"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/neotraverse@1.0.1/node_modules/neotraverse"
+      ],
       "license": "MIT",
       "author": "Puru Vijay",
       "homepage": "https://neotraverse.puruvj.dev",
@@ -1750,6 +2310,9 @@
       "name": "nlcst-to-string",
       "versions": [
         "4.0.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/nlcst-to-string@4.0.0/node_modules/nlcst-to-string"
       ],
       "license": "MIT",
       "author": "Titus Wormer",
@@ -1761,6 +2324,9 @@
       "versions": [
         "8.9.2"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/node-addon-api@8.9.2/node_modules/node-addon-api"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/nodejs/node-addon-api",
       "description": "Node.js API (Node-API)"
@@ -1769,6 +2335,9 @@
       "name": "node-fetch-native",
       "versions": [
         "1.6.7"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/node-fetch-native@1.6.7/node_modules/node-fetch-native"
       ],
       "license": "MIT",
       "homepage": "https://github.com/unjs/node-fetch-native#readme",
@@ -1779,6 +2348,9 @@
       "versions": [
         "1.0.5"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/node-mock-http@1.0.5/node_modules/node-mock-http"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/unjs/node-mock-http#readme",
       "description": ""
@@ -1787,6 +2359,9 @@
       "name": "normalize-path",
       "versions": [
         "3.0.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/normalize-path@3.0.0/node_modules/normalize-path"
       ],
       "license": "MIT",
       "author": "Jon Schlinkert",
@@ -1798,6 +2373,9 @@
       "versions": [
         "2.1.4"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/obug@2.1.4/node_modules/obug"
+      ],
       "license": "MIT",
       "author": "Kevin Deng",
       "homepage": "https://github.com/sxzz/obug#readme",
@@ -1808,6 +2386,9 @@
       "versions": [
         "1.5.1"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/ofetch@1.5.1/node_modules/ofetch"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/unjs/ofetch#readme",
       "description": "A better fetch API. Works on node, browser and workers."
@@ -1816,6 +2397,9 @@
       "name": "ohash",
       "versions": [
         "2.0.12"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/ohash@2.0.12/node_modules/ohash"
       ],
       "license": "MIT",
       "homepage": "https://github.com/unjs/ohash#readme",
@@ -1826,6 +2410,9 @@
       "versions": [
         "2.4.1"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/on-finished@2.4.1/node_modules/on-finished"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/jshttp/on-finished#readme",
       "description": "Execute a callback when a request closes, finishes, or errors"
@@ -1834,6 +2421,9 @@
       "name": "oniguruma-parser",
       "versions": [
         "0.12.2"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/oniguruma-parser@0.12.2/node_modules/oniguruma-parser"
       ],
       "license": "MIT",
       "author": "Steven Levithan",
@@ -1845,6 +2435,9 @@
       "versions": [
         "4.3.6"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/oniguruma-to-es@4.3.6/node_modules/oniguruma-to-es"
+      ],
       "license": "MIT",
       "author": "Steven Levithan",
       "homepage": "https://github.com/slevithan/oniguruma-to-es#readme",
@@ -1854,6 +2447,9 @@
       "name": "p-limit",
       "versions": [
         "7.3.2"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/p-limit@7.3.2/node_modules/p-limit"
       ],
       "license": "MIT",
       "author": "Sindre Sorhus",
@@ -1865,6 +2461,9 @@
       "versions": [
         "9.3.3"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/p-queue@9.3.3/node_modules/p-queue"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/sindresorhus/p-queue#readme",
       "description": "Promise queue with concurrency control"
@@ -1873,6 +2472,9 @@
       "name": "p-timeout",
       "versions": [
         "7.0.1"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/p-timeout@7.0.1/node_modules/p-timeout"
       ],
       "license": "MIT",
       "author": "Sindre Sorhus",
@@ -1884,6 +2486,9 @@
       "versions": [
         "1.8.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/package-manager-detector@1.8.0/node_modules/package-manager-detector"
+      ],
       "license": "MIT",
       "author": "Anthony Fu",
       "homepage": "https://github.com/antfu-collective/package-manager-detector#readme",
@@ -1894,6 +2499,9 @@
       "versions": [
         "0.2.9"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/pako@0.2.9/node_modules/pako"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/nodeca/pako",
       "description": "zlib port to javascript - fast, modularized, with browser support"
@@ -1902,6 +2510,9 @@
       "name": "parse-css-color",
       "versions": [
         "0.2.1"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/parse-css-color@0.2.1/node_modules/parse-css-color"
       ],
       "license": "MIT",
       "author": "Noel Delgado",
@@ -1913,6 +2524,9 @@
       "versions": [
         "1.0.2"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/parse-srcset@1.0.2/node_modules/parse-srcset"
+      ],
       "license": "MIT",
       "author": "Alex Bell",
       "homepage": "https://github.com/albell/parse-srcset#readme",
@@ -1923,16 +2537,112 @@
       "versions": [
         "1.0.1"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/path-browserify@1.0.1/node_modules/path-browserify"
+      ],
       "license": "MIT",
       "author": "James Halliday",
       "homepage": "https://github.com/browserify/path-browserify",
       "description": "the path module from node core for browsers"
     },
     {
+      "name": "pg",
+      "versions": [
+        "8.23.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/pg@8.23.0/node_modules/pg"
+      ],
+      "license": "MIT",
+      "author": "Brian Carlson",
+      "homepage": "https://github.com/brianc/node-postgres",
+      "description": "PostgreSQL client - pure javascript & libpq with the same API"
+    },
+    {
+      "name": "pg-cloudflare",
+      "versions": [
+        "1.4.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/pg-cloudflare@1.4.0/node_modules/pg-cloudflare"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/brianc/node-postgres#readme",
+      "description": "A socket implementation that can run on Cloudflare Workers using native TCP connections."
+    },
+    {
+      "name": "pg-connection-string",
+      "versions": [
+        "2.14.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/pg-connection-string@2.14.0/node_modules/pg-connection-string"
+      ],
+      "license": "MIT",
+      "author": "Blaine Bublitz",
+      "homepage": "https://github.com/brianc/node-postgres/tree/master/packages/pg-connection-string",
+      "description": "Functions for dealing with a PostgreSQL connection string"
+    },
+    {
+      "name": "pg-pool",
+      "versions": [
+        "3.14.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/pg-pool@3.14.0_pg@8.23.0/node_modules/pg-pool"
+      ],
+      "license": "MIT",
+      "author": "Brian M. Carlson",
+      "homepage": "https://github.com/brianc/node-postgres/tree/master/packages/pg-pool#readme",
+      "description": "Connection pool for node-postgres"
+    },
+    {
+      "name": "pg-protocol",
+      "versions": [
+        "1.16.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/pg-protocol@1.16.0/node_modules/pg-protocol"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/brianc/node-postgres#readme",
+      "description": "The postgres client/server binary protocol, implemented in TypeScript"
+    },
+    {
+      "name": "pg-types",
+      "versions": [
+        "2.2.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/pg-types@2.2.0/node_modules/pg-types"
+      ],
+      "license": "MIT",
+      "author": "Brian M. Carlson",
+      "homepage": "https://github.com/brianc/node-pg-types",
+      "description": "Query result type converters for node-postgres"
+    },
+    {
+      "name": "pgpass",
+      "versions": [
+        "1.0.5"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/pgpass@1.0.5/node_modules/pgpass"
+      ],
+      "license": "MIT",
+      "author": "Hannes Hörl",
+      "homepage": "https://github.com/hoegaarden/pgpass#readme",
+      "description": "Module for reading .pgpass"
+    },
+    {
       "name": "picomatch",
       "versions": [
         "2.3.2",
         "4.0.7"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/picomatch@2.3.2/node_modules/picomatch",
+        "<workspace>/node_modules/.pnpm/picomatch@4.0.7/node_modules/picomatch"
       ],
       "license": "MIT",
       "author": "Jon Schlinkert",
@@ -1944,6 +2654,9 @@
       "versions": [
         "7.0.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/pngjs@7.0.0/node_modules/pngjs"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/lukeapage/pngjs",
       "description": "PNG encoder/decoder in pure JS, supporting any bit size & interlace, async & sync with full test suite."
@@ -1952,6 +2665,9 @@
       "name": "postcss",
       "versions": [
         "8.5.28"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/postcss@8.5.28/node_modules/postcss"
       ],
       "license": "MIT",
       "author": "Andrey Sitnik",
@@ -1963,15 +2679,73 @@
       "versions": [
         "4.2.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/postcss-value-parser@4.2.0/node_modules/postcss-value-parser"
+      ],
       "license": "MIT",
       "author": "Bogdan Chadkin",
       "homepage": "https://github.com/TrySound/postcss-value-parser",
       "description": "Transforms css values and at-rule params into the tree"
     },
     {
+      "name": "postgres-array",
+      "versions": [
+        "2.0.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/postgres-array@2.0.0/node_modules/postgres-array"
+      ],
+      "license": "MIT",
+      "author": "Ben Drucker",
+      "homepage": "https://github.com/bendrucker/postgres-array#readme",
+      "description": "Parse postgres array columns"
+    },
+    {
+      "name": "postgres-bytea",
+      "versions": [
+        "1.0.1"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/postgres-bytea@1.0.1/node_modules/postgres-bytea"
+      ],
+      "license": "MIT",
+      "author": "Ben Drucker",
+      "homepage": "https://github.com/bendrucker/postgres-bytea#readme",
+      "description": "Postgres bytea parser"
+    },
+    {
+      "name": "postgres-date",
+      "versions": [
+        "1.0.7"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/postgres-date@1.0.7/node_modules/postgres-date"
+      ],
+      "license": "MIT",
+      "author": "Ben Drucker",
+      "homepage": "https://github.com/bendrucker/postgres-date#readme",
+      "description": "Postgres date column parser"
+    },
+    {
+      "name": "postgres-interval",
+      "versions": [
+        "1.2.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/postgres-interval@1.2.0/node_modules/postgres-interval"
+      ],
+      "license": "MIT",
+      "author": "Ben Drucker",
+      "homepage": "https://github.com/bendrucker/postgres-interval#readme",
+      "description": "Parse Postgres interval columns"
+    },
+    {
       "name": "prettier",
       "versions": [
         "3.9.6"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/prettier@3.9.6/node_modules/prettier"
       ],
       "license": "MIT",
       "author": "James Long",
@@ -1983,6 +2757,9 @@
       "versions": [
         "0.14.1"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/prettier-plugin-astro@0.14.1/node_modules/prettier-plugin-astro"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/withastro/prettier-plugin-astro/",
       "description": "A Prettier Plugin for formatting Astro files"
@@ -1991,6 +2768,9 @@
       "name": "prismjs",
       "versions": [
         "1.30.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/prismjs@1.30.0/node_modules/prismjs"
       ],
       "license": "MIT",
       "author": "Lea Verou",
@@ -2002,6 +2782,9 @@
       "versions": [
         "0.1.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/process-ancestry@0.1.0/node_modules/process-ancestry"
+      ],
       "license": "MIT",
       "author": "Matt Kane",
       "homepage": "https://github.com/ascorbic/process-ancestry",
@@ -2011,6 +2794,9 @@
       "name": "property-information",
       "versions": [
         "7.2.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/property-information@7.2.0/node_modules/property-information"
       ],
       "license": "MIT",
       "author": "Titus Wormer",
@@ -2022,6 +2808,9 @@
       "versions": [
         "1.1.2"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/radix3@1.1.2/node_modules/radix3"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/unjs/radix3#readme",
       "description": "Lightweight and fast router for JavaScript based on Radix Tree"
@@ -2030,6 +2819,9 @@
       "name": "range-parser",
       "versions": [
         "1.3.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/range-parser@1.3.0/node_modules/range-parser"
       ],
       "license": "MIT",
       "author": "TJ Holowaychuk",
@@ -2042,6 +2834,10 @@
         "4.1.2",
         "5.1.1"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/readdirp@4.1.2/node_modules/readdirp",
+        "<workspace>/node_modules/.pnpm/readdirp@5.1.1/node_modules/readdirp"
+      ],
       "license": "MIT",
       "author": "Thorsten Lorenz",
       "homepage": "https://github.com/paulmillr/readdirp",
@@ -2051,6 +2847,9 @@
       "name": "regex",
       "versions": [
         "6.1.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/regex@6.1.0/node_modules/regex"
       ],
       "license": "MIT",
       "author": "Steven Levithan",
@@ -2062,6 +2861,9 @@
       "versions": [
         "6.0.2"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/regex-recursion@6.0.2/node_modules/regex-recursion"
+      ],
       "license": "MIT",
       "author": "Steven Levithan",
       "homepage": "https://github.com/slevithan/regex-recursion#readme",
@@ -2071,6 +2873,9 @@
       "name": "regex-utilities",
       "versions": [
         "2.3.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/regex-utilities@2.3.0/node_modules/regex-utilities"
       ],
       "license": "MIT",
       "author": "Steven Levithan",
@@ -2083,6 +2888,10 @@
         "0.5.8",
         "0.7.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/request-light@0.5.8/node_modules/request-light",
+        "<workspace>/node_modules/.pnpm/request-light@0.7.0/node_modules/request-light"
+      ],
       "license": "MIT",
       "author": "Microsoft Corporation",
       "homepage": "https://github.com/microsoft/node-request-light#readme",
@@ -2092,6 +2901,9 @@
       "name": "require-from-string",
       "versions": [
         "2.0.2"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/require-from-string@2.0.2/node_modules/require-from-string"
       ],
       "license": "MIT",
       "author": "Vsevolod Strukchinsky",
@@ -2103,6 +2915,9 @@
       "versions": [
         "1.0.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/resolve-pkg-maps@1.0.0/node_modules/resolve-pkg-maps"
+      ],
       "license": "MIT",
       "author": "Hiroki Osame",
       "homepage": "https://github.com/privatenumber/resolve-pkg-maps#readme",
@@ -2112,6 +2927,9 @@
       "name": "retext-smartypants",
       "versions": [
         "6.2.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/retext-smartypants@6.2.0/node_modules/retext-smartypants"
       ],
       "license": "MIT",
       "author": "Titus Wormer",
@@ -2123,6 +2941,9 @@
       "versions": [
         "1.2.7"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/rolldown@1.2.7/node_modules/rolldown"
+      ],
       "license": "MIT",
       "homepage": "https://rolldown.rs/",
       "description": "Fast JavaScript/TypeScript bundler in Rust with Rollup-compatible API."
@@ -2131,6 +2952,9 @@
       "name": "s.color",
       "versions": [
         "0.0.15"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/s.color@0.0.15/node_modules/s.color"
       ],
       "license": "MIT",
       "author": "Syler",
@@ -2142,6 +2966,9 @@
       "versions": [
         "2.17.7"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/sanitize-html@2.17.7/node_modules/sanitize-html"
+      ],
       "license": "MIT",
       "author": "Apostrophe Technologies, Inc.",
       "homepage": "https://github.com/apostrophecms/apostrophe/tree/main/packages/sanitize-html#readme",
@@ -2151,6 +2978,9 @@
       "name": "sass-formatter",
       "versions": [
         "0.7.9"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/sass-formatter@0.7.9/node_modules/sass-formatter"
       ],
       "license": "MIT",
       "author": "Syler",
@@ -2162,6 +2992,9 @@
       "versions": [
         "0.10.5"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/satteri@0.10.5/node_modules/satteri"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/bruits/satteri#readme",
       "description": "High-performance Markdown and MDX processing"
@@ -2170,6 +3003,9 @@
       "name": "send",
       "versions": [
         "1.2.1"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/send@1.2.1/node_modules/send"
       ],
       "license": "MIT",
       "author": "TJ Holowaychuk",
@@ -2181,6 +3017,9 @@
       "versions": [
         "4.4.3"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/shiki@4.4.3/node_modules/shiki"
+      ],
       "license": "MIT",
       "author": "Pine Wu",
       "homepage": "https://github.com/shikijs/shiki#readme",
@@ -2190,6 +3029,9 @@
       "name": "sisteransi",
       "versions": [
         "1.0.5"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/sisteransi@1.0.5/node_modules/sisteransi"
       ],
       "license": "MIT",
       "author": "Terkel Gjervig",
@@ -2201,6 +3043,9 @@
       "versions": [
         "2.0.2"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/space-separated-tokens@2.0.2/node_modules/space-separated-tokens"
+      ],
       "license": "MIT",
       "author": "Titus Wormer",
       "homepage": "https://github.com/wooorm/space-separated-tokens#readme",
@@ -2210,6 +3055,9 @@
       "name": "stackback",
       "versions": [
         "0.0.2"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/stackback@0.0.2/node_modules/stackback"
       ],
       "license": "MIT",
       "author": "Roman Shtylman",
@@ -2221,6 +3069,9 @@
       "versions": [
         "2.0.2"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/statuses@2.0.2/node_modules/statuses"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/jshttp/statuses#readme",
       "description": "HTTP status utility"
@@ -2229,6 +3080,9 @@
       "name": "std-env",
       "versions": [
         "4.2.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/std-env@4.2.0/node_modules/std-env"
       ],
       "license": "MIT",
       "homepage": "https://github.com/unjs/std-env#readme",
@@ -2240,6 +3094,10 @@
         "7.2.0",
         "8.2.2"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/string-width@7.2.0/node_modules/string-width",
+        "<workspace>/node_modules/.pnpm/string-width@8.2.2/node_modules/string-width"
+      ],
       "license": "MIT",
       "author": "Sindre Sorhus",
       "homepage": "https://github.com/sindresorhus/string-width#readme",
@@ -2249,6 +3107,9 @@
       "name": "string.prototype.codepointat",
       "versions": [
         "0.2.1"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/string.prototype.codepointat@0.2.1/node_modules/string.prototype.codepointat"
       ],
       "license": "MIT",
       "author": "Mathias Bynens",
@@ -2260,6 +3121,9 @@
       "versions": [
         "4.0.4"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/stringify-entities@4.0.4/node_modules/stringify-entities"
+      ],
       "license": "MIT",
       "author": "Titus Wormer",
       "homepage": "https://github.com/wooorm/stringify-entities#readme",
@@ -2269,6 +3133,9 @@
       "name": "strip-ansi",
       "versions": [
         "7.2.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/strip-ansi@7.2.0/node_modules/strip-ansi"
       ],
       "license": "MIT",
       "author": "Sindre Sorhus",
@@ -2280,6 +3147,9 @@
       "versions": [
         "10.3.5"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/strtok3@10.3.5/node_modules/strtok3"
+      ],
       "license": "MIT",
       "author": "Borewit",
       "homepage": "https://github.com/Borewit/strtok3#readme",
@@ -2289,6 +3159,9 @@
       "name": "suf-log",
       "versions": [
         "2.5.3"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/suf-log@2.5.3/node_modules/suf-log"
       ],
       "license": "MIT",
       "author": "Syler",
@@ -2300,6 +3173,9 @@
       "versions": [
         "4.1.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/svgo@4.1.0/node_modules/svgo"
+      ],
       "license": "MIT",
       "author": "Kir Belevich",
       "homepage": "https://svgo.dev",
@@ -2309,6 +3185,9 @@
       "name": "tiny-inflate",
       "versions": [
         "1.0.3"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/tiny-inflate@1.0.3/node_modules/tiny-inflate"
       ],
       "license": "MIT",
       "author": "Devon Govett",
@@ -2320,6 +3199,9 @@
       "versions": [
         "6.1.4"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/tinybench@6.1.4/node_modules/tinybench"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/tinylibs/tinybench#readme",
       "description": "🔎 A simple, tiny and lightweight benchmarking library!"
@@ -2328,6 +3210,9 @@
       "name": "tinyclip",
       "versions": [
         "0.1.15"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/tinyclip@0.1.15/node_modules/tinyclip"
       ],
       "license": "MIT",
       "author": "Tinylibs Maintainers",
@@ -2340,6 +3225,10 @@
         "1.3.0",
         "1.3.1"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/tinyexec@1.3.0/node_modules/tinyexec",
+        "<workspace>/node_modules/.pnpm/tinyexec@1.3.1/node_modules/tinyexec"
+      ],
       "license": "MIT",
       "author": "James Garbutt",
       "homepage": "https://github.com/tinylibs/tinyexec#readme",
@@ -2349,6 +3238,9 @@
       "name": "tinyglobby",
       "versions": [
         "0.2.17"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/tinyglobby@0.2.17/node_modules/tinyglobby"
       ],
       "license": "MIT",
       "author": "Superchupu",
@@ -2360,6 +3252,9 @@
       "versions": [
         "1.1.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/to-data-view@1.1.0/node_modules/to-data-view"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/LinusU/to-data-view#readme"
     },
@@ -2367,6 +3262,9 @@
       "name": "toidentifier",
       "versions": [
         "1.0.1"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/toidentifier@1.0.1/node_modules/toidentifier"
       ],
       "license": "MIT",
       "author": "Douglas Christopher Wilson",
@@ -2378,6 +3276,9 @@
       "versions": [
         "6.1.2"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/token-types@6.1.2/node_modules/token-types"
+      ],
       "license": "MIT",
       "author": "Borewit",
       "homepage": "https://github.com/Borewit/token-types#readme",
@@ -2387,6 +3288,9 @@
       "name": "trim-lines",
       "versions": [
         "3.0.1"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/trim-lines@3.0.1/node_modules/trim-lines"
       ],
       "license": "MIT",
       "author": "Titus Wormer",
@@ -2398,6 +3302,9 @@
       "versions": [
         "2.2.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/trough@2.2.0/node_modules/trough"
+      ],
       "license": "MIT",
       "author": "Titus Wormer",
       "homepage": "https://github.com/wooorm/trough#readme",
@@ -2407,6 +3314,9 @@
       "name": "tsx",
       "versions": [
         "4.23.13"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/tsx@4.23.13/node_modules/tsx"
       ],
       "license": "MIT",
       "author": "Hiroki Osame",
@@ -2418,6 +3328,9 @@
       "versions": [
         "0.2.2"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/typesafe-path@0.2.2/node_modules/typesafe-path"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/johnsoncodehk/typesafe-path#readme"
     },
@@ -2425,6 +3338,9 @@
       "name": "typescript-auto-import-cache",
       "versions": [
         "0.3.6"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/typescript-auto-import-cache@0.3.6/node_modules/typescript-auto-import-cache"
       ],
       "license": "MIT",
       "homepage": "https://github.com/volarjs/typescript-auto-import-cache#readme"
@@ -2434,6 +3350,9 @@
       "versions": [
         "1.6.4"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/ufo@1.6.4/node_modules/ufo"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/unjs/ufo#readme",
       "description": "URL utils for humans"
@@ -2442,6 +3361,9 @@
       "name": "uint8array-extras",
       "versions": [
         "1.5.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/uint8array-extras@1.5.0/node_modules/uint8array-extras"
       ],
       "license": "MIT",
       "author": "Sindre Sorhus",
@@ -2453,6 +3375,9 @@
       "versions": [
         "1.7.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/ultrahtml@1.7.0/node_modules/ultrahtml"
+      ],
       "license": "MIT",
       "author": "Nate Moore",
       "homepage": "https://github.com/natemoo-re/ultrahtml#README"
@@ -2461,6 +3386,9 @@
       "name": "uncrypto",
       "versions": [
         "0.1.3"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/uncrypto@0.1.3/node_modules/uncrypto"
       ],
       "license": "MIT",
       "homepage": "https://github.com/unjs/uncrypto#readme",
@@ -2471,6 +3399,9 @@
       "versions": [
         "8.10.2"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/undici@8.10.2/node_modules/undici"
+      ],
       "license": "MIT",
       "homepage": "https://undici.nodejs.org",
       "description": "An HTTP/1.1 client, written from scratch for Node.js"
@@ -2480,6 +3411,9 @@
       "versions": [
         "8.9.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/undici-types@8.9.0/node_modules/undici-types"
+      ],
       "license": "MIT",
       "homepage": "https://undici.nodejs.org",
       "description": "A stand-alone types package for Undici"
@@ -2488,6 +3422,9 @@
       "name": "unicode-trie",
       "versions": [
         "2.0.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/unicode-trie@2.0.0/node_modules/unicode-trie"
       ],
       "license": "MIT",
       "author": "Devon Govett",
@@ -2499,6 +3436,9 @@
       "versions": [
         "11.0.5"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/unified@11.0.5/node_modules/unified"
+      ],
       "license": "MIT",
       "author": "Titus Wormer",
       "homepage": "https://unifiedjs.com",
@@ -2509,6 +3449,9 @@
       "versions": [
         "0.7.5"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/unifont@0.7.5/node_modules/unifont"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/unjs/unifont#readme",
       "description": "Framework agnostic tools for accessing data from font CDNs and providers"
@@ -2517,6 +3460,9 @@
       "name": "unist-util-is",
       "versions": [
         "6.0.1"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/unist-util-is@6.0.1/node_modules/unist-util-is"
       ],
       "license": "MIT",
       "author": "Titus Wormer",
@@ -2528,6 +3474,9 @@
       "versions": [
         "5.0.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/unist-util-position@5.0.0/node_modules/unist-util-position"
+      ],
       "license": "MIT",
       "author": "Titus Wormer",
       "homepage": "https://github.com/syntax-tree/unist-util-position#readme",
@@ -2537,6 +3486,9 @@
       "name": "unist-util-stringify-position",
       "versions": [
         "4.0.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/unist-util-stringify-position@4.0.0/node_modules/unist-util-stringify-position"
       ],
       "license": "MIT",
       "author": "Titus Wormer",
@@ -2548,6 +3500,9 @@
       "versions": [
         "5.1.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/unist-util-visit@5.1.0/node_modules/unist-util-visit"
+      ],
       "license": "MIT",
       "author": "Titus Wormer",
       "homepage": "https://github.com/syntax-tree/unist-util-visit#readme",
@@ -2557,6 +3512,9 @@
       "name": "unist-util-visit-parents",
       "versions": [
         "6.0.2"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/unist-util-visit-parents@6.0.2/node_modules/unist-util-visit-parents"
       ],
       "license": "MIT",
       "author": "Titus Wormer",
@@ -2568,6 +3526,9 @@
       "versions": [
         "1.17.5"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/unstorage@1.17.5/node_modules/unstorage"
+      ],
       "license": "MIT",
       "homepage": "https://unstorage.unjs.io",
       "description": "Universal Storage Layer"
@@ -2576,6 +3537,9 @@
       "name": "vfile",
       "versions": [
         "6.0.3"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/vfile@6.0.3/node_modules/vfile"
       ],
       "license": "MIT",
       "author": "Titus Wormer",
@@ -2587,6 +3551,9 @@
       "versions": [
         "4.0.3"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/vfile-message@4.0.3/node_modules/vfile-message"
+      ],
       "license": "MIT",
       "author": "Titus Wormer",
       "homepage": "https://github.com/vfile/vfile-message#readme",
@@ -2596,6 +3563,9 @@
       "name": "vite",
       "versions": [
         "8.2.2"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/vite@8.2.2_@types+node@26.5.0_esbuild@0.28.2_tsx@4.23.13_yaml@2.9.0/node_modules/vite"
       ],
       "license": "MIT",
       "author": "Evan You",
@@ -2607,6 +3577,9 @@
       "versions": [
         "1.1.3"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/vitefu@1.1.3_vite@8.2.2_@types+node@26.5.0_esbuild@0.28.2_tsx@4.23.13_yaml@2.9.0_/node_modules/vitefu"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/svitejs/vitefu#readme",
       "description": "Utilities for building frameworks with Vite"
@@ -2615,6 +3588,9 @@
       "name": "vitest",
       "versions": [
         "5.0.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/vitest@5.0.0_@types+node@26.5.0_vite@8.2.2_@types+node@26.5.0_esbuild@0.28.2_tsx@4.23.13_yaml@2.9.0_/node_modules/vitest"
       ],
       "license": "MIT",
       "author": "Anthony Fu",
@@ -2626,6 +3602,9 @@
       "versions": [
         "0.0.71"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/volar-service-css@0.0.71_@volar+language-service@2.4.28/node_modules/volar-service-css"
+      ],
       "license": "MIT",
       "author": "Johnson Chu",
       "homepage": "https://github.com/volarjs/services/tree/master/packages/css",
@@ -2635,6 +3614,9 @@
       "name": "volar-service-emmet",
       "versions": [
         "0.0.71"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/volar-service-emmet@0.0.71_@volar+language-service@2.4.28/node_modules/volar-service-emmet"
       ],
       "license": "MIT",
       "author": "Johnson Chu",
@@ -2646,6 +3628,9 @@
       "versions": [
         "0.0.71"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/volar-service-html@0.0.71_@volar+language-service@2.4.28/node_modules/volar-service-html"
+      ],
       "license": "MIT",
       "author": "Johnson Chu",
       "homepage": "https://github.com/volarjs/services/tree/master/packages/html",
@@ -2655,6 +3640,9 @@
       "name": "volar-service-prettier",
       "versions": [
         "0.0.71"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/volar-service-prettier@0.0.71_@volar+language-service@2.4.28_prettier@3.9.6/node_modules/volar-service-prettier"
       ],
       "license": "MIT",
       "author": "Pacharapol Withayasakpunt",
@@ -2666,6 +3654,9 @@
       "versions": [
         "0.0.71"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/volar-service-typescript@0.0.71_@volar+language-service@2.4.28/node_modules/volar-service-typescript"
+      ],
       "license": "MIT",
       "author": "Johnson Chu",
       "homepage": "https://github.com/volarjs/services/tree/master/packages/typescript",
@@ -2675,6 +3666,9 @@
       "name": "volar-service-typescript-twoslash-queries",
       "versions": [
         "0.0.71"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/volar-service-typescript-twoslash-queries@0.0.71_@volar+language-service@2.4.28/node_modules/volar-service-typescript-twoslash-queries"
       ],
       "license": "MIT",
       "author": "Johnson Chu",
@@ -2686,6 +3680,9 @@
       "versions": [
         "0.0.71"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/volar-service-yaml@0.0.71_@volar+language-service@2.4.28/node_modules/volar-service-yaml"
+      ],
       "license": "MIT",
       "author": "Remco Haszing",
       "homepage": "https://github.com/volarjs/services/tree/master/packages/yaml",
@@ -2695,6 +3692,9 @@
       "name": "vscode-css-languageservice",
       "versions": [
         "6.3.10"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/vscode-css-languageservice@6.3.10/node_modules/vscode-css-languageservice"
       ],
       "license": "MIT",
       "author": "Microsoft Corporation",
@@ -2706,6 +3706,9 @@
       "versions": [
         "5.6.2"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/vscode-html-languageservice@5.6.2/node_modules/vscode-html-languageservice"
+      ],
       "license": "MIT",
       "author": "Microsoft Corporation",
       "homepage": "https://github.com/Microsoft/vscode-html-languageservice#readme",
@@ -2715,6 +3718,9 @@
       "name": "vscode-json-languageservice",
       "versions": [
         "4.1.8"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/vscode-json-languageservice@4.1.8/node_modules/vscode-json-languageservice"
       ],
       "license": "MIT",
       "author": "Microsoft Corporation",
@@ -2727,6 +3733,10 @@
         "8.2.0",
         "9.0.2"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/vscode-jsonrpc@8.2.0/node_modules/vscode-jsonrpc",
+        "<workspace>/node_modules/.pnpm/vscode-jsonrpc@9.0.2/node_modules/vscode-jsonrpc"
+      ],
       "license": "MIT",
       "author": "Microsoft Corporation",
       "homepage": "https://github.com/Microsoft/vscode-languageserver-node#readme",
@@ -2736,6 +3746,9 @@
       "name": "vscode-languageserver",
       "versions": [
         "9.0.1"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/vscode-languageserver@9.0.1/node_modules/vscode-languageserver"
       ],
       "license": "MIT",
       "author": "Microsoft Corporation",
@@ -2748,6 +3761,10 @@
         "3.17.5",
         "3.18.3"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/vscode-languageserver-protocol@3.17.5/node_modules/vscode-languageserver-protocol",
+        "<workspace>/node_modules/.pnpm/vscode-languageserver-protocol@3.18.3/node_modules/vscode-languageserver-protocol"
+      ],
       "license": "MIT",
       "author": "Microsoft Corporation",
       "homepage": "https://github.com/Microsoft/vscode-languageserver-node#readme",
@@ -2757,6 +3774,9 @@
       "name": "vscode-languageserver-textdocument",
       "versions": [
         "1.0.14"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/vscode-languageserver-textdocument@1.0.14/node_modules/vscode-languageserver-textdocument"
       ],
       "license": "MIT",
       "author": "Microsoft Corporation",
@@ -2769,6 +3789,10 @@
         "3.17.5",
         "3.18.3"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/vscode-languageserver-types@3.17.5/node_modules/vscode-languageserver-types",
+        "<workspace>/node_modules/.pnpm/vscode-languageserver-types@3.18.3/node_modules/vscode-languageserver-types"
+      ],
       "license": "MIT",
       "author": "Microsoft Corporation",
       "homepage": "https://github.com/Microsoft/vscode-languageserver-node#readme",
@@ -2778,6 +3802,9 @@
       "name": "vscode-nls",
       "versions": [
         "5.2.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/vscode-nls@5.2.0/node_modules/vscode-nls"
       ],
       "license": "MIT",
       "author": "Microsoft Corporation",
@@ -2789,6 +3816,9 @@
       "versions": [
         "3.2.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/vscode-uri@3.2.0/node_modules/vscode-uri"
+      ],
       "license": "MIT",
       "author": "Microsoft",
       "homepage": "https://github.com/microsoft/vscode-uri#readme",
@@ -2798,6 +3828,9 @@
       "name": "why-is-node-running",
       "versions": [
         "2.3.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/why-is-node-running@2.3.0/node_modules/why-is-node-running"
       ],
       "license": "MIT",
       "author": "Mathias Buus",
@@ -2809,15 +3842,34 @@
       "versions": [
         "9.0.2"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/wrap-ansi@9.0.2/node_modules/wrap-ansi"
+      ],
       "license": "MIT",
       "author": "Sindre Sorhus",
       "homepage": "https://github.com/chalk/wrap-ansi#readme",
       "description": "Wordwrap a string with ANSI escape codes"
     },
     {
+      "name": "xtend",
+      "versions": [
+        "4.0.2"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/xtend@4.0.2/node_modules/xtend"
+      ],
+      "license": "MIT",
+      "author": "Raynos",
+      "homepage": "https://github.com/Raynos/xtend",
+      "description": "extend like a boss"
+    },
+    {
       "name": "xxhash-wasm",
       "versions": [
         "1.1.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/xxhash-wasm@1.1.0/node_modules/xxhash-wasm"
       ],
       "license": "MIT",
       "author": "Michael Jungo",
@@ -2829,6 +3881,9 @@
       "versions": [
         "1.23.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/yaml-language-server@1.23.0/node_modules/yaml-language-server"
+      ],
       "license": "MIT",
       "author": "Red Hat",
       "homepage": "https://github.com/redhat-developer/yaml-language-server#readme",
@@ -2839,6 +3894,9 @@
       "versions": [
         "18.1.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/yargs@18.1.0/node_modules/yargs"
+      ],
       "license": "MIT",
       "homepage": "https://yargs.js.org/",
       "description": "yargs the modern, pirate-themed, successor to optimist."
@@ -2847,6 +3905,9 @@
       "name": "yocto-queue",
       "versions": [
         "1.2.2"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/yocto-queue@1.2.2/node_modules/yocto-queue"
       ],
       "license": "MIT",
       "author": "Sindre Sorhus",
@@ -2858,6 +3919,9 @@
       "versions": [
         "3.2.1"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/yoga-layout@3.2.1/node_modules/yoga-layout"
+      ],
       "license": "MIT",
       "author": "Meta Open Source",
       "homepage": "https://yogalayout.dev/",
@@ -2868,6 +3932,9 @@
       "versions": [
         "4.5.4"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/zod@4.5.4/node_modules/zod"
+      ],
       "license": "MIT",
       "author": "Colin McDonnell",
       "homepage": "https://zod.dev",
@@ -2877,6 +3944,9 @@
       "name": "zwitch",
       "versions": [
         "2.0.4"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/zwitch@2.0.4/node_modules/zwitch"
       ],
       "license": "MIT",
       "author": "Titus Wormer",
@@ -2890,6 +3960,9 @@
       "versions": [
         "3.1000.29"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@aws-sdk+checksums@3.1000.29/node_modules/@aws-sdk/checksums"
+      ],
       "license": "Apache-2.0",
       "author": "AWS SDK for JavaScript Team",
       "homepage": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages-internal/checksums",
@@ -2899,6 +3972,9 @@
       "name": "@aws-sdk/client-s3",
       "versions": [
         "3.1127.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@aws-sdk+client-s3@3.1127.0/node_modules/@aws-sdk/client-s3"
       ],
       "license": "Apache-2.0",
       "author": "AWS SDK for JavaScript Team",
@@ -2910,6 +3986,9 @@
       "versions": [
         "3.977.9"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@aws-sdk+core@3.977.9/node_modules/@aws-sdk/core"
+      ],
       "license": "Apache-2.0",
       "author": "AWS SDK for JavaScript Team",
       "homepage": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages-internal/core",
@@ -2919,6 +3998,9 @@
       "name": "@aws-sdk/credential-provider-env",
       "versions": [
         "3.972.70"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@aws-sdk+credential-provider-env@3.972.70/node_modules/@aws-sdk/credential-provider-env"
       ],
       "license": "Apache-2.0",
       "author": "AWS SDK for JavaScript Team",
@@ -2930,6 +4012,9 @@
       "versions": [
         "3.972.72"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@aws-sdk+credential-provider-http@3.972.72/node_modules/@aws-sdk/credential-provider-http"
+      ],
       "license": "Apache-2.0",
       "author": "AWS SDK for JavaScript Team",
       "homepage": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages-internal/credential-provider-http",
@@ -2939,6 +4024,9 @@
       "name": "@aws-sdk/credential-provider-ini",
       "versions": [
         "3.973.15"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@aws-sdk+credential-provider-ini@3.973.15/node_modules/@aws-sdk/credential-provider-ini"
       ],
       "license": "Apache-2.0",
       "author": "AWS SDK for JavaScript Team",
@@ -2950,6 +4038,9 @@
       "versions": [
         "3.972.77"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@aws-sdk+credential-provider-login@3.972.77/node_modules/@aws-sdk/credential-provider-login"
+      ],
       "license": "Apache-2.0",
       "author": "AWS SDK for JavaScript Team",
       "homepage": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages-internal/credential-provider-login",
@@ -2959,6 +4050,9 @@
       "name": "@aws-sdk/credential-provider-node",
       "versions": [
         "3.972.82"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@aws-sdk+credential-provider-node@3.972.82/node_modules/@aws-sdk/credential-provider-node"
       ],
       "license": "Apache-2.0",
       "author": "AWS SDK for JavaScript Team",
@@ -2970,6 +4064,9 @@
       "versions": [
         "3.972.70"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@aws-sdk+credential-provider-process@3.972.70/node_modules/@aws-sdk/credential-provider-process"
+      ],
       "license": "Apache-2.0",
       "author": "AWS SDK for JavaScript Team",
       "homepage": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages-internal/credential-provider-process",
@@ -2979,6 +4076,9 @@
       "name": "@aws-sdk/credential-provider-sso",
       "versions": [
         "3.973.14"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@aws-sdk+credential-provider-sso@3.973.14/node_modules/@aws-sdk/credential-provider-sso"
       ],
       "license": "Apache-2.0",
       "author": "AWS SDK for JavaScript Team",
@@ -2990,6 +4090,9 @@
       "versions": [
         "3.972.76"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@aws-sdk+credential-provider-web-identity@3.972.76/node_modules/@aws-sdk/credential-provider-web-identity"
+      ],
       "license": "Apache-2.0",
       "author": "AWS SDK for JavaScript Team",
       "homepage": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages-internal/credential-provider-web-identity",
@@ -3000,6 +4103,9 @@
       "versions": [
         "3.972.75"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@aws-sdk+middleware-sdk-s3@3.972.75/node_modules/@aws-sdk/middleware-sdk-s3"
+      ],
       "license": "Apache-2.0",
       "author": "AWS SDK for JavaScript Team",
       "homepage": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages-internal/middleware-sdk-s3"
@@ -3008,6 +4114,9 @@
       "name": "@aws-sdk/nested-clients",
       "versions": [
         "3.997.44"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@aws-sdk+nested-clients@3.997.44/node_modules/@aws-sdk/nested-clients"
       ],
       "license": "Apache-2.0",
       "author": "AWS SDK for JavaScript Team",
@@ -3019,6 +4128,9 @@
       "versions": [
         "3.996.46"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@aws-sdk+signature-v4-multi-region@3.996.46/node_modules/@aws-sdk/signature-v4-multi-region"
+      ],
       "license": "Apache-2.0",
       "author": "AWS SDK for JavaScript Team",
       "homepage": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/signature-v4-multi-region"
@@ -3027,6 +4139,9 @@
       "name": "@aws-sdk/token-providers",
       "versions": [
         "3.1116.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@aws-sdk+token-providers@3.1116.0/node_modules/@aws-sdk/token-providers"
       ],
       "license": "Apache-2.0",
       "author": "AWS SDK for JavaScript Team",
@@ -3038,6 +4153,9 @@
       "versions": [
         "3.974.5"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@aws-sdk+types@3.974.5/node_modules/@aws-sdk/types"
+      ],
       "license": "Apache-2.0",
       "author": "AWS SDK for JavaScript Team",
       "homepage": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages-internal/types",
@@ -3047,6 +4165,9 @@
       "name": "@aws-sdk/xml-builder",
       "versions": [
         "3.972.40"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@aws-sdk+xml-builder@3.972.40/node_modules/@aws-sdk/xml-builder"
       ],
       "license": "Apache-2.0",
       "author": "AWS SDK for JavaScript Team",
@@ -3058,6 +4179,9 @@
       "versions": [
         "0.3.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@aws+lambda-invoke-store@0.3.0/node_modules/@aws/lambda-invoke-store"
+      ],
       "license": "Apache-2.0",
       "author": "Amazon Web Services",
       "homepage": "https://github.com/awslabs/aws-lambda-invoke-store",
@@ -3067,6 +4191,9 @@
       "name": "@img/sharp-darwin-arm64",
       "versions": [
         "0.35.4"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@img+sharp-darwin-arm64@0.35.4/node_modules/@img/sharp-darwin-arm64"
       ],
       "license": "Apache-2.0",
       "author": "Lovell Fuller",
@@ -3078,6 +4205,9 @@
       "versions": [
         "1.63.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@playwright+test@1.63.0/node_modules/@playwright/test"
+      ],
       "license": "Apache-2.0",
       "author": "Microsoft Corporation",
       "homepage": "https://playwright.dev",
@@ -3088,6 +4218,9 @@
       "versions": [
         "3.33.3"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@smithy+core@3.33.3/node_modules/@smithy/core"
+      ],
       "license": "Apache-2.0",
       "author": "AWS Smithy Team",
       "homepage": "https://github.com/smithy-lang/smithy-typescript/tree/main/packages/core"
@@ -3096,6 +4229,9 @@
       "name": "@smithy/credential-provider-imds",
       "versions": [
         "4.5.2"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@smithy+credential-provider-imds@4.5.2/node_modules/@smithy/credential-provider-imds"
       ],
       "license": "Apache-2.0",
       "author": "AWS SDK for JavaScript Team",
@@ -3107,6 +4243,9 @@
       "versions": [
         "5.8.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@smithy+fetch-http-handler@5.8.0/node_modules/@smithy/fetch-http-handler"
+      ],
       "license": "Apache-2.0",
       "author": "AWS SDK for JavaScript Team",
       "homepage": "https://github.com/smithy-lang/smithy-typescript/tree/main/packages/fetch-http-handler",
@@ -3116,6 +4255,9 @@
       "name": "@smithy/node-http-handler",
       "versions": [
         "4.12.1"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@smithy+node-http-handler@4.12.1/node_modules/@smithy/node-http-handler"
       ],
       "license": "Apache-2.0",
       "author": "AWS SDK for JavaScript Team",
@@ -3127,6 +4269,9 @@
       "versions": [
         "5.7.3"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@smithy+signature-v4@5.7.3/node_modules/@smithy/signature-v4"
+      ],
       "license": "Apache-2.0",
       "author": "AWS SDK for JavaScript Team",
       "homepage": "https://github.com/smithy-lang/smithy-typescript/tree/main/packages/signature-v4",
@@ -3137,6 +4282,9 @@
       "versions": [
         "4.18.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@smithy+types@4.18.0/node_modules/@smithy/types"
+      ],
       "license": "Apache-2.0",
       "author": "AWS Smithy Team",
       "homepage": "https://github.com/smithy-lang/smithy-typescript/tree/main/packages/types"
@@ -3145,6 +4293,9 @@
       "name": "aria-query",
       "versions": [
         "5.3.2"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/aria-query@5.3.2/node_modules/aria-query"
       ],
       "license": "Apache-2.0",
       "author": "Jesse Beach",
@@ -3156,6 +4307,9 @@
       "versions": [
         "4.1.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/axobject-query@4.1.0/node_modules/axobject-query"
+      ],
       "license": "Apache-2.0",
       "author": "Jesse Beach",
       "homepage": "https://github.com/A11yance/axobject-query#readme",
@@ -3165,6 +4319,9 @@
       "name": "detect-libc",
       "versions": [
         "2.1.2"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/detect-libc@2.1.2/node_modules/detect-libc"
       ],
       "license": "Apache-2.0",
       "author": "Lovell Fuller",
@@ -3176,6 +4333,9 @@
       "versions": [
         "1.4.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/expect-type@1.4.0/node_modules/expect-type"
+      ],
       "license": "Apache-2.0",
       "homepage": "https://github.com/mmkal/expect-type#readme"
     },
@@ -3183,6 +4343,9 @@
       "name": "playwright",
       "versions": [
         "1.63.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/playwright@1.63.0/node_modules/playwright"
       ],
       "license": "Apache-2.0",
       "author": "Microsoft Corporation",
@@ -3194,6 +4357,9 @@
       "versions": [
         "1.63.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/playwright-core@1.63.0/node_modules/playwright-core"
+      ],
       "license": "Apache-2.0",
       "author": "Microsoft Corporation",
       "homepage": "https://playwright.dev",
@@ -3204,6 +4370,9 @@
       "versions": [
         "0.35.4"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/sharp@0.35.4_@types+node@26.5.0/node_modules/sharp"
+      ],
       "license": "Apache-2.0",
       "author": "Lovell Fuller",
       "homepage": "https://sharp.pixelplumbing.com",
@@ -3213,6 +4382,9 @@
       "name": "typescript",
       "versions": [
         "5.9.3"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/typescript@5.9.3/node_modules/typescript"
       ],
       "license": "Apache-2.0",
       "author": "Microsoft Corp.",
@@ -3226,6 +4398,9 @@
       "versions": [
         "1.3.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@emmetio+html-matcher@1.3.0/node_modules/@emmetio/html-matcher"
+      ],
       "license": "ISC",
       "author": "Sergey Chikuyonok",
       "homepage": "https://github.com/emmetio/html-matcher#readme",
@@ -3235,6 +4410,9 @@
       "name": "@ungap/structured-clone",
       "versions": [
         "1.4.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@ungap+structured-clone@1.4.0/node_modules/@ungap/structured-clone"
       ],
       "license": "ISC",
       "author": "Andrea Giammarchi",
@@ -3246,6 +4424,9 @@
       "versions": [
         "3.1.3"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/anymatch@3.1.3/node_modules/anymatch"
+      ],
       "license": "ISC",
       "author": "Elan Shanker",
       "homepage": "https://github.com/micromatch/anymatch",
@@ -3255,6 +4436,9 @@
       "name": "boolbase",
       "versions": [
         "1.0.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/boolbase@1.0.0/node_modules/boolbase"
       ],
       "license": "ISC",
       "author": "Felix Boehm",
@@ -3266,6 +4450,9 @@
       "versions": [
         "9.0.1"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/cliui@9.0.1/node_modules/cliui"
+      ],
       "license": "ISC",
       "author": "Ben Coe",
       "homepage": "https://github.com/yargs/cliui#readme",
@@ -3275,6 +4462,9 @@
       "name": "css-color-keywords",
       "versions": [
         "1.0.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/css-color-keywords@1.0.0/node_modules/css-color-keywords"
       ],
       "license": "ISC",
       "author": "Jakob Krigovsky",
@@ -3286,6 +4476,9 @@
       "versions": [
         "2.0.5"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/get-caller-file@2.0.5/node_modules/get-caller-file"
+      ],
       "license": "ISC",
       "author": "Stefan Penner",
       "homepage": "https://github.com/stefanpenner/get-caller-file#readme",
@@ -3295,6 +4488,9 @@
       "name": "github-slugger",
       "versions": [
         "2.0.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/github-slugger@2.0.0/node_modules/github-slugger"
       ],
       "license": "ISC",
       "author": "Dan Flettre",
@@ -3306,14 +4502,32 @@
       "versions": [
         "2.0.4"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/inherits@2.0.4/node_modules/inherits"
+      ],
       "license": "ISC",
       "homepage": "https://github.com/isaacs/inherits#readme",
       "description": "Browser-friendly inheritance fully compatible with standard node.js inherits()"
     },
     {
+      "name": "pg-int8",
+      "versions": [
+        "1.0.1"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/pg-int8@1.0.1/node_modules/pg-int8"
+      ],
+      "license": "ISC",
+      "homepage": "https://github.com/charmander/pg-int8#readme",
+      "description": "64-bit big-endian signed integer-to-string conversion"
+    },
+    {
       "name": "piccolore",
       "versions": [
         "0.1.3"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/piccolore@0.1.3/node_modules/piccolore"
       ],
       "license": "ISC",
       "homepage": "https://github.com/delucis/piccolore#readme",
@@ -3323,6 +4537,9 @@
       "name": "picocolors",
       "versions": [
         "1.1.1"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/picocolors@1.1.1/node_modules/picocolors"
       ],
       "license": "ISC",
       "author": "Alexey Raspopov",
@@ -3334,6 +4551,9 @@
       "versions": [
         "7.8.5"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/semver@7.8.5/node_modules/semver"
+      ],
       "license": "ISC",
       "author": "GitHub Inc.",
       "homepage": "https://github.com/npm/node-semver#readme",
@@ -3343,6 +4563,9 @@
       "name": "server-destroy",
       "versions": [
         "1.0.1"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/server-destroy@1.0.1/node_modules/server-destroy"
       ],
       "license": "ISC",
       "author": "Isaac Z. Schlueter",
@@ -3354,6 +4577,9 @@
       "versions": [
         "1.2.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/setprototypeof@1.2.0/node_modules/setprototypeof"
+      ],
       "license": "ISC",
       "author": "Wes Todd",
       "homepage": "https://github.com/wesleytodd/setprototypeof",
@@ -3364,15 +4590,34 @@
       "versions": [
         "2.0.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/siginfo@2.0.0/node_modules/siginfo"
+      ],
       "license": "ISC",
       "author": "Emil Bay",
       "homepage": "https://github.com/emilbayes/siginfo#readme",
       "description": "Utility module to print pretty messages on SIGINFO/SIGUSR1"
     },
     {
+      "name": "split2",
+      "versions": [
+        "4.2.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/split2@4.2.0/node_modules/split2"
+      ],
+      "license": "ISC",
+      "author": "Matteo Collina",
+      "homepage": "https://github.com/mcollina/split2#readme",
+      "description": "split a Text Stream into a Line Stream, using Stream 3"
+    },
+    {
       "name": "y18n",
       "versions": [
         "5.0.8"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/y18n@5.0.8/node_modules/y18n"
       ],
       "license": "ISC",
       "author": "Ben Coe",
@@ -3385,6 +4630,10 @@
         "2.8.3",
         "2.9.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/yaml@2.8.3/node_modules/yaml",
+        "<workspace>/node_modules/.pnpm/yaml@2.9.0/node_modules/yaml"
+      ],
       "license": "ISC",
       "author": "Eemeli Aro",
       "homepage": "https://eemeli.org/yaml/",
@@ -3394,6 +4643,9 @@
       "name": "yargs-parser",
       "versions": [
         "22.0.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/yargs-parser@22.0.0/node_modules/yargs-parser"
       ],
       "license": "ISC",
       "author": "Ben Coe",
@@ -3407,6 +4659,9 @@
       "versions": [
         "5.3.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@fontsource-variable+jetbrains-mono@5.3.0/node_modules/@fontsource-variable/jetbrains-mono"
+      ],
       "license": "OFL-1.1",
       "author": "Google Inc.",
       "homepage": "https://fontsource.org/fonts/jetbrains-mono",
@@ -3416,6 +4671,9 @@
       "name": "@fontsource-variable/space-grotesk",
       "versions": [
         "5.3.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@fontsource-variable+space-grotesk@5.3.0/node_modules/@fontsource-variable/space-grotesk"
       ],
       "license": "OFL-1.1",
       "author": "Google Inc.",
@@ -3427,6 +4685,9 @@
       "versions": [
         "1.3.9"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/pretendard@1.3.9/node_modules/pretendard"
+      ],
       "license": "OFL-1.1",
       "author": "Kil Hyung-jin",
       "homepage": "https://cactus.tistory.com/306"
@@ -3437,6 +4698,9 @@
       "name": "@img/sharp-libvips-darwin-arm64",
       "versions": [
         "1.3.3"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@img+sharp-libvips-darwin-arm64@1.3.3/node_modules/@img/sharp-libvips-darwin-arm64"
       ],
       "license": "LGPL-3.0-or-later",
       "author": "Lovell Fuller",
@@ -3450,6 +4714,9 @@
       "versions": [
         "2.6.2"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@resvg+resvg-js@2.6.2/node_modules/@resvg/resvg-js"
+      ],
       "license": "MPL-2.0",
       "homepage": "https://github.com/yisibl/resvg-js#readme",
       "description": "A high-performance SVG renderer and toolkit, powered by Rust based resvg and napi-rs"
@@ -3458,6 +4725,9 @@
       "name": "@resvg/resvg-js-darwin-arm64",
       "versions": [
         "2.6.2"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/@resvg+resvg-js-darwin-arm64@2.6.2/node_modules/@resvg/resvg-js-darwin-arm64"
       ],
       "license": "MPL-2.0",
       "homepage": "https://github.com/yisibl/resvg-js#readme",
@@ -3468,6 +4738,9 @@
       "versions": [
         "1.33.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/lightningcss@1.33.0/node_modules/lightningcss"
+      ],
       "license": "MPL-2.0",
       "homepage": "https://github.com/parcel-bundler/lightningcss#readme",
       "description": "A CSS parser, transformer, and minifier written in Rust"
@@ -3477,6 +4750,9 @@
       "versions": [
         "1.33.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/lightningcss-darwin-arm64@1.33.0/node_modules/lightningcss-darwin-arm64"
+      ],
       "license": "MPL-2.0",
       "homepage": "https://github.com/parcel-bundler/lightningcss#readme",
       "description": "A CSS parser, transformer, and minifier written in Rust"
@@ -3485,6 +4761,9 @@
       "name": "satori",
       "versions": [
         "0.33.4"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/satori@0.33.4/node_modules/satori"
       ],
       "license": "MPL-2.0",
       "author": "Shu Ding",
@@ -3498,6 +4777,9 @@
       "versions": [
         "2.0.1"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/argparse@2.0.1/node_modules/argparse"
+      ],
       "license": "Python-2.0",
       "homepage": "https://github.com/nodeca/argparse#readme",
       "description": "CLI arguments parser. Native port of python's argparse."
@@ -3509,6 +4791,9 @@
       "versions": [
         "2.0.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/common-ancestor-path@2.0.0/node_modules/common-ancestor-path"
+      ],
       "license": "BlueOak-1.0.0",
       "author": "Isaac Z. Schlueter",
       "homepage": "https://github.com/isaacs/common-ancestor-path#readme",
@@ -3519,6 +4804,9 @@
       "versions": [
         "11.5.2"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/lru-cache@11.5.2/node_modules/lru-cache"
+      ],
       "license": "BlueOak-1.0.0",
       "author": "Isaac Z. Schlueter",
       "homepage": "https://github.com/isaacs/node-lru-cache#readme",
@@ -3528,6 +4816,9 @@
       "name": "sax",
       "versions": [
         "1.6.1"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/sax@1.6.1/node_modules/sax"
       ],
       "license": "BlueOak-1.0.0",
       "author": "Isaac Z. Schlueter",
@@ -3541,6 +4832,9 @@
       "versions": [
         "6.0.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/css-select@6.0.0/node_modules/css-select"
+      ],
       "license": "BSD-2-Clause",
       "author": "Felix Boehm",
       "homepage": "https://github.com/fb55/css-select#readme",
@@ -3550,6 +4844,9 @@
       "name": "css-what",
       "versions": [
         "7.0.0"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/css-what@7.0.0/node_modules/css-what"
       ],
       "license": "BSD-2-Clause",
       "author": "Felix Böhm",
@@ -3562,6 +4859,10 @@
         "2.3.0",
         "3.0.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/domelementtype@2.3.0/node_modules/domelementtype",
+        "<workspace>/node_modules/.pnpm/domelementtype@3.0.0/node_modules/domelementtype"
+      ],
       "license": "BSD-2-Clause",
       "author": "Felix Boehm",
       "homepage": "https://github.com/fb55/domelementtype#readme",
@@ -3573,6 +4874,10 @@
         "5.0.3",
         "6.0.1"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/domhandler@5.0.3/node_modules/domhandler",
+        "<workspace>/node_modules/.pnpm/domhandler@6.0.1/node_modules/domhandler"
+      ],
       "license": "BSD-2-Clause",
       "author": "Felix Boehm",
       "homepage": "https://github.com/fb55/domhandler#readme",
@@ -3583,6 +4888,10 @@
       "versions": [
         "3.2.2",
         "4.0.2"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/domutils@3.2.2/node_modules/domutils",
+        "<workspace>/node_modules/.pnpm/domutils@4.0.2/node_modules/domutils"
       ],
       "license": "BSD-2-Clause",
       "author": "Felix Boehm",
@@ -3596,6 +4905,11 @@
         "7.0.1",
         "8.1.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/entities@4.5.0/node_modules/entities",
+        "<workspace>/node_modules/.pnpm/entities@7.0.1/node_modules/entities",
+        "<workspace>/node_modules/.pnpm/entities@8.1.0/node_modules/entities"
+      ],
       "license": "BSD-2-Clause",
       "author": "Felix Boehm",
       "homepage": "https://github.com/fb55/entities#readme",
@@ -3606,6 +4920,9 @@
       "versions": [
         "4.2.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/http-cache-semantics@4.2.0/node_modules/http-cache-semantics"
+      ],
       "license": "BSD-2-Clause",
       "author": "Kornel Lesiński",
       "homepage": "https://github.com/kornelski/http-cache-semantics#readme",
@@ -3615,6 +4932,9 @@
       "name": "nth-check",
       "versions": [
         "2.1.1"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/nth-check@2.1.1/node_modules/nth-check"
       ],
       "license": "BSD-2-Clause",
       "author": "Felix Boehm",
@@ -3628,6 +4948,9 @@
       "versions": [
         "9.0.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/diff@9.0.0/node_modules/diff"
+      ],
       "license": "BSD-3-Clause",
       "homepage": "https://github.com/kpdecker/jsdiff#readme",
       "description": "A JavaScript text diff implementation."
@@ -3636,6 +4959,9 @@
       "name": "fast-uri",
       "versions": [
         "3.1.7"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/fast-uri@3.1.7/node_modules/fast-uri"
       ],
       "license": "BSD-3-Clause",
       "author": "Vincent Le Goff",
@@ -3647,6 +4973,9 @@
       "versions": [
         "1.2.1"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/ieee754@1.2.1/node_modules/ieee754"
+      ],
       "license": "BSD-3-Clause",
       "author": "Feross Aboukhadijeh",
       "homepage": "https://github.com/feross/ieee754#readme",
@@ -3656,6 +4985,9 @@
       "name": "jpeg-js",
       "versions": [
         "0.4.4"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/jpeg-js@0.4.4/node_modules/jpeg-js"
       ],
       "license": "BSD-3-Clause",
       "author": "Eugene Ware",
@@ -3667,6 +4999,9 @@
       "versions": [
         "1.8.0"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/smol-toml@1.8.0/node_modules/smol-toml"
+      ],
       "license": "BSD-3-Clause",
       "author": "Cynthia Rey",
       "homepage": "https://github.com/squirrelchat/smol-toml#readme",
@@ -3676,6 +5011,9 @@
       "name": "source-map-js",
       "versions": [
         "1.2.1"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/source-map-js@1.2.1/node_modules/source-map-js"
       ],
       "license": "BSD-3-Clause",
       "author": "Valentin 7rulnik Semirulnik",
@@ -3690,6 +5028,10 @@
         "2.0.28",
         "2.27.1"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/mdn-data@2.0.28/node_modules/mdn-data",
+        "<workspace>/node_modules/.pnpm/mdn-data@2.27.1/node_modules/mdn-data"
+      ],
       "license": "CC0-1.0",
       "author": "Mozilla Developer Network",
       "homepage": "https://developer.mozilla.org",
@@ -3702,6 +5044,9 @@
       "versions": [
         "7.0.13"
       ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/nodemailer@7.0.13/node_modules/nodemailer"
+      ],
       "license": "MIT-0",
       "author": "Andris Reinman",
       "homepage": "https://nodemailer.com/",
@@ -3713,6 +5058,9 @@
       "name": "tslib",
       "versions": [
         "2.8.1"
+      ],
+      "paths": [
+        "<workspace>/node_modules/.pnpm/tslib@2.8.1/node_modules/tslib"
       ],
       "license": "0BSD",
       "author": "Microsoft Corp.",

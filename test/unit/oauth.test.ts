@@ -1,3 +1,4 @@
+import { createTestDatabase } from '../../scripts/test-database.mjs';
 import { test, expect, vi, beforeAll, afterAll, afterEach } from 'vitest';
 import { mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -16,7 +17,11 @@ let auth: typeof import('../../src/pages/auth/[...path]');
 let callback: typeof import('../../src/pages/api/auth/callback/[provider]');
 let security: typeof import('../../src/lib/security');
 let db: typeof import('../../src/lib/db');
+let testDatabase: Awaited<ReturnType<typeof createTestDatabase>>;
 beforeAll(async () => {
+  testDatabase = await createTestDatabase('unit');
+  process.env.DATABASE_URL = testDatabase.connectionString;
+  process.env.DATABASE_SCHEMA = testDatabase.schema;
   auth = await import('../../src/pages/auth/[...path]');
   callback = await import('../../src/pages/api/auth/callback/[provider]');
   security = await import('../../src/lib/security');
@@ -26,8 +31,9 @@ afterEach(() => {
   vi.unstubAllGlobals();
   vi.restoreAllMocks();
 });
-afterAll(() => {
-  db.db.close();
+afterAll(async () => {
+  await db?.closeDatabase();
+  await testDatabase?.cleanup();
   rmSync(dir, { recursive: true, force: true });
   vi.unstubAllEnvs();
 });
@@ -78,7 +84,7 @@ test.each(['github', 'google'])(
     );
     expect(pending.returnTo).toBe('/suggest?slug=slack');
     expect(pending.provider).toBe(provider);
-    expect(db.one('SELECT id FROM users WHERE email=?', pending.email)).toBeUndefined();
+    expect(await db.one('SELECT id FROM users WHERE email=?', pending.email)).toBeUndefined();
   },
 );
 

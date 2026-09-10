@@ -4,9 +4,12 @@ import { readImage } from '../../lib/storage';
 export const GET: APIRoute = async (ctx) => {
   const id = ctx.params.id || '';
   if (!/^[a-f0-9]{36}$/.test(id)) return new Response(null, { status: 404 });
-  const file = one('SELECT * FROM uploads WHERE id=?', id);
+  const file = await one('SELECT * FROM uploads WHERE id=?', id);
   if (!file) return new Response(null, { status: 404 });
-  const publicUse = one("SELECT id FROM posts WHERE status='active' AND body LIKE ?", '%/media/' + id + '%');
+  const publicUse = await one(
+    "SELECT id FROM posts WHERE status='active' AND body LIKE ?",
+    '%/media/' + id + '%',
+  );
   if (!publicUse && ctx.locals.user?.id !== file.user_id) return new Response(null, { status: 404 });
   try {
     return new Response(new Uint8Array(await readImage(id, file.storage)), {

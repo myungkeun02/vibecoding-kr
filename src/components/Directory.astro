@@ -3,7 +3,7 @@ import { apps, categories, filterApps } from '../lib/apps';
 import { voteCounts } from '../lib/db';
 import ToolRow from './ToolRow.astro';
 const { params = Astro.url.searchParams } = Astro.props;
-const counts = voteCounts();
+const counts = await voteCounts();
 const r = filterApps(params, counts);
 const href = (key: string, value: string) => {
   const p = new URLSearchParams(params);

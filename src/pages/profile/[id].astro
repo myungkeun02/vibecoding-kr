@@ -2,13 +2,13 @@
 import Base from '../../layouts/Base.astro';
 import PostRow from '../../components/PostRow.astro';
 import { one, all, postSelect } from '../../lib/db';
-const u = one(
+const u = await one(
   "SELECT id,nickname,bio,created_at FROM users WHERE id=? AND status='active'",
   Astro.params.id || '',
 );
 if (!u) Astro.response.status = 404;
 const items = u
-  ? all(postSelect + " WHERE p.user_id=? AND p.status='active' ORDER BY p.created_at DESC", u.id)
+  ? await all(postSelect + " WHERE p.user_id=? AND p.status='active' ORDER BY p.created_at DESC", u.id)
   : [];
 ---
 

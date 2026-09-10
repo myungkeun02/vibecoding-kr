@@ -1,10 +1,12 @@
+import { migrateDatabase, closeDatabase } from '../src/lib/db';
 import { all, run, postSelect } from '../src/lib/db';
 import { absolute, dataDir } from '../src/lib/config';
 import { sendMail } from '../src/lib/mail';
 import { writeFileSync, mkdirSync } from 'node:fs';
-const posts = all(
+await migrateDatabase();
+const posts = await all(
   postSelect +
-    " WHERE p.status='active' AND p.created_at>=datetime('now','-7 days') ORDER BY likes DESC,p.created_at DESC LIMIT 8",
+    " WHERE p.status='active' AND p.created_at>=(CURRENT_TIMESTAMP - INTERVAL '7 days') ORDER BY likes DESC,p.created_at DESC LIMIT 8",
 );
 const subject = '이번 주, 직접 만든 이야기 · 바이브코딩가능?';
 const body =
@@ -21,20 +23,22 @@ if (!process.argv.includes('--send')) {
     console.log('이번 주 공개 글이 없어 발송하지 않습니다.');
     process.exit(0);
   }
-  run(
-    'CREATE TABLE IF NOT EXISTS mail_deliveries(campaign TEXT,email TEXT,created_at TEXT DEFAULT CURRENT_TIMESTAMP,PRIMARY KEY(campaign,email))',
+  await run(
+    'CREATE TABLE IF NOT EXISTS mail_deliveries(campaign TEXT,email TEXT,created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,PRIMARY KEY(campaign,email))',
   );
   const campaign = process.argv.find((x) => x.startsWith('--campaign='))?.slice(11);
   if (!campaign) throw new Error('--campaign=YYYY-WNN 캠페인 식별자를 지정하세요.');
-  const audience = all(
+  const audience = await all(
     "SELECT email,token FROM waitlist WHERE status='active' AND email NOT IN (SELECT email FROM mail_deliveries WHERE campaign=?)",
     campaign,
   );
   let n = 0;
   for (const w of audience) {
     await sendMail(w.email, subject, body + '\n\n수신 거부: ' + absolute('/unsubscribe?token=' + w.token));
-    run('INSERT INTO mail_deliveries(campaign,email) VALUES(?,?)', campaign, w.email);
+    await run('INSERT INTO mail_deliveries(campaign,email) VALUES(?,?)', campaign, w.email);
     n++;
   }
   console.log(`${n}건 발송 처리. 로컬 어댑터는 실제 이메일을 보내지 않습니다.`);
 }
+
+await closeDatabase();

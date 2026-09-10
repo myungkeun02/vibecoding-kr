@@ -1,12 +1,22 @@
 import { defineMiddleware } from 'astro:middleware';
 import { identity } from './lib/security';
-import { event, run, syncTools } from './lib/db';
+import { event, run, syncTools, migrateDatabase } from './lib/db';
 import { apps } from './lib/apps';
-syncTools(apps);
+let ready: Promise<void> | undefined;
+function initialize() {
+  return (ready ??= (async () => {
+    await migrateDatabase();
+    await syncTools(apps);
+  })().catch((error) => {
+    ready = undefined;
+    throw error;
+  }));
+}
 export const onRequest = defineMiddleware(async (ctx, next) => {
-  identity(ctx);
   let response: Response;
   try {
+    await initialize();
+    await identity(ctx);
     response = await next();
   } catch (error) {
     console.error('request_failed', ctx.url.pathname, (error as Error).name);
@@ -32,11 +42,11 @@ export const onRequest = defineMiddleware(async (ctx, next) => {
       ctx.url.pathname,
     )
   )
-    event('pageview', ctx.routePattern || '/');
+    await event('pageview', ctx.routePattern || '/');
   if (Date.now() % 97 === 0) {
-    run('DELETE FROM sessions WHERE expires<?', Date.now());
-    run('DELETE FROM auth_tokens WHERE expires<?', Date.now());
-    run("DELETE FROM analytics WHERE day<date('now','-90 days')");
+    await run('DELETE FROM sessions WHERE expires<?', Date.now());
+    await run('DELETE FROM auth_tokens WHERE expires<?', Date.now());
+    await run("DELETE FROM analytics WHERE day<(CURRENT_DATE - INTERVAL '90 days')");
   }
   return response;
 });

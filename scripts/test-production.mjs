@@ -1,3 +1,5 @@
+import { createTestDatabase } from './test-database.mjs';
+const database = await createTestDatabase('production');
 import { spawn, spawnSync } from 'node:child_process';
 import { mkdtempSync, mkdirSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { resolve, join } from 'node:path';
@@ -33,6 +35,8 @@ if (
   throw new Error('OpenSSL is required for the isolated TLS test');
 const env = {
   ...process.env,
+  DATABASE_URL: database.connectionString,
+  DATABASE_SCHEMA: database.schema,
   APP_ENV: 'production',
   DATA_DIR: dir,
   SITE_URL: origin,
@@ -138,5 +142,8 @@ try {
 } finally {
   await api.dispose();
   await new Promise((r) => proxy.close(r));
+  const exited = new Promise((resolve) => child.once('exit', resolve));
   child.kill('SIGTERM');
+  await exited;
+  await database.cleanup();
 }

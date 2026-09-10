@@ -1,6 +1,6 @@
 {
   "status": "PASS",
-  "checkedAt": "2026-09-08T09:27:32.816Z",
+  "checkedAt": "2026-09-10T11:00:54.009Z",
   "environment": "production bundle + APP_ENV=production + isolated self-signed HTTPS proxy",
   "checks": [
     "Secure HttpOnly SameSite=Lax session",

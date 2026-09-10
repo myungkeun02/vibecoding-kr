@@ -7,18 +7,22 @@
 |정확한 이름|용도 / 읽는 코드|공개 여부·예시|미설정 / 확인 방법|
 |---|---|---|---|
 |SITE_URL|`src/lib/config.ts`·absolute 링크|공개, `http://localhost:8095`|로컬 기본값. `/sitemap.xml`·canonical 확인|
-|DATA_DIR|config·db·mail·storage|서버 전용, `data/private`|기본 경로 생성. 외부 계정 불필요. 재시작 테스트|
+|DATABASE_URL|db·PostgreSQL 접속|비밀, `postgresql://user:password@host:5432/db`|로컬·운영 모두 필수. 미설정 시 DB 연결 거부|
+|DATABASE_POOL_MAX|pg 최대 연결 수|서버, `5`|작은 서비스는 기본 5개 유지|
+|TEST_DATABASE_URL|자동 검사 전용 PostgreSQL|비밀, 운영과 다른 DB|검사마다 무작위 스키마 생성·정리. 운영 주소로 대체하지 않음|
+|DATA_DIR|config·mail·storage|서버 전용, `data/private`|기본 경로 생성. 외부 계정 불필요. 재시작 테스트|
 |SESSION_SECRET|config·security|비밀, 무작위 48바이트 hex|로컬은 DATA_DIR/.session-secret 생성, 운영은 자동값 허용 안 함. 파일 권한 600|
 |HOST|Node adapter, 개발 명령은 loopback 지정|서버, `127.0.0.1`|로컬은 .env.example대로. 컨테이너는 `0.0.0.0`|
 |PORT|Node adapter|서버, `8095`|예제대로 지정. 테스트는 8096/8097|
 |APP_ENV|config·cookie·mail|서버, `development` / `production`|로컬 정책. 공개 운영에서 production 필수|
 
-`.env.example`를 복사하면 A 값으로 로컬 QA가 가능하다. .env를 출력하거나 session secret 값을 문서에 붙이지 않는다. 안전한 새 운영 키를 파일로 생성하려면 `node -e "require('fs').writeFileSync('session-secret.txt',require('crypto').randomBytes(48).toString('hex'),{mode:384})"`로 만든 뒤 호스팅의 비밀값 입력 기능으로 옮기고 파일을 제거한다. 이 파일도 커밋하지 않는다.
+`.env.example`를 복사하고 준비한 PostgreSQL의 DATABASE_URL을 설정한다. 테스트에는 별도의 TEST_DATABASE_URL을 설정한다. .env를 출력하거나 session secret 값을 문서에 붙이지 않는다. 안전한 새 운영 키를 파일로 생성하려면 `node -e "require('fs').writeFileSync('session-secret.txt',require('crypto').randomBytes(48).toString('hex'),{mode:384})"`로 만든 뒤 호스팅의 비밀값 입력 기능으로 옮기고 파일을 제거한다. 이 파일도 커밋하지 않는다.
 
 ## B. 운영 필수값
 
 |이름|운영 설정·미설정 동작|설정 후 확인|
 |---|---|---|
+|DATABASE_URL|Railway PostgreSQL 서비스의 내부 DATABASE_URL 참조|DB 연결·마이그레이션·health 확인|
 |APP_ENV|`production` 필수. 개발용 outbox와 비보안 쿠키 사용 방지|`pnpm env:check`의 mode|
 |SITE_URL|실제 HTTPS origin. 로컬 주소 금지|HTTPS 아니면 부팅 거부. canonical·sitemap·공유·메일 링크|
 |DATA_DIR|실제 영속 볼륨의 절대 경로 `/data`|상대 경로면 운영 부팅 거부. 호스팅 볼륨 장착과 재시작 전후 레코드 확인|
@@ -60,7 +64,7 @@
 |EXT-KAKAO / 앱 키·허용 도메인 없음|키·Web 플랫폼 도메인 설정 → 도구 상세 카카오 버튼 → 공유 대상 선택 화면까지만 확인하고 취소|도구명·판정 설명·해당 OG·canonical URL 일치; 네트워크/CSP 오류 없음|SNS에 게시하지 않고 선택창 닫기, 테스트 앱 키 제거|
 |EXT-GH-PR / 봇 fork·토큰 없음|테스트 fork/대상/키, 테스트 제안 관리자 채택 → 공식 출처와 JSON 편집 → `pnpm catalog:pr ID data/apps/slug.json` → 검증된 내용으로 `--publish`|봇 fork의 branch와 **draft** PR, CI 실행, 제안 상태는 배포 대기 유지. 개인정보 미포함|테스트 PR 닫고 branch 삭제, 테스트 데이터·토큰 제거|
 |EXT-DIGEST / 발송 설정·통제 구독자 없음|별도 테스트 DB에 통제 주소만 구독, 최근 공개 글 작성. `pnpm newsletter` 미리보기 검토 → `pnpm newsletter --send --campaign=qa-YYYYMMDD` → 같은 campaign 재실행|수신 메일에 한국어 글 링크·철회 링크, 첫 발송만 기록·재실행 중복 0. 철회 후 다음 캠페인 제외|통제 수신함·계정·전용 DB·캠페인 정리|
-|EXT-HOST / 배포 계정·영속 볼륨·실제 HTTPS 없음|`docs/deployment.md`대로 실제 Node+볼륨+도메인. health → 가입 → 글·업로드·인증 → 재배포 → 로그인/이미지/집계 → backup/restore 별도 staging|Secure 쿠키·HTTPS·canonical·실제 영속 레코드·한글 OG. 상용 임시 디스크를 성공으로 보지 않음|staging 계정·DB·볼륨만 정리; 운영 DB는 보존|
+|EXT-HOST / 실제 배포·영속 볼륨·HTTPS 검증 필요|`docs/deployment.md`대로 실제 Node+볼륨+도메인. health → 가입 → 글·업로드·인증 → 재배포 → 로그인/이미지/집계 → backup/restore 별도 staging|Secure 쿠키·HTTPS·canonical·실제 영속 레코드·한글 OG. 상용 임시 디스크를 성공으로 보지 않음|staging 계정·DB·볼륨만 정리; 운영 DB는 보존|
 
 Docker 엔진은 로컬에서 실행되지 않아 이미지 빌드/컨테이너 시작은 **BLOCKED_ACCESS**다. `docker compose config --quiet`로 설정 문법을 확인한 후 실제 엔진에서 `docker compose build && docker compose up -d`와 EXT-HOST 흐름을 수행한다. 이는 Node production bundle의 로컬 검증 결과와 별개다.
 

@@ -20,10 +20,10 @@ const {
 } = Astro.props;
 const user = Astro.locals.user;
 const unread = user
-  ? one(
+  ? (await one(
       "SELECT COUNT(*) AS n FROM notifications n JOIN posts p ON p.id=n.post_id LEFT JOIN comments c ON c.id=n.comment_id WHERE n.user_id=? AND n.is_read=0 AND p.status='active' AND (c.id IS NULL OR c.status='active')",
       user.id,
-    )!.n
+    ))!.n
   : 0;
 const structured = [
   { '@context': 'https://schema.org', '@type': 'Organization', name: brand.name, url: absolute('/') },

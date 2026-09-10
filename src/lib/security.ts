@@ -28,7 +28,7 @@ export async function passwordCheck(password: string, stored?: string | null) {
   const target = Buffer.from(digest, 'hex');
   return target.length === key.length && timingSafeEqual(key, target);
 }
-export function identity(ctx: APIContext) {
+export async function identity(ctx: APIContext) {
   let anon = verified(ctx.cookies.get('anon')?.value);
   if (!anon) {
     anon = id();
@@ -43,25 +43,25 @@ export function identity(ctx: APIContext) {
   ctx.locals.csrf = csrf;
   const token = ctx.cookies.get('session')?.value;
   ctx.locals.user = token
-    ? one(
+    ? await one(
         "SELECT u.* FROM sessions s JOIN users u ON u.id=s.user_id WHERE s.token=? AND s.expires>? AND u.status='active'",
         hash(token),
         Date.now(),
       )
     : null;
 }
-export function login(ctx: APIContext, user: string) {
+export async function login(ctx: APIContext, user: string) {
   const old = ctx.cookies.get('session')?.value;
-  if (old) run('DELETE FROM sessions WHERE token=?', hash(old));
+  if (old) await run('DELETE FROM sessions WHERE token=?', hash(old));
   const token = id() + id();
-  run(
+  await run(
     'INSERT INTO sessions(token,user_id,expires) VALUES(?,?,?)',
     hash(token),
     user,
     Date.now() + 30 * 86400000,
   );
   ctx.cookies.set('session', token, { ...cookieOpts, maxAge: 30 * 86400 });
-  mergeVotes(user, ctx.locals.anon);
+  await mergeVotes(user, ctx.locals.anon);
 }
 export const safeReturn = (v: unknown) =>
   typeof v === 'string' && v.startsWith('/') && !v.startsWith('//') && !/[\\\r\n]/.test(v) ? v : '/me';

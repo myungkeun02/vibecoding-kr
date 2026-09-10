@@ -4,7 +4,7 @@ import PostRow from '../../components/PostRow.astro';
 import Newsletter from '../../components/Newsletter.astro';
 import { posts } from '../../lib/db';
 import { boards } from '../../lib/config';
-const r = posts(Astro.url.searchParams);
+const r = await posts(Astro.url.searchParams);
 const link = (k: string, v: string) => {
   const p = new URLSearchParams(Astro.url.searchParams);
   p.delete('page');

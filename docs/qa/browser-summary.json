@@ -1,7 +1,7 @@
 {
-  "startedAt": "2026-09-08T11:23:16.634Z",
-  "durationMs": 16943.313000000002,
-  "passed": 18,
+  "startedAt": "2026-09-10T11:00:28.086Z",
+  "durationMs": 22249.447,
+  "passed": 19,
   "failed": 0,
   "flaky": 0,
   "skipped": 0,
@@ -12,7 +12,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 671
+          "durationMs": 1084
         }
       ]
     },
@@ -22,7 +22,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 496
+          "durationMs": 824
         }
       ]
     },
@@ -32,7 +32,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 1199
+          "durationMs": 1412
         }
       ]
     },
@@ -42,7 +42,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 652
+          "durationMs": 681
         }
       ]
     },
@@ -52,7 +52,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 720
+          "durationMs": 810
         }
       ]
     },
@@ -62,7 +62,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 2459
+          "durationMs": 4033
         }
       ]
     },
@@ -72,7 +72,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 97
+          "durationMs": 153
         }
       ]
     },
@@ -82,7 +82,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 105
+          "durationMs": 168
         }
       ]
     },
@@ -92,7 +92,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 64
+          "durationMs": 116
         }
       ]
     },
@@ -102,7 +102,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 14
+          "durationMs": 29
         }
       ]
     },
@@ -112,7 +112,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 124
+          "durationMs": 156
         }
       ]
     },
@@ -122,7 +122,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 91
+          "durationMs": 125
         }
       ]
     },
@@ -132,7 +132,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 77
+          "durationMs": 143
         }
       ]
     },
@@ -142,7 +142,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 1465
+          "durationMs": 1580
         }
       ]
     },
@@ -152,7 +152,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 52
+          "durationMs": 90
         }
       ]
     },
@@ -162,7 +162,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 112
+          "durationMs": 178
         }
       ]
     },
@@ -172,7 +172,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 775
+          "durationMs": 953
         }
       ]
     },
@@ -182,7 +182,17 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 6632
+          "durationMs": 7903
+        }
+      ]
+    },
+    {
+      "title": "concurrent PostgreSQL requests enforce one-use email tokens and account uniqueness",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 95
         }
       ]
     }

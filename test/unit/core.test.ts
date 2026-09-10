@@ -1,3 +1,4 @@
+import { createTestDatabase } from '../../scripts/test-database.mjs';
 import { test, expect, vi, beforeAll, afterAll } from 'vitest';
 import { mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -6,14 +7,19 @@ const dir = mkdtempSync(join(tmpdir(), 'vibecoding-test-'));
 process.env.DATA_DIR = dir;
 process.env.APP_ENV = 'test';
 let dbm: any, sec: any, apps: any;
+let testDatabase: Awaited<ReturnType<typeof createTestDatabase>>;
 beforeAll(async () => {
+  testDatabase = await createTestDatabase('unit');
+  process.env.DATABASE_URL = testDatabase.connectionString;
+  process.env.DATABASE_SCHEMA = testDatabase.schema;
   dbm = await import('../../src/lib/db');
   sec = await import('../../src/lib/security');
   apps = await import('../../src/lib/apps');
-  dbm.syncTools(apps.apps);
+  await dbm.syncTools(apps.apps);
 });
-afterAll(() => {
-  dbm.db.close();
+afterAll(async () => {
+  await dbm?.closeDatabase();
+  await testDatabase?.cleanup();
   rmSync(dir, { recursive: true, force: true });
 });
 test('catalog contains unique 100+ verified tools, 12+ categories and required products', () => {
@@ -34,38 +40,38 @@ test('Korean aliases, updated names, filters and page bounds', () => {
   expect(apps.filterApps(new URLSearchParams({ q: '없는도구123' })).total).toBe(0);
   expect(apps.filterApps(new URLSearchParams({ page: '999' })).page).toBeLessThan(999);
 });
-test('anonymous vote is idempotent and merges with account without double counting', () => {
+test('anonymous vote is idempotent and merges with account without double counting', async () => {
   const u = 'test-user';
-  dbm.run('INSERT INTO users(id,email,nickname) VALUES(?,?,?)', u, 'local@example.test', 'tester');
-  dbm.vote('slack', null, 'anon-a');
-  dbm.vote('slack', null, 'anon-a');
-  expect(dbm.voteCounts().slack).toBe(1);
-  dbm.vote('slack', u, 'anon-b');
-  expect(dbm.voteCounts().slack).toBe(2);
-  dbm.mergeVotes(u, 'anon-a');
-  expect(dbm.voteCounts().slack).toBe(1);
-  expect(dbm.totals().monthly).toBe(apps.getApp('slack').priceMonthly);
-  dbm.vote('slack', u, 'anon-b', true);
-  expect(dbm.voteCounts().slack || 0).toBe(0);
+  await dbm.run('INSERT INTO users(id,email,nickname) VALUES(?,?,?)', u, 'local@example.test', 'tester');
+  await dbm.vote('slack', null, 'anon-a');
+  await dbm.vote('slack', null, 'anon-a');
+  expect((await dbm.voteCounts()).slack).toBe(1);
+  await dbm.vote('slack', u, 'anon-b');
+  expect((await dbm.voteCounts()).slack).toBe(2);
+  await dbm.mergeVotes(u, 'anon-a');
+  expect((await dbm.voteCounts()).slack).toBe(1);
+  expect((await dbm.totals()).monthly).toBe(apps.getApp('slack').priceMonthly);
+  await dbm.vote('slack', u, 'anon-b', true);
+  expect((await dbm.voteCounts()).slack || 0).toBe(0);
 });
-test('free, unknown and one-time tools do not inflate monthly estimate', () => {
-  const start = dbm.totals().monthly;
-  for (const slug of ['obsidian', 'upnote', 'microsoft-excel']) dbm.vote(slug, null, 'cost-test');
-  expect(dbm.totals().monthly).toBe(start);
-  expect(dbm.totals().excluded).toBe(2);
+test('free, unknown and one-time tools do not inflate monthly estimate', async () => {
+  const start = (await dbm.totals()).monthly;
+  for (const slug of ['obsidian', 'upnote', 'microsoft-excel']) await dbm.vote(slug, null, 'cost-test');
+  expect((await dbm.totals()).monthly).toBe(start);
+  expect((await dbm.totals()).excluded).toBe(2);
 });
-test('seed is idempotent and preserves operational records', () => {
-  const before = dbm.totals();
-  dbm.syncTools(apps.apps);
-  dbm.syncTools(apps.apps);
-  expect(dbm.totals()).toEqual(before);
+test('seed is idempotent and preserves operational records', async () => {
+  const before = await dbm.totals();
+  await dbm.syncTools(apps.apps);
+  await dbm.syncTools(apps.apps);
+  expect(await dbm.totals()).toEqual(before);
 });
-test('rate limiter closes limit and reopens on expiry', () => {
-  expect(dbm.rate('x', 2, 60)).toBe(true);
-  expect(dbm.rate('x', 2, 60)).toBe(true);
-  expect(dbm.rate('x', 2, 60)).toBe(false);
-  dbm.run('UPDATE rate_limits SET expires=? WHERE key=?', Date.now() - 1, 'x');
-  expect(dbm.rate('x', 2, 60)).toBe(true);
+test('rate limiter closes limit and reopens on expiry', async () => {
+  expect(await dbm.rate('x', 2, 60)).toBe(true);
+  expect(await dbm.rate('x', 2, 60)).toBe(true);
+  expect(await dbm.rate('x', 2, 60)).toBe(false);
+  await dbm.run('UPDATE rate_limits SET expires=? WHERE key=?', Date.now() - 1, 'x');
+  expect(await dbm.rate('x', 2, 60)).toBe(true);
 });
 test('password hashing is salted, verifiable and cookie signatures reject tampering', async () => {
   const a = await sec.passwordHash('correct horse battery staple');
@@ -173,4 +179,48 @@ test('R2 upload/read and Resend adapters obey mocked provider contracts and prop
   fetcher.mockRestore();
   delete process.env.RESEND_API_KEY;
   delete process.env.MAIL_FROM;
+});
+
+test('PostgreSQL transactions roll back writes and isolate concurrent requests', async () => {
+  await expect(
+    dbm.transaction(async () => {
+      await dbm.run(
+        'INSERT INTO users(id,email,nickname) VALUES(?,?,?)',
+        'rolled-back',
+        'rollback@example.test',
+        'rollback',
+      );
+      throw new Error('intentional rollback');
+    }),
+  ).rejects.toThrow('intentional rollback');
+  expect(await dbm.one('SELECT id FROM users WHERE id=?', 'rolled-back')).toBeUndefined();
+  const allowed = await Promise.all(Array.from({ length: 20 }, () => dbm.rate('concurrent-test', 4, 60)));
+  expect(allowed.filter(Boolean)).toHaveLength(4);
+  await Promise.all(Array.from({ length: 20 }, () => dbm.vote('slack', null, 'parallel-voter')));
+  expect((await dbm.one('SELECT COUNT(*) AS n FROM votes WHERE anonymous=?', 'parallel-voter')).n).toBe(1);
+});
+
+test('PostgreSQL preserves case-insensitive account uniqueness', async () => {
+  await dbm.run(
+    'INSERT INTO users(id,email,nickname) VALUES(?,?,?)',
+    'case-first',
+    'MixedCase@example.test',
+    'CaseBuilder',
+  );
+  await expect(
+    dbm.run(
+      'INSERT INTO users(id,email,nickname) VALUES(?,?,?)',
+      'case-second',
+      'mixedcase@example.test',
+      'other-name',
+    ),
+  ).rejects.toMatchObject({ code: '23505' });
+  await expect(
+    dbm.run(
+      'INSERT INTO users(id,email,nickname) VALUES(?,?,?)',
+      'case-third',
+      'other@example.test',
+      'casebuilder',
+    ),
+  ).rejects.toMatchObject({ code: '23505' });
 });

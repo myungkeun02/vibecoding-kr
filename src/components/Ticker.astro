@@ -2,7 +2,7 @@
 import { totals } from '../lib/db';
 import { apps, priceLabel } from '../lib/apps';
 import { money } from '../lib/config';
-const t = totals();
+const t = await totals();
 const tape = apps.filter((a) => a.priceMonthly !== null).slice(0, 12);
 ---
 

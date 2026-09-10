@@ -28,18 +28,18 @@ const pageLabels: Record<string, string> = {
   '/rebuild-prompt': '사이트 제작 요청문',
   '/404': '없는 페이지',
 };
-const t = totals(),
-  counts = voteCounts();
-const days = all(
-  "SELECT day,SUM(count) AS n FROM analytics WHERE event='pageview' AND day>=date('now','-30 days') GROUP BY day ORDER BY day DESC",
+const t = await totals(),
+  counts = await voteCounts();
+const days = await all(
+  "SELECT day,SUM(count) AS n FROM analytics WHERE event='pageview' AND day>=(CURRENT_DATE - INTERVAL '30 days') GROUP BY day ORDER BY day DESC",
 );
-const events = all(
-  "SELECT event,SUM(count) AS n FROM analytics WHERE day>=date('now','-30 days') GROUP BY event",
+const events = await all(
+  "SELECT event,SUM(count) AS n FROM analytics WHERE day>=(CURRENT_DATE - INTERVAL '30 days') GROUP BY event",
 );
-const popular = all(
-  "SELECT path,SUM(count) AS n FROM analytics WHERE event='pageview' AND day>=date('now','-30 days') GROUP BY path ORDER BY n DESC LIMIT 20",
+const popular = await all(
+  "SELECT path,SUM(count) AS n FROM analytics WHERE event='pageview' AND day>=(CURRENT_DATE - INTERVAL '30 days') GROUP BY path ORDER BY n DESC LIMIT 20",
 );
-const subscribers = all("SELECT COUNT(*) AS n FROM waitlist WHERE status='active'")[0].n;
+const subscribers = (await all("SELECT COUNT(*) AS n FROM waitlist WHERE status='active'"))[0].n;
 ---
 
 <Base title="함께 만든 대체 현황"
