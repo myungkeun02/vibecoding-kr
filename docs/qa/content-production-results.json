@@ -1,0 +1,24 @@
+{
+  "checkedAt": "2026-09-16T11:06:16.859Z",
+  "origin": "https://vibepan.com",
+  "status": "PASS",
+  "sourceCommit": "2f47e21b8931c1d07560c69d42ee50a41418383c",
+  "deploymentId": "b874b30e-7b75-4308-8060-9d00550c4287",
+  "counts": {
+    "guides": 121,
+    "services": 0,
+    "builds": 0
+  },
+  "checks": [
+    "light: home, stats, SaaS, community, login, signup; 360/390/768/1440px, no overflow",
+    "dark: home, stats, SaaS, community, login, signup; 360/390/768/1440px, no overflow",
+    "Public totals match visible content counts and link to corresponding lists",
+    "No monetary estimate or animated savings counter",
+    "Self-reported experience responses remain separate from public review counts",
+    "No browser exceptions; read-only check, no production content added"
+  ],
+  "environment": "Chromium phone emulation; public DNS resolution with normal TLS verification",
+  "databaseCountsVerified": true,
+  "ciUrl": "https://github.com/myungkeun02/vibecoding-kr/actions/runs/35088348338",
+  "ciResult": "success"
+}

@@ -17,3 +17,9 @@ PostgreSQL에서 공개 상태·게시판·연결 도구·삭제 여부가 집�
 
 - [현황 · 다크](screenshots/content-stats-dark-390.png)
 - [현황 · 라이트](screenshots/content-stats-light-390.png)
+
+## 운영 도메인 확인
+
+운영 DB를 직접 조회한 공개 가이드 121개·SaaS 0개·제작 후기 0건이 실제 화면 및 API와 일치했다. 운영 콘텐츠는 추가·변경하지 않고 확인했다. 홈·현황·SaaS·커뮤니티·로그인·회원가입을 라이트·다크 모드와 360·390·768·1440px에서 확인했고 가로 넘침이나 브라우저 오류가 없었다. 수치는 각 콘텐츠 목록에 연결되며 기존 금액 합계는 표시되지 않는다.
+
+[운영 검증 결과](content-production-results.json) · [모바일 현황](screenshots/content-live-stats-light-390.png) · [모바일 홈](screenshots/content-live-home-dark-390.png)
