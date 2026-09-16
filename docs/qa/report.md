@@ -109,4 +109,12 @@ Hosting.kr의 네임서버를 Cloudflare Free로 변경하고 Railway CNAME·소
 
 실제 운영 HTTPS에서 홈·상세·health, canonical·sitemap·robots의 새 주소, 공유 이미지, 비공개 HTML 캐시 정책, HTTP 및 www의 경로·쿼리 보존 이동을 확인했다. 임시 계정으로 가입·Secure/HttpOnly/Lax 세션·글 작성·이미지 업로드·투표를 실행했고 다른 출처의 multipart 요청은 403으로 차단됐다. 글·계정 삭제 후 글과 이미지 URL의 404도 확인했다. 실제 내장 브라우저에서도 운영 홈페이지가 표시됐다. [domain-results.json](domain-results.json)에 결과를 기록했다.
 
-이 작업은 배포·DNS 설정 변경이며 앱 소스는 이전에 검증한 버전과 같다. 운영 OAuth와 실제 메일 발송은 여전히 미설정이며 Infisical은 [도입 제안](../secrets.md) 단계다.
+이 작업은 배포·DNS 설정 변경이며 앱 소스는 이전에 검증한 버전과 같다. 이 검사 시점에는 운영 OAuth와 실제 메일 발송이 미설정이었으며, OAuth 후속 결과는 아래에 기록했다. Infisical은 [도입 제안](../secrets.md) 단계다.
+
+## 2026-09-16 운영 Google·GitHub 인증 연결
+
+GitHub의 기존 앱에 운영 HTTPS 콜백을 추가했고, Google은 별도 운영 프로젝트·웹 클라이언트를 생성해 로컬 개발 설정과 분리했다. Google 앱은 외부 사용자 대상 프로덕션 상태이며 `openid`, 이메일, 기본 프로필 범위만 등록했다. 두 공급자의 운영 키를 Railway에 등록한 배포 `67e18c0b-f62c-49b8-bf2d-322c8672de71`가 성공했다. 앱 소스 변경은 없으며 준비 중 안내가 두 로그인 버튼으로 바뀌었다.
+
+운영 서버에서 두 버튼, 올바른 공급자 주소·운영 콜백, PKCE/S256·state, Secure/HttpOnly/Lax OAuth 쿠키, 잘못된 콜백 거부와 사용한 state 쿠키 제거를 확인했다. 실제 내장 브라우저에서 각 공급자의 인증 동의를 거쳐 `/onboarding`에 도착했다. 이는 서버의 실제 토큰 교환과 검증된 프로필 확인이 성공했음을 의미한다. 사용자의 닉네임·약관 선택 및 최초 소셜 가입 완료 후 세션·재로그인은 아직 확인하지 않았으며, 계정을 임의로 생성하지 않았다. [oauth-production-results.json](oauth-production-results.json)에 범위를 남겼다.
+
+도메인 변경 직후 로컬 OS DNS가 이전 등록 기관의 주차 주소를 반환해 초기 자동 요청이 시간 초과됐다. 후속 HTTPS 검사는 공개 DNS(1.1.1.1/8.8.8.8)에서 현재 주소를 조회하고 원래 호스트명과 정상 TLS 검증을 유지해 수행했다. 시스템 DNS 설정은 바꾸지 않았다. 실제 내장 브라우저에서도 두 공급자의 왕복 인증이 성공했으나, 모든 통신사의 DNS 전파 완료를 주장하지 않는다.

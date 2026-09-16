@@ -1,0 +1,55 @@
+{
+  "checkedAt": "2026-09-16T08:06:20.681Z",
+  "origin": "https://vibepan.com",
+  "dnsResolver": "1.1.1.1 / 8.8.8.8 (local OS resolver still has parking records; hostname and TLS verification preserved)",
+  "checks": {
+    "github": {
+      "loginButton": "PASS",
+      "authorizationRedirect": "PASS",
+      "productionCallback": "PASS",
+      "pkceState": "PASS",
+      "minimalScopes": "PASS",
+      "secureOAuthCookie": "PASS",
+      "invalidCallbackRejected": "PASS",
+      "consumedStateCleared": "PASS",
+      "realProviderConsent": "PASS",
+      "realTokenExchangeAndProfile": "PASS",
+      "onboardingReturn": "PASS",
+      "firstSocialSignupAndSession": "PENDING_USER",
+      "returningSocialLogin": "NOT_RUN"
+    },
+    "google": {
+      "loginButton": "PASS",
+      "authorizationRedirect": "PASS",
+      "productionCallback": "PASS",
+      "pkceState": "PASS",
+      "minimalScopes": "PASS",
+      "secureOAuthCookie": "PASS",
+      "invalidCallbackRejected": "PASS",
+      "consumedStateCleared": "PASS",
+      "realProviderConsent": "PASS",
+      "realTokenExchangeAndProfile": "PASS",
+      "onboardingReturn": "PASS",
+      "firstSocialSignupAndSession": "PENDING_USER",
+      "returningSocialLogin": "NOT_RUN"
+    }
+  },
+  "status": "PASS_AUTHENTICATION_ONBOARDING_PENDING_USER",
+  "completedAt": "2026-09-16T08:09:16.198Z",
+  "deploymentId": "67e18c0b-f62c-49b8-bf2d-322c8672de71",
+  "publicSourceCommit": "822fa2a11f0c6ceb2b8913a63b86d308df2deb97",
+  "configuration": {
+    "productionOrigin": "https://vibepan.com",
+    "github": "Existing app, exact production callback added; local callbacks retained",
+    "google": "Separate production project and web client; external users; published; only openid/email/profile",
+    "localDevelopmentCredentials": "UNCHANGED",
+    "sessionSecret": "UNCHANGED",
+    "infisical": "NOT_CONFIGURED"
+  },
+  "notes": [
+    "Application source unchanged; only provider settings and Railway environment updated.",
+    "No real user account was created by the assistant; nickname and agreement remain a user step.",
+    "Local OS DNS still returned old parking addresses; public-DNS HTTPS tests kept the hostname and certificate verification.",
+    "Actual browser provider authorization and token exchange succeeded for both providers."
+  ]
+}
