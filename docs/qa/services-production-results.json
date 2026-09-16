@@ -1,0 +1,21 @@
+{
+  "checkedAt": "2026-09-16T10:54:35.386Z",
+  "origin": "https://vibepan.com",
+  "status": "PASS",
+  "sourceCommit": "706195063a4d4240c01bdb382956b7fa4e173764",
+  "deploymentId": "785bca44-9861-4b80-b888-2fd1063d8739",
+  "checks": [
+    "Public SaaS list and empty state: light/dark, 360/390/768/1440px",
+    "Anonymous submission redirects to login with return path",
+    "Real mobile form and image upload create a pending SaaS; author preview works",
+    "Pending detail, attachment, sitemap and public list remain private",
+    "My activity shows registration; owner can edit and delete through the UI",
+    "Temporary service and account removed; no test service was published",
+    "No browser exceptions"
+  ],
+  "environment": "Chromium phone emulation; public DNS resolution with normal TLS verification",
+  "moderation": "Full publish/review flow verified locally against isolated PostgreSQL; production reviewer account awaits user designation",
+  "ciUrl": "https://github.com/myungkeun02/vibecoding-kr/actions/runs/35087344380",
+  "cleanup": "Temporary account, registration and uploaded local image removed; production users preserved",
+  "ciResult": "success"
+}

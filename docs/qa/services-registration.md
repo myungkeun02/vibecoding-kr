@@ -21,3 +21,11 @@
 - [모바일 공개 소개](screenshots/saas-published-390.png)
 
 최종 결과: 타입 검사 오류 0·경고 0(기존 클립보드 호환 API 안내 1개), 단위 검사 26개, 브라우저 시나리오 26개, PostgreSQL 재시작·백업/복원, 로컬 운영 HTTPS 검사 모두 통과했다. 운영 DB는 배포 전에 별도의 비공개 파일로 백업했다.
+
+## 실제 도메인 확인
+
+`https://vibepan.com`에 배포한 뒤 모바일 브라우저에서 회원 등록 → SaaS 작성·이미지 첨부 → 검토 중 비공개 → 내 활동 → 수정 → 삭제를 확인했다. 목록은 라이트·다크 모드와 360·390·768·1440px에서 가로 넘침이 없었다. 시험 계정·서비스·첨부 파일은 정리했고 공개 승인을 하지 않았다. 공개 승인 전체 흐름은 격리된 PostgreSQL에서 확인했으며, 운영 환경의 검토 담당 계정은 사용자 지정 대기 중이다.
+
+- [운영 검증 결과](services-production-results.json)
+- [운영 모바일 목록 · 라이트](screenshots/saas-live-list-light-390.png)
+- [운영 모바일 목록 · 다크](screenshots/saas-live-list-dark-390.png)
