@@ -195,3 +195,7 @@ export const getComments = async (id: string) =>
 export async function audit(actor: string | null, action: string, target: string) {
   await run('INSERT INTO audit(actor,action,target) VALUES(?,?,?)', actor, action, target);
 }
+
+export async function settingEnabled(key: 'registration_open' | 'saas_submissions_open') {
+  return (await one('SELECT value FROM site_settings WHERE key=?', key))?.value !== false;
+}

@@ -1,0 +1,82 @@
+---
+import '../../styles/global.css';
+import '../../styles/services.css';
+import '../../styles/admin.css';
+import { siteUrl } from '../../lib/config';
+const { title = '운영 현황', section = '', guest = false } = Astro.props;
+const actor = Astro.locals.admin;
+const nav = [
+  ['', '운영 현황', 'overview'],
+  ['services', 'SaaS·가이드', 'services'],
+  ['edits', '수정 제안', 'edits'],
+  ['users', '회원', 'users'],
+  ['community', '커뮤니티', 'community'],
+  ['analytics', '데이터 분석', 'analytics'],
+  ['access', '관리자 권한', 'access'],
+  ['audit', '조치 기록', 'audit'],
+  ['settings', '운영 설정', 'settings'],
+];
+---
+
+<!doctype html>
+<html lang="ko" data-theme="light">
+  <head
+    ><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta
+      name="robots"
+      content="noindex,nofollow,noarchive"
+    /><meta name="csrf-token" content={Astro.locals.csrf} /><title>{title} · 바이브판 관리</title><link
+      rel="icon"
+      href="/favicon.ico"
+    /></head
+  >
+  <body class:list={['admin-body', { 'admin-guest': guest }]}>
+    {
+      !guest && (
+        <aside class="admin-sidebar">
+          <>
+            <a href="/" class="admin-brand">
+              <>
+                <img src="/brand/vibepan-robot-128.webp" alt="" width="34" height="34" />
+                <span>
+                  바이브판 <small>관리자</small>
+                </span>
+              </>
+            </a>
+            <nav aria-label="관리자 메뉴">
+              {nav.map(([path, label, key]) => (
+                <a href={'/' + path} aria-current={section === key ? 'page' : undefined}>
+                  {label}
+                </a>
+              ))}
+            </nav>
+            <div class="admin-sidebar-foot">
+              <>
+                <a href={siteUrl} target="_blank" rel="noopener">
+                  서비스 열기 ↗
+                </a>
+                <p>{actor?.email}</p>
+                <form data-admin-form action="/api/admin/v1/logout" method="post">
+                  <>
+                    <input type="hidden" name="csrf" value={Astro.locals.csrf} />
+                    <button class="text-button" type="submit">
+                      로그아웃
+                    </button>
+                    <p class="form-status" role="status" />
+                  </>
+                </form>
+              </>
+            </div>
+          </>
+        </aside>
+      )
+    }
+    <main class="admin-main">
+      <header class="admin-page-head">
+        <div><p class="eyebrow">VIBEPAN / ADMIN</p><h1>{title}</h1></div>{
+          actor && <span class="badge">{actor.role === 'owner' ? '최초 관리자' : '관리자'}</span>
+        }
+      </header><slot />
+    </main>
+    <script src="../../admin/client.ts"></script>
+  </body>
+</html>

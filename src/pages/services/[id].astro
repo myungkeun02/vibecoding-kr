@@ -12,7 +12,6 @@ if (!s) Astro.response.status = 404;
 if (s?.catalog_slug) return Astro.redirect('/' + s.catalog_slug, 302);
 const builds = s ? (await posts(new URLSearchParams({ service: s.id, board: 'builds' }))).items : [];
 const owner = s && Astro.locals.user?.id === s.user_id;
-const reviewer = Astro.locals.user?.role === 'admin';
 ---
 
 <Base
@@ -26,7 +25,7 @@ const reviewer = Astro.locals.user?.role === 'admin';
   {
     s ? (
       <article class="service-detail">
-        {(owner || reviewer) && (
+        {owner && (
           <aside class="service-review-status" role="status">
             <strong>{serviceStatuses[s.status]}</strong>
             <p>
@@ -113,11 +112,6 @@ const reviewer = Astro.locals.user?.role === 'admin';
               <p class="form-status" role="status" />
             </form>
           </div>
-        )}
-        {reviewer && (
-          <a class="small accent" href="/admin#services">
-            SaaS 등록 관리 ↗
-          </a>
         )}
         <p class="section">
           <a href="/#directory">← SaaS 목록으로</a>

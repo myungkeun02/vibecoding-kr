@@ -1,9 +1,10 @@
 {
   "status": "PASS",
-  "at": "2026-09-16T13:36:07.284Z",
+  "at": "2026-09-16T14:10:53.687Z",
   "checks": [
     "real process restart",
-    "session persists",
+    "public and separate admin sessions persist",
+    "admin membership and action audit survive restart and restore",
     "posts persist",
     "submitted SaaS and review state persist through restart and restore",
     "approved seeded SaaS edit, guide and proposal survive restart, reseed and restore",

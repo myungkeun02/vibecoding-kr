@@ -90,7 +90,7 @@ const board = p?.board || Astro.url.searchParams.get('board') || 'builds';
           ><span>게시판</span><select name="board" aria-label="게시판"
             >{
               Object.entries(boards)
-                .filter(([k]) => k !== 'notice' || Astro.locals.user?.role === 'admin')
+                .filter(([k]) => k !== 'notice')
                 .map(([k, v]) => (
                   <option value={k} selected={board === k}>
                     {v}

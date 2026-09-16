@@ -1,0 +1,10 @@
+---
+const { path, label, fields = {}, confirm } = Astro.props;
+---
+
+<form data-admin-form action={'/api/admin/v1/' + path} method="post" data-confirm={confirm}>
+  <input type="hidden" name="csrf" value={Astro.locals.csrf} />{
+    Object.entries(fields).map(([name, value]) => <input type="hidden" name={name} value={String(value)} />)
+  }<button type="submit" class="button secondary small">{label}</button><p class="form-status" role="status">
+  </p>
+</form>

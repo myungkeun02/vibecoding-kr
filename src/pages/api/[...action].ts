@@ -1,7 +1,7 @@
 import { readLimited } from '../../lib/request';
 import type { APIRoute } from 'astro';
 import { z } from 'zod';
-import { transaction, run, one, rate, event, vote, totals, getPost, audit } from '../../lib/db';
+import { transaction, run, one, rate, event, vote, totals, getPost, settingEnabled } from '../../lib/db';
 import {
   id,
   email,
@@ -18,14 +18,7 @@ import { getApp } from '../../lib/apps';
 import { absolute, secret } from '../../lib/config';
 import { sendMail, mailAvailable } from '../../lib/mail';
 import { createHmac } from 'node:crypto';
-import {
-  submitService,
-  deleteService,
-  reviewService,
-  reviewServiceEdit,
-  cancelServiceEdit,
-  visibleService,
-} from '../../lib/services';
+import { submitService, deleteService, cancelServiceEdit, visibleService } from '../../lib/services';
 function bad(message: string, status = 400): never {
   throw Object.assign(new Error(message), { status });
 }
@@ -85,10 +78,6 @@ export const POST: APIRoute = async (ctx) => {
       if (!user) bad('로그인 후 이용해 주세요.', 401);
       return user;
     };
-    const admin = () => {
-      requireUser();
-      if (user.role !== 'admin') bad('관리자만 이용할 수 있어요.', 403);
-    };
     const ownPost = async (pid: string) => {
       requireUser();
       const p = await getPost(pid);
@@ -100,6 +89,7 @@ export const POST: APIRoute = async (ctx) => {
     await transaction(async () => {
       switch (action) {
         case 'auth/register': {
+          if (!(await settingEnabled('registration_open'))) bad('지금은 신규 가입을 받지 않습니다.', 403);
           const e = email(b.email);
           if (!e) bad('이메일 형식을 확인해 주세요.');
           const nick = String(b.nickname || '').trim();
@@ -128,6 +118,7 @@ export const POST: APIRoute = async (ctx) => {
           break;
         }
         case 'auth/oauth-register': {
+          if (!(await settingEnabled('registration_open'))) bad('지금은 신규 가입을 받지 않습니다.', 403);
           const payload = verified(ctx.cookies.get('oauth_pending')?.value);
           if (!payload) bad('가입 절차를 진행할 수 있는 시간이 지났어요. 소셜 로그인을 다시 시도해 주세요.');
           const p = JSON.parse(Buffer.from(payload, 'base64url').toString());
@@ -330,7 +321,7 @@ export const POST: APIRoute = async (ctx) => {
         case 'posts/update': {
           requireUser();
           const p = postSchema.parse(b);
-          if (p.board === 'notice') admin();
+          if (p.board === 'notice') bad('공지는 관리자 전용 화면에서 작성해 주세요.', 403);
           const linkedService = p.tool.startsWith('service:') ? await visibleService(p.tool.slice(8)) : null;
           if (p.tool && !getApp(p.tool) && !linkedService) bad('관련 도구를 확인해 주세요.');
           const toolSlug = linkedService ? linkedService.catalog_slug : p.tool || null;
@@ -499,6 +490,8 @@ export const POST: APIRoute = async (ctx) => {
         case 'services/update': {
           requireUser();
           if (action === 'services/update' && !b.id) bad('수정할 서비스를 확인해 주세요.');
+          if (action === 'services/create' && !(await settingEnabled('saas_submissions_open')))
+            bad('지금은 새 SaaS 등록을 받지 않습니다.', 403);
           const submitted = await submitService(
             b,
             user.id,
@@ -508,12 +501,6 @@ export const POST: APIRoute = async (ctx) => {
           result.redirect = submitted.editId
             ? '/services/edits/' + submitted.editId
             : '/services/' + submitted.serviceId + '?submitted=1';
-          break;
-        }
-        case 'services/edits/review': {
-          admin();
-          await reviewServiceEdit(b, user.id);
-          result.redirect = '/admin#service-edits';
           break;
         }
         case 'services/edits/cancel': {
@@ -526,12 +513,6 @@ export const POST: APIRoute = async (ctx) => {
           requireUser();
           await deleteService(b.id, user.id, b.revision);
           result.redirect = '/me#my-services';
-          break;
-        }
-        case 'services/review': {
-          admin();
-          await reviewService(b, user.id);
-          result.redirect = '/admin#services';
           break;
         }
         case 'suggest': {
@@ -599,67 +580,6 @@ export const POST: APIRoute = async (ctx) => {
         case 'analytics': {
           if (!['search', 'copy', 'share'].includes(b.event)) bad('알 수 없는 이벤트예요.');
           await event(b.event, b.slug && getApp(b.slug) ? '/' + b.slug : '/');
-          break;
-        }
-        case 'admin/action': {
-          admin();
-          const target = String(b.target),
-            op = b.operation;
-          await transaction(async () => {
-            switch (op) {
-              case 'user-suspend':
-              case 'user-restore': {
-                if (target === user.id) bad('자신의 계정은 제한할 수 없어요.');
-                await run(
-                  'UPDATE users SET status=? WHERE id=?',
-                  op === 'user-suspend' ? 'suspended' : 'active',
-                  target,
-                );
-                await run('DELETE FROM sessions WHERE user_id=?', target);
-                break;
-              }
-              case 'post-hide':
-              case 'post-restore':
-                await run(
-                  "UPDATE posts SET status=? WHERE id=? AND status<>'deleted'",
-                  op === 'post-hide' ? 'hidden' : 'active',
-                  target,
-                );
-                break;
-              case 'comment-hide':
-              case 'comment-restore':
-                await run(
-                  "UPDATE comments SET status=? WHERE id=? AND status<>'deleted'",
-                  op === 'comment-hide' ? 'hidden' : 'active',
-                  target,
-                );
-                break;
-              case 'post-pin':
-              case 'post-unpin':
-                await run('UPDATE posts SET pinned=? WHERE id=?', op === 'post-pin' ? 1 : 0, target);
-                break;
-              case 'report-resolve':
-              case 'report-dismiss':
-                await run(
-                  'UPDATE reports SET status=? WHERE id=?',
-                  op === 'report-resolve' ? 'resolved' : 'dismissed',
-                  target,
-                );
-                break;
-              case 'suggest-accept':
-              case 'suggest-reject':
-                await run(
-                  'UPDATE suggestions SET status=? WHERE id=?',
-                  op === 'suggest-accept' ? 'accepted_pending_release' : 'rejected',
-                  target,
-                );
-                break;
-              default:
-                bad('알 수 없는 운영 작업이에요.');
-            }
-            await audit(user.id, op, target);
-          });
-          result = { ok: true, redirect: '/admin' };
           break;
         }
         default:

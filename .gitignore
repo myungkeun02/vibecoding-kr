@@ -16,3 +16,7 @@ reference/
 session-secret*.txt
 *.pem
 docs/qa/playwright-results.json
+
+.wrangler/
+.dev.vars
+.dev.vars.*

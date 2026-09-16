@@ -1,0 +1,51 @@
+---
+import Layout from '../../layouts/admin/Layout.astro';
+import { siteSettings } from '../../admin/operations';
+const settings = await siteSettings(),
+  owner = Astro.locals.admin?.role === 'owner';
+---
+
+<Layout title="운영 설정" section="settings"
+  ><section class="admin-panel admin-editor">
+    <h2>가입과 등록</h2><p class="admin-help">
+      현재 사용자 가입과 SaaS 등록은 유지합니다. 점검이 필요할 때 신규 요청만 잠시 중지할 수 있습니다. 기존
+      회원 로그인과 공개된 내용은 유지됩니다.
+    </p><form
+      data-admin-form
+      action="/api/admin/v1/settings"
+      method="post"
+      data-confirm="선택한 가입·등록 설정을 적용할까요?"
+    >
+      <input type="hidden" name="csrf" value={Astro.locals.csrf} />{
+        [
+          ['registration_open', '신규 회원가입'],
+          ['saas_submissions_open', '회원의 새 SaaS 등록'],
+        ].map(([key, label]) => (
+          <label class="form-field">
+            <>
+              <span>{label}</span>
+              <select name={key} disabled={!owner}>
+                <>
+                  <option value="true" selected={settings[key] !== false}>
+                    허용
+                  </option>
+                  <option value="false" selected={settings[key] === false}>
+                    일시 중지
+                  </option>
+                </>
+              </select>
+            </>
+          </label>
+        ))
+      }{
+        owner ? (
+          <button type="submit" class="button primary">
+            설정 저장
+          </button>
+        ) : (
+          <p>설정 변경은 최초 관리자만 가능합니다.</p>
+        )
+      }<p class="form-status" role="status"></p>
+    </form>
+  </section></Layout
+>

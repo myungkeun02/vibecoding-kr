@@ -1,18 +1,58 @@
 {
-  "startedAt": "2026-09-16T13:38:12.703Z",
-  "durationMs": 44916.193,
-  "passed": 30,
+  "startedAt": "2026-09-16T14:17:27.090Z",
+  "durationMs": 56348.405,
+  "passed": 34,
   "failed": 0,
   "flaky": 0,
   "skipped": 0,
   "cases": [
+    {
+      "title": "community report review retains filters and shows hidden content to administrators",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 1230
+        }
+      ]
+    },
+    {
+      "title": "public and admin surfaces reject session reuse, legacy escalation, forged hosts and CSRF",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 366
+        }
+      ]
+    },
+    {
+      "title": "console adds and edits SaaS, manages members, records actions and renders across screen sizes",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 2719
+        }
+      ]
+    },
+    {
+      "title": "owner manages access and signup settings without giving other admins that permission",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 686
+        }
+      ]
+    },
     {
       "title": "seeded SaaS supports member guide edits, private comparison, admin approval and shared search",
       "status": "expected",
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 6074
+          "durationMs": 3922
         }
       ]
     },
@@ -22,7 +62,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 862
+          "durationMs": 1089
         }
       ]
     },
@@ -32,7 +72,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 742
+          "durationMs": 1030
         }
       ]
     },
@@ -42,7 +82,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 1075
+          "durationMs": 1339
         }
       ]
     },
@@ -52,7 +92,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 2633
+          "durationMs": 2743
         }
       ]
     },
@@ -62,7 +102,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 1064
+          "durationMs": 1215
         }
       ]
     },
@@ -72,7 +112,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 2192
+          "durationMs": 2935
         }
       ]
     },
@@ -82,7 +122,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 3832
+          "durationMs": 4098
         }
       ]
     },
@@ -92,7 +132,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 3916
+          "durationMs": 4344
         }
       ]
     },
@@ -102,7 +142,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 581
+          "durationMs": 755
         }
       ]
     },
@@ -112,7 +152,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 717
+          "durationMs": 1012
         }
       ]
     },
@@ -122,7 +162,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 1024
+          "durationMs": 1389
         }
       ]
     },
@@ -132,7 +172,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 1792
+          "durationMs": 1944
         }
       ]
     },
@@ -142,7 +182,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 642
+          "durationMs": 777
         }
       ]
     },
@@ -152,7 +192,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 754
+          "durationMs": 959
         }
       ]
     },
@@ -162,7 +202,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 3903
+          "durationMs": 4083
         }
       ]
     },
@@ -172,7 +212,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 188
+          "durationMs": 246
         }
       ]
     },
@@ -182,7 +222,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 201
+          "durationMs": 270
         }
       ]
     },
@@ -192,7 +232,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 184
+          "durationMs": 226
         }
       ]
     },
@@ -202,7 +242,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 39
+          "durationMs": 56
         }
       ]
     },
@@ -212,7 +252,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 188
+          "durationMs": 251
         }
       ]
     },
@@ -222,7 +262,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 149
+          "durationMs": 206
         }
       ]
     },
@@ -232,7 +272,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 160
+          "durationMs": 215
         }
       ]
     },
@@ -242,7 +282,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 1451
+          "durationMs": 2076
         }
       ]
     },
@@ -252,7 +292,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 131
+          "durationMs": 176
         }
       ]
     },
@@ -262,7 +302,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 247
+          "durationMs": 325
         }
       ]
     },
@@ -272,7 +312,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 879
+          "durationMs": 1192
         }
       ]
     },
@@ -282,7 +322,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 6827
+          "durationMs": 9299
         }
       ]
     },
@@ -292,7 +332,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 104
+          "durationMs": 138
         }
       ]
     },
@@ -302,7 +342,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 838
+          "durationMs": 1122
         }
       ]
     }

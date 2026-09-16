@@ -36,7 +36,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm validate && pnpm check && pnpm test && pnpm build
       - run: pnpm exec playwright install --with-deps chromium
-      - run: pnpm test:e2e && pnpm test:persistence && pnpm test:production && pnpm qa:summary
+      - run: pnpm test:e2e && pnpm test:persistence && pnpm test:production && pnpm test:admin-gateway && pnpm qa:summary
       - uses: actions/upload-artifact@v4
         if: success()
         with:

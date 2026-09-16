@@ -42,15 +42,17 @@ pnpm test:persistence
 pnpm test:production
 ```
 
-검사 전 전용 PostgreSQL의 `TEST_DATABASE_URL`을 설정합니다. 운영 `DATABASE_URL`은 테스트 대상으로 사용하지 않습니다. 각 검사는 무작위 PostgreSQL 스키마를 생성하고 해당 스키마만 정리합니다. E2E는 빌드된 서버를 8096 포트와 `data/test/e2e`에서 실행하고 해당 테스트 폴더만 초기화합니다. 재시작·복원 테스트는 8097 포트와 별도 새 테스트 폴더를 사용합니다. 8095의 사용자 데이터는 건드리지 않습니다. 실패 추적 파일과 테스트 DB는 공개 대상에서 제외합니다.
+검사 전 전용 PostgreSQL의 `TEST_DATABASE_URL`을 설정합니다. 운영 `DATABASE_URL`은 테스트 대상으로 사용하지 않습니다. 각 검사는 무작위 PostgreSQL 스키마를 생성하고 해당 스키마만 정리합니다. E2E는 빌드된 서버를 8096(서비스)·8098(관리자) 포트와 `data/test/e2e`에서 실행하고 해당 테스트 폴더만 초기화합니다. 재시작·복원 테스트는 8097 포트와 별도 새 테스트 폴더를 사용합니다. 8095의 사용자 데이터는 건드리지 않습니다. 실패 추적 파일과 테스트 DB는 공개 대상에서 제외합니다.
 
 ## 관리자와 콘텐츠 운영
 
-1. 서비스에서 운영자 본인의 계정을 만듭니다.
-2. 같은 DATABASE_URL로 `pnpm admin 운영자이메일`을 실행합니다.
-3. 다시 로그인하여 `/admin`에 접근합니다. 세션은 권한 부여 시 폐기됩니다.
+1. 비공개 배포 환경에 `ADMIN_SITE_URL`과 `ADMIN_BOOTSTRAP_EMAIL`을 설정합니다.
+2. Google OAuth에 관리자 주소의 `/api/admin/auth/callback`을 추가하고 지정한 Google 계정으로 접속합니다.
+3. `admin.vibepan.com`에서 SaaS·가이드, 회원, 커뮤니티, 통계와 추가 관리자 권한을 관리합니다. 일반 가입·등록은 유지합니다.
 
-카탈로그의 유일한 편집 원본은 `data/apps/<slug>.json`입니다. `pnpm validate && pnpm build`로 검사하고 재배포하면 메타데이터만 동기화되며 계정·글·투표는 유지됩니다. `pnpm seed`를 반복해도 초기화되지 않습니다. 숨긴 도구는 `published:false`로 처리하며 기존 참조는 DB에 남깁니다.
+관리자 세션·API는 서비스와 분리되어 있으며 일반 로그인이나 `users.role`로 접근할 수 없습니다. API 계약과 향후 별도 서버·Tailscale 구성은 [관리자 운영 문서](docs/admin-api.md)를 참고하세요.
+
+`data/apps/<slug>.json`은 초기 카탈로그와 출처 자료입니다. 공개 서비스 소개·제작 가이드의 공동 편집 내용은 PostgreSQL에서 관리하며 초기 동기화로 덮어쓰지 않습니다. `pnpm validate && pnpm build`로 검사하고 재배포하면 메타데이터만 동기화되며 계정·글·투표는 유지됩니다. `pnpm seed`를 반복해도 초기화되지 않습니다. 숨긴 도구는 `published:false`로 처리하며 기존 참조는 DB에 남깁니다.
 
 121개 공개 도구는 공식 출처의 아이콘을 목록·상세·관련 도구에 표시합니다. 아이콘은 `public/icons`에 저장해 제공하며 외부 이미지 서비스를 호출하지 않습니다. `pnpm icons:fetch`로 새 도구의 아이콘을 가져오고, 변경된 로고는 `pnpm icons:fetch --only=도구-slug`로 갱신합니다. 출처·갱신 방법은 [아이콘 안내](docs/licenses/TOOL-ICONS.md)에 있습니다.
 

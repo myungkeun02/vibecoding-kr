@@ -34,7 +34,7 @@ docker compose up -d
 docker compose logs --tail=50 app
 ```
 
-호스트의 127.0.0.1:8095에만 바인딩한다. 같은 호스트의 HTTPS 프록시로 접속한다. Docker 예제에서는 `docker compose exec app node scripts/operations.mjs admin <운영자이메일>`로 관리자 권한을 부여한다. 반드시 해당 계정을 먼저 가입하고 부여 후 다시 로그인한다. `docker compose down -v`는 운영 데이터 볼륨을 지우므로 재배포 절차에 쓰지 않는다.
+호스트의 127.0.0.1:8095에만 바인딩한다. 같은 호스트의 HTTPS 프록시로 접속한다. 관리자는 `ADMIN_BOOTSTRAP_EMAIL`과 `ADMIN_SITE_URL`을 비공개 환경에 지정한 뒤 해당 Google 계정으로만 로그인한다. 추가 관리자는 관리 화면에서 지정한다. 일반 회원 role은 관리자 인증에 사용하지 않는다. [관리자 배포 및 API](admin-api.md)를 따른다. `docker compose down -v`는 운영 데이터 볼륨을 지우므로 재배포 절차에 쓰지 않는다.
 
 ## Railway에 올리는 경우
 

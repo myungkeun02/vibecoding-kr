@@ -1,0 +1,66 @@
+---
+import Layout from '../../layouts/admin/Layout.astro';
+import Pagination from '../../components/admin/Pagination.astro';
+import { listRecords } from '../../admin/data';
+import { statusLabels } from '../../admin/labels';
+import { categoryName } from '../../lib/apps';
+const r = await listRecords('services', Astro.url.searchParams);
+---
+
+<Layout title="SaaS·가이드" section="services"
+  ><p class="admin-help">
+    기본 목록과 회원 등록을 함께 관리합니다. 서비스 정보와 제작 가이드를 직접 추가·수정할 수 있습니다.
+  </p><form class="admin-toolbar" action="/services">
+    <input
+      name="q"
+      type="search"
+      aria-label="SaaS 검색"
+      placeholder="서비스 이름 또는 주소"
+      value={Astro.url.searchParams.get('q') || ''}
+    /><select name="status" aria-label="공개 상태"
+      ><option value="">상태 전체</option>{
+        ['pending', 'published', 'hidden', 'rejected'].map((s) => (
+          <option value={s} selected={Astro.url.searchParams.get('status') === s}>
+            {statusLabels[s]}
+          </option>
+        ))
+      }</select
+    ><button class="button secondary" type="submit">검색</button><a
+      href="/services/new"
+      class="button primary">SaaS 추가 +</a
+    >
+  </form><div class="admin-table-wrap">
+    <table class="admin-table">
+      <thead
+        ><tr><th>서비스</th><th>분야</th><th>상태</th><th>가이드</th><th>등록자</th><th>수정일</th></tr
+        ></thead
+      ><tbody
+        >{
+          r.items.map((s) => (
+            <tr data-service-id={s.id}>
+              <>
+                <td class="cell-main">
+                  <>
+                    <a href={'/services/' + s.id}>
+                      <strong>{s.name}</strong>
+                    </a>
+                    <p class="muted small">{s.website_url}</p>
+                  </>
+                </td>
+                <td>{categoryName(s.category)}</td>
+                <td>
+                  <span class="admin-status" data-status={s.status}>
+                    {statusLabels[s.status]}
+                  </span>
+                </td>
+                <td>{s.guide ? '있음' : '없음'}</td>
+                <td>{s.nickname || '기본 목록'}</td>
+                <td>{s.updated_at.slice(0, 10)}</td>
+              </>
+            </tr>
+          ))
+        }</tbody
+      >
+    </table>{!r.items.length && <p class="admin-empty">검색 결과가 없습니다.</p>}
+  </div><Pagination result={r} base="/services" /></Layout
+>

@@ -1,3 +1,4 @@
+import { fixtureAdmin, adminBrowser, adminOrigin, adminGet, adminPost, reviewAction } from './admin-fixtures';
 import { test, expect, request as requestFactory, type APIRequestContext } from '@playwright/test';
 import { connectE2EDatabase } from '../../scripts/test-database.mjs';
 import { readdirSync, readFileSync, mkdirSync } from 'node:fs';
@@ -14,6 +15,8 @@ async function token(api: APIRequestContext, path = '/login') {
   return (await r.text()).match(/name="csrf-token" content="([^"]+)"/)?.[1] || '';
 }
 async function action(api: APIRequestContext, path: string, body: any, csrf?: string) {
+  const review = reviewAction(api, path, body);
+  if (review) return review;
   return api.post('/api/' + path, {
     headers: { Origin: origin, 'x-csrf-token': csrf || (await token(api)) },
     data: body,
@@ -78,7 +81,7 @@ test('all catalog pages, key pages, 404, sitemap and metadata render from the pr
     expect((await request.get(p)).status(), p).toBe(200);
   for (const p of ['/not-a-tool', '/community/not-found', '/category/nope'])
     expect((await request.get(p)).status(), p).toBe(404);
-  expect((await request.get('/admin')).status()).toBe(403);
+  expect((await request.get('/admin', { maxRedirects: 0 })).headers().location).toBe(adminOrigin + '/');
   const sitemap = await (await request.get('/sitemap.xml')).text();
   expect(sitemap).toContain(origin + '/slack');
   expect(sitemap).not.toContain('/admin');
@@ -276,10 +279,15 @@ test('admin permissions, moderation restore, pinned notice, suggestion status an
   request,
 }) => {
   const u = await account(request);
-  expect((await action(request, 'admin/action', { operation: 'post-hide', target: 'x' })).status()).toBe(403);
+  expect((await action(request, 'admin/action', { operation: 'post-hide', target: 'x' })).status()).toBe(401);
   const db = testDb();
-  await db.run("UPDATE users SET role='admin' WHERE email=?", u.email);
-  const pid = await post(request, { board: 'notice', title: '운영 공지 테스트입니다' });
+  await fixtureAdmin(request, u);
+  const notice = await adminPost(request, 'notices', {
+    title: '운영 공지 테스트입니다',
+    body: '관리자 화면에서 작성한 공지의 공개와 숨김을 확인합니다.',
+  });
+  expect(notice.status()).toBe(200);
+  const pid = (await notice.json()).id;
   await action(request, 'admin/action', { operation: 'post-pin', target: pid });
   expect(((await db.one('SELECT pinned FROM posts WHERE id=?', pid)) as any).pinned).toBe(1);
   await action(request, 'report', { type: 'post', target: pid, reason: '관리자 신고 처리 흐름 점검' });
@@ -297,8 +305,8 @@ test('admin permissions, moderation restore, pinned notice, suggestion status an
   expect(((await db.one('SELECT status FROM suggestions WHERE id=?', s.id)) as any).status).toBe(
     'accepted_pending_release',
   );
-  expect((await request.get('/admin')).status()).toBe(200);
-  expect(((await db.one('SELECT COUNT(*) AS n FROM audit')) as any).n).toBeGreaterThan(2);
+  expect((await adminGet(request, '/')).status()).toBe(200);
+  expect(((await db.one('SELECT COUNT(*) AS n FROM admin_audit')) as any).n).toBeGreaterThan(2);
   await db.close();
 });
 test('waitlist normalizes, dedupes, hides existing withdrawal token, honeypot and unsubscribe', async ({
@@ -508,7 +516,7 @@ test('comment update/delete, report resolution, notification read and account su
   expect(
     ((await db.one('SELECT COUNT(*) AS n FROM notifications WHERE user_id=? AND is_read=0', uid)) as any).n,
   ).toBe(0);
-  await db.run("UPDATE users SET role='admin' WHERE id=?", uid);
+  await fixtureAdmin(request, { id: uid });
   await action(request, 'report', { type: 'comment', target: cr.id, reason: '댓글 관리 기능 검증' });
   await action(request, 'admin/action', { operation: 'comment-hide', target: cr.id });
   expect(await (await request.get('/community/' + pid)).text()).not.toContain('수정한 댓글 내용');
@@ -620,14 +628,15 @@ test('Korean copy covers every tool page, narrow layouts, form errors and intern
   }
   const u = await account(page.request);
   const db = testDb();
-  await db.run("UPDATE users SET role='admin' WHERE email=?", u.email);
+  await fixtureAdmin(page.request, u);
+  await adminBrowser(page.context());
   await db.close();
   await page.goto('/suggest?slug=slack');
   await expect(page.getByLabel('관련 도구 (선택)', { exact: true })).toHaveValue('slack');
   expect(
     await page.getByLabel('관련 도구 (선택)', { exact: true }).locator('option:checked').innerText(),
   ).toContain('슬랙');
-  for (const path of ['/admin', '/me', '/stats', '/community/new']) {
+  for (const path of [adminOrigin + '/', '/me', '/stats', '/community/new']) {
     await page.goto(path);
     expect(await page.locator('main').innerText()).not.toMatch(
       /OPERATIONS|YOUR BUILDER LOG|SELF-REPORTED|SHARE YOUR PROCESS|인증 조작/,

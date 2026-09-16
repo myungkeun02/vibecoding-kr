@@ -53,7 +53,6 @@ if (!e) Astro.response.status = 404;
               <p class="form-status" role="status" />
             </form>
           )}
-          {Astro.locals.user.role === 'admin' && <a href="/admin#service-edits">수정 제안 검토</a>}
         </div>
       </section>
     ) : (

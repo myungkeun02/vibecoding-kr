@@ -1,0 +1,11 @@
+name = "vibepan-admin-gateway"
+main = "worker.mjs"
+compatibility_date = "2026-09-16"
+workers_dev = false
+preview_urls = false
+routes = [{ pattern = "admin.vibepan.com", custom_domain = true }]
+[vars]
+ADMIN_ORIGIN = "https://admin.vibepan.com"
+PUBLIC_ORIGIN = "https://vibepan.com"
+[observability]
+enabled = false

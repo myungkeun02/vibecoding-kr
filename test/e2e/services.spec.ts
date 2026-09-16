@@ -1,3 +1,4 @@
+import { fixtureAdmin, adminBrowser, adminOrigin, adminGet, reviewAction } from './admin-fixtures';
 import { test, expect, request as requestFactory, type APIRequestContext } from '@playwright/test';
 import { randomBytes } from 'node:crypto';
 import { mkdirSync, readFileSync } from 'node:fs';
@@ -19,6 +20,8 @@ async function csrf(api: APIRequestContext) {
   return (await (await api.get('/login')).text()).match(/name="csrf-token" content="([^"]+)"/)![1];
 }
 async function action(api: APIRequestContext, path: string, body: any) {
+  const review = reviewAction(api, path, body);
+  if (review) return review;
   return api.post('/api/' + path, {
     headers: { Origin: origin, 'x-csrf-token': await csrf(api) },
     data: body,
@@ -39,7 +42,7 @@ async function register(api: APIRequestContext, admin = false) {
   ).toBe(200);
   const db = connectE2EDatabase();
   const user = await db.one('SELECT id FROM users WHERE email=?', key + '@example.test');
-  if (admin) await db.run("UPDATE users SET role='admin' WHERE id=?", user.id);
+  if (admin) await fixtureAdmin(api, user);
   await db.close();
   return { ...user, password };
 }
@@ -66,6 +69,7 @@ test('members upload SaaS, admins publish, owners revise and delete; media follo
   await register(page.request);
   const adminContext = await browser.newContext();
   await register(adminContext.request, true);
+  await adminBrowser(adminContext);
   const adminPage = await adminContext.newPage();
   const visitor = await browser.newContext({ viewport: { width: 390, height: 844 } });
   const publicPage = await visitor.newPage();
@@ -110,13 +114,11 @@ test('members upload SaaS, admins publish, owners revise and delete; media follo
     );
     await page.goto('/me');
     await expect(page.locator('#my-services').locator('..').locator('..')).toContainText(data.name);
-    await adminPage.goto('/admin');
-    const row = adminPage.locator(`[data-service-id="${sid}"]`);
-    await row.getByText('상세 소개와 이미지', { exact: true }).click();
-    await expect(row.locator('img')).toBeVisible();
-    expect((await adminContext.request.get(origin + media)).status()).toBe(200);
-    await row.getByRole('button', { name: '검토 결과 적용' }).click();
-    await expect(adminPage).toHaveURL(/\/admin#services$/);
+    await adminPage.goto(adminOrigin + '/services/' + sid);
+    await expect(adminPage.locator('[data-service-image-preview]')).toBeVisible();
+    expect((await adminGet(adminContext.request, '/api/admin/v1' + media)).status()).toBe(200);
+    await adminPage.getByRole('button', { name: '검토 결과 적용' }).click();
+    await expect(adminPage).toHaveURL(adminOrigin + '/services?status=pending');
     await publicPage.goto(origin + '/?q=' + encodeURIComponent(data.name));
     await expect(publicPage.locator('.tool-row')).toHaveCount(1);
     await publicPage.goto(origin + '/?q=' + encodeURIComponent(data.name) + '&category=notes');
@@ -246,7 +248,7 @@ test('SaaS permissions, canonical duplicates, stale writes and malicious input a
       (
         await action(other, 'services/review', { id: sid, revision: s.revision, operation: 'publish' })
       ).status(),
-    ).toBe(403);
+    ).toBe(401);
     expect(
       (
         await action(request, 'services/create', {

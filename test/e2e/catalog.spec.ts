@@ -1,3 +1,4 @@
+import { fixtureAdmin, adminBrowser, adminOrigin, adminGet, reviewAction } from './admin-fixtures';
 import { test, expect, type APIRequestContext } from '@playwright/test';
 import { randomBytes } from 'node:crypto';
 import { readFileSync } from 'node:fs';
@@ -5,6 +6,8 @@ import { connectE2EDatabase } from '../../scripts/test-database.mjs';
 const origin = 'http://127.0.0.1:8096';
 const key = () => randomBytes(5).toString('hex');
 async function action(api: APIRequestContext, path: string, body: any) {
+  const review = reviewAction(api, path, body);
+  if (review) return review;
   const csrf = (await (await api.get('/login')).text()).match(/name="csrf-token" content="([^"]+)"/)![1];
   return api.post('/api/' + path, { headers: { Origin: origin, 'x-csrf-token': csrf }, data: body });
 }
@@ -19,7 +22,7 @@ async function member(api: APIRequestContext, admin = false) {
   ).toBe(200);
   const db = connectE2EDatabase();
   const u = await db.one('SELECT id FROM users WHERE email=?', email);
-  if (admin) await db.run("UPDATE users SET role='admin' WHERE id=?", u.id);
+  if (admin) await fixtureAdmin(api, u);
   await db.close();
   return { ...u, email, password };
 }
@@ -50,6 +53,7 @@ test('seeded SaaS supports member guide edits, private comparison, admin approva
   await member(page.request);
   const admin = await browser.newContext();
   await member(admin.request, true);
+  await adminBrowser(admin);
   const visitor = await browser.newContext();
   const visitorPage = await visitor.newPage();
   const db = connectE2EDatabase();
@@ -85,22 +89,23 @@ test('seeded SaaS supports member guide edits, private comparison, admin approva
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
     await page.screenshot({ path: 'docs/qa/screenshots/shared-saas-proposal-390.png', fullPage: true });
     expect((await visitor.request.get(origin + media)).status()).toBe(404);
-    expect((await admin.request.get(origin + media)).status()).toBe(200);
+    expect((await adminGet(admin.request, '/api/admin/v1' + media)).status()).toBe(200);
     expect((await visitor.request.get(page.url(), { maxRedirects: 0 })).status()).toBe(302);
     await visitorPage.goto(origin + '/trello');
     await expect(visitorPage.getByRole('heading', { level: 1 })).toHaveText(original.name);
     const adminPage = await admin.newPage();
-    await adminPage.goto(origin + '/admin#service-edits');
+    await adminPage.goto(adminOrigin + '/edits');
     const row = adminPage.locator(`[data-edit-id="${eid}"]`);
     await row.getByText('수정 전·후 비교', { exact: true }).click();
     await expect(row).toContainText('트렐로 공동 수정 시험');
     const approval = adminPage.waitForResponse(
       (response) =>
-        response.url().endsWith('/api/services/edits/review') && response.request().method() === 'POST',
+        response.url().endsWith('/api/admin/v1/service-edits/' + eid + '/review') &&
+        response.request().method() === 'POST',
     );
     await row.getByRole('button', { name: '수정 검토 결과 적용' }).click();
     expect((await approval).status()).toBe(200);
-    await expect(adminPage).toHaveURL(/\/admin#service-edits$/);
+    await expect(adminPage).toHaveURL(/\/edits$/);
     await visitorPage.reload();
     await expect(visitorPage.getByRole('heading', { level: 1 })).toHaveText('트렐로 공동 수정 시험');
     await expect(visitorPage.locator('main')).toContainText('마감일 알림을 직접 만드는 범위');
@@ -140,6 +145,7 @@ test('any member can propose changes but conflicting reviews, unauthorized edits
   await member(first.request);
   await member(second.request);
   await member(admin.request, true);
+  await adminBrowser(admin);
   const db = connectE2EDatabase();
   let sid = '';
   try {
@@ -184,7 +190,7 @@ test('any member can propose changes but conflicting reviews, unauthorized edits
     expect((await second.request.get('/services/edits/' + aid)).status()).toBe(404);
     expect(
       (await action(first.request, 'services/edits/review', { id: aid, operation: 'accept' })).status(),
-    ).toBe(403);
+    ).toBe(401);
     expect((await action(first.request, 'services/delete', { id: sid, revision: s.revision })).status()).toBe(
       403,
     );
@@ -232,6 +238,7 @@ test('a member adds a guide to another member’s SaaS without JavaScript', asyn
   await member(owner.request);
   await member(editor.request);
   await member(admin.request, true);
+  await adminBrowser(admin);
   const db = connectE2EDatabase();
   let sid = '';
   try {

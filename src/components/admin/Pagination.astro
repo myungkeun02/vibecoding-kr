@@ -1,0 +1,11 @@
+---
+const { result, base } = Astro.props;
+const href = (page: number) =>
+  base + '?' + new URLSearchParams({ ...Object.fromEntries(Astro.url.searchParams), page: String(page) });
+---
+
+<nav class="admin-pagination" aria-label="페이지 이동">
+  {result.page > 1 ? <a href={href(result.page - 1)}>← 이전</a> : <span />}<span
+    >{result.total.toLocaleString()}건 · {result.page} / {result.pages}</span
+  >{result.page < result.pages ? <a href={href(result.page + 1)}>다음 →</a> : <span />}
+</nav>

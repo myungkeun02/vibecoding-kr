@@ -79,7 +79,7 @@ export async function publicServices(params: URLSearchParams, size = 18) {
 export async function visibleService(sid: string, user?: Viewer) {
   const s = await one<Service>(serviceSelect + ' WHERE s.id=?', sid);
   if (!s) return null;
-  if (user?.role === 'admin' || user?.id === s.user_id) return s;
+  if (user?.id === s.user_id) return s;
   return s.status === 'published' && (s.catalog_slug ? s.catalog_active === 1 : s.account_status === 'active')
     ? s
     : null;
@@ -101,14 +101,14 @@ export function serviceContent(s: Service) {
     guide: s.guide,
   };
 }
-async function locked(sid: unknown, revision?: unknown) {
+export async function locked(sid: unknown, revision?: unknown) {
   const s = await one<Service>('SELECT * FROM services WHERE id=? FOR UPDATE', String(sid || ''));
   if (!s) fail('서비스를 찾을 수 없습니다.', 404);
   if (revision !== undefined && Number(revision) !== s.revision)
     fail('다른 수정이 먼저 반영됐습니다. 새로고침 후 다시 확인해 주세요.', 409);
   return s;
 }
-async function validateContent(input: any, userId: string, previous?: Service) {
+export async function validateContent(input: any, userId: string, previous?: Service) {
   const basic = serviceSchema.parse(input);
   const data = { ...basic, guide: parseGuide(input, previous?.guide || null) };
   if (previous?.catalog_slug && !data.guide)
@@ -131,7 +131,7 @@ async function validateContent(input: any, userId: string, previous?: Service) {
     fail('직접 첨부한 이미지나 현재 공개된 이미지를 사용해 주세요.', 403);
   return { data, url, image };
 }
-const contentValues = (data: ServiceContent) => [
+export const contentValues = (data: ServiceContent) => [
   data.name,
   data.website,
   normalizeServiceUrl(data.website)!.key,
@@ -203,33 +203,13 @@ export async function deleteService(sid: unknown, userId: string, revision: unkn
   await run('DELETE FROM services WHERE id=?', s.id);
   await audit(userId, 'service-delete', s.id);
 }
-export async function reviewService(input: any, reviewer: string) {
-  const s = await locked(input.id, input.revision),
-    operation = input.operation,
-    note = String(input.note || '').trim();
-  if (!['publish', 'reject', 'hide'].includes(operation) || note.length > 1000)
-    fail('검토 내용과 작업을 확인해 주세요.');
-  if (operation !== 'publish' && note.length < 5) fail('보완 또는 공개 중지 이유를 5자 이상 적어주세요.');
-  if (operation === 'hide' ? s.status !== 'published' : !['pending', 'hidden'].includes(s.status))
-    fail('처리 상태가 바뀌었습니다. 새로고침해 주세요.', 409);
-  const status = operation === 'publish' ? 'published' : operation === 'reject' ? 'rejected' : 'hidden';
-  await run(
-    "UPDATE services SET status=?,review_note=?,reviewed_by=?,reviewed_at=CURRENT_TIMESTAMP,published_at=CASE WHEN ?='published' THEN CURRENT_TIMESTAMP ELSE NULL END,revision=revision+1 WHERE id=?",
-    status,
-    note,
-    reviewer,
-    status,
-    s.id,
-  );
-  await audit(reviewer, 'service-' + operation, s.id);
-}
 export async function visibleServiceEdit(eid: string, user?: Viewer) {
   if (!user) return null;
   const e = await one<ServiceEdit>(
     'SELECT e.*,s.name,s.catalog_slug,u.nickname FROM service_edits e JOIN services s ON s.id=e.service_id JOIN users u ON u.id=e.user_id WHERE e.id=?',
     eid,
   );
-  return e && (e.user_id === user.id || user.role === 'admin') ? e : null;
+  return e && e.user_id === user.id ? e : null;
 }
 export async function cancelServiceEdit(eid: unknown, userId: string) {
   const e = await one<ServiceEdit>('SELECT * FROM service_edits WHERE id=? FOR UPDATE', String(eid || ''));
@@ -237,50 +217,6 @@ export async function cancelServiceEdit(eid: unknown, userId: string) {
   if (e.status !== 'pending') fail('이미 처리된 제안입니다.', 409);
   await run("UPDATE service_edits SET status='cancelled' WHERE id=?", e.id);
   await audit(userId, 'service-edit-cancel', e.id);
-}
-export async function reviewServiceEdit(input: any, reviewer: string) {
-  const ref = await one<{ service_id: string }>(
-    'SELECT service_id FROM service_edits WHERE id=?',
-    String(input.id || ''),
-  );
-  if (!ref) fail('이미 처리되었거나 없는 제안입니다.', 409);
-  // Match submission/deletion lock order: service first, then its proposal.
-  const s = await locked(ref.service_id);
-  const e = await one<ServiceEdit>(
-    'SELECT * FROM service_edits WHERE id=? FOR UPDATE',
-    String(input.id || ''),
-  );
-  if (!e || e.status !== 'pending') fail('이미 처리되었거나 없는 제안입니다.', 409);
-  const operation = input.operation,
-    note = String(input.note || '').trim();
-  if (!['accept', 'reject'].includes(operation) || note.length > 1000) fail('검토 내용을 확인해 주세요.');
-  if (operation === 'reject' && note.length < 5) fail('보완할 내용을 5자 이상 적어주세요.');
-  if (operation === 'accept') {
-    if (s.revision !== e.base_revision)
-      fail('다른 수정이 먼저 반영됐습니다. 최신 내용으로 다시 제안해 주세요.', 409);
-    if (s.status !== 'published') fail('서비스 공개 상태가 변경됐습니다. 다시 확인해 주세요.', 409);
-    if (!(await one("SELECT id FROM users WHERE id=? AND status='active'", e.user_id)))
-      fail('제안자의 계정 상태를 확인해 주세요.', 409);
-    if (
-      e.after_data.image &&
-      !(await one('SELECT id FROM uploads WHERE id=?', e.after_data.image.slice('/media/'.length)))
-    )
-      fail('제안에 첨부한 이미지가 삭제됐습니다.', 409);
-    await run(
-      'UPDATE services SET name=?,website_url=?,url_key=?,category=?,tagline=?,description=?,pricing=?,relationship=?,image_id=?,guide=?::jsonb,revision=revision+1,updated_at=CURRENT_TIMESTAMP,reviewed_at=CURRENT_TIMESTAMP,reviewed_by=? WHERE id=?',
-      ...contentValues(e.after_data),
-      reviewer,
-      s.id,
-    );
-  }
-  await run(
-    'UPDATE service_edits SET status=?,review_note=?,reviewed_by=?,reviewed_at=CURRENT_TIMESTAMP WHERE id=?',
-    operation === 'accept' ? 'accepted' : 'rejected',
-    note,
-    reviewer,
-    e.id,
-  );
-  await audit(reviewer, 'service-edit-' + operation, e.id);
 }
 export function contentChanges(before: ServiceContent, after: ServiceContent) {
   const fields: Record<string, string> = {

@@ -2,8 +2,10 @@
 import { contentChanges, type ServiceEdit } from '../lib/services';
 interface Props {
   edit: ServiceEdit;
+  administrative?: boolean;
 }
-const { edit: e } = Astro.props;
+const { edit: e, administrative = false } = Astro.props;
+const media = (path: string) => (administrative ? path.replace('/media/', '/api/admin/v1/media/') : path);
 const changes = contentChanges(e.before_data, e.after_data);
 ---
 
@@ -19,7 +21,7 @@ const changes = contentChanges(e.before_data, e.after_data);
                 <>
                   <span class="muted small">수정 전</span>
                   {c.key === 'image' && c.before !== '없음' ? (
-                    <img class="service-image-preview" src={c.before} alt="기존 이미지" />
+                    <img class="service-image-preview" src={media(c.before)} alt="기존 이미지" />
                   ) : (
                     <p>{c.before}</p>
                   )}
@@ -29,7 +31,7 @@ const changes = contentChanges(e.before_data, e.after_data);
                 <>
                   <span class="accent small">수정 제안</span>
                   {c.key === 'image' && c.after !== '없음' ? (
-                    <img class="service-image-preview" src={c.after} alt="수정 제안 이미지" />
+                    <img class="service-image-preview" src={media(c.after)} alt="수정 제안 이미지" />
                   ) : (
                     <p>{c.after}</p>
                   )}

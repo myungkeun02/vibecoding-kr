@@ -10,6 +10,7 @@ const files = [
   'data/icons.json',
   'data/exchange.json',
   'migrations',
+  'infra',
   'scripts',
   'test',
   'public',

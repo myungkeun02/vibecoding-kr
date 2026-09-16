@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "at": "2026-09-16T14:14:02.119Z",
+  "checks": [
+    "real Worker to production-mode Node origin",
+    "fixed origin and trusted forwarded host",
+    "dedicated admin session required",
+    "forged gateway blocked",
+    "HTML form and multipart upload through proxy",
+    "private media visibility",
+    "secure host-only OAuth cookie",
+    "dedicated Google callback"
+  ]
+}

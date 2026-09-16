@@ -1,0 +1,121 @@
+---
+import Layout from '../../layouts/admin/Layout.astro';
+import { dashboard } from '../../admin/data';
+import { categoryName } from '../../lib/apps';
+import { eventLabels } from '../../admin/labels';
+const d = await dashboard(Astro.url.searchParams),
+  max = Math.max(1, ...d.daily.map((x) => x.pageviews));
+---
+
+<Layout title="데이터 분석" section="analytics"
+  ><form class="admin-toolbar" action="/analytics">
+    <select name="days" aria-label="분석 기간"
+      >{
+        [7, 30, 90].map((n) => (
+          <option value={n} selected={d.days === n}>
+            최근 {n}일
+          </option>
+        ))
+      }</select
+    ><button class="button secondary" type="submit">조회</button>
+  </form><div class="admin-metrics">
+    {
+      [
+        ['페이지 열람', d.totals.pageviews, '요청 횟수'],
+        ['신규 가입', d.totals.signups, '현재 남아 있는 계정 기준'],
+        ['프롬프트 복사', d.totals.copies, '복사 버튼 사용 횟수'],
+        ['공개 제작 후기', d.totals.builds, '누적 공개 글 수'],
+      ].map(([name, count, note]) => (
+        <div class="admin-metric">
+          <>
+            <p>{name}</p>
+            <strong>{Number(count).toLocaleString()}</strong>
+            <small>{note}</small>
+          </>
+        </div>
+      ))
+    }
+  </div><section class="admin-panel">
+    <h2>일별 페이지 열람</h2><div
+      class="admin-chart"
+      role="img"
+      aria-label={'최근 ' + d.days + '일의 페이지 열람 추이'}
+    >
+      {
+        d.daily.map((x) => (
+          <a
+            href={'#day-' + x.day}
+            style={'height:' + Math.max(1, (x.pageviews / max) * 100) + '%'}
+            title={x.day + ' · ' + x.pageviews + '회'}
+            aria-label={x.day + ' ' + x.pageviews + '회'}
+          />
+        ))
+      }
+    </div><div class="admin-chart-labels">
+      <span>{d.daily[0]?.day}</span><span>{d.daily.at(-1)?.day}</span>
+    </div>
+  </section><div class="admin-grid">
+    <section class="admin-panel">
+      <h2>주요 동작</h2>{
+        d.events.map((e) => (
+          <div class="admin-bar-row">
+            <>
+              <span>{eventLabels[e.event] || e.event}</span>
+              <strong>{e.count.toLocaleString()}회</strong>
+            </>
+          </div>
+        ))
+      }{!d.events.length && <p class="muted">기록된 동작이 없습니다.</p>}
+    </section><section class="admin-panel">
+      <h2>공개 SaaS 분야</h2>{
+        d.categories.map((c) => (
+          <div class="admin-bar-row">
+            <>
+              <span>{categoryName(c.category)}</span>
+              <strong>{c.count}개</strong>
+            </>
+          </div>
+        ))
+      }
+    </section>
+  </div><section class="admin-panel">
+    <h2>페이지별 열람</h2><p class="admin-help">
+      개별 방문자를 추적하지 않고 화면 유형별 요청 수를 집계합니다.
+    </p>{
+      d.pages.map((p) => (
+        <div class="admin-bar-row">
+          <>
+            <span>{p.path === '/' ? '홈' : p.path}</span>
+            <strong>{p.count.toLocaleString()}회</strong>
+          </>
+        </div>
+      ))
+    }
+  </section><div class="admin-table-wrap">
+    <table class="admin-table">
+      <thead
+        ><tr
+          ><th>날짜 (UTC)</th><th>페이지 열람</th><th>회원가입</th><th>SaaS 등록</th><th>게시글 작성</th></tr
+        ></thead
+      ><tbody
+        >{
+          d.daily.map((row) => (
+            <tr id={'day-' + row.day}>
+              <>
+                <td>{row.day}</td>
+                <td>{row.pageviews.toLocaleString()}</td>
+                <td>{row.signups}</td>
+                <td>{row.services}</td>
+                <td>{row.posts}</td>
+              </>
+            </tr>
+          ))
+        }</tbody
+      >
+    </table>
+  </div><p class="admin-help">
+    일별 집계는 UTC 기준이며 최근 90일까지만 제공합니다. 페이지 열람에는 반복 요청이 포함되어 방문자 수로
+    해석할 수 없습니다. 관리자 화면은 제외하며, 가입·등록·게시글 수는 현재 보존된 데이터 기준입니다. 공개 후기
+    수는 제작 성공을 확인한 건수가 아닙니다.
+  </p></Layout
+>

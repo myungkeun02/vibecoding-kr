@@ -6,6 +6,7 @@ export default defineConfig({
   security: {
     allowedDomains: [
       { hostname: 'vibepan.com', protocol: 'https' },
+      { hostname: 'admin.vibepan.com', protocol: 'https' },
       { hostname: 'www.vibepan.com', protocol: 'https' },
       { hostname: 'vibecoding-kr-production.up.railway.app', protocol: 'https' },
       { hostname: 'localhost', protocol: 'http' },

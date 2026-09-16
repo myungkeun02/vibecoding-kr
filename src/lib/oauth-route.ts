@@ -1,7 +1,7 @@
 import type { APIContext } from 'astro';
 import { oauthEnabled, authorizationUrl, exchangeOAuth, type Provider } from './oauth';
 import { id, sign, verified, cookieOpts, safeReturn, login } from './security';
-import { one } from './db';
+import { one, settingEnabled } from './db';
 export async function handleOAuth(ctx: APIContext, provider: Provider, callback: boolean) {
   if (!oauthEnabled(provider))
     return new Response('소셜 로그인은 준비 중이에요. 로그인 화면에서 이메일로 로그인해 주세요.', {
@@ -42,6 +42,7 @@ export async function handleOAuth(ctx: APIContext, provider: Provider, callback:
       profile.subject,
     );
     if (!u) {
+      if (!(await settingEnabled('registration_open'))) throw new Error('REGISTRATION_CLOSED');
       if (await one('SELECT id FROM users WHERE lower(email)=lower(?)', profile.email))
         throw new Error('OAUTH_EXISTING_EMAIL');
       const pending = Buffer.from(

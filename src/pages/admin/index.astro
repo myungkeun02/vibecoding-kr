@@ -1,0 +1,77 @@
+---
+import Layout from '../../layouts/admin/Layout.astro';
+import { dashboard } from '../../admin/data';
+const d = await dashboard(Astro.url.searchParams),
+  t = d.totals;
+const cards = [
+  ['전체 회원', t.members, '/users', '현재 활성 계정'],
+  ['공개 SaaS', t.services, '/services?status=published', '가이드 ' + t.guides + '개'],
+  ['공개 게시글', t.posts, '/community', '제작 후기 ' + t.builds + '건'],
+  ['최근 가입', t.signups, '/analytics', d.days + '일 기준'],
+];
+const pending = [
+  ['SaaS 등록', t.pending_services, '/services?status=pending'],
+  ['정보·가이드 수정', t.pending_edits, '/edits?status=pending'],
+  ['신고', t.pending_reports, '/community?tab=reports&status=pending'],
+];
+const max = Math.max(1, ...d.daily.map((x) => x.pageviews));
+---
+
+<Layout title="운영 현황" section="overview"
+  ><p class="admin-help">새로 들어온 등록과 수정 제안, 커뮤니티 현황을 확인하세요.</p><div
+    class="admin-metrics"
+  >
+    {
+      cards.map(([label, count, href, note]) => (
+        <a class="admin-metric" href={String(href)}>
+          <>
+            <p>{label}</p>
+            <strong>{Number(count).toLocaleString()}</strong>
+            <small>{note}</small>
+          </>
+        </a>
+      ))
+    }
+  </div><div class="admin-grid">
+    <section class="admin-panel">
+      <div class="admin-toolbar">
+        <h2>검토할 항목</h2><a href="/services/new" class="button secondary small">SaaS 추가 +</a>
+      </div>{
+        pending.map(([label, count, href]) => (
+          <a href={String(href)} class="admin-bar-row">
+            <>
+              <span>{label}</span>
+              <strong>{count}건 →</strong>
+            </>
+          </a>
+        ))
+      }
+    </section><section class="admin-panel">
+      <h2>바로가기</h2><a class="admin-bar-row" href="/community?tab=notice">공지 작성 <span>→</span></a><a
+        class="admin-bar-row"
+        href="/users">회원 조회·관리 <span>→</span></a
+      ><a class="admin-bar-row" href="/access">관리자 권한 <span>→</span></a>
+    </section>
+  </div><section class="admin-panel">
+    <div class="admin-toolbar">
+      <h2>최근 {d.days}일 페이지 열람</h2><a href="/analytics">자세히 보기 →</a>
+    </div><div
+      class="admin-chart"
+      role="img"
+      aria-label={'최근 ' + d.days + '일 페이지 열람 ' + t.pageviews + '회'}
+    >
+      {
+        d.daily.map((x) => (
+          <a
+            href="/analytics"
+            style={'height:' + Math.max(1, (x.pageviews / max) * 100) + '%'}
+            aria-label={x.day + ' ' + x.pageviews + '회'}
+            title={x.day + ' · ' + x.pageviews + '회'}
+          />
+        ))
+      }
+    </div><div class="admin-chart-labels">
+      <span>{d.daily[0]?.day}</span><span>{d.daily.at(-1)?.day}</span>
+    </div><p class="admin-help">페이지를 연 횟수입니다. 방문자 수와 다르며 관리자 화면 열람은 제외합니다.</p>
+  </section></Layout
+>

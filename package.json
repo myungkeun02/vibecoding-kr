@@ -30,6 +30,7 @@
     "qa:summary": "node scripts/qa-summary.mjs",
     "export:public": "node scripts/export-public.mjs",
     "test:production": "node scripts/test-production.mjs",
+    "test:admin-gateway": "node scripts/test-admin-gateway.mjs",
     "icons:fetch": "node scripts/fetch-icons.mjs"
   },
   "dependencies": {

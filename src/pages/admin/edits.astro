@@ -1,0 +1,72 @@
+---
+import Layout from '../../layouts/admin/Layout.astro';
+import ServiceChanges from '../../components/ServiceChanges.astro';
+import Pagination from '../../components/admin/Pagination.astro';
+import { listRecords } from '../../admin/data';
+import { statusLabels } from '../../admin/labels';
+const params = new URLSearchParams(Astro.url.search);
+if (!params.has('status')) params.set('status', 'pending');
+const r = await listRecords('service-edits', params);
+---
+
+<Layout title="수정 제안" section="edits"
+  ><p class="admin-help">
+    수정 전·후와 출처를 확인해 반영하세요. 다른 수정이 먼저 반영됐으면 최신 내용으로 다시 제안해야 합니다.
+  </p><form class="admin-toolbar" action="/edits">
+    <input
+      name="q"
+      type="search"
+      aria-label="수정 제안 검색"
+      placeholder="서비스 이름"
+      value={params.get('q') || ''}
+    /><select name="status" aria-label="검토 상태"
+      ><option value="">상태 전체</option>{
+        ['pending', 'accepted', 'rejected', 'cancelled'].map((s) => (
+          <option value={s} selected={params.get('status') === s}>
+            {statusLabels[s]}
+          </option>
+        ))
+      }</select
+    ><button type="submit" class="button secondary">검색</button>
+  </form>{
+    r.items.map((e) => (
+      <article class="admin-review-item" data-edit-id={e.id}>
+        <details>
+          <>
+            <summary>수정 전·후 비교</summary>
+            <ServiceChanges edit={e} administrative />
+          </>
+        </details>
+        {e.review_note && <p>검토 안내: {e.review_note}</p>}
+        {e.status === 'pending' && (
+          <form
+            class="admin-review-form"
+            data-admin-form
+            action={'/api/admin/v1/service-edits/' + e.id + '/review'}
+            method="post"
+          >
+            <input type="hidden" name="csrf" value={Astro.locals.csrf} />
+            <select name="operation" aria-label="수정 검토 결과">
+              <option value="accept">반영</option>
+              <option value="reject">보완 요청</option>
+            </select>
+            <label class="form-field">
+              <span>제안자에게 남길 안내</span>
+              <input name="note" maxlength="1000" placeholder="보완 요청 시 이유를 적어주세요" />
+            </label>
+            <button type="submit" class="button primary">
+              수정 검토 결과 적용
+            </button>
+            <p class="form-status" role="status" />
+          </form>
+        )}
+        <p class="small">
+          <a href={'/services/' + e.service_id}>서비스 관리 →</a>
+        </p>
+      </article>
+    ))
+  }{!r.items.length && <p class="admin-empty">이 상태의 수정 제안이 없습니다.</p>}<Pagination
+    result={r}
+    base="/edits"
+  /></Layout
+>

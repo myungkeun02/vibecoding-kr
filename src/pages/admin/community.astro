@@ -1,0 +1,259 @@
+---
+import Layout from '../../layouts/admin/Layout.astro';
+import Pagination from '../../components/admin/Pagination.astro';
+import Action from '../../components/admin/Action.astro';
+import { listRecords } from '../../admin/data';
+import { statusLabels } from '../../admin/labels';
+import { siteUrl, boards } from '../../lib/config';
+const tab = ['posts', 'comments', 'reports', 'suggestions', 'notice'].includes(
+  Astro.url.searchParams.get('tab') || '',
+)
+  ? Astro.url.searchParams.get('tab')!
+  : 'posts';
+const r = tab === 'notice' ? null : await listRecords(tab, Astro.url.searchParams);
+const tabs = [
+  ['posts', '게시글'],
+  ['comments', '댓글'],
+  ['reports', '신고'],
+  ['suggestions', '기타 의견'],
+  ['notice', '공지 작성'],
+];
+const statuses =
+  tab === 'reports'
+    ? ['pending', 'resolved', 'dismissed']
+    : tab === 'suggestions'
+      ? ['pending', 'accepted_pending_release', 'rejected']
+      : ['active', 'hidden', 'deleted'];
+---
+
+<Layout title="커뮤니티 관리" section="community"
+  ><nav class="tabs">
+    {
+      tabs.map(([key, label]) => (
+        <a href={'/community?tab=' + key} aria-current={tab === key ? 'page' : undefined}>
+          {label}
+        </a>
+      ))
+    }
+  </nav>{
+    tab === 'notice' ? (
+      <section class="admin-panel admin-editor">
+        <>
+          <h2>새 공지</h2>
+          <p class="admin-help">저장하면 공지 게시판에 공개되며 상단에 고정됩니다.</p>
+          <form data-admin-form action="/api/admin/v1/notices" method="post">
+            <>
+              <input type="hidden" name="csrf" value={Astro.locals.csrf} />
+              <label class="form-field">
+                <>
+                  <span>제목</span>
+                  <input name="title" required minlength="3" maxlength="140" />
+                </>
+              </label>
+              <label class="form-field">
+                <>
+                  <span>본문 · 마크다운 지원</span>
+                  <textarea name="body" required minlength="10" maxlength="30000" rows="12" />
+                </>
+              </label>
+              <button type="submit" class="button primary">
+                공지 게시
+              </button>
+              <p class="form-status" role="status" />
+            </>
+          </form>
+        </>
+      </section>
+    ) : (
+      <>
+        <>
+          <form class="admin-toolbar" action="/community">
+            <input type="hidden" name="tab" value={tab} />
+            <input
+              type="search"
+              name="q"
+              aria-label="커뮤니티 검색"
+              placeholder="제목·내용 또는 작성자 검색"
+              value={Astro.url.searchParams.get('q') || ''}
+            />
+            <select name="status" aria-label="콘텐츠 상태">
+              <option value="">상태 전체</option>
+              {statuses.map((s) => (
+                <option value={s} selected={Astro.url.searchParams.get('status') === s}>
+                  {statusLabels[s]}
+                </option>
+              ))}
+            </select>
+            {tab === 'posts' && (
+              <select name="board" aria-label="게시판">
+                <option value="">게시판 전체</option>
+                {Object.entries(boards).map(([key, label]) => (
+                  <option value={key} selected={Astro.url.searchParams.get('board') === key}>
+                    {label}
+                  </option>
+                ))}
+              </select>
+            )}
+            <button type="submit" class="button secondary">
+              검색
+            </button>
+          </form>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <>
+                <thead>
+                  <tr>
+                    <>
+                      <th>내용</th>
+                      <th>작성자·접수일</th>
+                      <th>상태</th>
+                      <th>관리</th>
+                    </>
+                  </tr>
+                </thead>
+                <tbody>
+                  {r!.items.map((item) => (
+                    <tr>
+                      <td class="cell-body">
+                        {tab === 'posts' ? (
+                          <>
+                            {' '}
+                            <a href={siteUrl + '/community/' + item.id} target="_blank" rel="noopener">
+                              <strong>{item.title}</strong>
+                              <p class="muted small">
+                                {boards[item.board]}
+                                {item.pinned ? ' · 고정' : ''}
+                              </p>
+                            </a>
+                            <details>
+                              <summary>본문 보기</summary>
+                              <p>{item.body}</p>
+                            </details>
+                          </>
+                        ) : tab === 'comments' ? (
+                          <>
+                            <a
+                              href={siteUrl + '/community/' + item.post_id + '#comment-' + item.id}
+                              target="_blank"
+                              rel="noopener"
+                            >
+                              {item.title}
+                            </a>
+                            <p>{item.body}</p>
+                          </>
+                        ) : tab === 'reports' ? (
+                          <>
+                            <p>{item.reason}</p>
+                            <p class="small muted">
+                              {item.target_type === 'post' ? '게시글' : '댓글'} · {item.target_id}
+                            </p>
+                            {item.target_body && (
+                              <details>
+                                <summary>{item.target_title || '신고된 내용'} 보기</summary>
+                                <p>{item.target_body}</p>
+                              </details>
+                            )}
+                            {item.target_post && (
+                              <a
+                                href={
+                                  siteUrl +
+                                  '/community/' +
+                                  item.target_post +
+                                  (item.target_type === 'comment' ? '#comment-' + item.target_id : '')
+                                }
+                                target="_blank"
+                                rel="noopener"
+                              >
+                                공개 화면 ↗
+                              </a>
+                            )}
+                          </>
+                        ) : (
+                          <>
+                            <strong>{item.title}</strong>
+                            <p>{item.body}</p>
+                          </>
+                        )}
+                      </td>
+                      <td>
+                        {item.nickname || '탈퇴한 회원'}
+                        <p class="muted small">{item.created_at.slice(0, 10)}</p>
+                      </td>
+                      <td>{statusLabels[item.status]}</td>
+                      <td>
+                        <div class="admin-actions">
+                          {['posts', 'comments'].includes(tab) ? (
+                            <>
+                              {item.status !== 'deleted' && (
+                                <Action
+                                  path={tab + '/' + item.id + '/moderate'}
+                                  label={item.status === 'active' ? '숨김' : '복구'}
+                                  fields={{ operation: item.status === 'active' ? 'hide' : 'restore' }}
+                                />
+                              )}
+                              {tab === 'posts' && item.status !== 'deleted' && (
+                                <Action
+                                  path={'posts/' + item.id + '/moderate'}
+                                  label={item.pinned ? '고정 해제' : '고정'}
+                                  fields={{ operation: item.pinned ? 'unpin' : 'pin' }}
+                                />
+                              )}
+                            </>
+                          ) : tab === 'reports' ? (
+                            <>
+                              {item.target_status && item.target_status !== 'deleted' && (
+                                <Action
+                                  path={
+                                    (item.target_type === 'post' ? 'posts/' : 'comments/') +
+                                    item.target_id +
+                                    '/moderate'
+                                  }
+                                  label={
+                                    item.target_status === 'active' ? '신고 대상 숨김' : '신고 대상 복구'
+                                  }
+                                  fields={{
+                                    operation: item.target_status === 'active' ? 'hide' : 'restore',
+                                    context: 'reports',
+                                  }}
+                                />
+                              )}
+                              <Action
+                                path={'reports/' + item.id + '/moderate'}
+                                label="처리 완료"
+                                fields={{ operation: 'resolve' }}
+                              />
+                              <Action
+                                path={'reports/' + item.id + '/moderate'}
+                                label="기각"
+                                fields={{ operation: 'dismiss' }}
+                              />
+                            </>
+                          ) : (
+                            <>
+                              <Action
+                                path={'suggestions/' + item.id + '/moderate'}
+                                label="채택"
+                                fields={{ operation: 'accept' }}
+                              />
+                              <Action
+                                path={'suggestions/' + item.id + '/moderate'}
+                                label="반려"
+                                fields={{ operation: 'reject' }}
+                              />
+                            </>
+                          )}
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </>
+            </table>
+            {!r!.items.length && <p class="admin-empty">해당하는 항목이 없습니다.</p>}
+          </div>
+          <Pagination result={r} base="/community" />
+        </>
+      </>
+    )
+  }</Layout
+>

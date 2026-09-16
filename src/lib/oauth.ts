@@ -13,8 +13,13 @@ export const oauthEnabled = (provider: Provider) => {
   const c = oauthConfig(provider);
   return Boolean(c.clientId && c.clientSecret);
 };
-export function authorizationUrl(provider: Provider, state: string, verifier: string) {
-  const c = oauthConfig(provider);
+export function authorizationUrl(
+  provider: Provider,
+  state: string,
+  verifier: string,
+  config = oauthConfig(provider),
+) {
+  const c = config;
   const u = new URL(
     provider === 'github'
       ? 'https://github.com/login/oauth/authorize'
@@ -36,8 +41,9 @@ export async function exchangeOAuth(
   code: string,
   verifier: string,
   fetcher: typeof fetch = fetch,
+  config = oauthConfig(provider),
 ) {
-  const c = oauthConfig(provider);
+  const c = config;
   const r = await fetcher(
     provider === 'github'
       ? 'https://github.com/login/oauth/access_token'

@@ -4,16 +4,22 @@ import { servicePricing } from '../lib/service-schema';
 import type { Service } from '../lib/services';
 interface Props {
   service?: Service;
+  administrative?: boolean;
 }
-const { service: s } = Astro.props;
-const proposing = s?.status === 'published';
+const { service: s, administrative = false } = Astro.props;
+const proposing = !administrative && s?.status === 'published';
 const g = s?.guide;
 ---
 
 <form
   class="service-editor"
-  data-api
-  action={s ? '/api/services/update' : '/api/services/create'}
+  data-api={!administrative || undefined}
+  data-admin-form={administrative || undefined}
+  action={administrative
+    ? '/api/admin/v1/services' + (s ? '/' + s.id : '')
+    : s
+      ? '/api/services/update'
+      : '/api/services/create'}
   method="post"
 >
   <input type="hidden" name="csrf" value={Astro.locals.csrf} />
@@ -120,7 +126,7 @@ const g = s?.guide;
     <img
       class="service-image-preview"
       data-service-image-preview
-      src={s?.image_id ? '/media/' + s.image_id : undefined}
+      src={s?.image_id ? (administrative ? '/api/admin/v1/media/' : '/media/') + s.image_id : undefined}
       alt="첨부한 서비스 이미지"
       hidden={!s?.image_id}
     />
@@ -247,17 +253,47 @@ const g = s?.guide;
       </label>
     )
   }
+  {
+    administrative && (
+      <label class="form-field">
+        <>
+          <span>공개 상태</span>
+          <select name="publication" aria-label="공개 상태">
+            {[
+              ['published', '공개'],
+              ['pending', '검토 중'],
+              ['hidden', '공개 중지'],
+            ].map(([key, label]) => (
+              <option value={key} selected={(s?.status || 'published') === key}>
+                {label}
+              </option>
+            ))}
+          </select>
+        </>
+      </label>
+    )
+  }
   <p class="muted small">
     {
-      proposing
-        ? '수정 제안은 검토 후 반영됩니다. 검토 중에는 기존 내용이 그대로 공개됩니다.'
-        : '운영자 확인 후 목록에 공개됩니다. 검토 상태는 내 활동에서 확인할 수 있습니다.'
+      administrative
+        ? '선택한 공개 상태로 저장합니다. 공개로 저장하면 서비스 목록에 바로 반영됩니다.'
+        : proposing
+          ? '수정 제안은 검토 후 반영됩니다. 검토 중에는 기존 내용이 그대로 공개됩니다.'
+          : '운영자 확인 후 목록에 공개됩니다. 검토 상태는 내 활동에서 확인할 수 있습니다.'
     }
   </p>
   <p class="form-status" role="status"></p>
   <div class="service-submit">
     <button class="primary" type="submit"
-      >{proposing ? '수정 제안 보내기' : s ? '수정하고 검토 요청' : '등록 요청하기'}</button
+      >{
+        administrative
+          ? '저장하기'
+          : proposing
+            ? '수정 제안 보내기'
+            : s
+              ? '수정하고 검토 요청'
+              : '등록 요청하기'
+      }</button
     ><a class="muted" href={s ? '/services/' + s.id : '/services'}>취소</a>
   </div>
 </form>

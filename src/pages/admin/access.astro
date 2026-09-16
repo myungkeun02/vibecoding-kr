@@ -1,0 +1,72 @@
+---
+import Layout from '../../layouts/admin/Layout.astro';
+import Action from '../../components/admin/Action.astro';
+import { adminMembers } from '../../admin/data';
+const members = await adminMembers(),
+  owner = Astro.locals.admin?.role === 'owner';
+---
+
+<Layout title="관리자 권한" section="access"
+  ><p class="admin-help">
+    등록된 이메일의 Google 로그인만 허용합니다. 일반 회원의 비밀번호 로그인으로는 관리자 권한을 사용할 수
+    없습니다.
+  </p>{
+    owner && (
+      <section class="admin-panel">
+        <>
+          <h2>관리자 추가</h2>
+          <form class="admin-toolbar" data-admin-form action="/api/admin/v1/admins" method="post">
+            <>
+              <input type="hidden" name="csrf" value={Astro.locals.csrf} />
+              <input
+                type="email"
+                name="email"
+                aria-label="새 관리자 Google 이메일"
+                placeholder="관리자로 지정할 Google 계정 이메일"
+                required
+                maxlength="254"
+              />
+              <button class="button primary" type="submit">
+                관리자 권한 부여
+              </button>
+              <p class="form-status" role="status" />
+            </>
+          </form>
+          <p class="admin-help">
+            이메일은 발송하지 않습니다. 추가된 관리자는 이 주소에서 Google로 로그인하면 됩니다. 권한
+            부여·회수는 최초 관리자만 할 수 있습니다.
+          </p>
+        </>
+      </section>
+    )
+  }<div class="admin-table-wrap">
+    <table class="admin-table">
+      <thead><tr><th>Google 계정</th><th>권한</th><th>상태</th><th>최근 로그인</th><th>관리</th></tr></thead
+      ><tbody
+        >{
+          members.map((m) => (
+            <tr data-admin-id={m.id}>
+              <>
+                <td>{m.email}</td>
+                <td>{m.role === 'owner' ? '최초 관리자' : '관리자'}</td>
+                <td>{m.status === 'revoked' ? '권한 회수' : m.linked ? '사용 중' : '첫 로그인 대기'}</td>
+                <td>{m.last_login_at?.slice(0, 10) || '아직 없음'}</td>
+                <td>
+                  {owner && m.role !== 'owner' && m.status === 'active' && (
+                    <Action
+                      path={'admins/' + m.id + '/revoke'}
+                      label="권한 회수"
+                      confirm="관리자 권한을 회수하고 관리자 세션을 즉시 종료할까요?"
+                    />
+                  )}
+                </td>
+              </>
+            </tr>
+          ))
+        }</tbody
+      >
+    </table>
+  </div><p class="admin-help">
+    최초 관리자 권한은 화면에서 삭제하거나 다른 사람에게 이전할 수 없습니다.
+  </p></Layout
+>

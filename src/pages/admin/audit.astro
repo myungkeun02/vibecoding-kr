@@ -1,0 +1,43 @@
+---
+import Layout from '../../layouts/admin/Layout.astro';
+import Pagination from '../../components/admin/Pagination.astro';
+import { listRecords } from '../../admin/data';
+import { actionLabels } from '../../admin/labels';
+const r = await listRecords('audit', Astro.url.searchParams);
+---
+
+<Layout title="조치 기록" section="audit"
+  ><p class="admin-help">
+    관리자 로그인, 공개·숨김 처리, 계정·권한 변경을 기록합니다. 비밀번호와 로그인 토큰은 기록하지 않습니다.
+  </p><div class="admin-table-wrap">
+    <table class="admin-table">
+      <thead><tr><th>시각 (UTC)</th><th>관리자</th><th>조치</th><th>대상</th><th>안내</th></tr></thead><tbody
+        >{
+          r.items.map((a) => (
+            <tr>
+              <>
+                <td>{a.created_at.replace('T', ' ').slice(0, 19)}</td>
+                <td>{a.actor_email || '삭제된 관리자'}</td>
+                <td>{actionLabels[a.action] || '관리 조치'}</td>
+                <td class="small">
+                  {a.target_type === 'service' ? (
+                    <a href={'/services/' + a.target_id}>{a.target_id}</a>
+                  ) : a.target_type === 'user' ? (
+                    <a href={'/users?q=' + encodeURIComponent(a.target_id)}>{a.target_id}</a>
+                  ) : (
+                    a.target_id
+                  )}
+                </td>
+                <td class="cell-body">
+                  {a.details.note ||
+                    a.details.email ||
+                    (a.target_type === 'setting' ? (a.details.value ? '허용' : '중지') : '')}
+                </td>
+              </>
+            </tr>
+          ))
+        }</tbody
+      >
+    </table>{!r.items.length && <p class="admin-empty">기록된 조치가 없습니다.</p>}
+  </div><Pagination result={r} base="/audit" /></Layout
+>

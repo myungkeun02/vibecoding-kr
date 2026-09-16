@@ -1,0 +1,75 @@
+---
+import Layout from '../../../layouts/admin/Layout.astro';
+import ServiceEditor from '../../../components/ServiceEditor.astro';
+import { serviceRecord } from '../../../admin/data';
+import { statusLabels } from '../../../admin/labels';
+import { siteUrl } from '../../../lib/config';
+import { serviceHref } from '../../../lib/services';
+const isNew = Astro.params.id === 'new';
+let s;
+try {
+  s = isNew ? undefined : await serviceRecord(Astro.params.id || '');
+} catch (error: any) {
+  if (error.status === 404) return new Response('서비스를 찾을 수 없습니다.', { status: 404 });
+  throw error;
+}
+---
+
+<Layout title={isNew ? 'SaaS 추가' : s!.name + ' 관리'} section="services"
+  ><div class="admin-editor">
+    <div class="admin-detail-top">
+      <a href="/services">← 목록</a>{
+        s && (
+          <>
+            <>
+              <span class="badge">{statusLabels[s.status]}</span>
+              <a href={siteUrl + serviceHref(s)} target="_blank" rel="noopener">
+                공개 화면 ↗
+              </a>
+            </>
+          </>
+        )
+      }
+    </div>{
+      s && (
+        <section class="admin-panel">
+          <p class="admin-note">{s.description}</p>
+          {s.review_note && <p>이전 안내: {s.review_note}</p>}
+          <form
+            class="admin-review-form"
+            data-admin-form
+            action={'/api/admin/v1/services/' + s.id + '/review'}
+            method="post"
+          >
+            <>
+              <input type="hidden" name="csrf" value={Astro.locals.csrf} />
+              <input type="hidden" name="revision" value={s.revision} />
+              <select name="operation" aria-label="검토 결과">
+                {s.status === 'published' ? (
+                  <option value="hide">공개 중지</option>
+                ) : (
+                  <>
+                    <option value="publish">공개</option>
+                    <option value="reject">보완 요청</option>
+                  </>
+                )}
+              </select>
+              <label class="form-field">
+                <>
+                  <span>등록자에게 남길 안내</span>
+                  <input name="note" maxlength="1000" placeholder="보완·중지 시 이유를 적어주세요" />
+                </>
+              </label>
+              <button type="submit" class="button primary">
+                검토 결과 적용
+              </button>
+              <p class="form-status" role="status" />
+            </>
+          </form>
+        </section>
+      )
+    }<section class="admin-panel">
+      <h2>{isNew ? '서비스와 제작 가이드' : '내용 수정'}</h2><ServiceEditor service={s} administrative />
+    </section>
+  </div></Layout
+>

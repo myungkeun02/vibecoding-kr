@@ -67,22 +67,7 @@ try {
       'PostgreSQL restored. Previous data was backed up before restore. Restore uploads from the same backup and restart.',
     );
   } else if (command === 'admin') {
-    await db.transaction(async () => {
-      const user = await db.one(
-        "SELECT id FROM users WHERE lower(email)=lower(?) AND status='active' FOR UPDATE",
-        argument?.trim(),
-      );
-      if (!user) throw new Error('Create the intended account before granting admin');
-      await db.run("UPDATE users SET role='admin' WHERE id=?", user.id);
-      await db.run('DELETE FROM sessions WHERE user_id=?', user.id);
-      await db.run(
-        'INSERT INTO audit(actor,action,target) VALUES(?,?,?)',
-        user.id,
-        'cli-grant-admin',
-        user.id,
-      );
-    });
-    console.log('Admin granted; log in again.');
+    throw new Error('Use ADMIN_BOOTSTRAP_EMAIL for the initial Google-only owner, then grant access in the admin console. Public user roles do not grant admin access.');
   } else if (command === 'integrity') {
     const ready = await db.one('SELECT 1 AS ready');
     const constraints = await db.one(

@@ -1,5 +1,5 @@
 import { spawn, spawnSync } from 'node:child_process';
-import { randomBytes } from 'node:crypto';
+import { randomBytes, createHash } from 'node:crypto';
 import { mkdtempSync, mkdirSync, writeFileSync } from 'node:fs';
 import { resolve, join } from 'node:path';
 import { request, expect } from '@playwright/test';
@@ -16,6 +16,10 @@ const env = {
   APP_ENV: 'test',
   SESSION_SECRET: randomBytes(48).toString('hex'),
   SITE_URL: origin,
+  ADMIN_SITE_URL: 'http://localhost:8097',
+  APP_SURFACE: 'combined',
+  ADMIN_BOOTSTRAP_EMAIL: '',
+  ADMIN_PROXY_SECRET: '',
   HOST: '127.0.0.1',
   PORT: '8097',
   SMTP_URL: '',
@@ -95,9 +99,40 @@ try {
     image: '',
     change_reason: '실제 승인한 공동 편집 내용의 보존 여부를 확인합니다.',
   });
-  await database.run("UPDATE users SET role='admin' WHERE email=?", salt + '@example.test');
-  await action('services/edits/review', { id: proposal.redirect.split('/').pop(), operation: 'accept' });
+  const owner = await database.one('SELECT id,email FROM users WHERE email=?', salt + '@example.test');
+  const adminId = randomBytes(18).toString('hex'),
+    adminToken = randomBytes(36).toString('hex'),
+    adminCsrf = randomBytes(36).toString('hex');
+  await database.run(
+    "INSERT INTO admin_members(id,email,user_id,google_subject,role) VALUES(?,?,?,'persistence-subject','owner')",
+    adminId,
+    owner.email,
+    owner.id,
+  );
+  await database.run(
+    "INSERT INTO admin_sessions(token,member_id,google_subject,csrf,expires) VALUES(?,?,'persistence-subject',?,?)",
+    createHash('sha256').update(adminToken).digest('hex'),
+    adminId,
+    adminCsrf,
+    Date.now() + 3600000,
+  );
+  const adminHeaders = {
+    Origin: env.ADMIN_SITE_URL,
+    Cookie: 'vibepan-admin=' + adminToken,
+    'x-csrf-token': adminCsrf,
+  };
+  const approval = await api.post(
+    env.ADMIN_SITE_URL + '/api/admin/v1/service-edits/' + proposal.redirect.split('/').pop() + '/review',
+    { headers: adminHeaders, data: { operation: 'accept' } },
+  );
+  expect(approval.status()).toBe(200);
   async function checkSharedEdit() {
+    expect((await api.get(env.ADMIN_SITE_URL + '/api/admin/v1/me', { headers: adminHeaders })).status()).toBe(
+      200,
+    );
+    expect(
+      (await database.one('SELECT COUNT(*) AS n FROM admin_audit WHERE actor=?', adminId)).n,
+    ).toBeGreaterThan(0);
     const current = await database.one('SELECT * FROM services WHERE id=?', seeded.id);
     expect(current.description).toBe(editedDescription);
     expect(current.guide).toEqual(seeded.guide);
@@ -132,7 +167,8 @@ try {
         at: new Date().toISOString(),
         checks: [
           'real process restart',
-          'session persists',
+          'public and separate admin sessions persist',
+          'admin membership and action audit survive restart and restore',
           'posts persist',
           'submitted SaaS and review state persist through restart and restore',
           'approved seeded SaaS edit, guide and proposal survive restart, reseed and restore',
