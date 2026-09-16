@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "checkedAt": "2026-09-16T13:42:28.558Z",
+  "origin": "https://vibepan.com",
+  "sourceCommit": "082103f4d70f8c2e2ee6fb95eb9dc54948e41867",
+  "deploymentId": "a5fa908f-e0a4-496a-83ca-5d1cfdaba2e8",
+  "counts": {
+    "guides": 121,
+    "services": 121,
+    "builds": 0
+  },
+  "checks": [
+    "light: unified home/category/search/guide filters, seed details, member-only registration and editing; 360/390/768/1440px without overflow",
+    "dark: unified home/category/search/guide filters, seed details, member-only registration and editing; 360/390/768/1440px without overflow",
+    "Existing seeded URLs preserved; legacy /services redirects with query",
+    "Public totals and content links match the shared catalog",
+    "No production content created or changed during browser checks"
+  ],
+  "environment": "Chromium phone emulation, public DNS resolution, normal TLS verification",
+  "database": {
+    "seededServices": 121,
+    "publicServices": 121,
+    "guides": 121,
+    "unvalidatedConstraints": 0
+  },
+  "operations": {
+    "adminAccountConfigured": false,
+    "approvalAccount": "awaiting user designation"
+  }
+}

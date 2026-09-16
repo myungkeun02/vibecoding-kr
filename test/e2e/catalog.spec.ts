@@ -94,7 +94,12 @@ test('seeded SaaS supports member guide edits, private comparison, admin approva
     const row = adminPage.locator(`[data-edit-id="${eid}"]`);
     await row.getByText('수정 전·후 비교', { exact: true }).click();
     await expect(row).toContainText('트렐로 공동 수정 시험');
+    const approval = adminPage.waitForResponse(
+      (response) =>
+        response.url().endsWith('/api/services/edits/review') && response.request().method() === 'POST',
+    );
     await row.getByRole('button', { name: '수정 검토 결과 적용' }).click();
+    expect((await approval).status()).toBe(200);
     await expect(adminPage).toHaveURL(/\/admin#service-edits$/);
     await visitorPage.reload();
     await expect(visitorPage.getByRole('heading', { level: 1 })).toHaveText('트렐로 공동 수정 시험');

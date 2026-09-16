@@ -20,3 +20,13 @@
 - [모바일 제안 확인](screenshots/shared-saas-proposal-390.png)
 - [전체 브라우저 결과](browser-summary.json)
 - [재시작·복원 결과](persistence-results.json)
+
+## 운영 도메인 확인
+
+`https://vibepan.com` 배포 후 SaaS 121개·가이드 121개·제작 후기 0건이 DB와 공개 API·화면에서 일치한다. 이전 121개 URL, 통합 검색, 가이드 있음/없음, 분야별 목록, 로그인으로 이어지는 등록·수정 진입을 확인했다. 라이트·다크 모드와 360·390·768·1440px에서 가로 넘침과 브라우저 예외가 없다. 운영 콘텐츠를 시험 값으로 바꾸지 않았다.
+
+운영 DB의 제약 위반은 없으며 운영자 계정 수는 0이다. 승인할 계정은 사용자의 이메일 지정을 기다리며 임의로 승격하지 않았다.
+
+[운영 확인 결과](shared-catalog-production-results.json) · [실제 모바일 목록](screenshots/shared-live-home-light-390.png) · [실제 기존 가이드](screenshots/shared-live-slack-dark-390.png)
+
+CI에서는 승인 요청이 끝나기 전에 방문자 화면을 새로 고치는 검사 순서 문제를 발견했다. 같은 관리자 URL을 기다리던 검사를 실제 승인 응답이 끝날 때까지 기다리도록 수정했다. 서비스 동작 코드는 바뀌지 않았다.
