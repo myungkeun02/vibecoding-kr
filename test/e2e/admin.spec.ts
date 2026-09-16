@@ -99,6 +99,23 @@ test('public and admin surfaces reject session reuse, legacy escalation, forged 
       ).status(),
     ).toBe(403);
     await fixtureAdmin(request, u);
+    const notice = await adminPost(request, 'notices', {
+      title: '일반 세션으로 변경할 수 없는 공지',
+      body: '공지 관리에는 작성자라도 별도의 관리자 인증이 필요합니다.',
+    });
+    expect(notice.status()).toBe(200);
+    const noticeId = (await notice.json()).id;
+    expect(
+      (
+        await publicPost(request, 'posts/update', {
+          id: noticeId,
+          title: '게시판 변경 우회 시도',
+          body: '공지의 게시판을 바꾸더라도 일반 로그인으로 수정할 수 없어야 합니다.',
+          board: 'general',
+        })
+      ).status(),
+    ).toBe(403);
+    expect((await publicPost(request, 'posts/delete', { id: noticeId })).status()).toBe(403);
     expect((await adminGet(request, '/api/admin/v1/me')).status()).toBe(200);
     expect(
       (await request.get(publicOrigin + '/api/admin/v1/me', { headers: adminHeaders(request) })).status(),

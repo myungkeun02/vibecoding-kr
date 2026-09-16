@@ -104,7 +104,7 @@ const reactions =
             <button class="button secondary" data-copy-url>
               링크 복사
             </button>
-            {p.user_id === user?.id && (
+            {p.user_id === user?.id && p.board !== 'notice' && (
               <>
                 <a class="small" href={'/community/' + p.id + '/edit'}>
                   글 수정

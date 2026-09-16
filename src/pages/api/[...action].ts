@@ -83,6 +83,7 @@ export const POST: APIRoute = async (ctx) => {
       const p = await getPost(pid);
       if (!p) bad('게시글을 찾을 수 없어요.', 404);
       if (p.user_id !== user.id) bad('작성자만 변경할 수 있어요.', 403);
+      if (p.board === 'notice') bad('공지는 관리자 전용 화면에서 관리해 주세요.', 403);
       return p;
     };
     let result: any = { ok: true };
