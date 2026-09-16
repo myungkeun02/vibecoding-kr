@@ -1,0 +1,128 @@
+{
+  "checkedAt": "2026-09-16T14:32:13.233Z",
+  "status": "deployed-and-google-login-verified",
+  "sourceCommit": "cd20f5392ea73713ef343057236e3da7f7b16087",
+  "domain": "https://admin.vibepan.com",
+  "railwayDeployment": "3bf67fb4-b2c6-4266-90ba-7e35f7a14217",
+  "workerVersion": "4d8cd965-4064-4034-88e1-043cf7cdaafa",
+  "ci": {
+    "run": 35108333531,
+    "status": "success",
+    "unitTests": 44,
+    "browserTests": 34,
+    "persistence": "pass",
+    "productionMode": "pass",
+    "gateway": "pass"
+  },
+  "httpChecks": [
+    {
+      "check": "public-health",
+      "status": 200,
+      "pass": true
+    },
+    {
+      "check": "public-home",
+      "status": 200,
+      "pass": true
+    },
+    {
+      "check": "public-admin-api",
+      "status": 404,
+      "pass": true
+    },
+    {
+      "check": "public-signup",
+      "status": 200,
+      "pass": true
+    },
+    {
+      "check": "admin-login",
+      "status": 200,
+      "pass": true,
+      "noindex": true,
+      "noStore": true
+    },
+    {
+      "check": "admin-home",
+      "status": 302,
+      "pass": true,
+      "redirect": "https://admin.vibepan.com/login"
+    },
+    {
+      "check": "admin-api",
+      "status": 401,
+      "pass": true
+    },
+    {
+      "check": "admin-robots",
+      "status": 200,
+      "pass": true,
+      "disallowAll": true
+    },
+    {
+      "check": "admin-oauth",
+      "status": 302,
+      "pass": true,
+      "provider": "accounts.google.com",
+      "callback": "https://admin.vibepan.com/api/admin/auth/callback",
+      "secureHostCookie": true
+    }
+  ],
+  "database": {
+    "servicesPreserved": 121,
+    "activeAdmins": 1,
+    "designatedOwnerMatchesPrivateConfig": true,
+    "googleLinked": true,
+    "registrationOpen": true,
+    "saasSubmissionsOpen": true,
+    "activeAdminSessions": 1,
+    "lastOwnerLoginAt": "2026-09-16T14:31:03.914Z"
+  },
+  "realGoogleLogin": {
+    "status": "pass",
+    "callback": "https://admin.vibepan.com/api/admin/auth/callback",
+    "existingPublicCallbackPreserved": true,
+    "designatedOwnerAuthenticated": true,
+    "verifiedPages": [
+      "/",
+      "/access",
+      "/analytics",
+      "/audit"
+    ],
+    "loginAuditRecorded": true,
+    "authenticationMethod": "real-google-oauth-in-browser"
+  },
+  "isolation": {
+    "host": true,
+    "api": true,
+    "session": true,
+    "physicalServer": false,
+    "tailscale": false
+  },
+  "visual": {
+    "mobile390": "pass",
+    "desktop1440": "pass"
+  },
+  "postLoginIsolationChecks": [
+    {
+      "check": "public-admin-api",
+      "status": 404,
+      "pass": true
+    },
+    {
+      "check": "guest-admin-api",
+      "status": 401,
+      "pass": true
+    },
+    {
+      "check": "public-signup",
+      "status": 200,
+      "pass": true
+    },
+    {
+      "check": "public-health",
+      "status": 200,
+      "pass": true
+    }
+  ]
+}

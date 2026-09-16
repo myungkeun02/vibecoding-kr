@@ -39,7 +39,7 @@ cpSync('docs', join(dest, 'docs'), {
   filter: (p) => !p.includes('superpowers') && !p.endsWith('playwright-results.json'),
 });
 const forbidden =
-  /BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY|ghp_[A-Za-z0-9]{30,}|gho_[A-Za-z0-9]{30,}|sk-proj-[A-Za-z0-9_-]{20,}/;
+  /BEGIN (RSA |EC |OPENSSH |DSA )?PRIVATE KEY|gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{40,}|GOCSPX-[A-Za-z0-9_-]{20,}|sk-(?:proj-|svcacct-)[A-Za-z0-9_-]{20,}|\b(?:AKIA|ASIA)[A-Z0-9]{16}\b/;
 let count = 0;
 function scan(path) {
   for (const f of readdirSync(path, { withFileTypes: true })) {
@@ -49,7 +49,13 @@ function scan(path) {
         throw new Error('Forbidden export path');
       scan(p);
     } else {
-      if (/\.db(?:-|$)|^\.env$|\.session-secret/.test(f.name)) throw new Error('Forbidden export file');
+      if (
+        /\.(?:db(?:-.*)?|sqlite3?|dump|backup|sql\.gz|pem|key|p12|pfx)$|^\.dev\.vars(?:\.|$)|\.session-secret/.test(
+          f.name,
+        ) ||
+        (/^\.env(?:\.|$)/.test(f.name) && f.name !== '.env.example')
+      )
+        throw new Error('Forbidden export file');
       count++;
       if (/\.(md|json|ts|astro|js|mjs|txt|yml|yaml|toml|sql)$/.test(f.name)) {
         let s = readFileSync(p, 'utf8');
