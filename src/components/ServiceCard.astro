@@ -1,7 +1,7 @@
 ---
 import { categoryName } from '../lib/apps';
 import { servicePricing, serviceStatuses } from '../lib/service-schema';
-import type { Service } from '../lib/services';
+import { serviceHref, type Service } from '../lib/services';
 interface Props {
   service: Service;
   showStatus?: boolean;
@@ -9,18 +9,19 @@ interface Props {
 const { service: s, showStatus = false } = Astro.props;
 ---
 
-<a class="service-card" href={'/services/' + s.id}>
+<a class="service-card" href={serviceHref(s)}>
   <div class="service-card-top">
     <span class="service-initial" aria-hidden="true">{s.name.slice(0, 1)}</span>
     <div>
       <h3>{s.name}</h3><span class="small muted"
-        >{categoryName(s.category)} · {servicePricing[s.pricing]}</span>
+        >{categoryName(s.category)} · {servicePricing[s.pricing]}</span
+      >
     </div>
     <span class="service-card-arrow" aria-hidden="true">↗</span>
   </div>
   <p>{s.tagline}</p>
   <div class="service-card-meta">
-    <span>{s.relationship === 'maker' ? '직접 만든 서비스' : '사용자 추천'}</span>{
+    <span>{s.guide ? '제작 가이드 있음' : '가이드 없음'}</span>{
       showStatus && <span class="accent">{serviceStatuses[s.status]}</span>
     }
   </div>

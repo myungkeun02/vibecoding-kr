@@ -1,5 +1,6 @@
 ---
-import { apps } from '../lib/apps';
+import { catalog } from '../lib/catalog';
+const entries = (await catalog()).all;
 import { boards } from '../lib/config';
 const { post: p } = Astro.props;
 const build = p ? JSON.parse(p.build) : {};
@@ -100,12 +101,16 @@ const board = p?.board || Astro.url.searchParams.get('board') || 'builds';
         ><label class="form-field"
           ><span>관련 도구 (선택)</span><select name="tool" aria-label="관련 도구 (선택)"
             ><option value="">도구 선택 안 함</option>{
-              apps.map((a) => (
+              entries.map((a) => (
                 <option
-                  value={a.slug}
-                  selected={(p?.tool_slug || Astro.url.searchParams.get('tool')) === a.slug}
+                  value={a.catalog_slug || 'service:' + a.id}
+                  selected={
+                    (p?.tool_slug ||
+                      (p?.service_id ? 'service:' + p.service_id : '') ||
+                      Astro.url.searchParams.get('tool')) === (a.catalog_slug || 'service:' + a.id)
+                  }
                 >
-                  {a.nameKo} · {a.name}
+                  {a.name}
                 </option>
               ))
             }</select

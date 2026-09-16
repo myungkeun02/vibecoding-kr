@@ -5,11 +5,13 @@ import ServiceEditor from '../../components/ServiceEditor.astro';
 if (!Astro.locals.user) return Astro.redirect('/login?returnTo=' + encodeURIComponent('/services/new'));
 ---
 
-<Base title="SaaS 등록" pageKind="service-editor" mobileTitle="SaaS 등록" mobileBack="/services" noindex>
+<Base title="SaaS 등록" pageKind="service-editor" mobileTitle="SaaS 등록" mobileBack="/" noindex>
   <section class="service-form-wrap">
     <header class="page-head">
       <BrandIntro
-        ><h1>SaaS 등록</h1><p>공식 주소와 소개를 입력해 주세요. 운영자 확인 후 공개됩니다.</p></BrandIntro
+        ><h1>SaaS 등록</h1><p>
+          목록에 없는 서비스를 등록해 주세요. 제작 가이드는 나중에 추가할 수 있습니다.
+        </p></BrandIntro
       >
     </header><ServiceEditor />
   </section>

@@ -2,6 +2,9 @@
 import Base from '../layouts/Base.astro';
 import AdminAction from '../components/AdminAction.astro';
 import { all } from '../lib/db';
+import ServiceChanges from '../components/ServiceChanges.astro';
+import { serviceHref } from '../lib/services';
+import { editStatuses } from '../lib/service-schema';
 import { serviceStatuses, servicePricing } from '../lib/service-schema';
 import { categoryName } from '../lib/apps';
 const allowed = Astro.locals.user?.role === 'admin';
@@ -10,7 +13,12 @@ const reports = allowed ? await all('SELECT * FROM reports ORDER BY id DESC LIMI
 const suggestions = allowed ? await all('SELECT * FROM suggestions ORDER BY id DESC LIMIT 100') : [];
 const services = allowed
   ? await all(
-      "SELECT s.*,u.nickname FROM services s JOIN users u ON u.id=s.user_id ORDER BY CASE WHEN s.status='pending' THEN 0 ELSE 1 END,s.updated_at DESC LIMIT 100",
+      "SELECT s.*,u.nickname FROM services s LEFT JOIN users u ON u.id=s.user_id ORDER BY CASE WHEN s.status='pending' THEN 0 ELSE 1 END,s.updated_at DESC LIMIT 100",
+    )
+  : [];
+const edits = allowed
+  ? await all(
+      "SELECT e.*,s.name,s.catalog_slug,u.nickname FROM service_edits e JOIN services s ON s.id=e.service_id JOIN users u ON u.id=e.user_id ORDER BY CASE WHEN e.status='pending' THEN 0 ELSE 1 END,e.created_at DESC LIMIT 100",
     )
   : [];
 const users = allowed
@@ -28,6 +36,10 @@ const comments = allowed
   : [];
 const actions = allowed ? await all('SELECT * FROM audit ORDER BY id DESC LIMIT 50') : [];
 const actionLabels: Record<string, string> = {
+  'service-edit-submit': 'SaaS 수정 제안',
+  'service-edit-accept': 'SaaS 수정 반영',
+  'service-edit-reject': 'SaaS 수정 보완 요청',
+  'service-edit-cancel': 'SaaS 수정 제안 취소',
   'service-submit': 'SaaS 등록 요청',
   'service-update': 'SaaS 정보 수정',
   'service-delete': 'SaaS 등록 삭제',
@@ -80,7 +92,10 @@ const statuses: Record<string, string> = {
           <nav class="tabs">
             <>
               <>
-                <a href="#services">SaaS 등록</a>
+                <>
+                  <a href="#services">SaaS 등록</a>
+                  <a href="#service-edits">수정 제안</a>
+                </>
                 <a href="#reports">신고</a>
               </>
               <a href="#suggestions">도구 제안</a>
@@ -100,14 +115,14 @@ const statuses: Record<string, string> = {
                 <span class="badge">{serviceStatuses[s.status]}</span>
                 <h3>{s.name}</h3>
                 <p>
-                  {s.nickname} · {s.relationship === 'maker' ? '직접 만든 서비스' : '사용자 추천'} ·{' '}
+                  {s.nickname || '기존 카탈로그'} · {s.guide ? '가이드 있음' : '가이드 없음'} ·{' '}
                   {categoryName(s.category)} · {servicePricing[s.pricing]}
                 </p>
                 <p>
                   <a href={s.website_url} target="_blank" rel="noopener noreferrer nofollow">
                     {s.website_url} ↗
                   </a>{' '}
-                  · <a href={'/services/' + s.id}>등록 화면 보기</a>
+                  · <a href={serviceHref(s)}>등록 화면 보기</a>
                 </p>
                 <p>{s.tagline}</p>
                 <details>
@@ -159,6 +174,59 @@ const statuses: Record<string, string> = {
               </article>
             ))}
             {!services.length && <p class="empty">새로 접수된 SaaS가 없어요.</p>}
+          </section>
+          <section id="service-edits" class="section">
+            <>
+              <h2>SaaS 수정 제안</h2>
+              <p class="muted small">
+                수정 전·후와 출처를 확인해 주세요. 반영하면 기존 서비스와 제작 가이드가 바로 바뀝니다.
+              </p>
+            </>
+            {edits.map((e) => (
+              <article class="admin-row service-admin-row" data-edit-id={e.id}>
+                <span class="badge">{editStatuses[e.status]}</span>
+                <h3>{e.name}</h3>
+                <p>
+                  {e.nickname} · {e.created_at.slice(0, 10)}
+                </p>
+                <p class="service-description">{e.reason}</p>
+                <details>
+                  <summary>수정 전·후 비교</summary>
+                  <ServiceChanges edit={e} />
+                </details>
+                <a class="small" href={'/services/edits/' + e.id}>
+                  제안 상세
+                </a>
+                {e.status === 'pending' && (
+                  <form
+                    data-api
+                    action="/api/services/edits/review"
+                    method="post"
+                    class="service-review-form"
+                  >
+                    <input type="hidden" name="csrf" value={Astro.locals.csrf} />
+                    <input type="hidden" name="id" value={e.id} />
+                    <label class="form-field">
+                      <span>처리</span>
+                      <select name="operation">
+                        <option value="accept">검토 완료 · 반영</option>
+                        <option value="reject">보완 요청</option>
+                      </select>
+                    </label>
+                    <label class="form-field">
+                      <span>제안자에게 남길 안내</span>
+                      <textarea name="note" maxlength="1000" rows="2" />
+                    </label>
+                    <button class="button secondary" type="submit">
+                      수정 검토 결과 적용
+                    </button>
+                    <p class="form-status" role="status" />
+                  </form>
+                )}
+                {e.review_note && <p class="muted">{e.review_note}</p>}
+              </article>
+            ))}
+            {!edits.length && <p class="muted">검토할 수정 제안이 없습니다.</p>}
           </section>
           <section id="reports" class="section">
             <h2>신고 접수</h2>

@@ -5,6 +5,7 @@ import ServiceCard from '../components/ServiceCard.astro';
 import Base from '../layouts/Base.astro';
 import PostRow from '../components/PostRow.astro';
 import { all, postSelect } from '../lib/db';
+import { editStatuses } from '../lib/service-schema';
 import { getApp } from '../lib/apps';
 const user = Astro.locals.user;
 if (!user) return Astro.redirect('/login?returnTo=/me');
@@ -28,6 +29,10 @@ const savedPosts = await all(
 const suggestions = await all('SELECT * FROM suggestions WHERE user_id=? ORDER BY created_at DESC', user.id);
 const services = await all(
   'SELECT s.*,u.nickname FROM services s JOIN users u ON u.id=s.user_id WHERE s.user_id=? ORDER BY s.updated_at DESC',
+  user.id,
+);
+const serviceEdits = await all(
+  'SELECT e.*,s.name FROM service_edits e JOIN services s ON s.id=e.service_id WHERE e.user_id=? ORDER BY e.created_at DESC',
   user.id,
 );
 const labels: Record<string, string> = {
@@ -152,6 +157,20 @@ const labels: Record<string, string> = {
             <p class="muted">추천하고 싶은 SaaS를 등록하면 검토 상태를 여기에서 확인할 수 있어요.</p>
           )
         }
+      </div><div class="section">
+        <h2 id="my-service-edits">SaaS 수정 제안</h2>
+        {
+          serviceEdits.map((e) => (
+            <a class="post-preview" href={'/services/edits/' + e.id}>
+              <>
+                <strong>{e.name}</strong>
+                <span class="badge">{editStatuses[e.status]}</span>
+                <p>{e.reason}</p>
+              </>
+            </a>
+          ))
+        }
+        {!serviceEdits.length && <p class="muted">등록한 수정 제안이 없습니다.</p>}
       </div><div class="section">
         <h2 id="my-posts">내가 쓴 글</h2>{mine.map((p) => <PostRow post={p} />)}{
           !mine.length && (

@@ -1,4 +1,6 @@
 import { createDatabase } from './postgres.mjs';
+import { createHash } from 'node:crypto';
+import { normalizeServiceUrl } from './service-schema';
 
 let connection: ReturnType<typeof createDatabase> | undefined;
 export function database() {
@@ -19,7 +21,7 @@ export async function syncTools(apps: any[]) {
   await transaction(async () => {
     await one('SELECT pg_advisory_xact_lock(81260422)');
     await run('UPDATE tools SET active=0');
-    for (const a of apps)
+    for (const a of apps) {
       await run(
         'INSERT INTO tools(slug,name,price,metadata) VALUES(?,?,?,?) ON CONFLICT(slug) DO UPDATE SET name=excluded.name,price=excluded.price,metadata=excluded.metadata,active=1',
         a.slug,
@@ -27,6 +29,48 @@ export async function syncTools(apps: any[]) {
         a.priceMonthly,
         JSON.stringify(a),
       );
+      const url = normalizeServiceUrl(a.officialUrl);
+      if (!url) throw new Error('Invalid catalog URL: ' + a.slug);
+      const guide = Object.fromEntries(
+        [
+          'verdict',
+          'scope',
+          'verdictReason',
+          'difficulty',
+          'features',
+          'whatYouLose',
+          'operations',
+          'prompt',
+        ].map((k) => [k, a[k]]),
+      );
+      await run(
+        `INSERT INTO services(id,catalog_slug,name,website_url,url_key,category,tagline,description,pricing,relationship,status,guide,published_at)
+        VALUES(?,?,?,?,?,?,?,?,?,'user','published',?::jsonb,CURRENT_TIMESTAMP)
+        ON CONFLICT DO NOTHING`,
+        createHash('sha256')
+          .update('catalog:' + a.slug)
+          .digest('hex')
+          .slice(0, 36),
+        a.slug,
+        a.nameKo,
+        url.url,
+        url.key,
+        a.category,
+        a.summary,
+        a.scope + '\n\n' + a.verdictReason,
+        a.pricing.model,
+        JSON.stringify(guide),
+      );
+      // A later seed may describe a service already registered by a member. Keep that entry and its review state.
+      await run(
+        `UPDATE services SET catalog_slug=?,guide=COALESCE(guide,?::jsonb)
+        WHERE url_key=? AND catalog_slug IS NULL AND NOT EXISTS(SELECT 1 FROM services WHERE catalog_slug=?)`,
+        a.slug,
+        JSON.stringify(guide),
+        url.key,
+        a.slug,
+      );
+    }
   });
 }
 export const voteCounts = async () =>
@@ -45,17 +89,18 @@ export interface PublicTotals {
 export const totals = async () =>
   (await one<PublicTotals>(`
     SELECT
-      (SELECT COUNT(*) FROM tools WHERE active=1) AS guides,
-      (SELECT COUNT(*) FROM services s JOIN users u ON u.id=s.user_id
-        WHERE s.status='published' AND u.status='active') AS services,
+      (SELECT COUNT(*) FROM services s LEFT JOIN users u ON u.id=s.user_id LEFT JOIN tools t ON t.slug=s.catalog_slug
+        WHERE s.status='published' AND s.guide IS NOT NULL AND (s.catalog_slug IS NOT NULL AND t.active=1 OR s.catalog_slug IS NULL AND u.status='active')) AS guides,
+      (SELECT COUNT(*) FROM services s LEFT JOIN users u ON u.id=s.user_id LEFT JOIN tools t ON t.slug=s.catalog_slug
+        WHERE s.status='published' AND (s.catalog_slug IS NOT NULL AND t.active=1 OR s.catalog_slug IS NULL AND u.status='active')) AS services,
       (SELECT COUNT(*) FROM posts WHERE status='active' AND board='builds') AS builds
   `))!;
 export const buildCounts = async (): Promise<Record<string, number>> =>
   Object.fromEntries(
     (
-      await all(`SELECT p.tool_slug AS slug,COUNT(*) AS n FROM posts p
-      JOIN tools t ON t.slug=p.tool_slug WHERE p.status='active' AND p.board='builds' AND t.active=1
-      GROUP BY p.tool_slug`)
+      await all(`SELECT COALESCE(p.tool_slug,p.service_id) AS slug,COUNT(*) AS n FROM posts p
+      LEFT JOIN tools t ON t.slug=p.tool_slug WHERE p.status='active' AND p.board='builds' AND (t.active=1 OR p.service_id IS NOT NULL)
+      GROUP BY COALESCE(p.tool_slug,p.service_id)`)
     ).map((x) => [x.slug, x.n]),
   );
 export async function event(name: string, path = '/') {
@@ -119,9 +164,10 @@ export async function posts(params: URLSearchParams) {
   const q = (params.get('q') || '').slice(0, 100),
     board = params.get('board') || '',
     tool = params.get('tool') || '';
-  const args = [`%${q}%`, `%${q}%`, board, board, tool, tool];
+  const service = params.get('service') || '';
+  const args = [`%${q}%`, `%${q}%`, board, board, tool, tool, service, service];
   const where =
-    " WHERE p.status='active' AND (p.title ILIKE ? OR p.body ILIKE ?) AND (?='' OR p.board=?) AND (?='' OR p.tool_slug=?)";
+    " WHERE p.status='active' AND (p.title ILIKE ? OR p.body ILIKE ?) AND (?='' OR p.board=?) AND (?='' OR p.tool_slug=?) AND (?='' OR p.service_id=?)";
   const count = (await one('SELECT COUNT(*) AS n FROM posts p' + where, ...args))!.n;
   const page = Math.min(Math.max(1, Number(params.get('page')) || 1), Math.max(1, Math.ceil(count / 15)));
   return {

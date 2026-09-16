@@ -2,11 +2,14 @@
 import EmptyState from '../components/EmptyState.astro';
 import Mascot from '../components/Mascot.astro';
 import Base from '../layouts/Base.astro';
-import { getApp, related, categoryName, priceLabel } from '../lib/apps';
+import { related, categoryName, priceLabel } from '../lib/apps';
 import { verdicts, absolute, boards } from '../lib/config';
 import { one, voteCounts, posts } from '../lib/db';
 import ToolIcon from '../components/ToolIcon.astro';
-const a = getApp(Astro.params.slug || '');
+import { serviceBySlug } from '../lib/services';
+import { catalogApp } from '../lib/catalog';
+const service = await serviceBySlug(Astro.params.slug || '', Astro.locals.user);
+const a = service ? catalogApp(service) : null;
 if (!a) {
   Astro.response.status = 404;
 }
@@ -61,7 +64,7 @@ const jsonld = a
   description={a ? a.scope + ' — ' + a.verdictReason : undefined}
   og={a ? '/og/' + a.slug + '.png' : undefined}
   {jsonld}
-  noindex={!a}
+  noindex={!a || service?.status !== 'published'}
   >{
     a && v ? (
       <>
@@ -77,10 +80,13 @@ const jsonld = a
           </nav>
           <header class="detail-head">
             <>
-              <ToolIcon app={a} />
+              <ToolIcon app={a} imageUrl={service?.image_id ? '/media/' + service.image_id : undefined} />
               <div>
                 <>
                   <h1>{a.nameKo}</h1>
+                  <a class="small accent" href={'/services/' + service!.id + '/edit'}>
+                    정보 수정
+                  </a>
                   <p class="muted">
                     {a.nameKo !== a.name ? a.name + ' · ' : ''}
                     {a.summary}{' '}
@@ -97,6 +103,9 @@ const jsonld = a
               </div>
             </>
           </header>
+          <p class="service-description muted" data-service-description>
+            {service?.description}
+          </p>
           <div class="mobile-only mobile-tool-glance">
             <>
               <span>{categoryName(a.category)}</span>
@@ -233,7 +242,7 @@ const jsonld = a
                     ) : (
                       <p class="muted">
                         아직 소개할 대안을 확인하지 못했어요.{' '}
-                        <a href={'/suggest?slug=' + a.slug}>대안을 제안해 주세요 ↗</a>
+                        <a href={'/services/' + service!.id + '/edit'}>대안을 제안해 주세요 ↗</a>
                       </p>
                     )}
                   </section>
@@ -401,8 +410,8 @@ const jsonld = a
                           <button class="button secondary" data-native-share>
                             다른 앱으로 공유 ↗
                           </button>
-                          <a href={'/suggest?slug=' + a.slug} class="small muted">
-                            정보 수정 제안 ↗
+                          <a href={'/services/' + service!.id + '/edit'} class="small muted">
+                            정보 수정 ↗
                           </a>
                         </>
                       </div>
@@ -428,7 +437,7 @@ const jsonld = a
               </div>
             </>
           </section>
-          <div data-mobile-panel="reference"></div>
+          <div data-mobile-panel="reference" />
           <div class="mobile-only mobile-detail-action">
             <>
               <a class="button" href="#tool-prompt" data-detail-view="prompt">

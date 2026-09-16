@@ -1,14 +1,16 @@
 ---
 import { boards } from '../lib/config';
 import { getApp } from '../lib/apps';
+import { visibleService } from '../lib/services';
 const { post: p } = Astro.props;
+const service = p.service_id ? await visibleService(p.service_id) : null;
 const excerpt = p.body.slice(0, 180).replace(/[#*`]/g, '');
 ---
 
 <a class="post-row" href={'/community/' + p.id}>
   <div class="post-meta">
     <span class="badge">{p.pinned ? '고정 · ' : ''}{boards[p.board]}</span>
-    {p.tool_slug && <span>{getApp(p.tool_slug)?.nameKo || '관련 도구'}</span>}
+    {(p.tool_slug || service) && <span>{service?.name || getApp(p.tool_slug)?.nameKo || '관련 도구'}</span>}
   </div>
   <h2>{p.title}</h2>
   <p class="post-excerpt">{excerpt}</p>

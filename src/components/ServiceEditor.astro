@@ -6,6 +6,8 @@ interface Props {
   service?: Service;
 }
 const { service: s } = Astro.props;
+const proposing = s?.status === 'published';
+const g = s?.guide;
 ---
 
 <form
@@ -29,7 +31,7 @@ const { service: s } = Astro.props;
     ><span>서비스 이름</span><input
       name="name"
       required
-      minlength="2"
+      minlength="1"
       maxlength="80"
       value={s?.name || ''}
       placeholder="서비스 이름을 알려주세요"
@@ -72,17 +74,24 @@ const { service: s } = Astro.props;
       ></label
     >
   </div>
-  <fieldset class="service-relationship">
-    <legend>어떤 서비스인가요?</legend>
-    <label
-      ><input type="radio" name="relationship" value="user" checked={!s || s.relationship === 'user'} /> 추천하고
-      싶은 서비스</label
-    >
-    <label
-      ><input type="radio" name="relationship" value="maker" checked={s?.relationship === 'maker'} /> 제가 만든
-      서비스</label
-    >
-  </fieldset>
+  {
+    proposing ? (
+      <input type="hidden" name="relationship" value={s!.relationship} />
+    ) : (
+      <fieldset class="service-relationship">
+        <legend>어떤 서비스인가요?</legend>
+        <label>
+          <input type="radio" name="relationship" value="user" checked={!s || s.relationship === 'user'} />{' '}
+          추천하고 싶은 서비스
+        </label>
+        <label>
+          <input type="radio" name="relationship" value="maker" checked={s?.relationship === 'maker'} /> 제가
+          만든 서비스
+        </label>
+      </fieldset>
+    )
+  }
+
   <label class="form-field"
     ><span>한 줄 소개</span><input
       name="tagline"
@@ -132,18 +141,123 @@ const { service: s } = Astro.props;
     </div>
     <noscript><p class="field-help">이미지 없이도 서비스를 등록할 수 있어요.</p></noscript>
   </div>
+  <details class="service-guide-editor" open={Boolean(g)}>
+    <summary>제작 가이드 {g ? '수정' : '추가 (선택)'}</summary>
+    <p class="field-help">
+      직접 만들 수 있는 범위와 프롬프트를 적어주세요. 가이드 없이 서비스 정보만 등록할 수도 있습니다.
+    </p>
+    {
+      s?.catalog_slug ? (
+        <input type="hidden" name="guide_mode" value="present" />
+      ) : (
+        <label class="form-field">
+          <>
+            <span>가이드 등록</span>
+            <select name="guide_mode" data-guide-mode>
+              <>
+                <option value="none" selected={!g}>
+                  가이드 없음
+                </option>
+                <option value="present" selected={Boolean(g)}>
+                  가이드 작성
+                </option>
+              </>
+            </select>
+          </>
+        </label>
+      )
+    }
+    <fieldset data-guide-fields>
+      <label class="form-field"
+        ><span>대체 가능성</span><select name="guide_verdict"
+          ><option value="yes" selected={g?.verdict === 'yes'}>대체 가능</option><option
+            value="kinda"
+            selected={!g || g.verdict === 'kinda'}>일부 대체 가능</option
+          ><option value="no" selected={g?.verdict === 'no'}>대체 어려움</option></select
+        ></label
+      >
+      <label class="form-field"
+        ><span>제작 난이도</span><select name="guide_difficulty"
+          ><option value="입문" selected={g?.difficulty === '입문'}>입문</option><option
+            value="중급"
+            selected={!g || g.difficulty === '중급'}>중급</option
+          ><option value="고급" selected={g?.difficulty === '고급'}>고급</option></select
+        ></label
+      >
+      <label class="form-field"
+        ><span>제작 범위</span><textarea name="guide_scope" aria-label="제작 범위" maxlength="2000" rows="3"
+          >{g?.scope || ''}</textarea
+        ></label
+      >
+      <label class="form-field"
+        ><span>판단 이유</span><textarea name="guide_reason" aria-label="판단 이유" maxlength="3000" rows="4"
+          >{g?.verdictReason || ''}</textarea
+        ></label
+      >
+      <label class="form-field"
+        ><span>만들 기능 · 한 줄에 하나씩</span><textarea
+          name="guide_features"
+          aria-label="만들 기능"
+          maxlength="15000"
+          rows="4">{g?.features.join('\n') || ''}</textarea
+        ></label
+      >
+      <label class="form-field"
+        ><span>만들기 어렵거나 제외할 기능 · 한 줄에 하나씩</span><textarea
+          name="guide_limits"
+          aria-label="제외할 기능"
+          maxlength="15000"
+          rows="4">{g?.whatYouLose.join('\n') || ''}</textarea
+        ></label
+      >
+      <label class="form-field"
+        ><span>운영 시 필요한 것 · 한 줄에 하나씩</span><textarea
+          name="guide_operations"
+          aria-label="운영 시 필요한 것"
+          maxlength="15000"
+          rows="3">{g?.operations.join('\n') || ''}</textarea
+        ></label
+      >
+      <label class="form-field"
+        ><span>제작 프롬프트</span><textarea
+          name="guide_prompt"
+          aria-label="제작 프롬프트"
+          maxlength="20000"
+          rows="10">{g?.prompt || ''}</textarea
+        ></label
+      >
+      <p class="field-help">프롬프트는 500자 이상 입력해 주세요. API 키나 비밀번호는 넣지 마세요.</p>
+    </fieldset>
+  </details>
+  {
+    proposing && (
+      <label class="form-field">
+        <>
+          <span>수정 이유·출처</span>
+          <textarea
+            name="change_reason"
+            aria-label="수정 이유·출처"
+            required
+            minlength="5"
+            maxlength="1000"
+            rows="3"
+            placeholder="바꾼 이유와 확인한 자료의 주소를 적어주세요."
+          />
+        </>
+      </label>
+    )
+  }
   <p class="muted small">
-    운영자가 확인하면 SaaS 목록에 공개돼요. {
-      s
-        ? '수정한 내용도 다시 검토하며, 검토 중에는 목록에 표시되지 않아요.'
-        : '등록 상태는 내 활동에서 확인할 수 있어요.'
+    {
+      proposing
+        ? '수정 제안은 검토 후 반영됩니다. 검토 중에는 기존 내용이 그대로 공개됩니다.'
+        : '운영자 확인 후 목록에 공개됩니다. 검토 상태는 내 활동에서 확인할 수 있습니다.'
     }
   </p>
   <p class="form-status" role="status"></p>
   <div class="service-submit">
-    <button class="primary" type="submit">{s ? '수정하고 검토 요청' : '등록 요청하기'}</button><a
-      class="muted"
-      href={s ? '/services/' + s.id : '/services'}>취소</a
-    >
+    <button class="primary" type="submit"
+      >{proposing ? '수정 제안 보내기' : s ? '수정하고 검토 요청' : '등록 요청하기'}</button
+    ><a class="muted" href={s ? '/services/' + s.id : '/services'}>취소</a>
   </div>
 </form>

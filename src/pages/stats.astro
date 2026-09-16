@@ -5,25 +5,27 @@ import CatalogSummary from '../components/CatalogSummary.astro';
 import PostRow from '../components/PostRow.astro';
 import ServiceCard from '../components/ServiceCard.astro';
 import { totals, posts } from '../lib/db';
-import { apps, categories } from '../lib/apps';
+import { categories } from '../lib/apps';
+import { catalog } from '../lib/catalog';
 import { publicServices } from '../lib/services';
 const t = await totals();
 const recentBuilds = (await posts(new URLSearchParams({ board: 'builds' }))).items.slice(0, 3);
 const services = await publicServices(new URLSearchParams(), 3);
+const entries = (await catalog()).all;
 const groups = categories
-  .map((c) => ({ ...c, count: apps.filter((a) => a.category === c.slug).length }))
+  .map((c) => ({ ...c, count: entries.filter((a) => a.category === c.slug).length }))
   .filter((c) => c.count);
 ---
 
 <Base title="등록 현황" pageKind="stats">
   <header class="page-head">
-    <BrandIntro><h1>등록 현황</h1><p>현재 공개된 가이드, SaaS 소개, 제작 후기입니다.</p></BrandIntro>
+    <BrandIntro><h1>등록 현황</h1><p>현재 공개된 SaaS, 제작 가이드, 후기입니다.</p></BrandIntro>
   </header>
   <CatalogSummary counts={t} />
   <p class="muted small">검토 중이거나 숨김·삭제된 항목은 포함하지 않습니다.</p>
   <section class="section">
     <div class="flex between wrap-flex">
-      <h2>최근 등록 SaaS</h2><a href="/services" class="small">전체 보기</a>
+      <h2>최근 등록 SaaS</h2><a href="/#directory" class="small">전체 보기</a>
     </div>
     {
       services.items.length ? (
@@ -60,8 +62,8 @@ const groups = categories
     }
   </section>
   <section class="section">
-    <h2>분야별 제작 가이드</h2>
-    <nav class="category-counts" aria-label="분야별 제작 가이드">
+    <h2>분야별 SaaS</h2>
+    <nav class="category-counts" aria-label="분야별 SaaS">
       {
         groups.map((c) => (
           <a href={'/category/' + c.slug}>
@@ -77,8 +79,8 @@ const groups = categories
   <section class="section narrow prose">
     <h2>집계 기준</h2>
     <p>
-      제작 가이드는 사이트에 공개된 도구 설명, 등록 SaaS는 운영자가 공개한 소개, 제작 후기는 ‘제작 후기·작품’
-      게시판의 공개 글을 셉니다. 각 숫자를 누르면 해당 목록으로 이동합니다.
+      등록 SaaS는 현재 공개된 모든 서비스의 수입니다. 제작 가이드는 그중 제작 범위와 프롬프트가 있는
+      항목입니다. 제작 후기는 ‘제작 후기·작품’ 게시판의 공개 글을 셉니다.
     </p>
     <p>
       후기 수는 글의 개수입니다. 제작 성공이나 비용 절감을 확인한 건수는 아닙니다. 도구별 ‘대체 경험’ 버튼

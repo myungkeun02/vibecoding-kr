@@ -18,7 +18,14 @@ import { getApp } from '../../lib/apps';
 import { absolute, secret } from '../../lib/config';
 import { sendMail, mailAvailable } from '../../lib/mail';
 import { createHmac } from 'node:crypto';
-import { submitService, deleteService, reviewService } from '../../lib/services';
+import {
+  submitService,
+  deleteService,
+  reviewService,
+  reviewServiceEdit,
+  cancelServiceEdit,
+  visibleService,
+} from '../../lib/services';
 function bad(message: string, status = 400): never {
   throw Object.assign(new Error(message), { status });
 }
@@ -324,7 +331,10 @@ export const POST: APIRoute = async (ctx) => {
           requireUser();
           const p = postSchema.parse(b);
           if (p.board === 'notice') admin();
-          if (p.tool && !getApp(p.tool)) bad('관련 도구를 확인해 주세요.');
+          const linkedService = p.tool.startsWith('service:') ? await visibleService(p.tool.slice(8)) : null;
+          if (p.tool && !getApp(p.tool) && !linkedService) bad('관련 도구를 확인해 주세요.');
+          const toolSlug = linkedService ? linkedService.catalog_slug : p.tool || null;
+          const serviceId = linkedService && !linkedService.catalog_slug ? linkedService.id : null;
           for (const x of [p.url, p.repo])
             if (x && !safeUrl(x)) bad('링크는 http 또는 https 주소로 입력해 주세요.');
           const build = JSON.stringify({
@@ -340,25 +350,27 @@ export const POST: APIRoute = async (ctx) => {
           if (action === 'posts/update') {
             await ownPost(pid);
             await run(
-              'UPDATE posts SET title=?,body=?,board=?,tags=?,tool_slug=?,build=?,updated_at=CURRENT_TIMESTAMP WHERE id=?',
+              'UPDATE posts SET title=?,body=?,board=?,tags=?,tool_slug=?,service_id=?,build=?,updated_at=CURRENT_TIMESTAMP WHERE id=?',
               p.title,
               p.body,
               p.board,
               p.tags,
-              p.tool || null,
+              toolSlug,
+              serviceId,
               build,
               pid,
             );
           } else {
             await run(
-              'INSERT INTO posts(id,user_id,title,body,board,tags,tool_slug,build) VALUES(?,?,?,?,?,?,?,?)',
+              'INSERT INTO posts(id,user_id,title,body,board,tags,tool_slug,service_id,build) VALUES(?,?,?,?,?,?,?,?,?)',
               pid,
               user.id,
               p.title,
               p.body,
               p.board,
               p.tags,
-              p.tool || null,
+              toolSlug,
+              serviceId,
               build,
             );
             await event('post');
@@ -487,13 +499,27 @@ export const POST: APIRoute = async (ctx) => {
         case 'services/update': {
           requireUser();
           if (action === 'services/update' && !b.id) bad('수정할 서비스를 확인해 주세요.');
-          const serviceId = await submitService(
+          const submitted = await submitService(
             b,
             user.id,
             action === 'services/update' ? String(b.id) : undefined,
             b.revision,
           );
-          result.redirect = '/services/' + serviceId + '?submitted=1';
+          result.redirect = submitted.editId
+            ? '/services/edits/' + submitted.editId
+            : '/services/' + submitted.serviceId + '?submitted=1';
+          break;
+        }
+        case 'services/edits/review': {
+          admin();
+          await reviewServiceEdit(b, user.id);
+          result.redirect = '/admin#service-edits';
+          break;
+        }
+        case 'services/edits/cancel': {
+          requireUser();
+          await cancelServiceEdit(b.id, user.id);
+          result.redirect = '/me#my-service-edits';
           break;
         }
         case 'services/delete': {

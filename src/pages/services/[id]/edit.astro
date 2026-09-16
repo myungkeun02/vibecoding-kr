@@ -5,7 +5,7 @@ import EmptyState from '../../../components/EmptyState.astro';
 import { visibleService } from '../../../lib/services';
 if (!Astro.locals.user) return Astro.redirect('/login?returnTo=' + encodeURIComponent(Astro.url.pathname));
 const s = await visibleService(Astro.params.id || '', Astro.locals.user);
-const allowed = s && s.user_id === Astro.locals.user.id;
+const allowed = s && (s.status === 'published' || s.user_id === Astro.locals.user.id);
 if (!allowed) Astro.response.status = s ? 403 : 404;
 ---
 
@@ -24,7 +24,7 @@ if (!allowed) Astro.response.status = s ? 403 : 404;
             <header class="page-head">
               <>
                 <h1>SaaS 정보 수정</h1>
-                <p>수정 내용을 저장하면 다시 검토를 요청해요.</p>
+                <p>기존 정보와 제작 가이드를 수정해 제안할 수 있습니다.</p>
               </>
             </header>
             <ServiceEditor service={s} />

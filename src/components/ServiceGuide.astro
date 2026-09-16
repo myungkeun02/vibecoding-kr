@@ -1,0 +1,73 @@
+---
+import type { ServiceGuide } from '../lib/service-schema';
+import { verdicts } from '../lib/config';
+interface Props {
+  guide: ServiceGuide | null;
+  editUrl: string;
+}
+const { guide: g, editUrl } = Astro.props;
+---
+
+<section class="section service-guide" id="service-guide">
+  <div class="flex between wrap-flex">
+    <h2>제작 가이드</h2><a href={editUrl} class="small accent">{g ? '가이드 수정' : '가이드 추가'}</a>
+  </div>
+  {
+    g ? (
+      <>
+        <p>
+          <span class:list={['verdict', g.verdict]}>{verdicts[g.verdict].label}</span> · {g.difficulty}
+        </p>
+        <>
+          <h3>제작 범위</h3>
+          <p class="service-description">{g.scope}</p>
+          <p class="service-description muted">{g.verdictReason}</p>
+        </>
+        <>
+          <h3>만들 기능</h3>
+          <ul>
+            {g.features.map((f) => (
+              <li>{f}</li>
+            ))}
+          </ul>
+        </>
+        <>
+          <h3>제외할 기능</h3>
+          <ul>
+            {g.whatYouLose.map((f) => (
+              <li>{f}</li>
+            ))}
+          </ul>
+        </>
+        {g.operations.length > 0 && (
+          <>
+            <h3>운영 시 필요한 것</h3>
+            <ul>
+              {g.operations.map((f) => (
+                <li>{f}</li>
+              ))}
+            </ul>
+          </>
+        )}
+        <div class="flex between wrap-flex">
+          <>
+            <h3>제작 프롬프트</h3>
+            <button class="button secondary" data-copy="#service-build-prompt">
+              프롬프트 복사
+            </button>
+          </>
+        </div>
+        <pre id="service-build-prompt" class="service-guide-prompt">
+          {g.prompt}
+        </pre>
+      </>
+    ) : (
+      <div class="content-empty">
+        <>
+          <p>아직 제작 가이드가 없습니다.</p>
+          <a href={editUrl}>제작 범위와 프롬프트 추가하기</a>
+        </>
+      </div>
+    )
+  }
+</section>

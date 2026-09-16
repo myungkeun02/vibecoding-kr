@@ -117,11 +117,10 @@ test('members upload SaaS, admins publish, owners revise and delete; media follo
     expect((await adminContext.request.get(origin + media)).status()).toBe(200);
     await row.getByRole('button', { name: '검토 결과 적용' }).click();
     await expect(adminPage).toHaveURL(/\/admin#services$/);
-    await publicPage.goto(origin + '/services?q=' + encodeURIComponent(data.name));
-    await expect(publicPage.locator('.service-card')).toHaveCount(1);
-    await publicPage.getByLabel('SaaS 분야').selectOption('notes');
-    await publicPage.getByRole('button', { name: '검색', exact: true }).click();
-    await expect(publicPage.locator('.service-card')).toHaveCount(0);
+    await publicPage.goto(origin + '/?q=' + encodeURIComponent(data.name));
+    await expect(publicPage.locator('.tool-row')).toHaveCount(1);
+    await publicPage.goto(origin + '/?q=' + encodeURIComponent(data.name) + '&category=notes');
+    await expect(publicPage.locator('.tool-row')).toHaveCount(0);
     await publicPage.goto(origin + '/services/' + sid);
     await expect(publicPage.getByRole('heading', { name: data.name, exact: true })).toBeVisible();
     await expect(publicPage.locator('.service-review-status')).toHaveCount(0);
@@ -137,29 +136,34 @@ test('members upload SaaS, admins publish, owners revise and delete; media follo
     await page
       .getByLabel('상세 소개', { exact: true })
       .fill(data.description + ' 변경한 내용을 다시 확인해 주세요.');
-    await page.getByRole('button', { name: '수정하고 검토 요청' }).click();
-    await expect(page.locator('.service-review-status')).toContainText('검토 중');
-    expect((await visitor.request.get(origin + '/services/' + sid)).status()).toBe(404);
-    expect((await visitor.request.get(origin + media)).status()).toBe(404);
+    await page.getByLabel('수정 이유·출처').fill('소개 내용을 실제 사용 결과에 맞게 보완합니다.');
+    await page.getByRole('button', { name: '수정 제안 보내기' }).click();
+    await expect(page).toHaveURL(/\/services\/edits\/[a-f0-9]{36}$/);
+    const editId = serviceId(page.url());
+    await expect(page.locator('[data-edit-status]')).toContainText('검토 중');
+    expect((await visitor.request.get(origin + '/services/' + sid)).status()).toBe(200);
+    expect((await visitor.request.get(origin + media)).status()).toBe(200);
+    expect(await (await visitor.request.get(origin + '/services/' + sid)).text()).not.toContain(
+      '변경한 내용을 다시 확인',
+    );
     expect(
       (
-        await action(adminContext.request, 'services/review', {
+        await action(adminContext.request, 'services/edits/review', { id: editId, operation: 'accept' })
+      ).status(),
+    ).toBe(200);
+    expect(await (await visitor.request.get(origin + '/services/' + sid)).text()).toContain(
+      '변경한 내용을 다시 확인',
+    );
+    expect(
+      (
+        await action(page.request, 'services/update', {
+          ...data,
           id: sid,
           revision: published.revision,
-          operation: 'publish',
+          change_reason: '오래된 화면에서의 수정 제안입니다.',
         })
       ).status(),
     ).toBe(409);
-    const edited = await record(sid);
-    expect(
-      (
-        await action(adminContext.request, 'services/review', {
-          id: sid,
-          revision: edited.revision,
-          operation: 'publish',
-        })
-      ).status(),
-    ).toBe(200);
     await page.goto('/services/' + sid);
     page.once('dialog', (d) => d.accept());
     await page.getByRole('button', { name: '등록 삭제' }).click();

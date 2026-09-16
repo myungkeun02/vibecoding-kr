@@ -51,7 +51,7 @@ export const serviceSchema = z.object({
   name: z
     .string()
     .trim()
-    .min(2, '서비스 이름은 2자 이상 입력해 주세요.')
+    .min(1, '서비스 이름을 입력해 주세요.')
     .max(80, '서비스 이름은 80자 이내로 입력해 주세요.'),
   website: z
     .string()
@@ -76,3 +76,42 @@ export const serviceSchema = z.object({
     .regex(/^(?:\/media\/[a-f0-9]{36})?$/, '첨부 이미지를 다시 확인해 주세요.')
     .default(''),
 });
+
+export const guideSchema = z.object({
+  verdict: z.enum(['yes', 'kinda', 'no']),
+  scope: z.string().trim().min(15, '제작 범위는 15자 이상 입력해 주세요.').max(2000),
+  verdictReason: z.string().trim().min(30, '판단 이유는 30자 이상 입력해 주세요.').max(3000),
+  difficulty: z.enum(['입문', '중급', '고급']),
+  features: z.array(z.string().trim().min(1).max(500)).min(1).max(30),
+  whatYouLose: z.array(z.string().trim().min(1).max(500)).min(1).max(30),
+  operations: z.array(z.string().trim().min(1).max(500)).max(30),
+  prompt: z.string().trim().min(500, '제작 프롬프트는 500자 이상 입력해 주세요.').max(20000),
+});
+export type ServiceGuide = z.infer<typeof guideSchema>;
+export function parseGuide(input: any, previous: ServiceGuide | null = null) {
+  if (input.guide_mode === undefined) return previous;
+  if (input.guide_mode === 'none') return null;
+  if (input.guide_mode !== 'present')
+    throw Object.assign(new Error('가이드 입력 방식을 확인해 주세요.'), { status: 400 });
+  const lines = (value: unknown) =>
+    String(value || '')
+      .split('\n')
+      .map((s) => s.trim())
+      .filter(Boolean);
+  return guideSchema.parse({
+    verdict: input.guide_verdict,
+    scope: input.guide_scope,
+    verdictReason: input.guide_reason,
+    difficulty: input.guide_difficulty,
+    features: lines(input.guide_features),
+    whatYouLose: lines(input.guide_limits),
+    operations: lines(input.guide_operations),
+    prompt: input.guide_prompt,
+  });
+}
+export const editStatuses: Record<string, string> = {
+  pending: '검토 중',
+  accepted: '반영 완료',
+  rejected: '보완 필요',
+  cancelled: '취소됨',
+};

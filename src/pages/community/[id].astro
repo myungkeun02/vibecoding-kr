@@ -6,8 +6,10 @@ import { getPost, getComments, one } from '../../lib/db';
 import { markdown, plainText } from '../../lib/markdown';
 import { boards } from '../../lib/config';
 import { getApp } from '../../lib/apps';
+import { visibleService, serviceHref } from '../../lib/services';
 const p = await getPost(Astro.params.id || '');
 if (!p) Astro.response.status = 404;
+const linkedService = p?.service_id ? await visibleService(p.service_id) : null;
 const user = Astro.locals.user;
 const comments = p ? await getComments(p.id) : [];
 const build = p ? JSON.parse(p.build) : {};
@@ -47,6 +49,7 @@ const reactions =
             <div class="post-meta">
               <a href={p.user_id ? '/profile/' + p.user_id : undefined}>{p.nickname || '탈퇴한 사용자'}</a>
               <time datetime={p.created_at}>{p.created_at.slice(0, 10)}</time>
+              {linkedService && <a href={serviceHref(linkedService)}>{linkedService.name}</a>}
               {p.tool_slug && (
                 <a href={'/' + p.tool_slug}>{getApp(p.tool_slug)?.nameKo || '공개가 종료된 도구'}</a>
               )}

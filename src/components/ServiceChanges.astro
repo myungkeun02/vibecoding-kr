@@ -1,0 +1,44 @@
+---
+import { contentChanges, type ServiceEdit } from '../lib/services';
+interface Props {
+  edit: ServiceEdit;
+}
+const { edit: e } = Astro.props;
+const changes = contentChanges(e.before_data, e.after_data);
+---
+
+<div class="service-changes">
+  {
+    changes.map((c) => (
+      <section>
+        <>
+          <h4>{c.label}</h4>
+          <div class="service-change-pair">
+            <>
+              <div>
+                <>
+                  <span class="muted small">수정 전</span>
+                  {c.key === 'image' && c.before !== '없음' ? (
+                    <img class="service-image-preview" src={c.before} alt="기존 이미지" />
+                  ) : (
+                    <p>{c.before}</p>
+                  )}
+                </>
+              </div>
+              <div>
+                <>
+                  <span class="accent small">수정 제안</span>
+                  {c.key === 'image' && c.after !== '없음' ? (
+                    <img class="service-image-preview" src={c.after} alt="수정 제안 이미지" />
+                  ) : (
+                    <p>{c.after}</p>
+                  )}
+                </>
+              </div>
+            </>
+          </div>
+        </>
+      </section>
+    ))
+  }
+</div>

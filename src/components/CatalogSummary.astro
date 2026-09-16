@@ -5,8 +5,8 @@ interface Props {
 }
 const t = Astro.props.counts || (await totals());
 const items = [
-  { key: 'guides', label: '제작 가이드', value: t.guides, unit: '개', href: '/#directory' },
-  { key: 'services', label: '등록 SaaS', value: t.services, unit: '개', href: '/services' },
+  { key: 'services', label: '등록 SaaS', value: t.services, unit: '개', href: '/#directory' },
+  { key: 'guides', label: '제작 가이드', value: t.guides, unit: '개', href: '/?guide=available#directory' },
   { key: 'builds', label: '제작 후기', value: t.builds, unit: '건', href: '/community?board=builds' },
 ];
 ---

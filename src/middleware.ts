@@ -38,7 +38,7 @@ export const onRequest = defineMiddleware(async (ctx, next) => {
   if (
     response.status < 300 &&
     response.headers.get('Content-Type')?.includes('text/html') &&
-    !/^\/(api|admin|me|login|signup|reset|forgot|verify-email|onboarding|unsubscribe|notifications|services\/new|services\/[^/]+\/edit)/.test(
+    !/^\/(api|admin|me|login|signup|reset|forgot|verify-email|onboarding|unsubscribe|notifications|services\/new|services\/edits|services\/[^/]+\/edit)/.test(
       ctx.url.pathname,
     )
   )

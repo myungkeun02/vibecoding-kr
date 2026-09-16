@@ -79,10 +79,38 @@ try {
     image: '',
   });
   const before = await (await api.get('/api/totals')).json();
+  const seeded = await database.one("SELECT * FROM services WHERE catalog_slug='slack'");
+  const editedDescription =
+    '회원이 보완한 소개와 제작 가이드는 서버 재시작이나 백업 복원으로 사라지지 않아야 합니다.';
+  const proposal = await action('services/update', {
+    id: seeded.id,
+    revision: seeded.revision,
+    name: seeded.name,
+    website: seeded.website_url,
+    category: seeded.category,
+    tagline: seeded.tagline,
+    description: editedDescription,
+    pricing: seeded.pricing,
+    relationship: seeded.relationship,
+    image: '',
+    change_reason: '실제 승인한 공동 편집 내용의 보존 여부를 확인합니다.',
+  });
+  await database.run("UPDATE users SET role='admin' WHERE email=?", salt + '@example.test');
+  await action('services/edits/review', { id: proposal.redirect.split('/').pop(), operation: 'accept' });
+  async function checkSharedEdit() {
+    const current = await database.one('SELECT * FROM services WHERE id=?', seeded.id);
+    expect(current.description).toBe(editedDescription);
+    expect(current.guide).toEqual(seeded.guide);
+    expect(current.revision).toBe(seeded.revision + 1);
+    expect((await api.get('/slack')).status()).toBe(200);
+    expect(await (await api.get('/slack')).text()).toContain(editedDescription);
+    expect((await api.get(proposal.redirect)).status()).toBe(200);
+  }
   const backup = join(dir, 'backup.dump');
   ops(['backup', backup]);
   await stop();
   await start();
+  await checkSharedEdit();
   expect((await api.get('/community/' + p.id)).status()).toBe(200);
   expect((await api.get(submitted.redirect)).status()).toBe(200);
   expect(await (await api.get('/api/totals')).json()).toEqual(before);
@@ -91,6 +119,7 @@ try {
   await database.run('DELETE FROM votes');
   ops(['restore', backup, '--server-stopped']);
   await start();
+  await checkSharedEdit();
   expect(await (await api.get('/api/totals')).json()).toEqual(before);
   expect((await api.get('/community/' + p.id)).status()).toBe(200);
   expect((await api.get(submitted.redirect)).status()).toBe(200);
@@ -106,6 +135,7 @@ try {
           'session persists',
           'posts persist',
           'submitted SaaS and review state persist through restart and restore',
+          'approved seeded SaaS edit, guide and proposal survive restart, reseed and restore',
           'votes and totals persist',
           'PostgreSQL live pg_dump backup',
           'restore after stopped server',

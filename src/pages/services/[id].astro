@@ -1,11 +1,16 @@
 ---
 import Base from '../../layouts/Base.astro';
 import EmptyState from '../../components/EmptyState.astro';
+import ServiceGuide from '../../components/ServiceGuide.astro';
+import PostRow from '../../components/PostRow.astro';
+import { posts } from '../../lib/db';
 import { visibleService } from '../../lib/services';
 import { servicePricing, serviceStatuses } from '../../lib/service-schema';
 import { categoryName } from '../../lib/apps';
 const s = await visibleService(Astro.params.id || '', Astro.locals.user);
 if (!s) Astro.response.status = 404;
+if (s?.catalog_slug) return Astro.redirect('/' + s.catalog_slug, 302);
+const builds = s ? (await posts(new URLSearchParams({ service: s.id, board: 'builds' }))).items : [];
 const owner = s && Astro.locals.user?.id === s.user_id;
 const reviewer = Astro.locals.user?.role === 'admin';
 ---
@@ -15,7 +20,7 @@ const reviewer = Astro.locals.user?.role === 'admin';
   description={s?.tagline}
   pageKind="service-detail"
   mobileTitle="SaaS 소개"
-  mobileBack="/services"
+  mobileBack="/"
   noindex={!s || s.status !== 'published'}
 >
   {
@@ -36,10 +41,13 @@ const reviewer = Astro.locals.user?.role === 'admin';
         )}
         <header class="page-head">
           <>
-            <div class="eyebrow">
-              {s.relationship === 'maker' ? '직접 만든 서비스' : '사용자 추천'} · {categoryName(s.category)}
-            </div>
+            <div class="eyebrow">{categoryName(s.category)}</div>
             <h1>{s.name}</h1>
+            {(s.status === 'published' || owner) && (
+              <a class="small accent" href={'/services/' + s.id + '/edit'}>
+                정보 수정
+              </a>
+            )}
             <p>{s.tagline}</p>
             <div class="flex wrap-flex">
               <>
@@ -66,8 +74,24 @@ const reviewer = Astro.locals.user?.role === 'admin';
             <p class="service-description">{s.description}</p>
           </>
         </section>
+        <ServiceGuide guide={s.guide} editUrl={'/services/' + s.id + '/edit'} />
+        <section class="section">
+          <div class="flex between wrap-flex">
+            <>
+              <h2>제작 후기</h2>
+              <a class="small" href={'/community/new?board=builds&tool=service:' + s.id}>
+                후기 작성
+              </a>
+            </>
+          </div>
+          {builds.length ? (
+            builds.map((p) => <PostRow post={p} />)
+          ) : (
+            <p class="muted">아직 등록된 제작 후기가 없습니다.</p>
+          )}
+        </section>
         <p class="muted small">
-          {s.nickname}님이 등록 · {s.created_at.slice(0, 10)} · 등록자가 소개한 내용이에요.
+          {s.nickname}님이 등록 · {s.created_at.slice(0, 10)} · 수정 제안으로 내용을 보완할 수 있습니다.
         </p>
         {owner && (
           <div class="service-owner-actions">
@@ -96,7 +120,7 @@ const reviewer = Astro.locals.user?.role === 'admin';
           </a>
         )}
         <p class="section">
-          <a href="/services">← SaaS 목록으로</a>
+          <a href="/#directory">← SaaS 목록으로</a>
         </p>
       </article>
     ) : (
@@ -105,7 +129,7 @@ const reviewer = Astro.locals.user?.role === 'admin';
           <>
             <h1>서비스를 찾을 수 없어요.</h1>
             <p>아직 공개되지 않았거나 삭제된 서비스예요.</p>
-            <a href="/services" class="button">
+            <a href="/#directory" class="button">
               SaaS 목록으로
             </a>
           </>

@@ -6,11 +6,12 @@ import Directory from '../components/Directory.astro';
 import CatalogSummary from '../components/CatalogSummary.astro';
 import Newsletter from '../components/Newsletter.astro';
 import UiIcon from '../components/UiIcon.astro';
-import { apps, categories, filterApps } from '../lib/apps';
+import { categories } from '../lib/apps';
+import { catalog } from '../lib/catalog';
 import { absolute, boards } from '../lib/config';
-import { posts, buildCounts } from '../lib/db';
+import { posts } from '../lib/db';
 const recent = (await posts(new URLSearchParams({ board: 'builds' }))).items.slice(0, 3);
-const r = filterApps(Astro.url.searchParams, await buildCounts());
+const r = await catalog(Astro.url.searchParams);
 const jsonld = [
   {
     '@context': 'https://schema.org',
@@ -30,7 +31,7 @@ const jsonld = [
       '@type': 'ListItem',
       position: i + 1,
       name: a.name,
-      url: absolute('/' + a.slug),
+      url: absolute(a.href),
     })),
   },
 ];
@@ -51,7 +52,7 @@ const jsonld = [
           확인하세요.
         </p>
       </div><div class="mobile-only mobile-home-intro">
-        <p>{apps.length}개 도구의 제작 가이드</p><h1>
+        <p>{r.all.length}개 SaaS와 제작 가이드</p><h1>
           어떤 도구를 찾으세요<span class="accent">?</span>
         </h1>
       </div><form action="/" role="search" data-directory-search>
@@ -95,12 +96,10 @@ const jsonld = [
           ))
         }
       </div><div class="eyebrow" style="margin-top:17px">
-        도구 {apps.length}개 · {categories.length}개 분야
+        SaaS {r.all.length}개 · {categories.length}개 분야
       </div>
     </aside>
-  </section><CatalogSummary /><nav class="catalog-switch" aria-label="도구 탐색 방식">
-    <a href="/#directory" aria-current="page">제작 가이드</a><a href="/services">사용자 등록 SaaS ↗</a>
-  </nav><Directory /><div class="home-bottom">
+  </section><CatalogSummary /><Directory /><div class="home-bottom">
     <section>
       <div class="flex between">
         <h2>최근 제작 후기</h2><a class="small muted" href="/community?board=builds">후기 전체 보기</a>

@@ -2,9 +2,10 @@
 import icons from '../../data/icons.json';
 interface Props {
   app: { slug: string; name: string };
+  imageUrl?: string;
 }
-const { app } = Astro.props;
-const icon = (icons as Record<string, { src?: string | null }>)[app.slug];
+const { app, imageUrl } = Astro.props;
+const icon = imageUrl ? { src: imageUrl } : (icons as Record<string, { src?: string | null }>)[app.slug];
 ---
 
 <span

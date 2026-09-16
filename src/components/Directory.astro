@@ -1,12 +1,11 @@
 ---
 import EmptyState from './EmptyState.astro';
-import { apps, categories, filterApps } from '../lib/apps';
-import { buildCounts } from '../lib/db';
+import { categories } from '../lib/apps';
+import { catalog } from '../lib/catalog';
 import ToolRow from './ToolRow.astro';
 import MobileDirectory from './MobileDirectory.astro';
 const { params = Astro.url.searchParams } = Astro.props;
-const counts = await buildCounts();
-const r = filterApps(params, counts);
+const r = await catalog(params);
 const href = (key: string, value: string) => {
   const p = new URLSearchParams(params);
   p.delete('page');
@@ -22,7 +21,7 @@ const href = (key: string, value: string) => {
       <div class="eyebrow">어떤 도구를 만들까요?</div><a
         href={href('category', '')}
         class:list={{ active: !params.get('category') }}
-        data-filter-link>▦ 모든 도구 <small>{apps.length}</small></a
+        data-filter-link>▦ 모든 도구 <small>{r.all.length}</small></a
       >{
         categories.map((c) => (
           <a
@@ -32,14 +31,14 @@ const href = (key: string, value: string) => {
           >
             <span>{c.emoji}</span>
             {c.name}
-            <small>{apps.filter((a) => a.category === c.slug).length}</small>
+            <small>{r.categories[c.slug] || 0}</small>
           </a>
         ))
       }
     </nav>
   </aside><section class="directory-main">
     <div class="directory-head">
-      <h2>직접 만들어볼 도구<span class="count-label">{r.total}개</span></h2><a
+      <h2>SaaS 목록<span class="count-label">{r.total}개</span></h2><a
         href="/services/new"
         class="small accent">SaaS 등록하기 +</a
       >
@@ -88,6 +87,11 @@ const href = (key: string, value: string) => {
             </option>
           ))
         }</select
+      ><select name="guide" aria-label="제작 가이드"
+        ><option value="">가이드 전체</option><option
+          value="available"
+          selected={params.get('guide') === 'available'}>가이드 있음</option
+        ><option value="none" selected={params.get('guide') === 'none'}>가이드 없음</option></select
       ><select name="sort" aria-label="정렬"
         ><option value="popular" selected={!params.get('sort') || params.get('sort') === 'popular'}
           >후기 많은 순 ↓</option
@@ -99,7 +103,7 @@ const href = (key: string, value: string) => {
     </form><div class="tool-table-head">
       <span>도구 / 카테고리</span><span>이용 비용</span><span>대체 가능성</span><span>제작 후기</span>
     </div><div aria-live="polite" aria-label="검색 결과">
-      {r.items.map((a) => <ToolRow app={a} count={counts[a.slug] || 0} />)}{
+      {r.items.map((a) => <ToolRow entry={a} />)}{
         !r.items.length && (
           <EmptyState>
             <>

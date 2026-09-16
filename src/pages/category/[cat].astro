@@ -2,13 +2,14 @@
 import Base from '../../layouts/Base.astro';
 import Directory from '../../components/Directory.astro';
 import Mascot from '../../components/Mascot.astro';
-import { categories, apps } from '../../lib/apps';
+import { categories } from '../../lib/apps';
+import { catalog } from '../../lib/catalog';
 import { absolute } from '../../lib/config';
 const cat = categories.find((c) => c.slug === Astro.params.cat);
 if (!cat) Astro.response.status = 404;
 const params = new URLSearchParams(Astro.url.searchParams);
 if (cat) params.set('category', cat.slug);
-const list = apps.filter((a) => a.category === cat?.slug).slice(0, 20);
+const list = cat ? (await catalog(params)).items : [];
 const jsonld = cat
   ? [
       {
@@ -26,7 +27,7 @@ const jsonld = cat
           '@type': 'ListItem',
           position: i + 1,
           name: a.name,
-          url: absolute('/' + a.slug),
+          url: absolute(a.href),
         })),
       },
     ]

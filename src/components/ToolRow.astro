@@ -1,19 +1,28 @@
 ---
-import { categoryName, priceLabel } from '../lib/apps';
+import { categoryName } from '../lib/apps';
 import ToolIcon from './ToolIcon.astro';
 import { verdicts } from '../lib/config';
-const { app: a, count = 0 } = Astro.props;
-const v = verdicts[a.verdict as keyof typeof verdicts];
+import type { CatalogEntry } from '../lib/catalog';
+interface Props {
+  entry: CatalogEntry;
+}
+const { entry: a } = Astro.props;
+const v = a.verdict ? verdicts[a.verdict] : null;
 ---
 
-<a class="tool-row" href={'/' + a.slug}
-  ><span class="tool-info"
-    ><ToolIcon app={a} /><span
-      ><strong>{a.nameKo}</strong><small
-        >{a.nameKo !== a.name ? a.name + ' · ' : ''}{categoryName(a.category)}</small
+<a class="tool-row" href={a.href} data-catalog-id={a.id}>
+  <span class="tool-info"
+    ><ToolIcon app={a} imageUrl={a.image_id ? '/media/' + a.image_id : undefined} /><span
+      ><strong>{a.name}</strong><small
+        >{a.originalName && a.originalName !== a.name ? a.originalName + ' · ' : ''}{
+          categoryName(a.category)
+        }</small
       ></span
     ></span
-  ><span class="mobile-only tool-summary">{a.summary}</span><span class="price">{priceLabel(a)}</span><span
-    class:list={['verdict', a.verdict]}><span>{v.symbol} {v.label}</span></span
-  ><span class="review-count" aria-label={`제작 후기 ${count}건`}>후기 {count}</span></a
->
+  >
+  <span class="mobile-only tool-summary">{a.tagline}</span><span class="price">{a.pricingLabel}</span>
+  <span class:list={['verdict', a.verdict || 'unknown']}
+    ><span>{v ? v.symbol + ' ' + v.label : '가이드 없음'}</span></span
+  >
+  <span class="review-count" aria-label={`제작 후기 ${a.reviewCount}건`}>후기 {a.reviewCount}</span>
+</a>

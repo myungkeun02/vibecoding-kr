@@ -50,7 +50,7 @@ test('anonymous vote is idempotent and merges with account without double counti
   expect((await dbm.voteCounts()).slack).toBe(2);
   await dbm.mergeVotes(u, 'anon-a');
   expect((await dbm.voteCounts()).slack).toBe(1);
-  expect(await dbm.totals()).toEqual({ guides: apps.apps.length, services: 0, builds: 0 });
+  expect(await dbm.totals()).toEqual({ guides: apps.apps.length, services: apps.apps.length, builds: 0 });
   await dbm.vote('slack', u, 'anon-b', true);
   expect((await dbm.voteCounts()).slack || 0).toBe(0);
 });
@@ -126,6 +126,16 @@ test('seed is idempotent and preserves operational records', async () => {
   await dbm.syncTools(apps.apps);
   await dbm.syncTools(apps.apps);
   expect(await dbm.totals()).toEqual(before);
+});
+test('every seeded SaaS and guide can be submitted through the shared member editor', async () => {
+  const { serviceContent, publicServiceRows } = await import('../../src/lib/services');
+  const { serviceSchema, guideSchema } = await import('../../src/lib/service-schema');
+  const services = await publicServiceRows();
+  expect(services).toHaveLength(apps.apps.length);
+  for (const s of services) {
+    expect(serviceSchema.safeParse(serviceContent(s)).success, s.catalog_slug || s.id).toBe(true);
+    expect(guideSchema.safeParse(s.guide).success, s.catalog_slug || s.id).toBe(true);
+  }
 });
 test('rate limiter closes limit and reopens on expiry', async () => {
   expect(await dbm.rate('x', 2, 60)).toBe(true);

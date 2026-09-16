@@ -1,18 +1,48 @@
 {
-  "startedAt": "2026-09-16T11:03:29.165Z",
-  "durationMs": 32941.811,
-  "passed": 27,
+  "startedAt": "2026-09-16T13:38:12.703Z",
+  "durationMs": 44916.193,
+  "passed": 30,
   "failed": 0,
   "flaky": 0,
   "skipped": 0,
   "cases": [
+    {
+      "title": "seeded SaaS supports member guide edits, private comparison, admin approval and shared search",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 6074
+        }
+      ]
+    },
+    {
+      "title": "any member can propose changes but conflicting reviews, unauthorized edits and private media are protected",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 862
+        }
+      ]
+    },
+    {
+      "title": "a member adds a guide to another member’s SaaS without JavaScript",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 742
+        }
+      ]
+    },
     {
       "title": "all tool icons load locally, survive filtering and fall back after image failure",
       "status": "expected",
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 1049
+          "durationMs": 1075
         }
       ]
     },
@@ -22,7 +52,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 2300
+          "durationMs": 2633
         }
       ]
     },
@@ -32,7 +62,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 2306
+          "durationMs": 1064
         }
       ]
     },
@@ -42,7 +72,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 1763
+          "durationMs": 2192
         }
       ]
     },
@@ -52,7 +82,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 3806
+          "durationMs": 3832
         }
       ]
     },
@@ -62,7 +92,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 2633
+          "durationMs": 3916
         }
       ]
     },
@@ -72,7 +102,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 518
+          "durationMs": 581
         }
       ]
     },
@@ -82,7 +112,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 690
+          "durationMs": 717
         }
       ]
     },
@@ -92,7 +122,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 660
+          "durationMs": 1024
         }
       ]
     },
@@ -102,7 +132,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 1207
+          "durationMs": 1792
         }
       ]
     },
@@ -112,7 +142,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 616
+          "durationMs": 642
         }
       ]
     },
@@ -122,7 +152,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 693
+          "durationMs": 754
         }
       ]
     },
@@ -132,7 +162,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 4381
+          "durationMs": 3903
         }
       ]
     },
@@ -142,7 +172,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 157
+          "durationMs": 188
         }
       ]
     },
@@ -152,7 +182,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 151
+          "durationMs": 201
         }
       ]
     },
@@ -162,7 +192,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 138
+          "durationMs": 184
         }
       ]
     },
@@ -172,7 +202,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 35
+          "durationMs": 39
         }
       ]
     },
@@ -182,7 +212,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 173
+          "durationMs": 188
         }
       ]
     },
@@ -192,7 +222,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 137
+          "durationMs": 149
         }
       ]
     },
@@ -202,7 +232,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 128
+          "durationMs": 160
         }
       ]
     },
@@ -212,7 +242,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 1202
+          "durationMs": 1451
         }
       ]
     },
@@ -222,7 +252,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 119
+          "durationMs": 131
         }
       ]
     },
@@ -232,7 +262,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 221
+          "durationMs": 247
         }
       ]
     },
@@ -242,7 +272,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 832
+          "durationMs": 879
         }
       ]
     },
@@ -252,7 +282,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 4962
+          "durationMs": 6827
         }
       ]
     },
@@ -262,7 +292,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 97
+          "durationMs": 104
         }
       ]
     },
@@ -272,7 +302,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 610
+          "durationMs": 838
         }
       ]
     }

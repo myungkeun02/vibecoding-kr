@@ -8,7 +8,7 @@ const href = (key: string, value: string) => {
   value ? p.set(key, value) : p.delete(key);
   return '/?' + p.toString() + '#directory';
 };
-const activeCount = ['verdict', 'type', 'price'].filter((key) => params.get(key)).length;
+const activeCount = ['verdict', 'type', 'price', 'guide'].filter((key) => params.get(key)).length;
 const fields = [
   {
     name: 'verdict',
@@ -45,6 +45,15 @@ const fields = [
     ],
   },
   {
+    name: 'guide',
+    label: '제작 가이드 선택',
+    options: [
+      ['', '가이드 전체'],
+      ['available', '가이드 있음'],
+      ['none', '가이드 없음'],
+    ],
+  },
+  {
     name: 'sort',
     label: '결과 정렬',
     options: [
@@ -55,7 +64,7 @@ const fields = [
   },
 ];
 const reset = new URLSearchParams(params);
-for (const key of ['verdict', 'type', 'price', 'sort', 'page']) reset.delete(key);
+for (const key of ['verdict', 'type', 'price', 'guide', 'sort', 'page']) reset.delete(key);
 ---
 
 <div class="mobile-only mobile-discovery">
@@ -99,9 +108,10 @@ for (const key of ['verdict', 'type', 'price', 'sort', 'page']) reset.delete(key
   </nav>
   <div class="mobile-results-head">
     <h2 id="mobile-results-title" tabindex="-1">
-      {params.get('q') ? '검색한 도구' : '만들어볼 도구'}
+      {params.get('q') ? '검색한 도구' : 'SaaS 목록'}
       <span>{total}</span>
     </h2>
+    <a class="mobile-register-link" href="/services/new" aria-label="SaaS 등록하기">등록 +</a>
     <button
       id="mobile-filter-trigger"
       class="mobile-filter-trigger"

@@ -324,6 +324,15 @@
     padding: 8px 0 8px 12px;
     font-size: 13px;
   }
+  .mobile-register-link {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--accent);
+    font-size: 13px;
+    white-space: nowrap;
+  }
   .mobile-filter-trigger svg {
     width: 17px;
     height: 17px;

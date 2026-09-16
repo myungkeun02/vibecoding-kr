@@ -458,3 +458,16 @@ document.addEventListener('click', (event) => {
     $('.mobile-detail-tabs')?.scrollIntoView({ block: 'start' });
   }
 });
+
+// The form remains usable without JavaScript; with it, unused guide inputs stay out of the way.
+document.querySelectorAll<HTMLSelectElement>('[data-guide-mode]').forEach((select) => {
+  const fields = select.closest('details')?.querySelector<HTMLFieldSetElement>('[data-guide-fields]');
+  const update = () => {
+    if (fields) {
+      fields.hidden = select.value !== 'present';
+      fields.disabled = select.value !== 'present';
+    }
+  };
+  select.addEventListener('change', update);
+  update();
+});

@@ -1,0 +1,68 @@
+---
+import Base from '../../../layouts/Base.astro';
+import EmptyState from '../../../components/EmptyState.astro';
+import ServiceChanges from '../../../components/ServiceChanges.astro';
+import { visibleServiceEdit, serviceHref } from '../../../lib/services';
+import { editStatuses } from '../../../lib/service-schema';
+if (!Astro.locals.user) return Astro.redirect('/login?returnTo=' + encodeURIComponent(Astro.url.pathname));
+const e = await visibleServiceEdit(Astro.params.id || '', Astro.locals.user);
+if (!e) Astro.response.status = 404;
+---
+
+<Base
+  title="SaaS 수정 제안"
+  pageKind="service-edit-review"
+  noindex
+  mobileTitle="수정 제안"
+  mobileBack="/me#my-service-edits"
+>
+  {
+    e ? (
+      <section class="section narrow">
+        <header class="page-head">
+          <>
+            <h1>{e.name} 수정 제안</h1>
+            <p class="badge" data-edit-status>
+              {editStatuses[e.status]}
+            </p>
+            <p class="muted small">등록한 수정 제안은 본인과 운영자만 볼 수 있습니다.</p>
+          </>
+        </header>
+        <p class="service-description">{e.reason}</p>
+        {e.review_note && <p class="service-review-note">운영자 안내: {e.review_note}</p>}
+        <ServiceChanges edit={e} />
+        <div class="section flex wrap-flex">
+          <a
+            class="button secondary"
+            href={serviceHref({ id: e.service_id, catalog_slug: e.catalog_slug || null })}
+          >
+            현재 공개된 내용 보기
+          </a>
+          {e.status === 'pending' && e.user_id === Astro.locals.user.id && (
+            <form
+              data-api
+              action="/api/services/edits/cancel"
+              method="post"
+              data-confirm="이 수정 제안을 취소할까요?"
+            >
+              <input type="hidden" name="csrf" value={Astro.locals.csrf} />
+              <input type="hidden" name="id" value={e.id} />
+              <button class="text-button" type="submit">
+                제안 취소
+              </button>
+              <p class="form-status" role="status" />
+            </form>
+          )}
+          {Astro.locals.user.role === 'admin' && <a href="/admin#service-edits">수정 제안 검토</a>}
+        </div>
+      </section>
+    ) : (
+      <EmptyState>
+        <>
+          <h1>수정 제안을 찾을 수 없습니다.</h1>
+          <a href="/me">내 활동으로</a>
+        </>
+      </EmptyState>
+    )
+  }
+</Base>
