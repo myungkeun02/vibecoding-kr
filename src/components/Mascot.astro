@@ -1,0 +1,19 @@
+---
+interface Props {
+  size?: 'small' | 'medium' | 'large';
+}
+const { size = 'medium' } = Astro.props;
+const pixels = { small: 48, medium: 64, large: 88 }[size];
+---
+
+<img
+  class:list={['mascot', `mascot-${size}`]}
+  src="/brand/vibepan-robot-128.webp"
+  srcset="/brand/vibepan-robot-128.webp 128w, /brand/vibepan-robot-256.webp 256w"
+  sizes={`${pixels}px`}
+  width={pixels}
+  height={pixels}
+  alt=""
+  aria-hidden="true"
+  decoding="async"
+/>

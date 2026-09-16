@@ -1,4 +1,6 @@
 ---
+import EmptyState from '../components/EmptyState.astro';
+import BrandIntro from '../components/BrandIntro.astro';
 import Base from '../layouts/Base.astro';
 import PostRow from '../components/PostRow.astro';
 import { all, postSelect } from '../lib/db';
@@ -33,9 +35,11 @@ const labels: Record<string, string> = {
 
 <Base pageKind="account" title="내 활동" noindex
   ><header class="page-head">
-    <div class="eyebrow">내가 만들고 나눈 것들</div><h1 style="margin-top:12px">
-      {user.nickname}님의 작업 기록.
-    </h1><p>저장한 도구, 직접 만든 것, 함께 나눈 이야기.</p>
+    <BrandIntro
+      ><div class="eyebrow">내가 만들고 나눈 것들</div><h1>
+        {user.nickname}님의 작업 기록.
+      </h1><p>저장한 도구, 직접 만든 것, 함께 나눈 이야기.</p></BrandIntro
+    >
   </header><nav class="mobile-only mobile-account-links" aria-label="내 활동 바로가기">
     <a href="#saved-tools">저장한 도구 <strong>{saved.length}</strong></a><a href="#my-posts"
       >내가 쓴 글 <strong>{mine.length}</strong></a
@@ -114,9 +118,18 @@ const labels: Record<string, string> = {
     </aside><section>
       <h2 id="saved-tools">저장한 도구 <span class="count-label">{saved.length}</span></h2><div class="tabs">
         {saved.map((a) => a && <a href={'/' + a.slug}>{a.nameKo} ↗</a>)}
-      </div>{!saved.length && <p class="muted">나중에 만들고 싶은 도구를 저장해 보세요.</p>}<div
-        class="section"
-      >
+      </div>{
+        !saved.length && (
+          <EmptyState compact>
+            <>
+              <p>나중에 만들고 싶은 도구를 저장해 보세요.</p>
+              <a href="/" class="button secondary">
+                도구 둘러보기
+              </a>
+            </>
+          </EmptyState>
+        )
+      }<div class="section">
         <h2>직접 대체한 도구</h2>{
           voted.map((v) => (
             <a class="post-preview" href={'/' + v.slug}>

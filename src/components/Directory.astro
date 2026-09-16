@@ -1,4 +1,5 @@
 ---
+import EmptyState from './EmptyState.astro';
 import { apps, categories, filterApps } from '../lib/apps';
 import { voteCounts } from '../lib/db';
 import ToolRow from './ToolRow.astro';
@@ -100,7 +101,7 @@ const href = (key: string, value: string) => {
     </div><div aria-live="polite" aria-label="검색 결과">
       {r.items.map((a) => <ToolRow app={a} count={counts[a.slug] || 0} />)}{
         !r.items.length && (
-          <div class="empty">
+          <EmptyState>
             <>
               <h3>검색 조건에 맞는 도구가 없어요.</h3>
               <p>다른 이름으로 검색하거나 새로운 도구를 제안해 주세요.</p>
@@ -108,7 +109,7 @@ const href = (key: string, value: string) => {
                 도구 제안하기
               </a>
             </>
-          </div>
+          </EmptyState>
         )
       }
     </div><nav class="pagination" aria-label="페이지 이동">

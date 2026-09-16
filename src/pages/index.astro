@@ -1,4 +1,6 @@
 ---
+import Mascot from '../components/Mascot.astro';
+import EmptyState from '../components/EmptyState.astro';
 import Base from '../layouts/Base.astro';
 import Directory from '../components/Directory.astro';
 import Ticker from '../components/Ticker.astro';
@@ -69,10 +71,11 @@ const jsonld = [
         >
       </form>
     </div><aside>
-      <div class="terminal">
-        <div class="cmd">&gt; 어디까지 만들 수 있을까요?</div><strong
-          >완벽한 복제보다, 필요한 기능부터.</strong
-        ><br />만들 수 있는 기능과 어려운 부분을 함께 살펴봐요.
+      <div class="terminal home-guide">
+        <Mascot /><div>
+          <div class="cmd">어디까지 만들 수 있을까요?</div><strong>완벽한 복제보다, 필요한 기능부터.</strong
+          ><br />만들 수 있는 기능과 어려운 부분을 함께 살펴봐요.
+        </div>
       </div><div style="margin-top:17px">
         {
           [
@@ -113,15 +116,15 @@ const jsonld = [
         ))
       }{
         !recent.length && (
-          <div class="empty">
+          <EmptyState compact>
             <>
-              <h3 style="margin-top:16px">첫 번째 제작 이야기를 기다려요.</h3>
+              <h3>첫 번째 제작 이야기를 기다려요.</h3>
               <p>작은 성공도, 막혔던 부분도 다음에 만들 사람에게 도움이 됩니다.</p>
               <a href="/community/new" class="button secondary">
                 제작 후기 남기기 ↗
               </a>
             </>
-          </div>
+          </EmptyState>
         )
       }
     </section><Newsletter />

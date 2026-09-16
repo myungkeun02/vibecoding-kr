@@ -1,4 +1,5 @@
 ---
+import BrandIntro from '../components/BrandIntro.astro';
 import Base from '../layouts/Base.astro';
 import { safeReturn } from '../lib/security';
 const returnTo = safeReturn(Astro.url.searchParams.get('returnTo'));
@@ -7,13 +8,11 @@ if (Astro.locals.user) return Astro.redirect(returnTo);
 
 <Base title="회원가입" noindex
   ><section class="auth-panel">
-    <div class="eyebrow">처음 오셨나요?</div><h1 style="margin-top:14px">
-      나만의 도구 만들기, 함께 시작해요
-    </h1><p class="muted">도구를 저장하고, 만들면서 배운 것을 나눠보세요.</p><form
-      data-api
-      action="/api/auth/register"
-      method="post"
-    >
+    <BrandIntro
+      ><div class="eyebrow">처음 오셨나요?</div><h1>나만의 도구 만들기, 함께 시작해요</h1><p class="muted">
+        도구를 저장하고, 만들면서 배운 것을 나눠보세요.
+      </p></BrandIntro
+    ><form data-api action="/api/auth/register" method="post">
       <input type="hidden" name="csrf" value={Astro.locals.csrf} /><input
         type="hidden"
         name="returnTo"

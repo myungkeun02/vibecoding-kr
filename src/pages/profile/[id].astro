@@ -1,4 +1,6 @@
 ---
+import Mascot from '../../components/Mascot.astro';
+import EmptyState from '../../components/EmptyState.astro';
 import Base from '../../layouts/Base.astro';
 import PostRow from '../../components/PostRow.astro';
 import { one, all, postSelect } from '../../lib/db';
@@ -14,7 +16,7 @@ const items = u
 
 <Base title={u ? u.nickname + '님의 프로필' : '프로필을 찾을 수 없어요'} noindex={!u}
   ><section class="page-head narrow">
-    <div class="eyebrow">회원 프로필</div><h1 style="margin-top:15px">
+    {!u && <Mascot />}<div class="eyebrow">회원 프로필</div><h1 style="margin-top:15px">
       {u?.nickname || '프로필을 찾을 수 없어요'}
     </h1><p>{u ? u.bio || '아직 소개를 작성하지 않았어요.' : '탈퇴했거나 공개되지 않은 프로필이에요.'}</p>
   </section>{
@@ -24,7 +26,11 @@ const items = u
         {items.map((p) => (
           <PostRow post={p} />
         ))}
-        {!items.length && <p class="empty">아직 공개한 이야기가 없어요.</p>}
+        {!items.length && (
+          <EmptyState compact>
+            <p>아직 공개한 이야기가 없어요.</p>
+          </EmptyState>
+        )}
       </section>
     )
   }</Base

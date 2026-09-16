@@ -1,4 +1,5 @@
 ---
+import BrandIntro from '../components/BrandIntro.astro';
 import Base from '../layouts/Base.astro';
 import Ticker from '../components/Ticker.astro';
 import { totals, all, voteCounts } from '../lib/db';
@@ -44,9 +45,11 @@ const subscribers = (await all("SELECT COUNT(*) AS n FROM waitlist WHERE status=
 
 <Base title="함께 만든 대체 현황"
   ><header class="page-head">
-    <div class="eyebrow">직접 대체했다고 남긴 기록</div><h1 style="margin-top:15px">함께 만든 변화.</h1><p>
-      직접 만든 도구로 바꿨다고 알려주신 기록을 모았어요.
-    </p>
+    <BrandIntro
+      ><div class="eyebrow">직접 대체했다고 남긴 기록</div><h1>함께 만든 변화.</h1><p>
+        직접 만든 도구로 바꿨다고 알려주신 기록을 모았어요.
+      </p></BrandIntro
+    >
   </header><Ticker /><div class="stat-grid">
     <article><span class="muted small">대체 기록</span><strong>{t.votes}건</strong></article><article>
       <span class="muted small">공개 도구</span><strong>{apps.length}개</strong>

@@ -1,4 +1,5 @@
 ---
+import BrandIntro from '../components/BrandIntro.astro';
 import Base from '../layouts/Base.astro';
 import { safeReturn } from '../lib/security';
 const returnTo = safeReturn(Astro.url.searchParams.get('returnTo'));
@@ -13,11 +14,11 @@ const providers = [
 
 <Base title="로그인" noindex
   ><section class="auth-panel">
-    <div class="eyebrow">다시 만나 반가워요</div><h1 style="margin-top:14px">로그인하고 이어서 만들어요</h1><p
-      class="muted"
-    >
-      저장해 둔 도구와 내가 쓴 글을 확인해 보세요.
-    </p>{
+    <BrandIntro
+      ><div class="eyebrow">다시 만나 반가워요</div><h1>로그인하고 이어서 만들어요</h1><p class="muted">
+        저장해 둔 도구와 내가 쓴 글을 확인해 보세요.
+      </p></BrandIntro
+    >{
       Astro.url.searchParams.has('error') && (
         <p class="form-status error" role="alert">
           소셜 로그인을 완료하지 못했어요. 이메일 계정이 있다면 이메일로 로그인해 주세요.

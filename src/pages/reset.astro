@@ -1,10 +1,11 @@
 ---
+import BrandIntro from '../components/BrandIntro.astro';
 import Base from '../layouts/Base.astro';
 ---
 
 <Base title="새 비밀번호 설정" noindex
   ><section class="auth-panel">
-    <h1>새 비밀번호 설정</h1><form data-api action="/api/auth/reset" method="post">
+    <BrandIntro><h1>새 비밀번호 설정</h1></BrandIntro><form data-api action="/api/auth/reset" method="post">
       <input type="hidden" name="csrf" value={Astro.locals.csrf} /><input
         type="hidden"
         name="token"

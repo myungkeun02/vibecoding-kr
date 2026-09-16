@@ -665,6 +665,103 @@ select {
 .empty p {
   margin: 10px 0 18px;
 }
+.mascot {
+  display: block;
+  flex: none;
+  object-fit: contain;
+}
+.mascot-small {
+  width: 48px;
+  height: 48px;
+}
+.mascot-medium {
+  width: 64px;
+  height: 64px;
+}
+.mascot-large {
+  width: 88px;
+  height: 88px;
+}
+.brand-intro {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+.brand-intro-copy {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.brand-intro .mascot {
+  margin-top: 4px;
+}
+.brand-intro .eyebrow {
+  margin-bottom: 10px;
+}
+.brand-intro h1 {
+  margin-top: 0;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+.brand-intro p:last-child {
+  margin-bottom: 0;
+}
+.auth-panel > .brand-intro {
+  margin-bottom: 28px;
+}
+.mascot-state > .mascot {
+  margin: 0 auto 20px;
+}
+.mascot-state h3 {
+  color: var(--text);
+}
+.mascot-state-copy {
+  min-width: 0;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+.mascot-state-copy > :last-child {
+  margin-bottom: 0;
+}
+.mascot-state-compact {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  text-align: left;
+  padding: 20px;
+}
+.mascot-state-compact > .mascot {
+  margin: 0;
+}
+.mascot-state-compact p {
+  margin: 0;
+}
+.mascot-state-compact .button {
+  margin-top: 14px;
+}
+.community-empty {
+  margin-top: 24px;
+}
+.newsletter-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.page-head > .mascot {
+  margin: 0 auto 24px;
+}
+.home-guide {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+}
+.home-guide .mascot {
+  margin-top: 4px;
+}
+.home-guide .cmd {
+  margin-bottom: 6px;
+}
 .home-bottom {
   display: grid;
   grid-template-columns: 1.5fr 1fr;

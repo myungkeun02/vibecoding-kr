@@ -1,4 +1,6 @@
-# >_ 바이브코딩가능?
+<img src="public/brand/vibepan-robot-128.webp" alt="바이브코딩가능? 로봇 마스코트" width="64" height="64" />
+
+# 바이브코딩가능?
 
 “내가 쓰는 기능만 직접 만들 수 있을까?”를 탐색하고 제작 경험을 나누는 한국어 서비스입니다. Astro SSR, Node, PostgreSQL, vanilla JavaScript로 실제 계정·커뮤니티·대체 인증을 제공합니다. 결제나 광고는 없습니다.
 

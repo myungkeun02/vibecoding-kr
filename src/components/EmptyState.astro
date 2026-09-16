@@ -1,0 +1,11 @@
+---
+import Mascot from './Mascot.astro';
+interface Props {
+  compact?: boolean;
+}
+const { compact = false } = Astro.props;
+---
+
+<div class:list={['empty', 'mascot-state', { 'mascot-state-compact': compact }]}>
+  <Mascot size={compact ? 'small' : 'large'} /><div class="mascot-state-copy"><slot /></div>
+</div>

@@ -35,7 +35,13 @@ const unread = user
     ))!.n
   : 0;
 const structured = [
-  { '@context': 'https://schema.org', '@type': 'Organization', name: brand.name, url: absolute('/') },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: brand.name,
+    url: absolute('/'),
+    logo: absolute('/brand/vibepan-robot-256.png'),
+  },
   ...jsonld,
 ];
 ---

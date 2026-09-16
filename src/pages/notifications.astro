@@ -1,4 +1,5 @@
 ---
+import EmptyState from '../components/EmptyState.astro';
 import Base from '../layouts/Base.astro';
 import { all } from '../lib/db';
 const user = Astro.locals.user;
@@ -41,6 +42,18 @@ const items = await all(
           )}
         </article>
       ))
-    }{!items.length && <p class="empty">새 알림이 없어요. 댓글과 답글이 달리면 알려드릴게요.</p>}
+    }{
+      !items.length && (
+        <EmptyState>
+          <>
+            <h3>새로운 알림이 없어요.</h3>
+            <p>댓글과 답글이 달리면 여기에서 알려드릴게요.</p>
+            <a href="/community" class="button secondary">
+              이야기 둘러보기
+            </a>
+          </>
+        </EmptyState>
+      )
+    }
   </section></Base
 >

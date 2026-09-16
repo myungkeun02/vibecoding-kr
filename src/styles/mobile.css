@@ -920,6 +920,20 @@
   .auth-panel {
     margin: 32px auto;
   }
+  .brand-intro {
+    gap: 16px;
+  }
+  .brand-intro .mascot {
+    width: 56px;
+    height: 56px;
+  }
+  .mascot-state {
+    padding: 28px 20px;
+  }
+  .mascot-state-compact {
+    padding: 20px 16px;
+    gap: 14px;
+  }
   .auth-panel h1 {
     font-size: 28px;
   }

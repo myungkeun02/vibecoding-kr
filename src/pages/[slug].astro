@@ -1,4 +1,6 @@
 ---
+import EmptyState from '../components/EmptyState.astro';
+import Mascot from '../components/Mascot.astro';
 import Base from '../layouts/Base.astro';
 import { getApp, related, categoryName, priceLabel } from '../lib/apps';
 import { verdicts, absolute, boards } from '../lib/config';
@@ -263,9 +265,9 @@ const jsonld = a
                         </a>
                       ))
                     ) : (
-                      <div class="empty">
-                        아직 이 도구를 만들어본 이야기가 없어요. 시도한 과정을 남겨주세요.
-                      </div>
+                      <EmptyState compact>
+                        <p>아직 이 도구를 만들어본 이야기가 없어요. 시도한 과정을 남겨주세요.</p>
+                      </EmptyState>
                     )}
                   </section>
                 </>
@@ -444,6 +446,7 @@ const jsonld = a
     ) : (
       <section class="page-head empty">
         <>
+          <Mascot size="large" />
           <div class="eyebrow">404 · 페이지 없음</div>
           <h1>아직 이 도구를 찾지 못했어요.</h1>
           <p>이름을 다시 검색하거나 도구를 제안해 주세요.</p>

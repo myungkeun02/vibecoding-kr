@@ -1,4 +1,5 @@
 ---
+import EmptyState from '../../components/EmptyState.astro';
 import Base from '../../layouts/Base.astro';
 import PostRow from '../../components/PostRow.astro';
 import Newsletter from '../../components/Newsletter.astro';
@@ -49,14 +50,24 @@ const link = (k: string, v: string) => {
         ><button class="button secondary" type="submit">검색</button>
       </form>{r.items.map((p) => <PostRow post={p} />)}{
         !r.total && (
-          <div class="empty" style="margin-top:24px">
-            <>
-              <div class="mono accent">&gt; 새로운 이야기를 기다리는 중_</div>
-              <p>궁금한 점을 묻거나, 첫 제작 후기를 남겨보세요.</p>
-              <a class="button secondary" href="/community/new">
-                글 작성하기 ↗
-              </a>
-            </>
+          <div class="community-empty">
+            <EmptyState>
+              <>
+                <h3>
+                  {Astro.url.searchParams.get('q')
+                    ? '검색한 이야기를 찾지 못했어요.'
+                    : '첫 이야기를 기다리고 있어요.'}
+                </h3>
+                <p>
+                  {Astro.url.searchParams.get('q')
+                    ? '다른 검색어로 찾아보거나 직접 질문을 남겨보세요.'
+                    : '궁금한 점을 묻거나, 첫 제작 후기를 남겨보세요.'}
+                </p>
+                <a class="button secondary" href="/community/new">
+                  글 작성하기 ↗
+                </a>
+              </>
+            </EmptyState>
           </div>
         )
       }<nav class="pagination" aria-label="게시글 페이지">

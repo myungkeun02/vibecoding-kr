@@ -1,11 +1,16 @@
 ---
+import BrandIntro from '../components/BrandIntro.astro';
 import Base from '../layouts/Base.astro';
 import { mailAvailable } from '../lib/mail';
 ---
 
 <Base title="비밀번호 재설정 요청" noindex
   ><section class="auth-panel">
-    <h1>비밀번호를 잊으셨나요?</h1><p class="muted">가입한 이메일로 재설정 안내를 보내드려요.</p>{
+    <BrandIntro
+      ><h1>비밀번호를 잊으셨나요?</h1><p class="muted">
+        가입한 이메일로 재설정 안내를 보내드려요.
+      </p></BrandIntro
+    >{
       mailAvailable() ? (
         <form data-api action="/api/auth/forgot" method="post">
           <>
