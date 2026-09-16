@@ -1,0 +1,40 @@
+{
+  "status": "PASS_WITH_PENDING_EXTERNAL_SETUP",
+  "checkedAt": "2026-09-16T07:19:58.564Z",
+  "origin": "https://vibecoding-kr-production.up.railway.app",
+  "publicSourceCommit": "ba3a50d017e85a58bbad675bcd51ac3b0a3b1be7",
+  "deploymentId": "d2a82b52-3308-4071-8cd8-0fd7a658aa09",
+  "environment": "Railway Docker / Node 22 / PostgreSQL 18 / persistent /data volume",
+  "checks": {
+    "httpsHealth": "PASS",
+    "detailCanonical": "PASS",
+    "signup": "PASS",
+    "secureHttpOnlySameSiteSession": "PASS",
+    "multipartImageUpload": "PASS",
+    "postCreate": "PASS",
+    "toolVote": "PASS",
+    "externalDatabaseAndUploadBackup": "PASS",
+    "realWebServiceRestart": "PASS",
+    "sessionAndPostAfterRestart": "PASS",
+    "identicalImageBytesAfterRestart": "PASS",
+    "voteTotalsAfterRestart": "PASS",
+    "testAccountAndPostRemoval": "PASS",
+    "removedPostAndImageReturn404": "PASS",
+    "githubActions": "PASS",
+    "databaseRegionMigration": "PASS",
+    "databaseIntegrityAfterMigration": "PASS",
+    "homeAfterDatabaseMigration": "PASS"
+  },
+  "notes": [
+    "Restart briefly returned 502; checks were completed after recovery.",
+    "Public account, post and upload tests use temporary QA data; that data was removed.",
+    "Local unit tests (24), browser scenarios (19), backup/restore and trusted-proxy regression are recorded separately."
+  ],
+  "pending": [
+    "vibepan.com DNS and TLS",
+    "Production GitHub and Google OAuth callbacks and end-to-end login",
+    "Production email delivery"
+  ],
+  "region": "asia-southeast1-eqsg3a",
+  "databaseDeploymentId": "2509c83c-cd32-4f81-9029-682e6f3fa0f2"
+}

@@ -2,7 +2,11 @@
 
 ## 현재 상태
 
-2026-09-10 PostgreSQL 전환 후 로컬 Node production bundle과 실제 브라우저·재시작·백업/복원을 검증했다. Railway PostgreSQL과 웹 서비스·업로드 볼륨을 생성했으며 첫 배포를 검증 중이다. 실제 공개 URL 검증 전에는 온라인 운영 완료로 보고하지 않는다.
+2026-09-16 Railway에 Node 웹 서버·PostgreSQL 18·업로드 볼륨을 배포했다. [공개 미리보기](https://vibecoding-kr-production.up.railway.app)에서 HTTPS 회원가입, 로그인 세션, 글 작성, 이미지 업로드, 투표를 확인했다. 실제 서버 재시작 후 세션·글·이미지 바이트·집계가 유지됐고, 점검용 계정·글·이미지는 정리했다. 서버 밖에 PostgreSQL 백업과 업로드 사본도 보관했다. [공개 서버 검증 기록](qa/railway-results.json)을 참고한다.
+
+현재 Node 서버가 화면과 API를 함께 제공하므로 Railway에서 실행하며 Vercel 프로젝트는 만들지 않았다. `vibepan.com`은 Railway에 등록했지만 DNS 연결 방식 선택을 기다리고 있다. 운영 Google/GitHub 로그인과 메일 발송은 아직 설정하지 않았다. 임시 주소의 배포 성공을 도메인·외부 로그인까지 완료한 것으로 해석하지 않는다.
+
+웹과 DB 모두 싱가포르 `asia-southeast1-eqsg3a`의 단일 인스턴스다. 최초 DB는 미국 서부에 생성됐으나 2026-09-16 볼륨 이동을 완료했다. 이동 후 DB 연결·제약조건과 홈페이지 HTTP 200을 확인했다. 이동 중에는 일시적으로 서비스가 중단되므로 다음 지역 변경도 백업 후 점검 시간에 수행한다.
 
 ## Node 서버
 
@@ -39,6 +43,8 @@ Railway의 새 서비스는 기존 `railway.toml` 방식 대신 서비스 설정
 ## 도메인·공유·외부 설정
 
 SITE_URL 변경 후 재시작/재배포한다. `/sitemap.xml`, 상세 canonical, JSON-LD, X/Kakao 링크, 메일 주소가 새 HTTPS origin인지 확인한다. OG는 빌드된 `dist/client/og`에서 제공한다. 새 커뮤니티 글은 `/og/default.png`를 사용한다. 제목·설명은 해당 글별로 SSR한다. Google/GitHub 앱에는 새 callback URI를 별도로 등록한다.
+
+Astro의 `security.allowedDomains`에는 실제 운영 호스트를 명시한다. Railway HTTPS 프록시가 전달한 출처를 신뢰하도록 설정해야 일반 폼과 이미지 업로드가 동작한다. 출처 검사를 끄거나 모든 호스트를 허용하지 않는다. 현재 임시 Railway 호스트와 `vibepan.com`, `www.vibepan.com`, 로컬 검사 호스트만 등록했다.
 
 실제 공개 운영 전 약관·개인정보의 운영 주체와 연락처를 입력한다. 비밀번호·쿠키·요청본문·OAuth code·확인/철회 토큰을 proxy 로그에 저장하지 않는다. 에러 로그는 상태·경로·오류 유형으로 제한한다.
 
