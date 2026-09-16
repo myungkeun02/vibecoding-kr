@@ -38,3 +38,7 @@
 - [로그인](screenshots/mobile-login-light-360.png)
 
 검색 결과를 DOM으로 교체할 때 noscript 내부 스타일이 활성화되어 필터 버튼이 사라지는 문제를 발견했다. 스타일 삽입을 제거하고 클라이언트 활성 상태에 따라 기본 폼과 dialog를 전환하도록 수정한 뒤 검색·필터·JS 없는 제출을 다시 검증했다.
+
+## 운영 배포 확인
+
+2026-09-16, 공개 소스 `8102d6eb592679c391db27acbdd0e5bd60d560ac`를 Railway에 배포했다. 실제 `https://vibepan.com`에서 모바일 홈·검색·필터 재열기·상세 전환·커뮤니티 글쓰기의 로그인 복귀·Google/GitHub 버튼·360px 가로 넘침·데스크톱 표와 메뉴·canonical·브라우저 및 HTTP 오류를 확인했고 모두 PASS였다. 배포 ID와 상세 결과는 [운영 결과](mobile-production-results.json)에 기록한다. 인증 제공자의 최종 동의 및 가입은 이번 UI 회귀 검사에서 다시 수행하지 않았다.

@@ -1,0 +1,19 @@
+{
+  "checkedAt": "2026-09-16T09:48:35.064Z",
+  "origin": "https://vibepan.com",
+  "status": "PASS",
+  "sourceCommit": "8102d6eb592679c391db27acbdd0e5bd60d560ac",
+  "checks": [
+    "mobile home and cards",
+    "search and filter reopening",
+    "detail section switching",
+    "community writing login return",
+    "Google and GitHub buttons",
+    "360px overflow",
+    "desktop navigation and table",
+    "canonical",
+    "no console or HTTP errors"
+  ],
+  "environment": "Chromium phone emulation; public DNS resolution with normal TLS verification",
+  "deploymentId": "24066a9f-ea46-4314-98dc-255bada91e62"
+}
