@@ -1,0 +1,63 @@
+---
+import UiIcon from './UiIcon.astro';
+const { unread = 0, title, back = '/' } = Astro.props;
+const path = Astro.url.pathname;
+const user = Astro.locals.user;
+const inCommunity = path.startsWith('/community');
+const inAccount =
+  ['/me', '/login', '/signup', '/notifications', '/onboarding', '/forgot', '/reset', '/admin'].includes(
+    path,
+  ) || path.startsWith('/profile');
+const items = [
+  { href: '/', label: '도구 탐색', icon: 'grid', active: !inCommunity && !inAccount && path !== '/stats' },
+  { href: '/community', label: '이야기', icon: 'chat', active: inCommunity },
+  { href: '/stats', label: '대체 현황', icon: 'chart', active: path === '/stats' },
+  { href: '/me', label: '내 활동', icon: 'user', active: inAccount },
+];
+---
+
+<header class="mobile-header mobile-only">
+  {
+    title ? (
+      <>
+        <>
+          <a class="mobile-icon-button" href={back} aria-label="목록으로 돌아가기">
+            <UiIcon name="back" />
+          </a>
+          <span class="mobile-page-title">{title}</span>
+        </>
+      </>
+    ) : (
+      <a class="brand" href="/">
+        <span class="brand-mark">&gt;_</span>바이브코딩가능?
+      </a>
+    )
+  }
+  <div class="mobile-header-actions">
+    <button class="mobile-icon-button" data-theme-toggle aria-label="화면 테마 전환">◐</button>
+    {
+      user ? (
+        <a class="mobile-icon-button" href="/notifications" aria-label={`알림 ${unread}개`}>
+          <UiIcon name="bell" />
+          {unread > 0 && <span class="notification-dot" />}
+        </a>
+      ) : (
+        <a class="mobile-login" href={'/login?returnTo=' + encodeURIComponent(path + Astro.url.search)}>
+          로그인
+        </a>
+      )
+    }
+  </div>
+</header>
+<nav class="mobile-tabbar mobile-only" aria-label="모바일 주요 메뉴">
+  {
+    items.map((item) => (
+      <a href={item.href} aria-current={item.active ? 'page' : undefined}>
+        <>
+          <UiIcon name={item.icon} />
+          <span>{item.label}</span>
+        </>
+      </a>
+    ))
+  }
+</nav>

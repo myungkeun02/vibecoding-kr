@@ -13,7 +13,9 @@ const v = verdicts[a.verdict as keyof typeof verdicts];
         >{a.nameKo !== a.name ? a.name + ' · ' : ''}{categoryName(a.category)}</small
       ></span
     ></span
-  ><span class="price">{priceLabel(a)}</span><span class:list={['verdict', a.verdict]}
-    ><span>{v.symbol} {v.label}</span></span
-  ><span class="vote-count" aria-label={`직접 대체한 사람 ${count}명`}>↑ {count}</span></a
+  ><span class="mobile-only tool-summary">{a.summary}</span><span class="price">{priceLabel(a)}</span><span
+    class:list={['verdict', a.verdict]}><span>{v.symbol} {v.label}</span></span
+  ><span class="vote-count" aria-label={`직접 대체한 사람 ${count}명`}>↑ {count}</span><span
+    class="mobile-only tool-card-link">어디까지 만들 수 있을까? <span aria-hidden="true">↗</span></span
+  ></a
 >

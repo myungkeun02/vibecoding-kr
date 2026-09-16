@@ -13,8 +13,12 @@ const link = (k: string, v: string) => {
 };
 ---
 
-<Base title="만드는 사람들" noindex={Astro.url.search.length > 0}
-  ><header class="page-head">
+<Base pageKind="community" title="만드는 사람들" noindex={Astro.url.search.length > 0}
+  ><header class="mobile-only mobile-community-head">
+    <p class="eyebrow">작은 시도도, 함께 나누면.</p><h1>만드는 사람들<span class="accent">.</span></h1><p>
+      완성한 도구부터 오늘 막힌 코드까지.
+    </p>
+  </header><header class="page-head desktop-only">
     <div class="eyebrow">만들어보고, 막혀보고, 함께 나눠요</div><div class="flex between wrap-flex">
       <h1 style="margin-top:13px">혼자 만들고, 함께 배우고.</h1><a class="button" href="/community/new"
         >이야기 남기기 +</a
@@ -74,5 +78,7 @@ const link = (k: string, v: string) => {
         >
       </section><Newsletter />
     </aside>
-  </div></Base
+  </div><a class="mobile-only mobile-compose" href="/community/new"
+    ><span aria-hidden="true">＋</span> 이야기 쓰기</a
+  ></Base
 >

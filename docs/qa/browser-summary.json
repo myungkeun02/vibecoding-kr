@@ -1,7 +1,7 @@
 {
-  "startedAt": "2026-09-10T20:39:08.284Z",
-  "durationMs": 30964.402000000002,
-  "passed": 19,
+  "startedAt": "2026-09-16T09:45:18.876Z",
+  "durationMs": 31604.832,
+  "passed": 23,
   "failed": 0,
   "flaky": 0,
   "skipped": 0,
@@ -12,7 +12,47 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 1827
+          "durationMs": 886
+        }
+      ]
+    },
+    {
+      "title": "mobile discovery uses cards, filter sheet, cancellation, URL history and reachable pagination",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 2653
+        }
+      ]
+    },
+    {
+      "title": "mobile detail switches sections, copies complete agent prompts and restores desktop content",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 2482
+        }
+      ]
+    },
+    {
+      "title": "mobile navigation, themes, small screens and no-JavaScript filtering remain usable",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 2275
+        }
+      ]
+    },
+    {
+      "title": "mobile writing, editing, bookmarks and profile are usable with a real session",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 3908
         }
       ]
     },
@@ -22,7 +62,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 2876
+          "durationMs": 862
         }
       ]
     },
@@ -32,7 +72,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 2311
+          "durationMs": 1334
         }
       ]
     },
@@ -42,7 +82,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 964
+          "durationMs": 674
         }
       ]
     },
@@ -52,7 +92,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 1113
+          "durationMs": 768
         }
       ]
     },
@@ -62,7 +102,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 4608
+          "durationMs": 2738
         }
       ]
     },
@@ -72,7 +112,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 387
+          "durationMs": 174
         }
       ]
     },
@@ -82,7 +122,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 301
+          "durationMs": 192
         }
       ]
     },
@@ -92,7 +132,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 233
+          "durationMs": 169
         }
       ]
     },
@@ -102,7 +142,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 81
+          "durationMs": 40
         }
       ]
     },
@@ -112,7 +152,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 302
+          "durationMs": 184
         }
       ]
     },
@@ -122,7 +162,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 214
+          "durationMs": 152
         }
       ]
     },
@@ -132,7 +172,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 368
+          "durationMs": 179
         }
       ]
     },
@@ -142,7 +182,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 2509
+          "durationMs": 1645
         }
       ]
     },
@@ -152,7 +192,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 176
+          "durationMs": 125
         }
       ]
     },
@@ -162,7 +202,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 266
+          "durationMs": 242
         }
       ]
     },
@@ -172,7 +212,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 1343
+          "durationMs": 848
         }
       ]
     },
@@ -182,7 +222,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 9123
+          "durationMs": 7451
         }
       ]
     },
@@ -192,7 +232,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 110
+          "durationMs": 107
         }
       ]
     }

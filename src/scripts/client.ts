@@ -1,4 +1,6 @@
 export {};
+document.documentElement.dataset.enhanced = 'true';
+document.querySelectorAll<HTMLDialogElement>('.mobile-sheet[open]').forEach((sheet) => sheet.close());
 function iconFallback(img: HTMLImageElement) {
   if (!img.hasAttribute('data-tool-icon-image')) return;
   img.hidden = true;
@@ -90,16 +92,25 @@ function roll(value: number) {
 let controller: AbortController | undefined;
 async function updateDirectory(url: URL, push = true) {
   if (!$('#directory')) return;
+  if (url.pathname !== location.pathname) {
+    location.assign(url.href);
+    return;
+  }
   controller?.abort();
   controller = new AbortController();
+  const categoryScroll = $('[data-mobile-categories]')?.scrollLeft || 0;
   $('#directory')?.classList.add('loading');
+  $('#directory')?.setAttribute('aria-busy', 'true');
   try {
     const r = await fetch(url.pathname + url.search, { signal: controller.signal });
     if (!r.ok) throw new Error();
     const html = new DOMParser().parseFromString(await r.text(), 'text/html');
     const next = html.querySelector('#directory');
     if (!next) throw new Error();
+    next.querySelectorAll('.mobile-sheet[open]').forEach((sheet) => sheet.removeAttribute('open'));
     $('#directory')?.replaceWith(next);
+    const categoryNav = $('[data-mobile-categories]');
+    if (categoryNav) categoryNav.scrollLeft = categoryScroll;
     if (push) history.pushState(null, '', url.pathname + url.search + url.hash);
     const input = $<HTMLInputElement>('#search');
     if (input) input.value = url.searchParams.get('q') || '';
@@ -107,6 +118,7 @@ async function updateDirectory(url: URL, push = true) {
     if ((e as Error).name !== 'AbortError') {
       toast('검색 결과를 불러오지 못했어요. 다시 시도해 주세요.');
       $('#directory')?.classList.remove('loading');
+      $('#directory')?.removeAttribute('aria-busy');
     }
   }
 }
@@ -144,6 +156,22 @@ document.addEventListener('keydown', (e) => {
 });
 document.addEventListener('submit', async (e) => {
   const form = e.target as HTMLFormElement;
+  if (form.matches('[data-mobile-filters], [data-directory-search]')) {
+    e.preventDefault();
+    clearTimeout(searchTimer);
+    const url = new URL(location.href);
+    const mobileFilters = form.hasAttribute('data-mobile-filters');
+    for (const [key, value] of new FormData(form)) {
+      value ? url.searchParams.set(key, String(value)) : url.searchParams.delete(key);
+    }
+    url.searchParams.delete('page');
+    url.hash = '';
+    form.closest('dialog')?.close();
+    form.querySelector<HTMLInputElement>('input:not([type=hidden])')?.blur();
+    await updateDirectory(url);
+    if (mobileFilters) $('#mobile-filter-trigger')?.focus({ preventScroll: true });
+    return;
+  }
   if (!form.matches('form[data-api]')) return;
   e.preventDefault();
   if (form.dataset.confirm && !window.confirm(form.dataset.confirm)) return;
@@ -191,7 +219,13 @@ document.addEventListener('click', async (e) => {
   const link = (e.target as Element).closest<HTMLAnchorElement>('a[data-filter-link]');
   if (link && !e.ctrlKey && !e.metaKey && !e.shiftKey && e.button === 0) {
     e.preventDefault();
+    link.closest('dialog')?.close();
+    clearTimeout(searchTimer);
     await updateDirectory(new URL(link.href));
+    if (link.hasAttribute('data-page-link')) {
+      $('#mobile-results-title')?.focus({ preventScroll: true });
+      $('#directory')?.scrollIntoView({ block: 'start' });
+    }
     return;
   }
   const b = (e.target as Element).closest<HTMLButtonElement>('button');
@@ -340,5 +374,77 @@ document.addEventListener('change', async (event) => {
     toast((e as Error).message);
   } finally {
     input.value = '';
+  }
+});
+
+// Mobile surfaces share the same URLs and server data as the desktop workspace.
+const mobileViewport = window.matchMedia('(max-width: 760px)');
+function syncMobileDetail() {
+  const panels = document.querySelectorAll<HTMLElement>('[data-mobile-panel]');
+  if (!panels.length) return;
+  const view =
+    location.hash === '#tool-prompt'
+      ? 'prompt'
+      : location.hash === '#tool-reference'
+        ? 'reference'
+        : 'overview';
+  document.body.dataset.mobileView = view;
+  for (const panel of panels) panel.hidden = mobileViewport.matches && panel.dataset.mobilePanel !== view;
+  document.querySelectorAll<HTMLAnchorElement>('.mobile-detail-tabs [data-detail-view]').forEach((link) => {
+    if (link.dataset.detailView === view) link.setAttribute('aria-current', 'true');
+    else link.removeAttribute('aria-current');
+  });
+}
+function closeMobileSheets() {
+  document.querySelectorAll<HTMLDialogElement>('.mobile-sheet[open]').forEach((sheet) => sheet.close());
+}
+mobileViewport.addEventListener('change', () => {
+  syncMobileDetail();
+  if (!mobileViewport.matches) closeMobileSheets();
+});
+window.addEventListener('hashchange', syncMobileDetail);
+window.addEventListener('popstate', () => {
+  closeMobileSheets();
+  syncMobileDetail();
+});
+syncMobileDetail();
+document.addEventListener('click', (event) => {
+  const target = event.target instanceof Element ? event.target : null;
+  const opener = target?.closest<HTMLButtonElement>('[data-open-sheet]');
+  if (opener) {
+    const sheet = document.getElementById(opener.dataset.openSheet!) as HTMLDialogElement | null;
+    if (!sheet) return;
+    const form = sheet.querySelector('form');
+    form?.reset();
+    sheet.showModal();
+    document.documentElement.classList.add('sheet-open');
+    sheet.addEventListener('close', () => document.documentElement.classList.remove('sheet-open'), {
+      once: true,
+    });
+  }
+  if (target?.closest('[data-close-sheet]')) target.closest('dialog')?.close();
+  if (target instanceof HTMLDialogElement && target.classList.contains('mobile-sheet')) {
+    const rect = target.getBoundingClientRect();
+    if (
+      event.clientX < rect.left ||
+      event.clientX > rect.right ||
+      event.clientY < rect.top ||
+      event.clientY > rect.bottom
+    )
+      target.close();
+  }
+  const detailLink = target?.closest<HTMLAnchorElement>('[data-detail-view]');
+  if (
+    detailLink &&
+    mobileViewport.matches &&
+    !event.metaKey &&
+    !event.ctrlKey &&
+    !event.shiftKey &&
+    event.button === 0
+  ) {
+    event.preventDefault();
+    history.pushState(null, '', detailLink.hash);
+    syncMobileDetail();
+    $('.mobile-detail-tabs')?.scrollIntoView({ block: 'start' });
   }
 });

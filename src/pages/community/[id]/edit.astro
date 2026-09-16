@@ -8,7 +8,12 @@ const allowed = p && p.user_id === Astro.locals.user.id;
 if (!allowed) Astro.response.status = p ? 403 : 404;
 ---
 
-<Base title="이야기 수정" noindex
+<Base
+  title="이야기 수정"
+  pageKind="editor"
+  mobileTitle="이야기 수정"
+  mobileBack={'/community/' + Astro.params.id}
+  noindex
   ><header class="page-head"><h1>{allowed ? '이야기 수정' : '이 글을 수정할 수 없어요.'}</h1></header>{
     allowed && <PostEditor post={p} />
   }</Base

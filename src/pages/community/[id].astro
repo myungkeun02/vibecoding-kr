@@ -28,6 +28,9 @@ const reactions =
 ---
 
 <Base
+  pageKind="post"
+  mobileTitle="이야기"
+  mobileBack="/community"
   title={p?.title || '게시글을 찾을 수 없어요'}
   description={p ? plainText(p.body).slice(0, 150) : undefined}
   noindex={!p}
@@ -82,7 +85,7 @@ const reactions =
               </div>
             </section>
           )}
-          <div class="flex wrap-flex">
+          <div class="flex wrap-flex post-actions">
             <button class="button secondary" data-react="like" data-post={p.id} aria-pressed={reactions.like}>
               좋아요 {p.likes}
             </button>

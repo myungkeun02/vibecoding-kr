@@ -33,23 +33,38 @@ const jsonld = [
 ];
 ---
 
-<Base title="이 도구, 바이브코딩으로 대체할 수 있을까?" {jsonld} noindex={Astro.url.search.length > 0}
+<Base
+  pageKind="home"
+  title="이 도구, 바이브코딩으로 대체할 수 있을까?"
+  {jsonld}
+  noindex={Astro.url.search.length > 0}
   ><section class="hero">
     <div>
-      <div class="eyebrow"><span class="status-dot"></span> 필요한 기능부터, 직접 만들어보세요</div><h1>
-        이 도구,<br /><span class="accent">직접 만들 수 있을까?</span>
-      </h1><p>
-        매일 쓰는 기능만 골라, 나만의 도구로.<br />어디까지 만들 수 있는지 살펴보고, 프롬프트로 시작해 보세요.
-      </p><form action="/" role="search">
+      <div class="desktop-only">
+        <div class="eyebrow"><span class="status-dot"></span> 필요한 기능부터, 직접 만들어보세요</div><h1>
+          이 도구,<br /><span class="accent">직접 만들 수 있을까?</span>
+        </h1><p>
+          매일 쓰는 기능만 골라, 나만의 도구로.<br />어디까지 만들 수 있는지 살펴보고, 프롬프트로 시작해
+          보세요.
+        </p>
+      </div><div class="mobile-only mobile-home-intro">
+        <p><span class="status-dot"></span> {apps.length}개의 도구, 나만의 방식으로</p><h1>
+          다음엔,<br />뭘 만들어볼까요<span class="accent">?</span>
+        </h1>
+      </div><form action="/" role="search" data-directory-search>
         <label class="search-box"
           ><span aria-hidden="true">&gt;</span><input
             id="search"
             name="q"
             aria-label="도구 검색"
-            placeholder={`노션, 엑셀, 옵시디언… ${apps.length}개 도구 검색`}
+            placeholder="노션, 엑셀… 만들고 싶은 도구 검색"
             value={Astro.url.searchParams.get('q') || ''}
             autocomplete="off"
-          /><kbd aria-hidden="true">/</kbd></label
+          /><kbd aria-hidden="true">/</kbd><button
+            class="mobile-only search-submit"
+            type="submit"
+            aria-label="검색">↗</button
+          ></label
         >
       </form>
     </div><aside>

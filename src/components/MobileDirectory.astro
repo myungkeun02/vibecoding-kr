@@ -1,0 +1,175 @@
+---
+import { categories } from '../lib/apps';
+import UiIcon from './UiIcon.astro';
+const { params, total } = Astro.props;
+const href = (key: string, value: string) => {
+  const p = new URLSearchParams(params);
+  p.delete('page');
+  value ? p.set(key, value) : p.delete(key);
+  return '/?' + p.toString() + '#directory';
+};
+const activeCount = ['verdict', 'type', 'price'].filter((key) => params.get(key)).length;
+const fields = [
+  {
+    name: 'verdict',
+    label: '대체 가능성 선택',
+    options: [
+      ['', '모두 보기'],
+      ['yes', '대체 가능'],
+      ['kinda', '일부 대체 가능'],
+      ['no', '대체 어려움'],
+    ],
+  },
+  {
+    name: 'type',
+    label: '도구 유형 선택',
+    options: [
+      ['', '모든 유형'],
+      ['saas', '웹 서비스'],
+      ['desktop', '데스크톱'],
+      ['local-first', '내 기기 중심'],
+      ['open-source', '오픈소스'],
+    ],
+  },
+  {
+    name: 'price',
+    label: '요금 방식 선택',
+    options: [
+      ['', '모든 요금'],
+      ['free', '무료'],
+      ['freemium', '무료+유료'],
+      ['subscription', '구독형'],
+      ['one-time', '한 번 구매'],
+      ['usage-based', '사용한 만큼 결제'],
+      ['contact-sales', '견적 문의'],
+    ],
+  },
+  {
+    name: 'sort',
+    label: '결과 정렬',
+    options: [
+      ['popular', '많이 대체한 순'],
+      ['newest', '최근 확인한 순'],
+      ['price', '월 비용이 낮은 순'],
+    ],
+  },
+];
+const reset = new URLSearchParams(params);
+for (const key of ['verdict', 'type', 'price', 'sort', 'page']) reset.delete(key);
+---
+
+<div class="mobile-only mobile-discovery">
+  {
+    Astro.url.pathname !== '/' && (
+      <form action="/" role="search" data-directory-search>
+        <label class="search-box">
+          <>
+            <input
+              id="search"
+              name="q"
+              aria-label="도구 검색"
+              placeholder="만들고 싶은 도구 검색"
+              value={params.get('q') || ''}
+            />
+            <button class="search-submit" type="submit" aria-label="검색">
+              ↗
+            </button>
+          </>
+        </label>
+      </form>
+    )
+  }
+  <nav class="mobile-categories" data-mobile-categories aria-label="분야 선택">
+    <a
+      href={href('category', '')}
+      aria-current={!params.get('category') ? 'true' : undefined}
+      data-filter-link>전체</a
+    >
+    {
+      categories.map((c) => (
+        <a
+          href={href('category', c.slug)}
+          aria-current={params.get('category') === c.slug ? 'true' : undefined}
+          data-filter-link
+        >
+          {c.emoji} {c.name}
+        </a>
+      ))
+    }
+  </nav>
+  <div class="mobile-results-head">
+    <h2 id="mobile-results-title" tabindex="-1">
+      {params.get('q') ? '검색한 도구' : '만들어볼 도구'}
+      <span>{total}</span>
+    </h2>
+    <button
+      id="mobile-filter-trigger"
+      class="mobile-filter-trigger"
+      data-open-sheet="mobile-filters"
+      aria-haspopup="dialog"
+      ><UiIcon name="filter" />필터·정렬{activeCount > 0 && <b>{activeCount}</b>}</button
+    >
+  </div>
+  {
+    activeCount > 0 && (
+      <div class="mobile-active-filters">
+        {fields
+          .filter((f) => f.name !== 'sort' && params.get(f.name))
+          .map((f) => (
+            <a
+              href={href(f.name, '')}
+              data-filter-link
+              aria-label={`${f.options.find(([value]) => value === params.get(f.name))?.[1]} 조건 해제`}
+            >
+              {f.options.find(([value]) => value === params.get(f.name))?.[1]}{' '}
+              <span aria-hidden="true">×</span>
+            </a>
+          ))}
+      </div>
+    )
+  }
+  <dialog id="mobile-filters" class="mobile-sheet" aria-labelledby="mobile-filter-title" open>
+    <div class="sheet-handle" aria-hidden="true"></div>
+    <header>
+      <div>
+        <p class="eyebrow">나에게 맞는 도구 찾기</p><h2 id="mobile-filter-title">필터와 정렬</h2>
+      </div><button class="mobile-icon-button" data-close-sheet aria-label="필터 닫기"
+        ><UiIcon name="close" /></button
+      >
+    </header>
+    <form action="/#directory" data-mobile-filters>
+      <input type="hidden" name="q" value={params.get('q') || ''} /><input
+        type="hidden"
+        name="category"
+        value={params.get('category') || ''}
+      />
+      <div class="sheet-fields">
+        {
+          fields.map((f) => (
+            <label class="form-field">
+              <>
+                <span>{f.label}</span>
+                <select name={f.name} aria-label={f.label}>
+                  {f.options.map(([value, label]) => (
+                    <option
+                      value={value}
+                      selected={(params.get(f.name) || (f.name === 'sort' ? 'popular' : '')) === value}
+                    >
+                      {label}
+                    </option>
+                  ))}
+                </select>
+              </>
+            </label>
+          ))
+        }
+      </div>
+      <footer>
+        <a href={'/?' + reset.toString() + '#directory'} data-filter-link>조건 초기화</a><button
+          type="submit"
+          class="primary">선택한 조건으로 보기</button
+        >
+      </footer>
+    </form>
+  </dialog>
+</div>

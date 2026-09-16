@@ -1,5 +1,7 @@
 ---
 import '../styles/global.css';
+import '../styles/mobile.css';
+import MobileShell from '../components/MobileShell.astro';
 import { brand, absolute } from '../lib/config';
 import { one } from '../lib/db';
 interface Props {
@@ -9,6 +11,9 @@ interface Props {
   og?: string;
   jsonld?: any[];
   noindex?: boolean;
+  pageKind?: string;
+  mobileTitle?: string;
+  mobileBack?: string;
 }
 const {
   title = brand.name,
@@ -17,6 +22,9 @@ const {
   og = '/og/default.png',
   jsonld = [],
   noindex = false,
+  pageKind,
+  mobileTitle,
+  mobileBack,
 } = Astro.props;
 const user = Astro.locals.user;
 const unread = user
@@ -34,7 +42,10 @@ const structured = [
 <!doctype html>
 <html lang="ko" data-theme="dark">
   <head
-    ><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>
+    ><meta charset="UTF-8" /><meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    /><title>
       {title === brand.name ? title : title + ' · ' + brand.name}
     </title><meta name="description" content={description} /><link
       rel="canonical"
@@ -56,7 +67,7 @@ const structured = [
       ))
     }</head
   >
-  <body
+  <body data-page={pageKind}
     ><a href="#main" class="skip">본문으로 건너뛰기</a><header class="site-header">
       <div class="wrap">
         <a class="brand" href="/"><span class="brand-mark">&gt;_</span>{brand.name}</a><nav
@@ -85,7 +96,9 @@ const structured = [
           }
         </div>
       </div>
-    </header><main id="main" class="wrap"><slot /></main><footer class="site-footer">
+    </header><MobileShell {unread} title={mobileTitle} back={mobileBack} /><main id="main" class="wrap">
+      <slot />
+    </main><footer class="site-footer">
       <div class="wrap">
         <div class="flex between wrap-flex">
           <a href="/" class="brand">&gt;_ {brand.name}</a><div class="flex wrap-flex">

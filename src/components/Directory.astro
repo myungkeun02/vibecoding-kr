@@ -2,6 +2,7 @@
 import { apps, categories, filterApps } from '../lib/apps';
 import { voteCounts } from '../lib/db';
 import ToolRow from './ToolRow.astro';
+import MobileDirectory from './MobileDirectory.astro';
 const { params = Astro.url.searchParams } = Astro.props;
 const counts = await voteCounts();
 const r = filterApps(params, counts);
@@ -14,6 +15,7 @@ const href = (key: string, value: string) => {
 ---
 
 <div class="directory-layout" id="directory">
+  <MobileDirectory {params} total={r.total} />
   <aside>
     <nav class="category-nav" aria-label="도구 카테고리">
       <div class="eyebrow">어떤 도구를 만들까요?</div><a
@@ -127,5 +129,28 @@ const href = (key: string, value: string) => {
         ))
       }
     </nav>
+    <nav class="mobile-only mobile-pagination" aria-label="도구 목록 페이지">
+      {
+        r.page > 1 ? (
+          <a href={href('page', String(r.page - 1))} data-filter-link data-page-link>
+            ← 이전
+          </a>
+        ) : (
+          <span>← 이전</span>
+        )
+      }
+      <span><strong>{r.page}</strong> / {r.pages}</span>
+      {
+        r.page < r.pages ? (
+          <a href={href('page', String(r.page + 1))} data-filter-link data-page-link>
+            다음 →
+          </a>
+        ) : (
+          <span>다음 →</span>
+        )
+      }
+    </nav><a class="mobile-only mobile-suggest" href="/suggest"
+      >찾는 도구가 없나요? <span>도구 제안하기 ↗</span></a
+    >
   </section>
 </div>

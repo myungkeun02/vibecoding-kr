@@ -31,14 +31,20 @@ const labels: Record<string, string> = {
 };
 ---
 
-<Base title="내 활동" noindex
+<Base pageKind="account" title="내 활동" noindex
   ><header class="page-head">
     <div class="eyebrow">내가 만들고 나눈 것들</div><h1 style="margin-top:12px">
       {user.nickname}님의 작업 기록.
     </h1><p>저장한 도구, 직접 만든 것, 함께 나눈 이야기.</p>
-  </header><div class="profile-grid">
+  </header><nav class="mobile-only mobile-account-links" aria-label="내 활동 바로가기">
+    <a href="#saved-tools">저장한 도구 <strong>{saved.length}</strong></a><a href="#my-posts"
+      >내가 쓴 글 <strong>{mine.length}</strong></a
+    ><a href="#profile-settings">프로필 설정 ↗</a>{
+      user.role === 'admin' && <a href="/admin">관리자 화면 ↗</a>
+    }
+  </nav><div class="profile-grid">
     <aside>
-      <div class="meta-box">
+      <div class="meta-box" id="profile-settings">
         <p class="small">{user.email}</p>
         <p class="small">
           {user.email_verified_at ? '이메일 확인 완료 ✓' : '아직 이메일 주소를 확인하지 않았어요.'}
@@ -106,7 +112,7 @@ const labels: Record<string, string> = {
         </form>
       </details>
     </aside><section>
-      <h2>저장한 도구 <span class="count-label">{saved.length}</span></h2><div class="tabs">
+      <h2 id="saved-tools">저장한 도구 <span class="count-label">{saved.length}</span></h2><div class="tabs">
         {saved.map((a) => a && <a href={'/' + a.slug}>{a.nameKo} ↗</a>)}
       </div>{!saved.length && <p class="muted">나중에 만들고 싶은 도구를 저장해 보세요.</p>}<div
         class="section"
@@ -120,7 +126,7 @@ const labels: Record<string, string> = {
           ))
         }{!voted.length && <p class="muted">아직 직접 대체한 도구를 등록하지 않았어요.</p>}
       </div><div class="section">
-        <h2>내가 쓴 글</h2>{mine.map((p) => <PostRow post={p} />)}{
+        <h2 id="my-posts">내가 쓴 글</h2>{mine.map((p) => <PostRow post={p} />)}{
           !mine.length && (
             <a href="/community/new" class="button secondary">
               첫 이야기 남기기 ↗
