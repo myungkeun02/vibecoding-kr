@@ -9,8 +9,8 @@ if (Astro.locals.user) return Astro.redirect(returnTo);
 <Base title="회원가입" noindex
   ><section class="auth-panel">
     <BrandIntro
-      ><div class="eyebrow">처음 오셨나요?</div><h1>나만의 도구 만들기, 함께 시작해요</h1><p class="muted">
-        도구를 저장하고, 만들면서 배운 것을 나눠보세요.
+      ><h1>회원가입</h1><p class="muted">
+        가입하면 도구 저장, SaaS 등록, 글쓰기를 이용할 수 있습니다.
       </p></BrandIntro
     ><form data-api action="/api/auth/register" method="post">
       <input type="hidden" name="csrf" value={Astro.locals.csrf} /><input

@@ -50,15 +50,76 @@ test('anonymous vote is idempotent and merges with account without double counti
   expect((await dbm.voteCounts()).slack).toBe(2);
   await dbm.mergeVotes(u, 'anon-a');
   expect((await dbm.voteCounts()).slack).toBe(1);
-  expect((await dbm.totals()).monthly).toBe(apps.getApp('slack').priceMonthly);
+  expect(await dbm.totals()).toEqual({ guides: apps.apps.length, services: 0, builds: 0 });
   await dbm.vote('slack', u, 'anon-b', true);
   expect((await dbm.voteCounts()).slack || 0).toBe(0);
 });
-test('free, unknown and one-time tools do not inflate monthly estimate', async () => {
-  const start = (await dbm.totals()).monthly;
+test('button responses and prices never become public savings or content counts', async () => {
+  const start = await dbm.totals();
   for (const slug of ['obsidian', 'upnote', 'microsoft-excel']) await dbm.vote(slug, null, 'cost-test');
-  expect((await dbm.totals()).monthly).toBe(start);
-  expect((await dbm.totals()).excluded).toBe(2);
+  expect(await dbm.totals()).toEqual(start);
+  expect(await dbm.totals()).not.toHaveProperty('monthly');
+});
+test('content totals and tool review counts follow publication, board and deletion', async () => {
+  const before = await dbm.totals();
+  const reviewsBefore = (await dbm.buildCounts()).slack || 0;
+  await dbm.run(
+    "INSERT INTO users(id,email,nickname) VALUES('count-owner','counts@example.test','집계 시험')",
+  );
+  await dbm.run(
+    "INSERT INTO users(id,email,nickname,status) VALUES('count-suspended','counts-suspended@example.test','제한 계정','suspended')",
+  );
+  try {
+    for (const [id, status, user] of [
+      ['count-public', 'published', 'count-owner'],
+      ['count-pending', 'pending', 'count-owner'],
+      ['count-hidden', 'hidden', 'count-owner'],
+      ['count-rejected', 'rejected', 'count-owner'],
+      ['count-suspended-service', 'published', 'count-suspended'],
+    ])
+      await dbm.run(
+        `INSERT INTO services(id,user_id,name,website_url,url_key,category,tagline,description,pricing,relationship,status)
+      VALUES(?,?,?,'https://example.com',?,'projects','집계 범위를 확인하는 서비스입니다','공개 상태에 따라 집계가 달라지는지 확인하기 위한 시험용 서비스 설명입니다.','free','maker',?)`,
+        id,
+        user,
+        id,
+        id,
+        status,
+      );
+    for (const [id, board, status, slug] of [
+      ['count-review', 'builds', 'active', 'slack'],
+      ['count-unlinked', 'builds', 'active', null],
+      ['count-question', 'questions', 'active', 'slack'],
+      ['count-hidden-review', 'builds', 'hidden', 'slack'],
+      ['count-deleted-review', 'builds', 'deleted', 'slack'],
+    ])
+      await dbm.run(
+        "INSERT INTO posts(id,user_id,title,body,board,status,tool_slug) VALUES(?,'count-owner','집계 확인 글','후기 공개 상태 확인',?,?,?)",
+        id,
+        board,
+        status,
+        slug,
+      );
+    expect(await dbm.totals()).toEqual({
+      guides: before.guides,
+      services: before.services + 1,
+      builds: before.builds + 2,
+    });
+    expect((await dbm.buildCounts()).slack).toBe(reviewsBefore + 1);
+    const ranked = apps.filterApps(new URLSearchParams({ sort: 'popular' }), await dbm.buildCounts());
+    expect(ranked.items[0].slug).toBe('slack');
+    await dbm.run("UPDATE services SET status='hidden' WHERE id='count-public'");
+    await dbm.run("UPDATE posts SET status='deleted' WHERE id='count-review'");
+    expect(await dbm.totals()).toEqual({
+      guides: before.guides,
+      services: before.services,
+      builds: before.builds + 1,
+    });
+    expect((await dbm.buildCounts()).slack || 0).toBe(reviewsBefore);
+  } finally {
+    await dbm.run("DELETE FROM posts WHERE user_id='count-owner'");
+    await dbm.run("DELETE FROM users WHERE id IN ('count-owner','count-suspended')");
+  }
 });
 test('seed is idempotent and preserves operational records', async () => {
   const before = await dbm.totals();

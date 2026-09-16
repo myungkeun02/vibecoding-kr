@@ -21,7 +21,7 @@ export const brand = {
   name: '바이브코딩가능?',
   en: 'Can I Vibecode It? KR',
   description:
-    '내가 쓰는 기능만, 직접 만들 수 있을까? 어디까지 직접 만들 수 있는지 살펴보고, AI 제작 요청문과 실제 제작 경험을 나눠보세요.',
+    '도구별로 직접 만들 수 있는 기능과 제작 프롬프트를 확인하고, SaaS 소개와 제작 후기를 찾아보세요.',
 };
 export const absolute = (path: string) => new URL(path, siteUrl).href;
 export const boards: Record<string, string> = {

@@ -3,14 +3,14 @@ import Mascot from '../components/Mascot.astro';
 import EmptyState from '../components/EmptyState.astro';
 import Base from '../layouts/Base.astro';
 import Directory from '../components/Directory.astro';
-import Ticker from '../components/Ticker.astro';
+import CatalogSummary from '../components/CatalogSummary.astro';
 import Newsletter from '../components/Newsletter.astro';
 import UiIcon from '../components/UiIcon.astro';
-import { apps, filterApps } from '../lib/apps';
+import { apps, categories, filterApps } from '../lib/apps';
 import { absolute, boards } from '../lib/config';
-import { posts, voteCounts } from '../lib/db';
-const recent = (await posts(new URLSearchParams())).items.slice(0, 3);
-const r = filterApps(Astro.url.searchParams, await voteCounts());
+import { posts, buildCounts } from '../lib/db';
+const recent = (await posts(new URLSearchParams({ board: 'builds' }))).items.slice(0, 3);
+const r = filterApps(Astro.url.searchParams, await buildCounts());
 const jsonld = [
   {
     '@context': 'https://schema.org',
@@ -44,15 +44,15 @@ const jsonld = [
   ><section class="hero">
     <div>
       <div class="desktop-only">
-        <div class="eyebrow"><span class="status-dot"></span> 필요한 기능부터, 직접 만들어보세요</div><h1>
+        <div class="eyebrow"><span class="status-dot"></span> 도구별 기능 분석과 제작 가이드</div><h1>
           이 도구,<br /><span class="accent">직접 만들 수 있을까?</span>
         </h1><p>
-          매일 쓰는 기능만 골라, 나만의 도구로.<br />어디까지 만들 수 있는지 살펴보고, 프롬프트로 시작해
-          보세요.
+          직접 만들 수 있는 기능과 어려운 부분을 정리했습니다.<br />도구를 고르고, AI에 입력할 제작 프롬프트를
+          확인하세요.
         </p>
       </div><div class="mobile-only mobile-home-intro">
-        <p>{apps.length}개 도구의 가능성과 제작 요청문</p><h1>
-          어떤 도구를 만들까요<span class="accent">?</span>
+        <p>{apps.length}개 도구의 제작 가이드</p><h1>
+          어떤 도구를 찾으세요<span class="accent">?</span>
         </h1>
       </div><form action="/" role="search" data-directory-search>
         <label class="search-box"
@@ -73,8 +73,8 @@ const jsonld = [
     </div><aside>
       <div class="terminal home-guide">
         <Mascot /><div>
-          <div class="cmd">어디까지 만들 수 있을까요?</div><strong>완벽한 복제보다, 필요한 기능부터.</strong
-          ><br />만들 수 있는 기능과 어려운 부분을 함께 살펴봐요.
+          <div class="cmd">직접 만들기 전에</div><strong>필요한 기능과 제작 범위를 확인하세요.</strong><br
+          />기능별 난이도와 운영에 드는 비용을 정리했습니다.
         </div>
       </div><div style="margin-top:17px">
         {
@@ -95,15 +95,15 @@ const jsonld = [
           ))
         }
       </div><div class="eyebrow" style="margin-top:17px">
-        도구 {apps.length}개 · 분야 15개 · 다음 만들거리를 찾아보세요
+        도구 {apps.length}개 · {categories.length}개 분야
       </div>
     </aside>
-  </section><Ticker /><nav class="catalog-switch" aria-label="도구 탐색 방식">
+  </section><CatalogSummary /><nav class="catalog-switch" aria-label="도구 탐색 방식">
     <a href="/#directory" aria-current="page">제작 가이드</a><a href="/services">사용자 등록 SaaS ↗</a>
   </nav><Directory /><div class="home-bottom">
     <section>
       <div class="flex between">
-        <h2>직접 만들어본 이야기</h2><a class="small muted" href="/community">커뮤니티 전체 ↗</a>
+        <h2>최근 제작 후기</h2><a class="small muted" href="/community?board=builds">후기 전체 보기</a>
       </div>{
         recent.map((p) => (
           <a class="post-preview" href={'/community/' + p.id}>
@@ -120,9 +120,9 @@ const jsonld = [
         !recent.length && (
           <EmptyState compact>
             <>
-              <h3>첫 번째 제작 이야기를 기다려요.</h3>
-              <p>작은 성공도, 막혔던 부분도 다음에 만들 사람에게 도움이 됩니다.</p>
-              <a href="/community/new" class="button secondary">
+              <h3>아직 등록된 제작 후기가 없습니다.</h3>
+              <p>만든 기능과 사용한 도구, 어려웠던 점을 적어주세요.</p>
+              <a href="/community/new?board=builds" class="button secondary">
                 제작 후기 남기기 ↗
               </a>
             </>

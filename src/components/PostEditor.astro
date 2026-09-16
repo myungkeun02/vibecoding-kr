@@ -14,7 +14,7 @@ const board = p?.board || Astro.url.searchParams.get('board') || 'builds';
       <label class="form-field"
         ><span>제목</span><input
           name="title"
-          placeholder="어떤 이야기를 나누고 싶으세요?"
+          placeholder="제목을 입력해 주세요"
           required
           minlength="3"
           maxlength="140"
@@ -37,7 +37,7 @@ const board = p?.board || Astro.url.searchParams.get('board') || 'builds';
           >이미지 첨부<input type="file" accept="image/png,image/jpeg,image/webp" data-upload hidden /></label
         ><span class="muted small">PNG·JPEG·WebP, 최대 5MB</span>
       </div><pre id="markdown-preview" class="meta-box" hidden></pre><details class="section">
-        <summary>제작 후기 정보를 더 남길래요 (선택)</summary><div class="stack" style="margin-top:20px">
+        <summary>제작 정보 (선택)</summary><div class="stack" style="margin-top:20px">
           <label class="form-field"
             ><span>사용한 AI 코딩 도구</span><input
               name="agent"
@@ -78,7 +78,7 @@ const board = p?.board || Astro.url.searchParams.get('board') || 'builds';
           >
         </div>
       </details><p class="form-status" role="status"></p><div class="flex editor-submit">
-        <button class="primary" type="submit">{p ? '수정 내용 저장' : '이야기 게시하기'} ↗</button><a
+        <button class="primary" type="submit">{p ? '수정 내용 저장' : '게시하기'} ↗</button><a
           class="muted small"
           href={p ? '/community/' + p.id : '/community'}>취소</a
         >

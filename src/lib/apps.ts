@@ -31,8 +31,7 @@ export function filterApps(params: URLSearchParams, counts: Record<string, numbe
       : params.get('sort') === 'newest'
         ? b.checkedOn.localeCompare(a.checkedOn) || a.name.localeCompare(b.name)
         : (counts[b.slug] || 0) - (counts[a.slug] || 0) ||
-          (['notion', 'slack', 'obsidian', 'microsoft-excel'].includes(b.slug) ? 1 : 0) -
-            (['notion', 'slack', 'obsidian', 'microsoft-excel'].includes(a.slug) ? 1 : 0) ||
+          b.checkedOn.localeCompare(a.checkedOn) ||
           a.name.localeCompare(b.name),
   );
   const pages = Math.max(1, Math.ceil(results.length / 20));

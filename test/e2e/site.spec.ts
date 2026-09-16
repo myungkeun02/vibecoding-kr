@@ -145,10 +145,8 @@ test('agent-specific clipboard copy, FAQ, sharing and anonymous vote toggle', as
   const b = page.locator('[data-vote]');
   await b.click();
   await expect(b).toHaveAttribute('aria-pressed', 'true');
-  await expect(page.locator('[data-odometer]')).toHaveAttribute(
-    'data-odometer',
-    String(catalog.find((a) => a.slug === 'slack').priceMonthly),
-  );
+  await expect(page.locator('[data-experience-count]')).toHaveText('1');
+  await expect(page.locator('[data-odometer]')).toHaveCount(0);
   await page.reload();
   await expect(b).toHaveAttribute('aria-pressed', 'true');
   await b.click();
@@ -193,7 +191,7 @@ test('UI post creation, editing, comment, reply, reaction and image upload', asy
     buffer: readFileSync('public/og/default.png'),
   });
   await expect(page.getByLabel('본문 · 마크다운 지원', { exact: true })).toHaveValue(/\/media\//);
-  await page.getByRole('button', { name: '이야기 게시하기' }).click();
+  await page.getByRole('button', { name: '게시하기' }).click();
   await expect(
     page.getByRole('heading', { name: '브라우저에서 작성한 제작 후기', exact: true }),
   ).toBeVisible();
@@ -218,9 +216,7 @@ test('UI post creation, editing, comment, reply, reaction and image upload', asy
   await page.goto('/me');
   await expect(page.getByRole('heading', { name: '저장한 글', exact: true })).toBeVisible();
 });
-test('duplicate identity votes, anonymous-to-member merge, free/one-time/unknown pricing', async ({
-  request,
-}) => {
+test('duplicate responses merge on login without changing public content counts', async ({ request }) => {
   const who = await account(request);
   await action(request, 'vote', { slug: 'trello' });
   await action(request, 'vote', { slug: 'trello' });
@@ -238,8 +234,8 @@ test('duplicate identity votes, anonymous-to-member merge, free/one-time/unknown
   const before = await (await request.get('/api/totals')).json();
   for (const slug of ['obsidian', 'upnote', 'microsoft-excel']) await action(request, 'vote', { slug });
   const after = await (await request.get('/api/totals')).json();
-  expect(after.monthly).toBe(before.monthly);
-  expect(after.excluded).toBe(before.excluded + 2);
+  expect(after).toEqual(before);
+  expect(after).not.toHaveProperty('monthly');
   await db.close();
 });
 test('ownership enforcement, XSS, notifications, deletion and bookmarks remain consistent', async ({
@@ -455,7 +451,9 @@ test('responsive dark/light layouts, reduced motion, keyboard and clean browser 
     animations: 'disabled',
   });
   await page.emulateMedia({ reducedMotion: 'reduce' });
-  expect(await page.locator('.tape').evaluate((el) => getComputedStyle(el).animationName)).toBe('none');
+  expect(await page.locator('.catalog-summary').evaluate((el) => getComputedStyle(el).animationName)).toBe(
+    'none',
+  );
   await page.keyboard.press('/');
   await expect(page.getByLabel('도구 검색', { exact: true })).toBeFocused();
   expect(errors).toEqual([]);
@@ -563,7 +561,10 @@ test('360px authenticated long text and large totals, and no-JavaScript form sub
   await db.run("UPDATE tools SET price=987654321098 WHERE slug='slack'");
   await page.goto('/slack');
   await page.locator('[data-vote]').click();
-  await expect(page.locator('[data-odometer]')).toHaveAttribute('data-odometer', /9876543/);
+  await expect(page.locator('[data-vote]')).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.locator('[data-odometer]')).toHaveCount(0);
+  const counts = await (await page.request.get('/api/totals')).json();
+  expect(counts).not.toHaveProperty('monthly');
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
   await db.run(
     'UPDATE tools SET price=? WHERE slug=?',
@@ -665,4 +666,64 @@ test('concurrent PostgreSQL requests enforce one-use email tokens and account un
   );
   expect(registered.map((r) => r.status()).sort()).toEqual([200, 409]);
   await other.dispose();
+});
+
+test('public counts link to content and review totals update when a post is hidden', async ({ page }) => {
+  await account(page.request);
+  const before = await (await page.request.get('/api/totals')).json();
+  const pid = await post(page.request, { title: '집계에 포함되는 실제 제작 후기', tool: 'slack' });
+  const question = await post(page.request, {
+    title: '후기 수에 포함하지 않는 질문',
+    board: 'questions',
+    tool: 'slack',
+  });
+  const db = testDb();
+  try {
+    await page.goto('/stats');
+    await expect(page.getByRole('heading', { name: '등록 현황', exact: true })).toBeVisible();
+    const summary = page.locator('[data-public-count=builds]');
+    await expect(summary).toContainText(String(before.builds + 1) + '건');
+    await expect(summary).toHaveAttribute('href', '/community?board=builds');
+    expect(await (await page.request.get('/api/totals')).json()).toEqual({
+      ...before,
+      builds: before.builds + 1,
+    });
+    await page.goto('/?q=slack');
+    const expected = (await db.one(
+      "SELECT COUNT(*) AS n FROM posts WHERE status='active' AND board='builds' AND tool_slug='slack'",
+    ))!.n;
+    await expect(page.locator('.review-count')).toHaveText('후기 ' + expected);
+    await page.goto('/slack');
+    await expect(page.locator('#tool-builds')).toContainText('집계에 포함되는 실제 제작 후기');
+    await expect(page.locator('#tool-builds')).not.toContainText('후기 수에 포함하지 않는 질문');
+    await page.locator('[data-vote]').click();
+    expect(await (await page.request.get('/api/totals')).json()).toEqual({
+      ...before,
+      builds: before.builds + 1,
+    });
+    await db.run("UPDATE posts SET status='hidden' WHERE id=?", pid);
+    await page.goto('/stats');
+    await expect(summary).toContainText(String(before.builds) + '건');
+    for (const theme of ['light', 'dark']) {
+      await page.evaluate((theme) => localStorage.setItem('theme', theme), theme);
+      await page.reload();
+      for (const width of [360, 390, 768, 1440]) {
+        await page.setViewportSize({ width, height: 900 });
+        expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
+      }
+      await page.setViewportSize({ width: 390, height: 844 });
+      await page.screenshot({
+        path: 'docs/qa/screenshots/content-stats-' + theme + '-390.png',
+        fullPage: true,
+        animations: 'disabled',
+      });
+    }
+    await expect(page.locator('[data-odometer]')).toHaveCount(0);
+    expect(await page.locator('main').innerText()).not.toMatch(
+      /월 추정|함께 만든 변화|페이지 유형별 열람|이메일 주소 \d+개/,
+    );
+  } finally {
+    await db.run('DELETE FROM posts WHERE id IN (?,?)', pid, question);
+    await db.close();
+  }
 });

@@ -12,21 +12,21 @@ Astro server output + Node standalone adapter가 HTML을 렌더링한다. `src/m
 
 `migrations/*.sql`은 정렬된 버전으로 1회씩 트랜잭션 적용한다. 현재 001 기본 테이블, 002 동의·인덱스, 003 이메일 확인 시각이다. 적용 기록이 있는 마이그레이션은 수정하지 않고 새 파일을 추가한다. seed는 계정·글·투표 초기화 없이 metadata만 동기화한다.
 
-|테이블|책임·참조 정책|
-|---|---|
-|tools|slug 기본키, 기준 월 비용, 메타데이터 JSON, 활성 여부|
-|users|이메일·닉네임 unique, salted scrypt, bio, role/status, email_verified_at|
-|sessions / identities / consents|세션 토큰은 SHA-256 해시, 사용자 삭제 cascade, OAuth provider+subject unique, 동의 버전·시각|
-|auth_tokens|이메일 확인/비밀번호 재설정용 해시·종류·만료. 30분·일회성|
-|votes|slug+user / slug+anonymous 각각 unique; 계정 삭제 cascade|
-|posts / comments|작성자 FK SET NULL, 상태로 숨김/삭제. 글 삭제 시 본문·제작 기록·하위 댓글 비움|
-|reactions / bookmarks|사용자+글+종류, 사용자+도구 unique. 삭제 글의 반응 제거|
-|notifications|사용자·글·댓글 참조, 읽음. 삭제 대상 알림 제거, 숨긴 대상 목록 제외|
-|reports / suggestions / audit|신고 중복 제약, 제안 검토 상태, 관리자 조치 기록. 탈퇴 시 actor/user 참조 NULL|
-|waitlist|이메일 unique, 동의 문구·시각, 임의 철회 토큰, 철회 상태|
-|analytics / rate_limits|날짜·이벤트·경로 유형의 집계, 단기 요청 횟수|
-|uploads|이미지 소유자·storage·크기·타입. 게시 전에는 소유자만 읽음|
-|mail_deliveries|다이제스트 발송 시 생성, campaign+email unique|
+| 테이블                           | 책임·참조 정책                                                                               |
+| -------------------------------- | -------------------------------------------------------------------------------------------- |
+| tools                            | slug 기본키, 기준 월 비용, 메타데이터 JSON, 활성 여부                                        |
+| users                            | 이메일·닉네임 unique, salted scrypt, bio, role/status, email_verified_at                     |
+| sessions / identities / consents | 세션 토큰은 SHA-256 해시, 사용자 삭제 cascade, OAuth provider+subject unique, 동의 버전·시각 |
+| auth_tokens                      | 이메일 확인/비밀번호 재설정용 해시·종류·만료. 30분·일회성                                    |
+| votes                            | slug+user / slug+anonymous 각각 unique; 계정 삭제 cascade                                    |
+| posts / comments                 | 작성자 FK SET NULL, 상태로 숨김/삭제. 글 삭제 시 본문·제작 기록·하위 댓글 비움               |
+| reactions / bookmarks            | 사용자+글+종류, 사용자+도구 unique. 삭제 글의 반응 제거                                      |
+| notifications                    | 사용자·글·댓글 참조, 읽음. 삭제 대상 알림 제거, 숨긴 대상 목록 제외                          |
+| reports / suggestions / audit    | 신고 중복 제약, 제안 검토 상태, 관리자 조치 기록. 탈퇴 시 actor/user 참조 NULL               |
+| waitlist                         | 이메일 unique, 동의 문구·시각, 임의 철회 토큰, 철회 상태                                     |
+| analytics / rate_limits          | 날짜·이벤트·경로 유형의 집계, 단기 요청 횟수                                                 |
+| uploads                          | 이미지 소유자·storage·크기·타입. 게시 전에는 소유자만 읽음                                   |
+| mail_deliveries                  | 다이제스트 발송 시 생성, campaign+email unique                                               |
 
 SQL 실행은 `src/lib/db.ts`의 바인딩 헬퍼로 통일하되 기능별 SQL은 API에도 둔다. 이 크기의 서비스에서 다층 repository 추상화를 추가하지 않았다.
 
@@ -48,15 +48,15 @@ Markdown을 marked로 처리한 후 sanitize-html로 허용 태그·속성·URL�
 
 ## 집계 정의
 
-`SUM(COALESCE(tools.price,0))`를 활성 도구와 유효 votes 조인으로 계산한다. 익명 쿠키에 따라 한 도구 1건, 계정에 따라 1건을 허용하고 로그인 시 같은 도구 중복을 제거한다. 철회는 DELETE로 반영된다. IP는 스팸 완화용이며 동일인 증명의 수단이 아니다.
+공개 합계(`/api/totals`)는 활성 제작 가이드 수(`guides`), 공개 상태이며 등록자 계정이 활성인 SaaS 수(`services`), 공개된 제작 후기·작품 게시글 수(`builds`)다. 비공개·검토 중·숨김·삭제된 콘텐츠는 각 공개 목록과 같은 기준으로 제외한다. 도구별 후기 수와 기본 정렬은 해당 도구에 연결된 공개 builds 글을 사용한다. 질문과 댓글은 후기 수에 포함하지 않는다.
 
-priceMonthly는 검증된 기준 플랜·최소 좌석의 KRW 월 비용이다. 월 결제 원금이 있으면 우선하고 연 결제 월 환산만 확인된 경우 이를 명시한다. 무료 0원은 순위에 포함, 일회성·미확인·견적·사용량은 null로 금액 제외 건수를 분리한다. 메타데이터 가격 갱신은 현재 모든 인증의 추정액에 반영되며 역사적 절약액 시계열은 아니다.
+기존 votes는 사용자 본인의 대체 경험 표시로만 유지한다. 익명 쿠키·계정별 중복과 로그인 시 병합 처리는 보존하되, 사람 수·제작 성공·금액 합계로 환산하지 않는다. `monthly`, `excluded` 합계와 숫자 롤링 UI는 제거했다. 가격은 도구의 요금 정보 및 가격 정렬에만 사용한다.
 
 분석은 pageview/search/copy/vote/signup/post/share 이벤트 횟수만 받는다. 검색어·이메일·본문·세션은 보내지 않는다. 페이지 경로는 `/:slug`, `/community/[id]` 등 유형이며 공개 글의 개인 정보가 경로 집계에 들어가지 않는다. 봇을 완벽히 제외한 순방문자 통계는 아니다.
 
 ## 모바일 전용 화면 (2026-09-16)
 
-760px 이하에서는 `MobileShell.astro`가 상단 탐색과 하단 4개 메뉴를 제공한다. 홈은 검색·분야 선택·도구 카드 순서로 구성하고, `MobileDirectory.astro`의 네이티브 dialog에서 필터를 모아 적용한다. 데스크톱 표와 모바일 카드는 같은 서버 데이터와 링크를 사용한다. 별도 모바일 도메인이나 기기별 리다이렉트가 없어 공유 URL·세션·검색 조건이 유지된다.
+760px 이하에서는 `MobileShell.astro`가 상단 탐색과 하단 4개 메뉴를 제공한다. 홈은 검색·공개 콘텐츠 수·분야 선택·도구 카드 순서로 구성하고, `MobileDirectory.astro`의 네이티브 dialog에서 필터를 모아 적용한다. 데스크톱 표와 모바일 카드는 같은 서버 데이터와 링크를 사용한다. 별도 모바일 도메인이나 기기별 리다이렉트가 없어 공유 URL·세션·검색 조건이 유지된다.
 
 상세는 가능한 범위·제작 요청문·참고 정보로 구분한다. 모바일에서만 선택한 내용이 표시되며 URL 해시와 뒤로가기가 상태를 복원한다. 761px 이상으로 전환하면 전체 내용을 다시 표시한다. JS가 없으면 모든 상세 내용과 필터 폼을 읽고 사용할 수 있다. 폼·권한·API·DB는 기존 경로를 그대로 사용한다.
 

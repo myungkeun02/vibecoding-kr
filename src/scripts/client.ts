@@ -62,33 +62,6 @@ async function copy(text: string) {
     if (!ok) throw new Error('자동 복사가 지원되지 않아요. 프롬프트를 선택해 직접 복사해 주세요.');
   }
 }
-function roll(value: number) {
-  document.querySelectorAll<HTMLElement>('[data-odometer]').forEach((el) => {
-    el.dataset.odometer = String(value);
-    el.style.setProperty('--digits', String(('₩' + value.toLocaleString('ko-KR')).length * 0.8));
-    el.setAttribute('aria-label', '₩' + value.toLocaleString('ko-KR'));
-    el.replaceChildren();
-    for (const char of '₩' + value.toLocaleString('ko-KR')) {
-      const span = document.createElement('span');
-      span.setAttribute('aria-hidden', 'true');
-      if (/\d/.test(char)) {
-        span.className = 'odigit';
-        const reel = document.createElement('span');
-        reel.className = 'oreel';
-        for (let n = 0; n < 10; n++) {
-          const digit = document.createElement('span');
-          digit.textContent = String(n);
-          reel.append(digit);
-        }
-        span.append(reel);
-        requestAnimationFrame(() =>
-          requestAnimationFrame(() => (reel.style.transform = `translateY(-${Number(char) * 1.2}em)`)),
-        );
-      } else span.textContent = char;
-      el.append(span);
-    }
-  });
-}
 let controller: AbortController | undefined;
 async function updateDirectory(url: URL, push = true) {
   if (!$('#directory')) return;
@@ -312,10 +285,11 @@ document.addEventListener('click', async (e) => {
       const remove = b.getAttribute('aria-pressed') === 'true';
       const data = await api('/api/vote', { slug: b.dataset.slug, remove });
       b.setAttribute('aria-pressed', String(data.voted));
-      b.textContent = (data.voted ? '대체 기록 남김 ✓' : '직접 대체했어요 ↑') + ' ' + data.count;
-      roll(data.monthly);
-      document.querySelectorAll('[data-total-votes]').forEach((el) => (el.textContent = String(data.votes)));
-      toast(data.voted ? '직접 대체한 기록을 남겼어요.' : '대체 기록을 취소했어요.');
+      b.textContent = data.voted ? '대체 경험 표시됨 · 취소' : '대체 경험 표시하기';
+      document
+        .querySelectorAll('[data-experience-count]')
+        .forEach((el) => (el.textContent = String(data.count)));
+      toast(data.voted ? '대체 경험을 표시했습니다.' : '표시를 취소했습니다.');
       return;
     }
     if (b.hasAttribute('data-bookmark')) {
@@ -352,7 +326,6 @@ document.addEventListener('click', async (e) => {
     b.disabled = false;
   }
 });
-document.querySelectorAll<HTMLElement>('[data-odometer]').forEach((e) => roll(Number(e.dataset.odometer)));
 document.querySelectorAll<HTMLElement>('[data-service-upload-controls]').forEach((el) => (el.hidden = false));
 document.addEventListener('click', (event) => {
   const button = (event.target as HTMLElement).closest<HTMLElement>('[data-service-image-remove]');

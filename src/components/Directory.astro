@@ -1,11 +1,11 @@
 ---
 import EmptyState from './EmptyState.astro';
 import { apps, categories, filterApps } from '../lib/apps';
-import { voteCounts } from '../lib/db';
+import { buildCounts } from '../lib/db';
 import ToolRow from './ToolRow.astro';
 import MobileDirectory from './MobileDirectory.astro';
 const { params = Astro.url.searchParams } = Astro.props;
-const counts = await voteCounts();
+const counts = await buildCounts();
 const r = filterApps(params, counts);
 const href = (key: string, value: string) => {
   const p = new URLSearchParams(params);
@@ -90,14 +90,14 @@ const href = (key: string, value: string) => {
         }</select
       ><select name="sort" aria-label="정렬"
         ><option value="popular" selected={!params.get('sort') || params.get('sort') === 'popular'}
-          >많이 대체한 순 ↓</option
+          >후기 많은 순 ↓</option
         ><option value="newest" selected={params.get('sort') === 'newest'}>최근 확인한 순</option><option
           value="price"
           selected={params.get('sort') === 'price'}>월 비용이 낮은 순</option
         ></select
       ><noscript><button type="submit">적용</button></noscript>
     </form><div class="tool-table-head">
-      <span>도구 / 카테고리</span><span>이용 비용</span><span>대체 가능성</span><span>대체한 사람</span>
+      <span>도구 / 카테고리</span><span>이용 비용</span><span>대체 가능성</span><span>제작 후기</span>
     </div><div aria-live="polite" aria-label="검색 결과">
       {r.items.map((a) => <ToolRow app={a} count={counts[a.slug] || 0} />)}{
         !r.items.length && (

@@ -1,158 +1,88 @@
 ---
 import BrandIntro from '../components/BrandIntro.astro';
 import Base from '../layouts/Base.astro';
-import Ticker from '../components/Ticker.astro';
-import { totals, all, voteCounts } from '../lib/db';
-import { apps, priceLabel } from '../lib/apps';
-import fx from '../../data/exchange.json';
-const eventLabels: Record<string, string> = {
-  pageview: '페이지 열람',
-  search: '검색',
-  copy: '프롬프트 복사',
-  vote: '대체 기록 등록·취소',
-  signup: '가입',
-  post: '글 작성',
-  share: '공유',
-};
-const pageLabels: Record<string, string> = {
-  '/': '홈',
-  '/[slug]': '도구 상세',
-  '/category/[cat]': '분야별 도구',
-  '/community': '커뮤니티 목록',
-  '/services': '사용자 등록 SaaS 목록',
-  '/services/[id]': '사용자 등록 SaaS 소개',
-  '/community/[id]': '게시글',
-  '/community/new': '글쓰기',
-  '/community/[id]/edit': '글 수정',
-  '/profile/[id]': '회원 프로필',
-  '/stats': '대체 현황',
-  '/privacy': '개인정보 처리 안내',
-  '/terms': '이용약관',
-  '/rebuild-prompt': '사이트 제작 요청문',
-  '/404': '없는 페이지',
-};
-const t = await totals(),
-  counts = await voteCounts();
-const days = await all(
-  "SELECT day,SUM(count) AS n FROM analytics WHERE event='pageview' AND day>=(CURRENT_DATE - INTERVAL '30 days') GROUP BY day ORDER BY day DESC",
-);
-const events = await all(
-  "SELECT event,SUM(count) AS n FROM analytics WHERE day>=(CURRENT_DATE - INTERVAL '30 days') GROUP BY event",
-);
-const popular = await all(
-  "SELECT path,SUM(count) AS n FROM analytics WHERE event='pageview' AND day>=(CURRENT_DATE - INTERVAL '30 days') GROUP BY path ORDER BY n DESC LIMIT 20",
-);
-const subscribers = (await all("SELECT COUNT(*) AS n FROM waitlist WHERE status='active'"))[0].n;
+import CatalogSummary from '../components/CatalogSummary.astro';
+import PostRow from '../components/PostRow.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import { totals, posts } from '../lib/db';
+import { apps, categories } from '../lib/apps';
+import { publicServices } from '../lib/services';
+const t = await totals();
+const recentBuilds = (await posts(new URLSearchParams({ board: 'builds' }))).items.slice(0, 3);
+const services = await publicServices(new URLSearchParams(), 3);
+const groups = categories
+  .map((c) => ({ ...c, count: apps.filter((a) => a.category === c.slug).length }))
+  .filter((c) => c.count);
 ---
 
-<Base title="함께 만든 대체 현황"
-  ><header class="page-head">
-    <BrandIntro
-      ><div class="eyebrow">직접 대체했다고 남긴 기록</div><h1>함께 만든 변화.</h1><p>
-        직접 만든 도구로 바꿨다고 알려주신 기록을 모았어요.
-      </p></BrandIntro
-    >
-  </header><Ticker /><div class="stat-grid">
-    <article><span class="muted small">대체 기록</span><strong>{t.votes}건</strong></article><article>
-      <span class="muted small">공개 도구</span><strong>{apps.length}개</strong>
-    </article><article>
-      <span class="muted small">비용 합계에서 빠진 기록</span><strong>{t.excluded}건</strong>
-    </article>
-  </div><section class="section narrow prose">
-    <h2>숫자를 읽는 방법</h2><p>
-      각 도구의 월 이용료에 대체 기록 수를 곱한 뒤 모두 더한 값이에요. 기록 한 건당 기준 요금제 한 개를
-      계산하며, 인원별로 요금을 받는 도구는 최소 이용 인원을 적용해요.
-    </p><p>
-      사용자가 직접 남긴 기록이므로 실제로 얼마나 절약했는지 확인한 금액은 아니에요. 기존 도구 회사의 매출
-      감소를 뜻하지도 않습니다. 직접 운영하는 서버와 AI API 비용, 유지·보수에 드는 시간도 따로 고려해야 해요.
-    </p><ul>
-      <li>무료 도구도 대체 기록 수에는 포함하지만 비용 합계에는 더하지 않아요.</li><li>
-        한 번만 결제하는 상품, 가격이 확인되지 않은 상품, 견적이나 사용량에 따라 요금이 달라지는 상품은 비용
-        합계에서 제외해요.
-      </li><li>
-        매달 결제할 때의 요금과 연간 요금을 12개월로 나눈 금액을 구분합니다. 합계는 각 도구 페이지에 명시한
-        기준만 적용합니다.
-      </li><li>
-        미국 달러 환산 기준: {fx.date}, 1달러 = {fx.rates.KRW.toLocaleString()}원. <a href={fx.source}
-          >환율 출처 · Frankfurter ↗</a
-        >
-      </li><li>
-        회원은 도구마다 기록을 한 번 남길 수 있어요. 비회원은 브라우저에 저장한 쿠키로 중복을 확인하며,
-        로그인하면 그 브라우저에서 남긴 기록을 계정에 연결해요.
-      </li><li>
-        비회원이 쿠키를 삭제하거나 기기를 바꾸면 중복 참여를 완전히 막을 수는 없어요. 과도한 요청을 제한할
-        때는 IP 주소 자체를 저장하지 않고, 날짜별로 달라지는 식별값을 잠시 사용해요.
-      </li>
-    </ul>
-  </section><section class="section">
-    <h2>공개 페이지 유형별 열람</h2>
-    <p class="muted small">
-      업데이트 소식을 받아보는 이메일 주소 {subscribers}개 · 개별 주소는 공개하지 않아요.
-    </p>
-    <div class="table-scroll">
-      <table class="data-table">
-        <thead><tr><th>페이지 유형</th><th>최근 30일 열람</th></tr></thead><tbody
-          >{
-            popular.map((p) => (
-              <tr>
-                <>
-                  <td>{pageLabels[p.path] || p.path}</td>
-                  <td>{p.n}</td>
-                </>
-              </tr>
-            ))
-          }</tbody
-        >
-      </table>
+<Base title="등록 현황" pageKind="stats">
+  <header class="page-head">
+    <BrandIntro><h1>등록 현황</h1><p>현재 공개된 가이드, SaaS 소개, 제작 후기입니다.</p></BrandIntro>
+  </header>
+  <CatalogSummary counts={t} />
+  <p class="muted small">검토 중이거나 숨김·삭제된 항목은 포함하지 않습니다.</p>
+  <section class="section">
+    <div class="flex between wrap-flex">
+      <h2>최근 등록 SaaS</h2><a href="/services" class="small">전체 보기</a>
     </div>
-    {!popular.length && <p class="muted">아직 집계된 열람이 없어요.</p>}
-  </section><section class="section">
-    <h2>집계에 적용하는 기준 가격</h2><div class="prose">
-      <table>
-        <thead><tr><th>도구</th><th>기준 가격</th><th>대체 기록</th><th>집계</th></tr></thead><tbody
-          >{
-            apps
-              .filter((a) => a.priceMonthly !== null || (counts[a.slug] || 0) > 0)
-              .map((a) => (
-                <tr>
-                  <>
-                    <td>
-                      <a href={'/' + a.slug}>{a.nameKo}</a>
-                    </td>
-                    <td>{priceLabel(a)}</td>
-                    <td>{counts[a.slug] || 0}</td>
-                    <td>
-                      {a.priceMonthly === null
-                        ? '제외'
-                        : a.priceMonthly === 0
-                          ? '무료 · 금액 0'
-                          : '월 비용 합산'}
-                    </td>
-                  </>
-                </tr>
-              ))
-          }</tbody
-        >
-      </table>
+    {
+      services.items.length ? (
+        <div class="service-grid">
+          {services.items.map((s) => (
+            <ServiceCard service={s} />
+          ))}
+        </div>
+      ) : (
+        <div class="content-empty">
+          <>
+            <p>아직 공개된 SaaS가 없습니다.</p>
+            <a href="/services/new">SaaS 등록하기</a>
+          </>
+        </div>
+      )
+    }
+  </section>
+  <section class="section">
+    <div class="flex between wrap-flex">
+      <h2>최근 제작 후기</h2><a href="/community?board=builds" class="small">전체 보기</a>
     </div>
-  </section><section class="section">
-    <h2>최근 30일 자체 통계</h2><p class="muted small">
-      페이지 보기, 검색, 복사 등 기능을 이용한 횟수예요. 개인정보와 검색어 내용은 수집하지 않으며, 페이지는
-      유형별로 묶어 집계해요.
-    </p><div class="tabs">
+    {
+      recentBuilds.length ? (
+        recentBuilds.map((p) => <PostRow post={p} />)
+      ) : (
+        <div class="content-empty">
+          <>
+            <p>아직 등록된 제작 후기가 없습니다.</p>
+            <a href="/community/new?board=builds">후기 작성하기</a>
+          </>
+        </div>
+      )
+    }
+  </section>
+  <section class="section">
+    <h2>분야별 제작 가이드</h2>
+    <nav class="category-counts" aria-label="분야별 제작 가이드">
       {
-        events.map((e) => (
-          <span class="badge">
-            {eventLabels[e.event] || e.event} {e.n}
-          </span>
+        groups.map((c) => (
+          <a href={'/category/' + c.slug}>
+            <>
+              <span>{c.name}</span>
+              <strong>{c.count}개</strong>
+            </>
+          </a>
         ))
       }
-    </div>{
-      days.map((d) => (
-        <div class="admin-row mono small">
-          {d.day} · 페이지 열람 {d.n}회
-        </div>
-      ))
-    }
-  </section></Base
->
+    </nav>
+  </section>
+  <section class="section narrow prose">
+    <h2>집계 기준</h2>
+    <p>
+      제작 가이드는 사이트에 공개된 도구 설명, 등록 SaaS는 운영자가 공개한 소개, 제작 후기는 ‘제작 후기·작품’
+      게시판의 공개 글을 셉니다. 각 숫자를 누르면 해당 목록으로 이동합니다.
+    </p>
+    <p>
+      후기 수는 글의 개수입니다. 제작 성공이나 비용 절감을 확인한 건수는 아닙니다. 도구별 ‘대체 경험’ 버튼
+      응답은 이 숫자에 포함하지 않습니다.
+    </p>
+  </section>
+</Base>

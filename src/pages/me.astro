@@ -41,9 +41,7 @@ const labels: Record<string, string> = {
 <Base pageKind="account" title="내 활동" noindex
   ><header class="page-head">
     <BrandIntro
-      ><div class="eyebrow">내가 만들고 나눈 것들</div><h1>
-        {user.nickname}님의 작업 기록.
-      </h1><p>저장한 도구, 직접 만든 것, 함께 나눈 이야기.</p></BrandIntro
+      ><h1>내 활동</h1><p>{user.nickname}님의 저장 목록과 작성한 글, 등록한 SaaS입니다.</p></BrandIntro
     >
   </header><nav class="mobile-only mobile-account-links" aria-label="내 활동 바로가기">
     <a href="#saved-tools">저장한 도구 <strong>{saved.length}</strong></a><a href="#my-posts"
@@ -135,14 +133,14 @@ const labels: Record<string, string> = {
           </EmptyState>
         )
       }<div class="section">
-        <h2>직접 대체한 도구</h2>{
+        <h2>대체 경험을 표시한 도구</h2>{
           voted.map((v) => (
             <a class="post-preview" href={'/' + v.slug}>
               {getApp(v.slug)?.nameKo || '공개가 종료된 도구'}
               <span class="muted small"> · {v.created_at.slice(0, 10)}</span>
             </a>
           ))
-        }{!voted.length && <p class="muted">아직 직접 대체한 도구를 등록하지 않았어요.</p>}
+        }{!voted.length && <p class="muted">아직 대체 경험을 표시한 도구가 없습니다.</p>}
       </div><div class="section">
         <div class="flex between wrap-flex">
           <h2 id="my-services">등록한 SaaS</h2><a class="small accent" href="/services/new">SaaS 등록하기 +</a

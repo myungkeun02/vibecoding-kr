@@ -11,8 +11,8 @@ const inAccount =
   ) || path.startsWith('/profile');
 const items = [
   { href: '/', label: '도구 탐색', icon: 'grid', active: !inCommunity && !inAccount && path !== '/stats' },
-  { href: '/community', label: '이야기', icon: 'chat', active: inCommunity },
-  { href: '/stats', label: '대체 현황', icon: 'chart', active: path === '/stats' },
+  { href: '/community', label: '커뮤니티', icon: 'chat', active: inCommunity },
+  { href: '/stats', label: '등록 현황', icon: 'chart', active: path === '/stats' },
   { href: '/me', label: '내 활동', icon: 'user', active: inAccount },
 ];
 ---

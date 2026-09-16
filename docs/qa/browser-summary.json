@@ -1,7 +1,7 @@
 {
-  "startedAt": "2026-09-16T10:49:56.536Z",
-  "durationMs": 32466.787,
-  "passed": 26,
+  "startedAt": "2026-09-16T11:03:29.165Z",
+  "durationMs": 32941.811,
+  "passed": 27,
   "failed": 0,
   "flaky": 0,
   "skipped": 0,
@@ -12,7 +12,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 671
+          "durationMs": 1049
         }
       ]
     },
@@ -22,7 +22,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 2401
+          "durationMs": 2300
         }
       ]
     },
@@ -32,7 +32,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 2491
+          "durationMs": 2306
         }
       ]
     },
@@ -42,7 +42,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 1827
+          "durationMs": 1763
         }
       ]
     },
@@ -52,7 +52,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 3819
+          "durationMs": 3806
         }
       ]
     },
@@ -62,7 +62,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 2746
+          "durationMs": 2633
         }
       ]
     },
@@ -72,7 +72,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 525
+          "durationMs": 518
         }
       ]
     },
@@ -82,7 +82,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 721
+          "durationMs": 690
         }
       ]
     },
@@ -92,7 +92,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 706
+          "durationMs": 660
         }
       ]
     },
@@ -102,7 +102,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 1241
+          "durationMs": 1207
         }
       ]
     },
@@ -112,7 +112,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 631
+          "durationMs": 616
         }
       ]
     },
@@ -122,7 +122,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 726
+          "durationMs": 693
         }
       ]
     },
@@ -132,17 +132,17 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 3867
+          "durationMs": 4381
         }
       ]
     },
     {
-      "title": "duplicate identity votes, anonymous-to-member merge, free/one-time/unknown pricing",
+      "title": "duplicate responses merge on login without changing public content counts",
       "status": "expected",
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 164
+          "durationMs": 157
         }
       ]
     },
@@ -152,7 +152,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 174
+          "durationMs": 151
         }
       ]
     },
@@ -162,7 +162,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 151
+          "durationMs": 138
         }
       ]
     },
@@ -172,7 +172,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 39
+          "durationMs": 35
         }
       ]
     },
@@ -182,7 +182,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 161
+          "durationMs": 173
         }
       ]
     },
@@ -192,7 +192,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 136
+          "durationMs": 137
         }
       ]
     },
@@ -202,7 +202,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 149
+          "durationMs": 128
         }
       ]
     },
@@ -212,7 +212,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 1314
+          "durationMs": 1202
         }
       ]
     },
@@ -222,7 +222,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 115
+          "durationMs": 119
         }
       ]
     },
@@ -232,7 +232,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 217
+          "durationMs": 221
         }
       ]
     },
@@ -242,7 +242,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 748
+          "durationMs": 832
         }
       ]
     },
@@ -252,7 +252,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 5393
+          "durationMs": 4962
         }
       ]
     },
@@ -262,7 +262,17 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 98
+          "durationMs": 97
+        }
+      ]
+    },
+    {
+      "title": "public counts link to content and review totals update when a post is hidden",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 610
         }
       ]
     }

@@ -166,9 +166,6 @@
     background: transparent;
     font-size: 22px;
   }
-  [data-page='home'] #main > .ticker {
-    display: none;
-  }
   .tool-row {
     position: relative;
     grid-template-columns: minmax(0, 1fr) auto;
@@ -188,7 +185,7 @@
     grid-column: 1 / -1;
     grid-row: 1;
     gap: 12px;
-    padding-right: 52px;
+    padding-right: 70px;
   }
   .tool-row .tool-icon {
     width: 44px;
@@ -224,7 +221,7 @@
     font-size: 12px;
     justify-content: center;
   }
-  .tool-row .vote-count {
+  .tool-row .review-count {
     position: absolute;
     grid-area: auto;
     white-space: nowrap;

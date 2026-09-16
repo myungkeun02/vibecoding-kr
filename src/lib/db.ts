@@ -37,10 +37,27 @@ export const voteCounts = async () =>
       )
     ).map((x) => [x.slug, x.n]),
   );
+export interface PublicTotals {
+  guides: number;
+  services: number;
+  builds: number;
+}
 export const totals = async () =>
-  (await one(
-    'SELECT COALESCE(SUM(COALESCE(t.price,0)),0) AS monthly,COUNT(*) AS votes,COALESCE(SUM(CASE WHEN t.price IS NULL THEN 1 ELSE 0 END),0) AS excluded FROM votes v JOIN tools t ON t.slug=v.slug WHERE t.active=1',
-  ))!;
+  (await one<PublicTotals>(`
+    SELECT
+      (SELECT COUNT(*) FROM tools WHERE active=1) AS guides,
+      (SELECT COUNT(*) FROM services s JOIN users u ON u.id=s.user_id
+        WHERE s.status='published' AND u.status='active') AS services,
+      (SELECT COUNT(*) FROM posts WHERE status='active' AND board='builds') AS builds
+  `))!;
+export const buildCounts = async (): Promise<Record<string, number>> =>
+  Object.fromEntries(
+    (
+      await all(`SELECT p.tool_slug AS slug,COUNT(*) AS n FROM posts p
+      JOIN tools t ON t.slug=p.tool_slug WHERE p.status='active' AND p.board='builds' AND t.active=1
+      GROUP BY p.tool_slug`)
+    ).map((x) => [x.slug, x.n]),
+  );
 export async function event(name: string, path = '/') {
   await run(
     'INSERT INTO analytics(day,event,path) VALUES(?,?,?) ON CONFLICT(day,event,path) DO UPDATE SET count=analytics.count+1',
@@ -95,7 +112,7 @@ export async function vote(slug: string, user: string | null, anon: string, remo
         user ? null : anon,
       );
   });
-  return { count: (await voteCounts())[slug] || 0, ...(await totals()) };
+  return { count: (await voteCounts())[slug] || 0 };
 }
 export const postSelect = `SELECT p.*,u.nickname, (SELECT COUNT(*) FROM reactions r WHERE r.post_id=p.id AND r.kind='like') AS likes,(SELECT COUNT(*) FROM comments c WHERE c.post_id=p.id AND c.status='active') AS comments FROM posts p LEFT JOIN users u ON u.id=p.user_id`;
 export async function posts(params: URLSearchParams) {

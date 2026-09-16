@@ -149,9 +149,9 @@ test('mobile navigation, themes, small screens and no-JavaScript filtering remai
   await page.getByRole('button', { name: '화면 테마 전환' }).click();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
   await capture(page, 'home-light-360');
-  await page.locator('.mobile-tabbar').getByRole('link', { name: '이야기', exact: true }).click();
+  await page.locator('.mobile-tabbar').getByRole('link', { name: '커뮤니티', exact: true }).click();
   await capture(page, 'community-light-360');
-  await page.getByRole('link', { name: '이야기 쓰기', exact: true }).click();
+  await page.getByRole('link', { name: '글쓰기', exact: true }).click();
   await expect(page).toHaveURL(/login\?returnTo=%2Fcommunity%2Fnew/);
   await capture(page, 'login-light-360');
   await page.locator('.mobile-tabbar').getByRole('link', { name: '내 활동' }).click();
@@ -195,7 +195,7 @@ test('mobile writing, editing, bookmarks and profile are usable with a real sess
     .fill('작은 화면에서도 도구를 찾고 제작 과정을 편하게 기록했습니다.');
   await noOverflow(page);
   await capture(page, 'editor');
-  await page.getByRole('button', { name: '이야기 게시하기' }).click();
+  await page.getByRole('button', { name: '게시하기' }).click();
   await expect(page.getByRole('heading', { name: '휴대폰에서 남긴 제작 이야기' })).toBeVisible();
   await page.getByRole('link', { name: '글 수정', exact: true }).click();
   await page.getByLabel('제목', { exact: true }).fill('휴대폰에서 수정한 제작 이야기');

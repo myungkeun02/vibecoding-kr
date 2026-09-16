@@ -5,14 +5,10 @@ const { csrf } = Astro.locals;
 
 <section class="newsletter">
   <div class="newsletter-heading">
-    <div class="eyebrow">다음 만들거리를 만나보세요</div><Mascot size="small" />
-  </div><h2 style="margin-top:12px">
-    다음엔 무엇을<br />직접 만들어볼까요?
-  </h2><p>새 도구와 제작 프롬프트, 업데이트 소식을 받아보세요.</p><form
-    data-api
-    action="/api/waitlist"
-    method="post"
-  >
+    <div class="eyebrow">이메일 알림</div><Mascot size="small" />
+  </div><h2 style="margin-top:12px">업데이트 소식 받기</h2><p>
+    새로 추가된 도구와 제작 가이드를 이메일로 받습니다.
+  </p><form data-api action="/api/waitlist" method="post">
     <input type="hidden" name="csrf" value={csrf} /><label class="honeypot" aria-hidden="true"
       >홈페이지<input name="website" tabindex="-1" autocomplete="off" /></label
     ><label class="form-field"

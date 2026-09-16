@@ -401,95 +401,6 @@ button.secondary {
   font: 12px/23px var(--mono);
   border-radius: 3px;
 }
-.ticker {
-  position: relative;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  background: var(--surface);
-  border-radius: 8px;
-  margin: 20px 0 35px;
-}
-.ticker-main {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 24px;
-  padding: 24px 29px;
-}
-.ticker-label {
-  font: 11px var(--mono);
-  letter-spacing: 0.1em;
-  color: var(--accent);
-  margin-bottom: 7px;
-}
-.ticker-main h2 {
-  font-size: 1rem;
-  margin: 0 0 5px;
-}
-.ticker-main p {
-  font-size: 0.75rem;
-  color: var(--muted);
-  margin: 0;
-}
-.ticker-value {
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-}
-.odometer {
-  font: 500 clamp(2.2rem, 4vw, 3.6rem)/1.2 var(--mono);
-  letter-spacing: -0.08em;
-  color: var(--accent);
-  display: flex;
-  font-variant-numeric: tabular-nums;
-}
-.odigit {
-  display: inline-block;
-  height: 1.2em;
-  overflow: hidden;
-}
-.oreel {
-  display: flex;
-  flex-direction: column;
-  transition: transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-.oreel > span {
-  height: 1.2em;
-}
-.ticker-value small {
-  color: var(--muted);
-  font: 12px var(--mono);
-}
-.tape-viewport {
-  border-top: 1px solid var(--line);
-  overflow: hidden;
-  mask-image: linear-gradient(90deg, transparent, black 5%, black 95%, transparent);
-}
-.tape {
-  display: flex;
-  gap: 32px;
-  width: max-content;
-  padding: 9px 20px;
-  font: 11px var(--mono);
-  color: var(--muted);
-  animation: tape 55s linear infinite;
-}
-.tape span {
-  white-space: nowrap;
-}
-.tape b {
-  color: var(--accent);
-  font-weight: 400;
-}
-.ticker:hover .tape,
-.ticker:focus-within .tape {
-  animation-play-state: paused;
-}
-@keyframes tape {
-  to {
-    transform: translateX(-50%);
-  }
-}
 .directory-layout {
   display: grid;
   grid-template-columns: 205px 1fr;
@@ -637,7 +548,7 @@ select {
 .tool-row .verdict small {
   font-size: 0.7rem;
 }
-.vote-count {
+.review-count {
   text-align: right;
   color: var(--muted);
   font: 12px var(--mono);
@@ -1291,9 +1202,7 @@ textarea {
     grid-template-columns: 1fr 260px;
     gap: 25px;
   }
-  .ticker-main {
-    padding: 22px;
-  }
+
   .hero h1 {
     font-size: 2.8rem;
   }
@@ -1356,26 +1265,7 @@ textarea {
   .search-box input {
     font-size: 0.9rem;
   }
-  .ticker-main {
-    display: block;
-    padding: 20px;
-  }
-  .ticker-label {
-    font-size: 10px;
-  }
-  .ticker-main p {
-    font-size: 0.73rem;
-  }
-  .ticker-value {
-    margin-top: 15px;
-  }
-  .odometer {
-    font-size: 2.5rem;
-  }
-  .ticker {
-    margin-top: 14px;
-    margin-bottom: 25px;
-  }
+
   .directory-layout {
     display: block;
   }
@@ -1438,7 +1328,7 @@ textarea {
     grid-column: 2;
     grid-row: 1 / 3;
   }
-  .vote-count {
+  .review-count {
     grid-column: 3;
     grid-row: 1 / 3;
     font-size: 0.7rem;
@@ -1552,17 +1442,90 @@ textarea {
     opacity: 1;
     transform: none;
   }
-  .tape {
-    flex-wrap: wrap;
-    width: auto;
-    max-height: 80px;
-    overflow: auto;
+}
+
+.catalog-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  margin: 24px 0;
+  overflow: hidden;
+}
+.catalog-summary a {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 20px 24px;
+}
+.catalog-summary a + a {
+  border-left: 1px solid var(--line);
+}
+.catalog-summary a:hover {
+  background: var(--surface);
+}
+.catalog-summary span {
+  color: var(--muted);
+  font-size: 14px;
+}
+.catalog-summary strong {
+  font-size: 24px;
+  font-variant-numeric: tabular-nums;
+}
+.catalog-summary small {
+  font-size: 13px;
+  font-weight: 400;
+  margin-left: 4px;
+}
+.category-counts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0 28px;
+}
+.category-counts a {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+.category-counts strong {
+  color: var(--muted);
+  font-weight: 400;
+}
+.content-empty {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 14px;
+}
+.content-empty p {
+  color: var(--muted);
+  margin: 0 0 8px;
+}
+.content-empty a {
+  color: var(--accent);
+  font-size: 14px;
+}
+@media (max-width: 760px) {
+  .catalog-summary {
+    margin: 20px 0;
   }
-}
-.ticker-value {
-  max-width: 100%;
-  flex-wrap: wrap;
-}
-.odometer {
-  font-size: clamp(1rem, calc((100vw - 110px) / var(--digits, 10)), 3.6rem);
+  .catalog-summary a {
+    flex-direction: column;
+    gap: 4px;
+    padding: 14px 12px;
+  }
+  .catalog-summary span {
+    font-size: 12px;
+  }
+  .catalog-summary strong {
+    font-size: 23px;
+  }
+  .category-counts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 20px;
+    font-size: 14px;
+  }
 }
