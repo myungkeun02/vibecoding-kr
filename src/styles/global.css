@@ -3,31 +3,35 @@
 @import 'pretendard/dist/web/variable/pretendardvariable.css';
 :root {
   color-scheme: dark;
-  --bg: #090c0b;
-  --surface: #101512;
-  --raised: #172019;
-  --text: #eaf1e9;
-  --muted: #9aa99e;
-  --line: #2a352c;
-  --accent: #b4ff5d;
-  --yes: #b4ff5d;
-  --kinda: #ffd17b;
-  --no: #ff9792;
-  --sans: 'Space Grotesk Variable', 'Pretendard Variable', sans-serif;
+  --bg: #141312;
+  --surface: #1a1816;
+  --raised: #24211d;
+  --text: #eeeae5;
+  --muted: #aaa29a;
+  --line: #36312c;
+  --accent: #ffa264;
+  --accent-soft: #302218;
+  --on-accent: #21170f;
+  --yes: #ffa264;
+  --kinda: #cdb38b;
+  --no: #df9791;
+  --sans: 'Pretendard Variable', 'Space Grotesk Variable', sans-serif;
   --mono: 'JetBrains Mono Variable', 'Pretendard Variable', monospace;
 }
 :root[data-theme='light'] {
   color-scheme: light;
-  --bg: #f6f5ed;
-  --surface: #fffef7;
-  --raised: #e9eee1;
-  --text: #1c291c;
-  --muted: #5b695e;
-  --line: #ced5c6;
-  --accent: #34740b;
-  --yes: #34740b;
-  --kinda: #845300;
-  --no: #b1302d;
+  --bg: #faf9f7;
+  --surface: #ffffff;
+  --raised: #f3f0ec;
+  --text: #2b2825;
+  --muted: #746c65;
+  --line: #e3dfd9;
+  --accent: #c4521c;
+  --accent-soft: #fff0e5;
+  --on-accent: #ffffff;
+  --yes: #c4521c;
+  --kinda: #856b40;
+  --no: #ad4e43;
 }
 * {
   box-sizing: border-box;
@@ -90,12 +94,14 @@ h3 {
 }
 h1 {
   font-size: clamp(2rem, 4.5vw, 4rem);
-  font-weight: 650;
+  font-weight: 550;
 }
 h2 {
+  font-weight: 550;
   font-size: 1.65rem;
 }
 h3 {
+  font-weight: 550;
   font-size: 1.15rem;
 }
 small,
@@ -139,13 +145,12 @@ li {
 .accent {
   color: var(--accent);
 }
-.mono,
-.eyebrow {
+.mono {
   font-family: var(--mono);
 }
 .eyebrow {
   font-size: 0.73rem;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.025em;
   text-transform: uppercase;
   color: var(--muted);
 }
@@ -179,7 +184,7 @@ li {
   top: -100px;
   z-index: 50;
   background: var(--accent);
-  color: var(--bg);
+  color: var(--on-accent);
   padding: 12px;
 }
 .skip:focus {
@@ -197,20 +202,21 @@ li {
   gap: 40px;
 }
 .brand {
-  font-weight: 750;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-weight: 600;
   font-size: 1.25rem;
   letter-spacing: -0.06em;
   white-space: nowrap;
 }
 .brand-mark {
-  display: inline-grid;
-  place-items: center;
-  width: 32px;
-  height: 32px;
-  background: var(--accent);
-  color: var(--bg);
-  font: 700 17px var(--mono);
-  margin-right: 9px;
+  display: block;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  object-fit: contain;
+  margin: 0;
 }
 .nav {
   display: flex;
@@ -245,16 +251,16 @@ button.primary {
   gap: 0.5rem;
   padding: 11px 20px;
   background: var(--accent);
-  color: var(--bg);
-  font-weight: 650;
+  color: var(--on-accent);
+  font-weight: 550;
   border: 1px solid var(--accent);
-  border-radius: 5px;
+  border-radius: 8px;
   font-size: 0.9rem;
   line-height: 1.4;
 }
 .button:hover {
   filter: brightness(1.05);
-  color: var(--bg);
+  color: var(--on-accent);
 }
 .button.secondary,
 button.secondary {
@@ -309,8 +315,8 @@ button.secondary {
   padding-left: 32px;
 }
 .terminal {
-  font-size: 0.78rem;
-  font-family: var(--mono);
+  font-size: 0.85rem;
+  font-family: var(--sans);
   color: var(--muted);
   line-height: 2.2;
 }
@@ -330,8 +336,8 @@ button.secondary {
   border-bottom: 1px solid var(--line);
 }
 .verdict {
-  font-family: var(--mono);
-  font-weight: 600;
+  font-family: var(--sans);
+  font-weight: 500;
   display: inline-flex;
   align-items: center;
   gap: 7px;
@@ -363,10 +369,10 @@ button.secondary {
   align-items: center;
   gap: 15px;
   padding: 0 18px;
-  border: 1px solid #56684b;
+  border: 1px solid var(--line);
   background: var(--surface);
-  border-radius: 6px;
-  box-shadow: 0 0 0 3px rgba(180, 255, 93, 0.025);
+  border-radius: 8px;
+  box-shadow: none;
 }
 .search-box > span {
   font: 22px var(--mono);
@@ -395,9 +401,9 @@ button.secondary {
 .ticker {
   position: relative;
   overflow: hidden;
-  border: 1px solid #3a4c31;
-  background: linear-gradient(105deg, var(--surface), var(--bg));
-  border-radius: 6px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 8px;
   margin: 20px 0 35px;
 }
 .ticker-main {
@@ -494,14 +500,14 @@ button.secondary {
 .category-nav a {
   padding: 8px 10px;
   font-size: 0.86rem;
-  border-radius: 4px;
+  border-radius: 6px;
   color: var(--muted);
   display: flex;
   gap: 10px;
   align-items: center;
 }
 .category-nav a.active {
-  background: var(--raised);
+  background: var(--accent-soft);
   color: var(--accent);
 }
 .category-nav small {
@@ -542,7 +548,7 @@ select {
   border: 1px solid var(--line);
   background: var(--surface);
   color: var(--text);
-  border-radius: 4px;
+  border-radius: 6px;
   padding: 7px 28px 7px 10px;
   font-size: 0.78rem;
   max-width: 100%;
@@ -568,7 +574,7 @@ select {
 }
 .tool-row:hover {
   background: var(--surface);
-  transform: translateX(3px);
+  transform: none;
   color: var(--text);
 }
 .tool-info {
@@ -602,6 +608,7 @@ select {
   display: none;
 }
 .tool-info strong {
+  font-weight: 550;
   font-size: 0.98rem;
   display: block;
   line-height: 1.4;
@@ -650,10 +657,10 @@ select {
 }
 .empty {
   padding: 40px 20px;
-  border: 1px dashed var(--line);
+  border: 1px solid var(--line);
   text-align: center;
   color: var(--muted);
-  border-radius: 6px;
+  border-radius: 8px;
 }
 .empty p {
   margin: 10px 0 18px;
@@ -680,7 +687,7 @@ select {
 .newsletter {
   padding: 27px;
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--surface);
 }
 .newsletter h2 {
@@ -720,7 +727,7 @@ input.field {
   width: 100%;
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 4px;
+  border-radius: 6px;
   padding: 11px 13px;
   color: var(--text);
   font-size: 0.95rem;
@@ -803,8 +810,8 @@ textarea {
   padding: 24px;
   border: 1px solid var(--line);
   background: var(--surface);
-  border-radius: 6px;
-  border-left: 3px solid var(--v);
+  border-radius: 8px;
+  border-left: 1px solid var(--line);
 }
 .verdict-panel.yes {
   --v: var(--yes);
@@ -829,7 +836,7 @@ textarea {
 }
 .prompt-block {
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: 8px;
   overflow: hidden;
 }
 .prompt-toolbar {
@@ -863,7 +870,7 @@ textarea {
 .meta-box {
   border: 1px solid var(--line);
   padding: 22px;
-  border-radius: 6px;
+  border-radius: 8px;
   margin-bottom: 20px;
 }
 .meta-box h3 {
@@ -919,7 +926,7 @@ textarea {
 .related-card {
   border: 1px solid var(--line);
   padding: 18px;
-  border-radius: 5px;
+  border-radius: 8px;
   min-width: 0;
 }
 .related-card strong {
@@ -968,12 +975,12 @@ textarea {
   border: 1px solid var(--line);
   padding: 8px 14px;
   font-size: 0.84rem;
-  border-radius: 4px;
+  border-radius: 6px;
 }
 .tabs a.active {
   color: var(--accent);
-  border-color: var(--accent);
-  background: var(--surface);
+  border-color: var(--line);
+  background: var(--accent-soft);
 }
 .community-layout {
   display: grid;
@@ -1043,7 +1050,7 @@ textarea {
   margin: 20px 0;
 }
 .prose blockquote {
-  border-left: 3px solid var(--line);
+  border-left: 1px solid var(--line);
   margin-left: 0;
   padding-left: 20px;
   color: var(--muted);
@@ -1134,10 +1141,10 @@ textarea {
   padding: 12px 20px;
   background: var(--text);
   color: var(--bg);
-  border-radius: 5px;
+  border-radius: 8px;
   font-size: 0.88rem;
   max-width: calc(100vw - 30px);
-  box-shadow: 0 8px 40px #0004;
+  box-shadow: 0 4px 18px #0002;
 }
 .toast[hidden] {
   display: none;
@@ -1316,6 +1323,7 @@ textarea {
     gap: 11px;
   }
   .tool-info strong {
+    font-weight: 550;
     font-size: 0.9rem;
   }
   .tool-info small {

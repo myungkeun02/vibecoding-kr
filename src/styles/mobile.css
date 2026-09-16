@@ -39,9 +39,11 @@
     font-size: 17px;
   }
   .mobile-header .brand-mark {
-    border-radius: 6px;
-    width: 28px;
-    height: 28px;
+    width: 32px;
+    height: 32px;
+    flex-basis: 32px;
+    margin: 0;
+    border-radius: 0;
   }
   .mobile-header-actions {
     margin-left: auto;
@@ -59,7 +61,7 @@
     color: var(--text);
     background: transparent;
     border: 0;
-    border-radius: 12px;
+    border-radius: 8px;
     font-size: 22px;
     flex-shrink: 0;
   }
@@ -72,7 +74,7 @@
   }
   .mobile-page-title {
     font-size: 16px;
-    font-weight: 650;
+    font-weight: 550;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -114,8 +116,8 @@
     color: var(--accent);
   }
   .mobile-tabbar a[aria-current='page'] svg {
-    background: var(--raised);
-    box-shadow: 0 0 0 6px var(--raised);
+    background: transparent;
+    box-shadow: none;
     border-radius: 4px;
   }
   .mobile-home-intro p {
@@ -130,14 +132,14 @@
     padding: 26px 0 22px;
   }
   .hero .mobile-home-intro h1 {
-    font-size: 32px;
-    line-height: 1.23;
-    font-weight: 650;
+    font-size: 27px;
+    line-height: 1.35;
+    font-weight: 550;
     margin: 0 0 22px;
   }
   .search-box {
     height: 54px;
-    border-radius: 12px;
+    border-radius: 8px;
     background: var(--surface);
     padding: 0 12px 0 16px;
     gap: 10px;
@@ -153,13 +155,15 @@
     display: none;
   }
   .search-submit {
+    display: grid;
+    place-items: center;
     min-width: 40px;
     height: 40px;
     padding: 0;
     border: 0;
     border-radius: 9px;
     color: var(--accent);
-    background: var(--raised);
+    background: transparent;
     font-size: 22px;
   }
   [data-page='home'] #main > .ticker {
@@ -168,11 +172,11 @@
   .tool-row {
     position: relative;
     grid-template-columns: minmax(0, 1fr) auto;
-    grid-template-rows: auto auto auto auto;
-    gap: 12px 8px;
-    padding: 18px;
+    grid-template-rows: auto auto auto;
+    gap: 10px 8px;
+    padding: 16px;
     border: 1px solid var(--line);
-    border-radius: 16px;
+    border-radius: 8px;
     background: var(--surface);
     margin-bottom: 12px;
   }
@@ -190,10 +194,10 @@
     width: 44px;
     height: 44px;
     flex-basis: 44px;
-    border-radius: 12px;
+    border-radius: 8px;
   }
   .tool-row .tool-info strong {
-    font-size: 17px;
+    font-size: 16px;
   }
   .tool-row .tool-info small {
     font-size: 12px;
@@ -224,25 +228,10 @@
     position: absolute;
     grid-area: auto;
     white-space: nowrap;
-    top: 20px;
-    right: 18px;
+    top: 18px;
+    right: 16px;
     font: 13px var(--mono);
     color: var(--muted);
-  }
-  .tool-card-link {
-    grid-column: 1 / -1;
-    grid-row: 4;
-    border-top: 1px solid var(--line);
-    padding-top: 12px;
-    display: flex;
-    justify-content: space-between;
-    font-size: 12px;
-    color: var(--muted);
-  }
-  .tool-card-link > span {
-    color: var(--accent);
-    font-size: 17px;
-    line-height: 1;
   }
   .home-bottom {
     margin: 36px 0;
@@ -300,15 +289,15 @@
     padding: 9px 14px;
     background: var(--surface);
     border: 1px solid var(--line);
-    border-radius: 24px;
+    border-radius: 8px;
     font-size: 13px;
     white-space: nowrap;
   }
   .mobile-categories a[aria-current] {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: var(--bg);
-    font-weight: 650;
+    background: var(--accent-soft);
+    border-color: var(--accent-soft);
+    color: var(--accent);
+    font-weight: 550;
   }
   .mobile-results-head {
     display: flex;
@@ -346,7 +335,7 @@
     display: grid;
     place-items: center;
     background: var(--accent);
-    color: var(--bg);
+    color: var(--on-accent);
     border-radius: 50%;
     width: 18px;
     height: 18px;
@@ -395,7 +384,7 @@
   }
   .mobile-pagination a {
     border: 1px solid var(--line);
-    border-radius: 10px;
+    border-radius: 8px;
   }
   .mobile-pagination strong {
     color: var(--text);
@@ -422,7 +411,7 @@
     padding: 10px 22px max(22px, env(safe-area-inset-bottom));
     border: 1px solid var(--line);
     border-bottom: 0;
-    border-radius: 24px 24px 0 0;
+    border-radius: 12px 12px 0 0;
     overflow-y: auto;
   }
   .mobile-sheet::backdrop {
@@ -468,7 +457,7 @@
   .sheet-fields select {
     min-height: 52px;
     padding: 12px 22px 12px 10px;
-    border-radius: 10px;
+    border-radius: 8px;
     font-size: 16px;
   }
   .mobile-sheet footer {
@@ -487,7 +476,7 @@
   }
   .mobile-sheet footer button {
     flex: 1;
-    border-radius: 12px;
+    border-radius: 8px;
     min-height: 50px;
     padding-inline: 10px;
     font-size: 14px;
@@ -504,7 +493,7 @@
     width: 56px;
     height: 56px;
     flex-basis: 56px;
-    border-radius: 14px;
+    border-radius: 8px;
   }
   .detail-head h1 {
     font-size: 27px;
@@ -544,7 +533,7 @@
     font-size: 14px;
     font-weight: 550;
     color: var(--muted);
-    border-bottom: 2px solid transparent;
+    border-bottom: 1px solid transparent;
   }
   .mobile-detail-tabs a[aria-current] {
     color: var(--accent);
@@ -570,9 +559,9 @@
   }
   .verdict-panel {
     padding: 22px;
-    border-radius: 16px;
+    border-radius: 8px;
     border-left-width: 1px;
-    border-top: 3px solid var(--v);
+    border-top: 1px solid var(--line);
   }
   .verdict-panel .big {
     font-size: 25px;
@@ -597,7 +586,7 @@
     margin-top: 0;
   }
   .meta-box {
-    border-radius: 14px;
+    border-radius: 8px;
     padding: 20px;
   }
   .meta-box p,
@@ -612,13 +601,13 @@
   .meta-box button,
   .meta-box .button {
     min-height: 48px;
-    border-radius: 10px;
+    border-radius: 8px;
   }
   .detail-grid .small {
     font-size: 13px;
   }
   .prompt-block {
-    border-radius: 14px;
+    border-radius: 8px;
   }
   .prompt-toolbar {
     padding: 15px;
@@ -662,7 +651,7 @@
   }
   .mobile-detail-action .button {
     min-height: 48px;
-    border-radius: 12px;
+    border-radius: 8px;
     font-size: 14px;
   }
   .mobile-detail-action a {
@@ -711,13 +700,13 @@
   [data-page='community'] .tabs a {
     flex: 0 0 auto;
     min-height: 44px;
-    border-radius: 24px;
+    border-radius: 8px;
     font-size: 13px;
   }
   [data-page='community'] .tabs a.active {
-    background: var(--accent);
-    color: var(--bg);
-    border-color: var(--accent);
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-color: var(--accent-soft);
   }
   .community-layout {
     display: block;
@@ -729,7 +718,7 @@
   }
   .community-layout form input[name='q'] {
     grid-column: 1 / -1;
-    border-radius: 12px;
+    border-radius: 8px;
     min-height: 48px;
   }
   .community-layout form select {
@@ -741,7 +730,7 @@
   }
   .community-layout form button {
     min-height: 44px;
-    border-radius: 10px;
+    border-radius: 8px;
   }
   .community-layout > aside {
     display: none;
@@ -770,12 +759,12 @@
     right: 20px;
     bottom: calc(var(--mobile-nav) + 16px);
     padding: 12px 18px;
-    border-radius: 28px;
-    color: var(--bg);
+    border-radius: 8px;
+    color: var(--on-accent);
     background: var(--accent);
-    box-shadow: 0 5px 20px #0003;
+    box-shadow: none;
     font-size: 14px;
-    font-weight: 650;
+    font-weight: 550;
     z-index: 25;
   }
   .mobile-compose span {
@@ -783,7 +772,7 @@
     line-height: 1;
   }
   .mobile-compose:hover {
-    color: var(--bg);
+    color: var(--on-accent);
   }
   [data-page='community'] .site-footer {
     padding-bottom: 60px;
@@ -810,7 +799,7 @@
     min-height: 44px;
     font-size: 13px;
     padding: 10px 14px;
-    border-radius: 10px;
+    border-radius: 8px;
   }
   .prose {
     font-size: 16px;
@@ -833,7 +822,7 @@
   .form-field select,
   input.field {
     font-size: 16px;
-    border-radius: 10px;
+    border-radius: 8px;
   }
   .form-field > span {
     font-size: 14px;
@@ -879,13 +868,13 @@
     padding: 10px;
     border: 1px solid var(--line);
     background: var(--bg);
-    border-radius: 14px;
+    border-radius: 8px;
     z-index: 10;
   }
   .editor-submit button {
     flex: 1;
     min-height: 48px;
-    border-radius: 10px;
+    border-radius: 8px;
     font-size: 15px;
   }
   .editor-submit a {
@@ -904,7 +893,7 @@
     background: var(--surface);
     border: 1px solid var(--line);
     padding: 14px;
-    border-radius: 12px;
+    border-radius: 8px;
     font-size: 14px;
   }
   .mobile-account-links strong {
@@ -937,7 +926,7 @@
   .auth-panel .button,
   .auth-panel .primary {
     min-height: 50px;
-    border-radius: 12px;
+    border-radius: 8px;
   }
   .auth-panel .check-label {
     font-size: 13px;
@@ -946,7 +935,7 @@
     grid-template-columns: 1fr;
     gap: 0;
     border: 1px solid var(--line);
-    border-radius: 14px;
+    border-radius: 8px;
     padding: 6px 16px;
   }
   .stat-grid article {
@@ -981,7 +970,7 @@
     font-size: 15px;
   }
   .related-card {
-    border-radius: 12px;
+    border-radius: 8px;
     padding: 16px;
   }
   .related-card > .verdict {

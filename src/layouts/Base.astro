@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import '../styles/mobile.css';
 import MobileShell from '../components/MobileShell.astro';
+import BrandMark from '../components/BrandMark.astro';
 import { brand, absolute } from '../lib/config';
 import { one } from '../lib/db';
 interface Props {
@@ -61,7 +62,14 @@ const structured = [
       content="summary_large_image"
     /><meta name="csrf-token" content={Astro.locals.csrf} />{
       noindex && <meta name="robots" content="noindex,follow" />
-    }<link rel="icon" href="/favicon.svg" /><script is:inline src="/theme.js"></script>{
+    }<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" /><link
+      rel="icon"
+      type="image/png"
+      href="/favicon-32.png"
+      sizes="32x32"
+    /><link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" /><script
+      is:inline
+      src="/theme.js"></script>{
       structured.map((s) => (
         <script is:inline type="application/ld+json" set:html={JSON.stringify(s).replace(/</g, '\u003c')} />
       ))
@@ -70,10 +78,7 @@ const structured = [
   <body data-page={pageKind}
     ><a href="#main" class="skip">본문으로 건너뛰기</a><header class="site-header">
       <div class="wrap">
-        <a class="brand" href="/"><span class="brand-mark">&gt;_</span>{brand.name}</a><nav
-          class="nav"
-          aria-label="주 메뉴"
-        >
+        <a class="brand" href="/"><BrandMark />{brand.name}</a><nav class="nav" aria-label="주 메뉴">
           <a href="/" aria-current={Astro.url.pathname === '/' ? 'page' : undefined}>도구 탐색</a><a
             href="/community"
             aria-current={Astro.url.pathname.startsWith('/community') ? 'page' : undefined}>만드는 사람들</a
@@ -101,7 +106,7 @@ const structured = [
     </main><footer class="site-footer">
       <div class="wrap">
         <div class="flex between wrap-flex">
-          <a href="/" class="brand">&gt;_ {brand.name}</a><div class="flex wrap-flex">
+          <a href="/" class="brand"><BrandMark />{brand.name}</a><div class="flex wrap-flex">
             <a href="/rebuild-prompt">이 사이트를 만든 프롬프트 ↗</a><a href="/suggest">도구 제안</a><a
               href="/privacy">개인정보 처리 안내</a
             ><a href="/terms">이용약관</a>

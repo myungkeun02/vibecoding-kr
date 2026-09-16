@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import Directory from '../components/Directory.astro';
 import Ticker from '../components/Ticker.astro';
 import Newsletter from '../components/Newsletter.astro';
+import UiIcon from '../components/UiIcon.astro';
 import { apps, filterApps } from '../lib/apps';
 import { absolute, boards } from '../lib/config';
 import { posts, voteCounts } from '../lib/db';
@@ -48,12 +49,12 @@ const jsonld = [
           보세요.
         </p>
       </div><div class="mobile-only mobile-home-intro">
-        <p><span class="status-dot"></span> {apps.length}개의 도구, 나만의 방식으로</p><h1>
-          다음엔,<br />뭘 만들어볼까요<span class="accent">?</span>
+        <p>{apps.length}개 도구의 가능성과 제작 요청문</p><h1>
+          어떤 도구를 만들까요<span class="accent">?</span>
         </h1>
       </div><form action="/" role="search" data-directory-search>
         <label class="search-box"
-          ><span aria-hidden="true">&gt;</span><input
+          ><span aria-hidden="true"><UiIcon name="search" /></span><input
             id="search"
             name="q"
             aria-label="도구 검색"
@@ -63,7 +64,7 @@ const jsonld = [
           /><kbd aria-hidden="true">/</kbd><button
             class="mobile-only search-submit"
             type="submit"
-            aria-label="검색">↗</button
+            aria-label="검색"><UiIcon name="search" /></button
           ></label
         >
       </form>
@@ -114,7 +115,6 @@ const jsonld = [
         !recent.length && (
           <div class="empty">
             <>
-              <div class="mono accent">[ 여러분의 첫 작품을 기다려요 ]</div>
               <h3 style="margin-top:16px">첫 번째 제작 이야기를 기다려요.</h3>
               <p>작은 성공도, 막혔던 부분도 다음에 만들 사람에게 도움이 됩니다.</p>
               <a href="/community/new" class="button secondary">

@@ -1,5 +1,6 @@
 ---
 import UiIcon from './UiIcon.astro';
+import BrandMark from './BrandMark.astro';
 const { unread = 0, title, back = '/' } = Astro.props;
 const path = Astro.url.pathname;
 const user = Astro.locals.user;
@@ -29,7 +30,8 @@ const items = [
       </>
     ) : (
       <a class="brand" href="/">
-        <span class="brand-mark">&gt;_</span>바이브코딩가능?
+        <BrandMark />
+        바이브코딩가능?
       </a>
     )
   }
