@@ -1,0 +1,30 @@
+{
+  "checkedAt": "2026-09-16T10:34:02.215Z",
+  "origin": "https://vibepan.com",
+  "status": "PASS",
+  "sourceCommit": "d242c153ebf19f236253c617c9559221fa305fc5",
+  "deploymentId": "25c284fc-febf-4eb2-8835-3f00a19804f6",
+  "checks": [
+    "login: dark, HTTP 200, mascot loaded, 360/390px",
+    "signup: dark, HTTP 200, mascot loaded, 360/390px",
+    "search: dark, HTTP 200, mascot loaded, 360/390px",
+    "community: dark, HTTP 200, mascot loaded, 360/390px",
+    "404: dark, HTTP 404, mascot loaded, 360/390px",
+    "category-404: dark, HTTP 404, mascot loaded, 360/390px",
+    "stats: dark, HTTP 200, mascot loaded, 360/390px",
+    "login: light, HTTP 200, mascot loaded, 360/390px",
+    "signup: light, HTTP 200, mascot loaded, 360/390px",
+    "search: light, HTTP 200, mascot loaded, 360/390px",
+    "community: light, HTTP 200, mascot loaded, 360/390px",
+    "404: light, HTTP 404, mascot loaded, 360/390px",
+    "category-404: light, HTTP 404, mascot loaded, 360/390px",
+    "stats: light, HTTP 200, mascot loaded, 360/390px",
+    "desktop guide",
+    "Google/GitHub login buttons",
+    "canonical and organization logo",
+    "256px WebP delivery",
+    "no browser exceptions"
+  ],
+  "environment": "Chromium phone emulation; public DNS resolution with normal TLS verification",
+  "ciUrl": "https://github.com/myungkeun02/vibecoding-kr/actions/runs/35085502759"
+}

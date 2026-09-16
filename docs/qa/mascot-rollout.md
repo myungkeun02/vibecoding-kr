@@ -22,3 +22,7 @@
 - [빈 검색 결과](screenshots/mascot-search-light-390.png)
 - [도구 404](screenshots/mascot-404-dark-390.png)
 - [데스크톱 홈](screenshots/mascot-home-desktop.png)
+
+## 운영 확인
+
+공개 소스 `d242c153ebf19f236253c617c9559221fa305fc5`, Railway 배포 `25c284fc-febf-4eb2-8835-3f00a19804f6`가 성공했다. 실제 HTTPS 주소에서 로그인·회원가입·빈 검색·빈 커뮤니티·도구/분야 404·대체 현황을 다크/라이트 및 360/390px로 검사했고, 데스크톱 홈 안내·서비스 로고 메타데이터·새 WebP 파일 응답도 확인했다. 브라우저 예외가 없었다. 공개 DNS 조회와 정상 TLS 검증을 사용했으며 [운영 결과](mascot-production-results.json)에 기록했다.
