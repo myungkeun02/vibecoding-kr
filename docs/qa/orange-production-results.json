@@ -1,0 +1,27 @@
+{
+  "checkedAt": "2026-09-16T10:26:10.505Z",
+  "origin": "https://vibepan.com",
+  "status": "PASS",
+  "sourceCommit": "0d8f3d8a984124b2241bf010730df389b97cf2b8",
+  "checks": [
+    "orange palette in dark and light themes",
+    "1px borders and 8px corners",
+    "robot header logo",
+    "favicon, touch icon and WebP assets",
+    "mobile home and cards",
+    "search and filter reopening",
+    "detail section switching",
+    "community writing login return",
+    "Google and GitHub buttons",
+    "360px overflow",
+    "desktop navigation and table",
+    "canonical",
+    "no console or HTTP errors"
+  ],
+  "environment": "Chromium phone emulation; public DNS resolution with normal TLS verification",
+  "deploymentId": "a3494110-bc80-4165-9cff-a60475eb4e6b",
+  "ci": {
+    "status": "PASS",
+    "url": "https://github.com/myungkeun02/vibecoding-kr/actions/runs/35084661733"
+  }
+}
