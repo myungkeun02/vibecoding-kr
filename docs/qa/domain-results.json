@@ -1,0 +1,43 @@
+{
+  "checkedAt": "2026-09-16T07:39:55.170Z",
+  "origin": "https://vibepan.com",
+  "checks": {
+    "httpsHealth": "PASS",
+    "homeAndDetailCanonical": "PASS",
+    "privateHtmlCache": "PASS",
+    "sitemapOrigin": "PASS",
+    "robotsOrigin": "PASS",
+    "shareImage": "PASS",
+    "httpAndWwwPreservePathAndQuery": "PASS",
+    "signup": "PASS",
+    "secureHttpOnlySameSiteSession": "PASS",
+    "postCreate": "PASS",
+    "multipartImageUpload": "PASS",
+    "toolVote": "PASS",
+    "crossOriginMultipartRejected": "PASS",
+    "sessionPostAndImageReadback": "PASS",
+    "testDataCleanup": "PASS",
+    "removedPostAndImageReturn404": "PASS",
+    "inAppBrowserHome": "PASS"
+  },
+  "status": "PASS_WITH_PENDING_EXTERNAL_SETUP",
+  "completedAt": "2026-09-16T07:41:39.532Z",
+  "deploymentId": "327c1ea4-f9d1-4fc8-aae0-a452a6333aec",
+  "publicSourceCommit": "b3bb8fa",
+  "configuration": {
+    "dns": "Cloudflare Free, proxied apex and www CNAME",
+    "ssl": "Cloudflare Universal SSL, Full mode per Railway documentation",
+    "siteUrl": "https://vibepan.com",
+    "wwwRedirect": 308,
+    "additionalPaidSubscriptions": false
+  },
+  "pending": [
+    "Production GitHub and Google OAuth callbacks and end-to-end login",
+    "Production email delivery"
+  ],
+  "notes": [
+    "Application source is unchanged; this deployment applies the production SITE_URL.",
+    "Cloudflare certificate issuance and Railway routing were verified through actual HTTPS requests.",
+    "Temporary QA account, post and uploaded image were removed."
+  ]
+}

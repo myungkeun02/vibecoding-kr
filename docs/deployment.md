@@ -4,7 +4,7 @@
 
 2026-09-16 Railway에 Node 웹 서버·PostgreSQL 18·업로드 볼륨을 배포했다. [공개 미리보기](https://vibecoding-kr-production.up.railway.app)에서 HTTPS 회원가입, 로그인 세션, 글 작성, 이미지 업로드, 투표를 확인했다. 실제 서버 재시작 후 세션·글·이미지 바이트·집계가 유지됐고, 점검용 계정·글·이미지는 정리했다. 서버 밖에 PostgreSQL 백업과 업로드 사본도 보관했다. [공개 서버 검증 기록](qa/railway-results.json)을 참고한다.
 
-현재 Node 서버가 화면과 API를 함께 제공하므로 Railway에서 실행하며 Vercel 프로젝트는 만들지 않았다. `vibepan.com`은 Railway에 등록했지만 DNS 연결 방식 선택을 기다리고 있다. 운영 Google/GitHub 로그인과 메일 발송은 아직 설정하지 않았다. 임시 주소의 배포 성공을 도메인·외부 로그인까지 완료한 것으로 해석하지 않는다.
+현재 Node 서버가 화면과 API를 함께 제공하므로 Railway에서 실행하며 Vercel 프로젝트는 만들지 않았다. 운영 주소는 **https://vibepan.com**이다. Cloudflare Free DNS·HTTPS와 Railway 연결 후 SITE_URL을 변경해 재배포했다. 새 도메인에서 가입·세션·글·이미지·투표와 www 이동을 확인했다. [도메인 검증 기록](qa/domain-results.json)을 참고한다. 운영 Google/GitHub 로그인과 메일 발송은 아직 설정하지 않았다. 도메인 연결 성공을 외부 로그인까지 완료한 것으로 해석하지 않는다.
 
 웹과 DB 모두 싱가포르 `asia-southeast1-eqsg3a`의 단일 인스턴스다. 최초 DB는 미국 서부에 생성됐으나 2026-09-16 볼륨 이동을 완료했다. 이동 후 DB 연결·제약조건과 홈페이지 HTTP 200을 확인했다. 이동 중에는 일시적으로 서비스가 중단되므로 다음 지역 변경도 백업 후 점검 시간에 수행한다.
 
@@ -41,6 +41,10 @@ Railway의 새 서비스는 기존 `railway.toml` 방식 대신 서비스 설정
 볼륨은 런타임에 장착되므로 DB 마이그레이션을 build 단계에 넣지 않는다. 배포 후 테스트 계정과 글·인증·이미지를 만들고 재배포하여 그대로 남는지 확인한다. 실제 서비스의 restart 테스트 전 별도 백업을 확보한다. [Railway 볼륨 공식 문서](https://docs.railway.com/volumes)와 [Dockerfile 공식 문서](https://docs.railway.com/builds/dockerfiles)를 2026-09-08 확인했다.
 
 ## 도메인·공유·외부 설정
+
+도메인 등록·갱신은 Hosting.kr에 유지하고 네임서버는 Cloudflare로 변경했다. `@`는 Railway에서 발급한 CNAME 대상, `www`는 기본 도메인을 가리키며 둘 다 Cloudflare 프록시를 사용한다. Railway 소유 확인 TXT를 별도로 등록했다. Cloudflare의 무료 Universal SSL과 Full 암호화 모드는 [Railway 공식 안내](https://docs.railway.com/networking/domains/working-with-domains#cloudflare-configuration)에 따른다. `www` 요청은 Cloudflare 규칙으로 기본 HTTPS 주소에 308 이동하며 경로·쿼리를 보존한다. Railway Trial의 도메인 한 개 제한 안에서 구성했고 추가 유료 구독은 만들지 않았다.
+
+키 관리 도구는 [Infisical 도입 제안](secrets.md)에 개발·운영 분리와 Railway 기존 변수 보존 절차를 정리했다. 아직 외부 키 저장소로 이전하지 않았다.
 
 SITE_URL 변경 후 재시작/재배포한다. `/sitemap.xml`, 상세 canonical, JSON-LD, X/Kakao 링크, 메일 주소가 새 HTTPS origin인지 확인한다. OG는 빌드된 `dist/client/og`에서 제공한다. 새 커뮤니티 글은 `/og/default.png`를 사용한다. 제목·설명은 해당 글별로 SSR한다. Google/GitHub 앱에는 새 callback URI를 별도로 등록한다.
 

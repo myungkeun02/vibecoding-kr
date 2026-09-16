@@ -79,7 +79,7 @@
 
 ## 남은 제약과 상태 구분
 
-주요 로컬 사용 흐름에 남은 **FAIL은 없다**. 위 표는 2026-09-10 로컬 검증 기준이다. 이후 Railway Docker 실행·실제 인터넷 HTTPS·영속 볼륨은 아래 2026-09-16 검증으로 확인했다. 실제 외부 키·공급자 계정이 필요한 운영 OAuth·메일 연동과 자체 도메인은 아직 완료로 보고하지 않는다.
+주요 로컬 사용 흐름에 남은 **FAIL은 없다**. 위 표는 2026-09-10 로컬 검증 기준이다. 이후 Railway Docker 실행·실제 인터넷 HTTPS·영속 볼륨과 자체 도메인은 아래 2026-09-16 검증으로 확인했다. 실제 외부 키·공급자 계정이 필요한 운영 OAuth·메일 연동은 아직 완료로 보고하지 않는다.
 
 도구 가격 대부분은 확인 필요로 남겨 두었고, 공식 페이지 확인 실패 후보 6개는 정식 카탈로그에서 제외했다. 121개 제작 프롬프트의 결과물을 실제로 만드는 작업은 **NOT_RUN**이며 화면에도 편집 검토로 명시한다. 익명 쿠키 삭제에 의한 동일인 재인증을 완벽히 막지는 못한다. PostgreSQL과 업로드 볼륨을 사용하는 단일 웹 인스턴스 운영 기준이며 부하·침투·법적 적합성의 인증을 주장하지 않는다. 정책의 운영 주체·연락처를 실제 배포 전에 확정해야 한다.
 
@@ -99,6 +99,14 @@ GitHub·Google 자격은 Git에서 제외된 비공개 환경파일에만 저장
 
 실제 Railway HTTPS 주소에서 health 200, 상세 canonical, 회원가입과 Secure/HttpOnly/SameSite=Lax 세션, 이미지 업로드, 게시글 작성, 도구 투표가 통과했다. PostgreSQL custom-format 백업과 업로드 사본을 서버 밖에 보관한 후 실제 웹 서비스를 재시작했다. 재시작 중 일시적인 502가 발생했으며 복구 후 로그인 상태·글·업로드 바이트 SHA-256·집계 값이 유지됨을 확인했다. 점검용 글·계정 삭제 후 글과 이미지 URL이 404가 되는 것도 확인했다. 이전 실패 검사에서 남은 점검 전용 계정 1개도 정리했다.
 
-공개 배포 소스 `ba3a50d017e85a58bbad675bcd51ac3b0a3b1be7`의 [GitHub Actions 검사](https://github.com/myungkeun02/vibecoding-kr/actions/runs/35067266387)가 통과했다. 로컬과 공개 서버 검증 범위는 [railway-results.json](railway-results.json)에 구분해 기록했다. `vibepan.com` DNS, 운영 OAuth, 실제 메일 발송은 미완료다.
+공개 배포 소스 `ba3a50d017e85a58bbad675bcd51ac3b0a3b1be7`의 [GitHub Actions 검사](https://github.com/myungkeun02/vibecoding-kr/actions/runs/35067266387)가 통과했다. 로컬과 공개 서버 검증 범위는 [railway-results.json](railway-results.json)에 구분해 기록했다. 이 검사 시점에는 `vibepan.com` DNS, 운영 OAuth, 실제 메일 발송이 미완료였으며 도메인 연결은 아래 후속 검사로 완료했다.
 
 PostgreSQL 볼륨을 싱가포르로 이동해 웹 서버와 같은 지역에 배치했다. 이동 후 DB 연결·제약조건 검사와 홈페이지 HTTP 200이 통과했다. 단일 외부 요청의 첫 바이트 시간은 이동 전 2.529초, 이동 후 0.374초였으며 부하 테스트 결과는 아니다.
+
+## 2026-09-16 운영 도메인 연결
+
+Hosting.kr의 네임서버를 Cloudflare Free로 변경하고 Railway CNAME·소유 확인 TXT와 www 리디렉션을 구성했다. Cloudflare 무료 인증서 발급 후 `SITE_URL=https://vibepan.com`을 적용한 배포 `327c1ea4-f9d1-4fc8-aae0-a452a6333aec`가 성공했다. 초기 Railway 라우팅 404는 설정 재적용·재배포 후 해소됐다.
+
+실제 운영 HTTPS에서 홈·상세·health, canonical·sitemap·robots의 새 주소, 공유 이미지, 비공개 HTML 캐시 정책, HTTP 및 www의 경로·쿼리 보존 이동을 확인했다. 임시 계정으로 가입·Secure/HttpOnly/Lax 세션·글 작성·이미지 업로드·투표를 실행했고 다른 출처의 multipart 요청은 403으로 차단됐다. 글·계정 삭제 후 글과 이미지 URL의 404도 확인했다. 실제 내장 브라우저에서도 운영 홈페이지가 표시됐다. [domain-results.json](domain-results.json)에 결과를 기록했다.
+
+이 작업은 배포·DNS 설정 변경이며 앱 소스는 이전에 검증한 버전과 같다. 운영 OAuth와 실제 메일 발송은 여전히 미설정이며 Infisical은 [도입 제안](../secrets.md) 단계다.
