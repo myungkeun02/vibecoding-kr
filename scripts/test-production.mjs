@@ -6,6 +6,7 @@ import { resolve, join } from 'node:path';
 import { randomBytes } from 'node:crypto';
 import https from 'node:https';
 import { request, expect } from '@playwright/test';
+import sharp from 'sharp';
 mkdirSync('data/test', { recursive: true });
 const dir = mkdtempSync(resolve('data/test/https-')),
   origin = 'https://127.0.0.1:8099';
@@ -61,6 +62,8 @@ const proxy = https.createServer({ key: readFileSync(key), cert: readFileSync(ce
     const headers = { ...req.headers };
     delete headers.host;
     delete headers.connection;
+    headers['x-forwarded-host'] = req.headers.host;
+    headers['x-forwarded-proto'] = 'https';
     const upstream = await fetch('http://127.0.0.1:8098' + req.url, {
       method: req.method,
       headers,
@@ -111,6 +114,29 @@ try {
   expect(cookies.find((c) => c.name === 'session')?.httpOnly).toBe(true);
   expect(cookies.find((c) => c.name === 'session')?.sameSite).toBe('Lax');
   expect((await api.get('/me')).url()).toBe(origin + '/me');
+  const form = await api.post('/api/profile/update', {
+    headers: { Origin: origin, 'x-csrf-token': csrf },
+    form: { nickname: 'TLS_' + salt, bio: 'HTTPS 프록시를 통한 일반 폼 저장 확인' },
+  });
+  expect(form.status()).toBe(200);
+  const upload = await api.post('/api/upload', {
+    headers: { Origin: origin, 'x-csrf-token': csrf },
+    multipart: {
+      file: {
+        name: 'qa.png',
+        mimeType: 'image/png',
+        buffer: await sharp({ create: { width: 8, height: 8, channels: 4, background: '#00ff00' } })
+          .png()
+          .toBuffer(),
+      },
+    },
+  });
+  expect(upload.status()).toBe(200);
+  const crossSite = await api.post('/api/profile/update', {
+    headers: { Origin: 'https://untrusted.example', 'x-csrf-token': csrf },
+    form: { nickname: 'TLS_' + salt, bio: '거부해야 하는 요청' },
+  });
+  expect(crossSite.status()).toBe(403);
   const missing = await api.post('/api/auth/send-verification', {
     headers: { Origin: origin, 'x-csrf-token': csrf },
     data: {},
@@ -128,6 +154,8 @@ try {
         checks: [
           'Secure HttpOnly SameSite=Lax session',
           'authenticated request over HTTPS',
+          'form and multipart upload behind a trusted HTTPS proxy',
+          'cross-site form remains forbidden',
           'canonical origin',
           'unconfigured email returns 503',
           'no development outbox in production',

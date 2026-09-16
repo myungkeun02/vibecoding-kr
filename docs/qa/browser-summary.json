@@ -1,6 +1,6 @@
 {
-  "startedAt": "2026-09-10T11:00:28.086Z",
-  "durationMs": 22249.447,
+  "startedAt": "2026-09-10T20:39:08.284Z",
+  "durationMs": 30964.402000000002,
   "passed": 19,
   "failed": 0,
   "flaky": 0,
@@ -12,7 +12,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 1084
+          "durationMs": 1827
         }
       ]
     },
@@ -22,7 +22,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 824
+          "durationMs": 2876
         }
       ]
     },
@@ -32,7 +32,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 1412
+          "durationMs": 2311
         }
       ]
     },
@@ -42,7 +42,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 681
+          "durationMs": 964
         }
       ]
     },
@@ -52,7 +52,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 810
+          "durationMs": 1113
         }
       ]
     },
@@ -62,7 +62,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 4033
+          "durationMs": 4608
         }
       ]
     },
@@ -72,7 +72,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 153
+          "durationMs": 387
         }
       ]
     },
@@ -82,7 +82,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 168
+          "durationMs": 301
         }
       ]
     },
@@ -92,7 +92,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 116
+          "durationMs": 233
         }
       ]
     },
@@ -102,7 +102,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 29
+          "durationMs": 81
         }
       ]
     },
@@ -112,7 +112,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 156
+          "durationMs": 302
         }
       ]
     },
@@ -122,7 +122,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 125
+          "durationMs": 214
         }
       ]
     },
@@ -132,7 +132,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 143
+          "durationMs": 368
         }
       ]
     },
@@ -142,7 +142,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 1580
+          "durationMs": 2509
         }
       ]
     },
@@ -152,7 +152,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 90
+          "durationMs": 176
         }
       ]
     },
@@ -162,7 +162,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 178
+          "durationMs": 266
         }
       ]
     },
@@ -172,7 +172,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 953
+          "durationMs": 1343
         }
       ]
     },
@@ -182,7 +182,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 7903
+          "durationMs": 9123
         }
       ]
     },
@@ -192,7 +192,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 95
+          "durationMs": 110
         }
       ]
     }
