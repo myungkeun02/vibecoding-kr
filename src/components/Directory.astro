@@ -40,8 +40,8 @@ const href = (key: string, value: string) => {
   </aside><section class="directory-main">
     <div class="directory-head">
       <h2>직접 만들어볼 도구<span class="count-label">{r.total}개</span></h2><a
-        href="/suggest"
-        class="small muted">찾는 도구가 없나요? +</a
+        href="/services/new"
+        class="small accent">SaaS 등록하기 +</a
       >
     </div><form id="filters" class="filters" action="/">
       <input type="hidden" name="q" value={params.get('q') || ''} /><input
@@ -105,8 +105,8 @@ const href = (key: string, value: string) => {
             <>
               <h3>검색 조건에 맞는 도구가 없어요.</h3>
               <p>다른 이름으로 검색하거나 새로운 도구를 제안해 주세요.</p>
-              <a href="/suggest" class="button secondary">
-                도구 제안하기
+              <a href="/services/new" class="button secondary">
+                SaaS 등록하기
               </a>
             </>
           </EmptyState>
@@ -150,8 +150,8 @@ const href = (key: string, value: string) => {
           <span>다음 →</span>
         )
       }
-    </nav><a class="mobile-only mobile-suggest" href="/suggest"
-      >찾는 도구가 없나요? <span>도구 제안하기 ↗</span></a
+    </nav><a class="mobile-only mobile-suggest" href="/services/new"
+      >소개하고 싶은 도구가 있나요? <span>SaaS 등록하기 +</span></a
     >
   </section>
 </div>

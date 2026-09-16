@@ -1,0 +1,91 @@
+---
+import Base from '../../layouts/Base.astro';
+import BrandIntro from '../../components/BrandIntro.astro';
+import EmptyState from '../../components/EmptyState.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import { publicServices } from '../../lib/services';
+import { categories } from '../../lib/apps';
+const r = await publicServices(Astro.url.searchParams);
+const pageLink = (page: number) =>
+  '/services?' + new URLSearchParams({ ...Object.fromEntries(Astro.url.searchParams), page: String(page) });
+---
+
+<Base title="함께 찾은 SaaS" pageKind="services" noindex={Astro.url.search.length > 0}>
+  <header class="page-head service-page-head">
+    <BrandIntro
+      ><div class="eyebrow">함께 찾고, 직접 소개해요</div><h1>함께 찾은 SaaS</h1><p>
+        써보고 좋았던 서비스도, 직접 만든 서비스도 만나보세요.
+      </p></BrandIntro
+    >
+  </header>
+  <div class="service-directory-nav">
+    <nav class="tabs" aria-label="도구 탐색 방식">
+      <a href="/#directory">제작 가이드</a><a href="/services" class="active" aria-current="page"
+        >사용자 등록 SaaS</a
+      >
+    </nav><a class="button" href="/services/new">SaaS 등록하기 +</a>
+  </div>
+  <form class="service-filters" action="/services" role="search">
+    <label class="form-field"
+      ><span class="sr-only">SaaS 검색</span><input
+        name="q"
+        aria-label="SaaS 검색"
+        value={Astro.url.searchParams.get('q') || ''}
+        placeholder="이름이나 소개로 검색"
+        maxlength="100"
+      /></label
+    >
+    <label class="form-field"
+      ><span class="sr-only">SaaS 분야</span><select name="category" aria-label="SaaS 분야"
+        ><option value="">모든 분야</option>{
+          categories.map((c) => (
+            <option value={c.slug} selected={Astro.url.searchParams.get('category') === c.slug}>
+              {c.name}
+            </option>
+          ))
+        }</select
+      ></label
+    >
+    <button class="button secondary" type="submit">검색</button>
+  </form>
+  <p class="muted small">{r.total}개 서비스 · 최근 공개한 순</p>
+  {
+    r.items.length ? (
+      <div class="service-grid">
+        {r.items.map((s) => (
+          <ServiceCard service={s} />
+        ))}
+      </div>
+    ) : (
+      <EmptyState>
+        <>
+          <h2>
+            {Astro.url.searchParams.get('q') || Astro.url.searchParams.get('category')
+              ? '조건에 맞는 SaaS가 없어요.'
+              : '첫 서비스를 소개해 주세요.'}
+          </h2>
+          <p>유용하게 쓰는 도구나 직접 만든 SaaS를 알려주세요.</p>
+          <a class="button secondary" href="/services/new">
+            SaaS 등록하기
+          </a>
+        </>
+      </EmptyState>
+    )
+  }
+  {
+    r.pages > 1 && (
+      <nav class="pagination" aria-label="SaaS 목록 페이지">
+        {r.page > 1 && <a href={pageLink(r.page - 1)}>이전</a>}
+        <span>
+          {r.page} / {r.pages}
+        </span>
+        {r.page < r.pages && <a href={pageLink(r.page + 1)}>다음</a>}
+      </nav>
+    )
+  }
+  <p class="service-list-note muted small">
+    등록자가 소개한 서비스입니다. 직접 제작할 수 있는 범위와 제작 요청문은 <a href="/#directory"
+      >제작 가이드</a
+    >에서 확인하세요.
+  </p>
+</Base>

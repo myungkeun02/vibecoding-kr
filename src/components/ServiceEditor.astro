@@ -1,0 +1,149 @@
+---
+import { categories } from '../lib/apps';
+import { servicePricing } from '../lib/service-schema';
+import type { Service } from '../lib/services';
+interface Props {
+  service?: Service;
+}
+const { service: s } = Astro.props;
+---
+
+<form
+  class="service-editor"
+  data-api
+  action={s ? '/api/services/update' : '/api/services/create'}
+  method="post"
+>
+  <input type="hidden" name="csrf" value={Astro.locals.csrf} />
+  {
+    s && (
+      <>
+        <>
+          <input type="hidden" name="id" value={s.id} />
+          <input type="hidden" name="revision" value={s.revision} />
+        </>
+      </>
+    )
+  }
+  <label class="form-field"
+    ><span>서비스 이름</span><input
+      name="name"
+      required
+      minlength="2"
+      maxlength="80"
+      value={s?.name || ''}
+      placeholder="서비스 이름을 알려주세요"
+    /></label
+  >
+  <label class="form-field"
+    ><span>서비스 주소</span><input
+      name="website"
+      type="url"
+      inputmode="url"
+      required
+      maxlength="1000"
+      value={s?.website_url || ''}
+      placeholder="https://…"
+      aria-describedby="service-url-help"
+    /></label
+  >
+  <p id="service-url-help" class="field-help">누구나 방문할 수 있는 공식 주소를 적어주세요.</p>
+  <div class="service-field-pair">
+    <label class="form-field"
+      ><span>분야</span><select name="category" aria-label="분야" required
+        ><option value="">분야 선택</option>{
+          categories.map((c) => (
+            <option value={c.slug} selected={s?.category === c.slug}>
+              {c.name}
+            </option>
+          ))
+        }</select
+      ></label
+    >
+    <label class="form-field"
+      ><span>요금 방식</span><select name="pricing" aria-label="요금 방식"
+        >{
+          Object.entries(servicePricing).map(([key, label]) => (
+            <option value={key} selected={(s?.pricing || 'unknown') === key}>
+              {label}
+            </option>
+          ))
+        }</select
+      ></label
+    >
+  </div>
+  <fieldset class="service-relationship">
+    <legend>어떤 서비스인가요?</legend>
+    <label
+      ><input type="radio" name="relationship" value="user" checked={!s || s.relationship === 'user'} /> 추천하고
+      싶은 서비스</label
+    >
+    <label
+      ><input type="radio" name="relationship" value="maker" checked={s?.relationship === 'maker'} /> 제가 만든
+      서비스</label
+    >
+  </fieldset>
+  <label class="form-field"
+    ><span>한 줄 소개</span><input
+      name="tagline"
+      required
+      minlength="10"
+      maxlength="160"
+      value={s?.tagline || ''}
+      placeholder="누구에게 어떤 도움이 되는 서비스인가요?"
+    /></label
+  >
+  <label class="form-field"
+    ><span>상세 소개</span><textarea
+      name="description"
+      aria-label="상세 소개"
+      required
+      minlength="30"
+      maxlength="5000"
+      rows="7"
+      placeholder="주요 기능, 추천하는 이유, 사용해 본 경험을 30자 이상 적어주세요."
+      >{s?.description || ''}</textarea
+    ></label
+  >
+  <div class="service-image-field">
+    <p>서비스 화면 또는 로고 <span class="muted small">선택</span></p>
+    <input type="hidden" name="image" value={s?.image_id ? '/media/' + s.image_id : ''} />
+    <img
+      class="service-image-preview"
+      data-service-image-preview
+      src={s?.image_id ? '/media/' + s.image_id : undefined}
+      alt="첨부한 서비스 이미지"
+      hidden={!s?.image_id}
+    />
+    <div data-service-upload-controls hidden>
+      <label class="button secondary"
+        >이미지 첨부<input
+          class="service-file-input"
+          type="file"
+          accept="image/png,image/jpeg,image/webp"
+          aria-label="서비스 이미지 첨부"
+          data-service-upload
+        /></label
+      >
+      <button type="button" class="text-button" data-service-image-remove hidden={!s?.image_id}
+        >이미지 제거</button
+      >
+      <p class="field-help">직접 첨부할 수 있는 PNG·JPEG·WebP 이미지, 최대 5MB</p>
+    </div>
+    <noscript><p class="field-help">이미지 없이도 서비스를 등록할 수 있어요.</p></noscript>
+  </div>
+  <p class="muted small">
+    운영자가 확인하면 SaaS 목록에 공개돼요. {
+      s
+        ? '수정한 내용도 다시 검토하며, 검토 중에는 목록에 표시되지 않아요.'
+        : '등록 상태는 내 활동에서 확인할 수 있어요.'
+    }
+  </p>
+  <p class="form-status" role="status"></p>
+  <div class="service-submit">
+    <button class="primary" type="submit">{s ? '수정하고 검토 요청' : '등록 요청하기'}</button><a
+      class="muted"
+      href={s ? '/services/' + s.id : '/services'}>취소</a
+    >
+  </div>
+</form>

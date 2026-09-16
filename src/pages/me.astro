@@ -1,6 +1,7 @@
 ---
 import EmptyState from '../components/EmptyState.astro';
 import BrandIntro from '../components/BrandIntro.astro';
+import ServiceCard from '../components/ServiceCard.astro';
 import Base from '../layouts/Base.astro';
 import PostRow from '../components/PostRow.astro';
 import { all, postSelect } from '../lib/db';
@@ -25,6 +26,10 @@ const savedPosts = await all(
   user.id,
 );
 const suggestions = await all('SELECT * FROM suggestions WHERE user_id=? ORDER BY created_at DESC', user.id);
+const services = await all(
+  'SELECT s.*,u.nickname FROM services s JOIN users u ON u.id=s.user_id WHERE s.user_id=? ORDER BY s.updated_at DESC',
+  user.id,
+);
 const labels: Record<string, string> = {
   pending: '검토 대기',
   accepted_pending_release: '채택 · 반영 대기',
@@ -43,9 +48,9 @@ const labels: Record<string, string> = {
   </header><nav class="mobile-only mobile-account-links" aria-label="내 활동 바로가기">
     <a href="#saved-tools">저장한 도구 <strong>{saved.length}</strong></a><a href="#my-posts"
       >내가 쓴 글 <strong>{mine.length}</strong></a
-    ><a href="#profile-settings">프로필 설정 ↗</a>{
-      user.role === 'admin' && <a href="/admin">관리자 화면 ↗</a>
-    }
+    ><a href="#my-services">등록한 SaaS <strong>{services.length}</strong></a><a href="#profile-settings"
+      >프로필 설정 ↗</a
+    >{user.role === 'admin' && <a href="/admin">관리자 화면 ↗</a>}
   </nav><div class="profile-grid">
     <aside>
       <div class="meta-box" id="profile-settings">
@@ -85,7 +90,7 @@ const labels: Record<string, string> = {
         </form>
       </div><details class="meta-box">
         <summary>계정 탈퇴</summary><p style="margin-top:15px">
-          작성한 글과 댓글의 내용, 대체 기록, 저장한 목록과 이메일 정보가 삭제돼요. 모든 기기에서
+          작성한 글과 댓글의 내용, 등록한 SaaS, 대체 기록, 저장한 목록과 이메일 정보가 삭제돼요. 모든 기기에서
           로그아웃됩니다.
         </p><form
           data-api
@@ -138,6 +143,17 @@ const labels: Record<string, string> = {
             </a>
           ))
         }{!voted.length && <p class="muted">아직 직접 대체한 도구를 등록하지 않았어요.</p>}
+      </div><div class="section">
+        <div class="flex between wrap-flex">
+          <h2 id="my-services">등록한 SaaS</h2><a class="small accent" href="/services/new">SaaS 등록하기 +</a
+          >
+        </div>
+        <div class="service-account-list">{services.map((s) => <ServiceCard service={s} showStatus />)}</div>
+        {
+          !services.length && (
+            <p class="muted">추천하고 싶은 SaaS를 등록하면 검토 상태를 여기에서 확인할 수 있어요.</p>
+          )
+        }
       </div><div class="section">
         <h2 id="my-posts">내가 쓴 글</h2>{mine.map((p) => <PostRow post={p} />)}{
           !mine.length && (

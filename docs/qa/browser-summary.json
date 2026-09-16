@@ -1,7 +1,7 @@
 {
-  "startedAt": "2026-09-16T10:30:37.315Z",
-  "durationMs": 29096.058,
-  "passed": 23,
+  "startedAt": "2026-09-16T10:49:56.536Z",
+  "durationMs": 32466.787,
+  "passed": 26,
   "failed": 0,
   "flaky": 0,
   "skipped": 0,
@@ -12,7 +12,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 687
+          "durationMs": 671
         }
       ]
     },
@@ -22,7 +22,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 2394
+          "durationMs": 2401
         }
       ]
     },
@@ -32,7 +32,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 2374
+          "durationMs": 2491
         }
       ]
     },
@@ -42,7 +42,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 1887
+          "durationMs": 1827
         }
       ]
     },
@@ -52,7 +52,37 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 3801
+          "durationMs": 3819
+        }
+      ]
+    },
+    {
+      "title": "members upload SaaS, admins publish, owners revise and delete; media follows visibility",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 2746
+        }
+      ]
+    },
+    {
+      "title": "SaaS permissions, canonical duplicates, stale writes and malicious input are rejected",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 525
+        }
+      ]
+    },
+    {
+      "title": "review feedback, no-JavaScript submission, suspension and account deletion control SaaS visibility",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 721
         }
       ]
     },
@@ -62,7 +92,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 717
+          "durationMs": 706
         }
       ]
     },
@@ -72,7 +102,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 1178
+          "durationMs": 1241
         }
       ]
     },
@@ -82,7 +112,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 614
+          "durationMs": 631
         }
       ]
     },
@@ -92,7 +122,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 714
+          "durationMs": 726
         }
       ]
     },
@@ -102,7 +132,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 4530
+          "durationMs": 3867
         }
       ]
     },
@@ -112,7 +142,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 132
+          "durationMs": 164
         }
       ]
     },
@@ -122,7 +152,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 151
+          "durationMs": 174
         }
       ]
     },
@@ -132,7 +162,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 136
+          "durationMs": 151
         }
       ]
     },
@@ -152,7 +182,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 166
+          "durationMs": 161
         }
       ]
     },
@@ -162,7 +192,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 134
+          "durationMs": 136
         }
       ]
     },
@@ -172,7 +202,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 142
+          "durationMs": 149
         }
       ]
     },
@@ -182,7 +212,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 1306
+          "durationMs": 1314
         }
       ]
     },
@@ -192,7 +222,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 119
+          "durationMs": 115
         }
       ]
     },
@@ -202,7 +232,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 227
+          "durationMs": 217
         }
       ]
     },
@@ -212,7 +242,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 837
+          "durationMs": 748
         }
       ]
     },
@@ -222,7 +252,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 5428
+          "durationMs": 5393
         }
       ]
     },
@@ -232,7 +262,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 92
+          "durationMs": 98
         }
       ]
     }

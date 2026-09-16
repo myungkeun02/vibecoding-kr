@@ -1,0 +1,47 @@
+---
+import Base from '../../../layouts/Base.astro';
+import ServiceEditor from '../../../components/ServiceEditor.astro';
+import EmptyState from '../../../components/EmptyState.astro';
+import { visibleService } from '../../../lib/services';
+if (!Astro.locals.user) return Astro.redirect('/login?returnTo=' + encodeURIComponent(Astro.url.pathname));
+const s = await visibleService(Astro.params.id || '', Astro.locals.user);
+const allowed = s && s.user_id === Astro.locals.user.id;
+if (!allowed) Astro.response.status = s ? 403 : 404;
+---
+
+<Base
+  title="SaaS 정보 수정"
+  pageKind="service-editor"
+  mobileTitle="SaaS 정보 수정"
+  mobileBack={'/services/' + Astro.params.id}
+  noindex
+>
+  <section class="service-form-wrap">
+    {
+      allowed ? (
+        <>
+          <>
+            <header class="page-head">
+              <>
+                <h1>SaaS 정보 수정</h1>
+                <p>수정 내용을 저장하면 다시 검토를 요청해요.</p>
+              </>
+            </header>
+            <ServiceEditor service={s} />
+          </>
+        </>
+      ) : (
+        <div class="section">
+          <EmptyState>
+            <>
+              <h1>이 서비스를 수정할 수 없어요.</h1>
+              <a class="button" href="/services">
+                SaaS 목록으로
+              </a>
+            </>
+          </EmptyState>
+        </div>
+      )
+    }
+  </section>
+</Base>

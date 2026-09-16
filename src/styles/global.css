@@ -40,6 +40,9 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 90px;
 }
+html:not([data-enhanced]) {
+  scroll-behavior: auto;
+}
 body {
   margin: 0;
   background: var(--bg);

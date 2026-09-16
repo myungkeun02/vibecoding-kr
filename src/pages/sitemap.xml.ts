@@ -6,11 +6,17 @@ export const GET: APIRoute = async () => {
   const urls = [
     '/',
     '/community',
+    '/services',
     '/stats',
     '/rebuild-prompt',
     ...apps.map((a) => '/' + a.slug),
     ...categories.map((c) => '/category/' + c.slug),
     ...(await all("SELECT id FROM posts WHERE status='active'")).map((p) => '/community/' + p.id),
+    ...(
+      await all(
+        "SELECT s.id FROM services s JOIN users u ON u.id=s.user_id WHERE s.status='published' AND u.status='active'",
+      )
+    ).map((s) => '/services/' + s.id),
   ];
   return new Response(
     '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' +

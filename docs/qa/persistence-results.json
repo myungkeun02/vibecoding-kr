@@ -1,10 +1,11 @@
 {
   "status": "PASS",
-  "at": "2026-09-10T11:00:53.229Z",
+  "at": "2026-09-16T10:49:13.828Z",
   "checks": [
     "real process restart",
     "session persists",
     "posts persist",
+    "submitted SaaS and review state persist through restart and restore",
     "votes and totals persist",
     "PostgreSQL live pg_dump backup",
     "restore after stopped server",

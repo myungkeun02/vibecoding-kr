@@ -67,12 +67,24 @@ try {
     board: 'builds',
   });
   await action('vote', { slug: 'slack' });
+  const submitted = await action('services/create', {
+    name: '재시작 후에도 남는 SaaS',
+    website: 'https://' + salt + '.example.com',
+    category: 'notes',
+    tagline: '자료와 메모를 모아두는 SaaS 서비스',
+    description:
+      '서버를 재시작하거나 백업에서 복원해도 등록한 소개와 검토 상태가 유지되는지 확인하는 서비스입니다.',
+    pricing: 'free',
+    relationship: 'user',
+    image: '',
+  });
   const before = await (await api.get('/api/totals')).json();
   const backup = join(dir, 'backup.dump');
   ops(['backup', backup]);
   await stop();
   await start();
   expect((await api.get('/community/' + p.id)).status()).toBe(200);
+  expect((await api.get(submitted.redirect)).status()).toBe(200);
   expect(await (await api.get('/api/totals')).json()).toEqual(before);
   expect((await api.get('/me')).url()).toBe(origin + '/me');
   await stop();
@@ -81,6 +93,7 @@ try {
   await start();
   expect(await (await api.get('/api/totals')).json()).toEqual(before);
   expect((await api.get('/community/' + p.id)).status()).toBe(200);
+  expect((await api.get(submitted.redirect)).status()).toBe(200);
   ops(['integrity']);
   writeFileSync(
     'docs/qa/persistence-results.json',
@@ -92,6 +105,7 @@ try {
           'real process restart',
           'session persists',
           'posts persist',
+          'submitted SaaS and review state persist through restart and restore',
           'votes and totals persist',
           'PostgreSQL live pg_dump backup',
           'restore after stopped server',

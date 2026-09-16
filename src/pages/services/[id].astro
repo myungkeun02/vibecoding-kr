@@ -1,0 +1,116 @@
+---
+import Base from '../../layouts/Base.astro';
+import EmptyState from '../../components/EmptyState.astro';
+import { visibleService } from '../../lib/services';
+import { servicePricing, serviceStatuses } from '../../lib/service-schema';
+import { categoryName } from '../../lib/apps';
+const s = await visibleService(Astro.params.id || '', Astro.locals.user);
+if (!s) Astro.response.status = 404;
+const owner = s && Astro.locals.user?.id === s.user_id;
+const reviewer = Astro.locals.user?.role === 'admin';
+---
+
+<Base
+  title={s?.name || '서비스를 찾을 수 없어요'}
+  description={s?.tagline}
+  pageKind="service-detail"
+  mobileTitle="SaaS 소개"
+  mobileBack="/services"
+  noindex={!s || s.status !== 'published'}
+>
+  {
+    s ? (
+      <article class="service-detail">
+        {(owner || reviewer) && (
+          <aside class="service-review-status" role="status">
+            <strong>{serviceStatuses[s.status]}</strong>
+            <p>
+              {s.status === 'pending'
+                ? '운영자가 확인하고 있어요. 공개 전에는 등록자와 운영자만 이 페이지를 볼 수 있어요.'
+                : s.status === 'published'
+                  ? 'SaaS 목록에 공개된 서비스예요.'
+                  : '아래 안내를 확인하고 내용을 수정해 다시 검토를 요청할 수 있어요.'}
+            </p>
+            {s.review_note && <p class="service-review-note">{s.review_note}</p>}
+          </aside>
+        )}
+        <header class="page-head">
+          <>
+            <div class="eyebrow">
+              {s.relationship === 'maker' ? '직접 만든 서비스' : '사용자 추천'} · {categoryName(s.category)}
+            </div>
+            <h1>{s.name}</h1>
+            <p>{s.tagline}</p>
+            <div class="flex wrap-flex">
+              <>
+                <a class="button" href={s.website_url} target="_blank" rel="nofollow ugc noopener noreferrer">
+                  서비스 방문하기 ↗
+                </a>
+                <span class="muted">{servicePricing[s.pricing]}</span>
+              </>
+            </div>
+          </>
+        </header>
+        {s.image_id && (
+          <img
+            class="service-detail-image"
+            src={'/media/' + s.image_id}
+            alt={s.name + ' 소개 이미지'}
+            width="960"
+            height="600"
+          />
+        )}
+        <section class="section">
+          <>
+            <h2>서비스 소개</h2>
+            <p class="service-description">{s.description}</p>
+          </>
+        </section>
+        <p class="muted small">
+          {s.nickname}님이 등록 · {s.created_at.slice(0, 10)} · 등록자가 소개한 내용이에요.
+        </p>
+        {owner && (
+          <div class="service-owner-actions">
+            <a class="button secondary" href={'/services/' + s.id + '/edit'}>
+              등록 정보 수정
+            </a>
+            <form
+              data-api
+              action="/api/services/delete"
+              method="post"
+              data-confirm="등록한 SaaS를 삭제할까요? 목록에서도 사라져요."
+            >
+              <input type="hidden" name="csrf" value={Astro.locals.csrf} />
+              <input type="hidden" name="id" value={s.id} />
+              <input type="hidden" name="revision" value={s.revision} />
+              <button type="submit" class="text-button danger">
+                등록 삭제
+              </button>
+              <p class="form-status" role="status" />
+            </form>
+          </div>
+        )}
+        {reviewer && (
+          <a class="small accent" href="/admin#services">
+            SaaS 등록 관리 ↗
+          </a>
+        )}
+        <p class="section">
+          <a href="/services">← SaaS 목록으로</a>
+        </p>
+      </article>
+    ) : (
+      <div class="section">
+        <EmptyState>
+          <>
+            <h1>서비스를 찾을 수 없어요.</h1>
+            <p>아직 공개되지 않았거나 삭제된 서비스예요.</p>
+            <a href="/services" class="button">
+              SaaS 목록으로
+            </a>
+          </>
+        </EmptyState>
+      </div>
+    )
+  }
+</Base>

@@ -15,7 +15,9 @@ if (!user)
           새로운 도구, 달라진 가격, 더 나은 프롬프트를 알려주세요.
         </p></BrandIntro
       >
-    </header><form data-api action="/api/suggest" method="post">
+    </header><p class="service-suggest-link">
+      새로운 SaaS를 소개하려면 <a href="/services/new">SaaS 등록하기 ↗</a>
+    </p><form data-api action="/api/suggest" method="post">
       <input type="hidden" name="csrf" value={Astro.locals.csrf} /><label class="form-field"
         ><span>관련 도구 (선택)</span><select name="slug" aria-label="관련 도구 (선택)">
           <option value="">새 도구 제안 · 선택 안 함</option>

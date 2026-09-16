@@ -10,7 +10,13 @@ export const GET: APIRoute = async (ctx) => {
     "SELECT id FROM posts WHERE status='active' AND body LIKE ?",
     '%/media/' + id + '%',
   );
-  if (!publicUse && ctx.locals.user?.id !== file.user_id) return new Response(null, { status: 404 });
+  const serviceUse = await one(
+    "SELECT s.id FROM services s JOIN users u ON u.id=s.user_id WHERE s.image_id=? AND ((s.status='published' AND u.status='active') OR ?=1)",
+    id,
+    ctx.locals.user?.role === 'admin' ? 1 : 0,
+  );
+  if (!publicUse && !serviceUse && ctx.locals.user?.id !== file.user_id)
+    return new Response(null, { status: 404 });
   try {
     return new Response(new Uint8Array(await readImage(id, file.storage)), {
       headers: {

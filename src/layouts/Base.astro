@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import '../styles/services.css';
 import '../styles/mobile.css';
 import MobileShell from '../components/MobileShell.astro';
 import BrandMark from '../components/BrandMark.astro';
@@ -86,6 +87,9 @@ const structured = [
       <div class="wrap">
         <a class="brand" href="/"><BrandMark />{brand.name}</a><nav class="nav" aria-label="주 메뉴">
           <a href="/" aria-current={Astro.url.pathname === '/' ? 'page' : undefined}>도구 탐색</a><a
+            href="/services"
+            aria-current={Astro.url.pathname.startsWith('/services') ? 'page' : undefined}>SaaS 모음</a
+          ><a
             href="/community"
             aria-current={Astro.url.pathname.startsWith('/community') ? 'page' : undefined}>만드는 사람들</a
           ><a href="/stats">대체 현황 ↗</a>
@@ -113,9 +117,9 @@ const structured = [
       <div class="wrap">
         <div class="flex between wrap-flex">
           <a href="/" class="brand"><BrandMark />{brand.name}</a><div class="flex wrap-flex">
-            <a href="/rebuild-prompt">이 사이트를 만든 프롬프트 ↗</a><a href="/suggest">도구 제안</a><a
-              href="/privacy">개인정보 처리 안내</a
-            ><a href="/terms">이용약관</a>
+            <a href="/rebuild-prompt">이 사이트를 만든 프롬프트 ↗</a><a href="/services/new">SaaS 등록</a><a
+              href="/suggest">정보 수정 제안</a
+            ><a href="/privacy">개인정보 처리 안내</a><a href="/terms">이용약관</a>
           </div>
         </div><p class="footer-note">
           도구별 대체 가능성은 소개한 기능 범위를 기준으로 검토한 의견입니다. 외부 추적 도구 없이 이용 횟수만

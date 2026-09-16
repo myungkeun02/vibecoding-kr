@@ -18,6 +18,7 @@ import { getApp } from '../../lib/apps';
 import { absolute, secret } from '../../lib/config';
 import { sendMail, mailAvailable } from '../../lib/mail';
 import { createHmac } from 'node:crypto';
+import { submitService, deleteService, reviewService } from '../../lib/services';
 function bad(message: string, status = 400): never {
   throw Object.assign(new Error(message), { status });
 }
@@ -480,6 +481,31 @@ export const POST: APIRoute = async (ctx) => {
             reason,
           );
           result.message = '신고를 접수했어요. 운영자가 확인하겠습니다.';
+          break;
+        }
+        case 'services/create':
+        case 'services/update': {
+          requireUser();
+          if (action === 'services/update' && !b.id) bad('수정할 서비스를 확인해 주세요.');
+          const serviceId = await submitService(
+            b,
+            user.id,
+            action === 'services/update' ? String(b.id) : undefined,
+            b.revision,
+          );
+          result.redirect = '/services/' + serviceId + '?submitted=1';
+          break;
+        }
+        case 'services/delete': {
+          requireUser();
+          await deleteService(b.id, user.id, b.revision);
+          result.redirect = '/me#my-services';
+          break;
+        }
+        case 'services/review': {
+          admin();
+          await reviewService(b, user.id);
+          result.redirect = '/admin#services';
           break;
         }
         case 'suggest': {

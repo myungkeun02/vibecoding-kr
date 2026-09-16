@@ -174,6 +174,10 @@ document.addEventListener('submit', async (e) => {
   }
   if (!form.matches('form[data-api]')) return;
   e.preventDefault();
+  if (form.dataset.uploading === 'true') {
+    toast('이미지 첨부가 끝나면 등록할 수 있어요.');
+    return;
+  }
   if (form.dataset.confirm && !window.confirm(form.dataset.confirm)) return;
   const status = form.querySelector<HTMLElement>('.form-status');
   const button = form.querySelector<HTMLButtonElement>('button[type=submit],button:not([type])');
@@ -349,14 +353,34 @@ document.addEventListener('click', async (e) => {
   }
 });
 document.querySelectorAll<HTMLElement>('[data-odometer]').forEach((e) => roll(Number(e.dataset.odometer)));
+document.querySelectorAll<HTMLElement>('[data-service-upload-controls]').forEach((el) => (el.hidden = false));
+document.addEventListener('click', (event) => {
+  const button = (event.target as HTMLElement).closest<HTMLElement>('[data-service-image-remove]');
+  const form = button?.closest<HTMLFormElement>('form');
+  if (!form || form.dataset.uploading === 'true') return;
+  form.querySelector<HTMLInputElement>('input[name=image]')!.value = '';
+  const preview = form.querySelector<HTMLImageElement>('[data-service-image-preview]')!;
+  preview.hidden = true;
+  preview.removeAttribute('src');
+  button!.hidden = true;
+});
 document.addEventListener('change', async (event) => {
   const input = event.target as HTMLInputElement;
-  if (!input.hasAttribute('data-upload') || !input.files?.[0]) return;
+  const serviceUpload = input.hasAttribute('data-service-upload');
+  if ((!input.hasAttribute('data-upload') && !serviceUpload) || !input.files?.[0]) return;
   const file = input.files[0];
   if (file.size > 5 * 1024 * 1024) {
     toast('5MB 이하 이미지를 선택해 주세요.');
+    input.value = '';
     return;
   }
+  const editor = serviceUpload ? input.closest<HTMLFormElement>('form') : null;
+  const submit = editor?.querySelector<HTMLButtonElement>('button[type=submit]');
+  const status = editor?.querySelector<HTMLElement>('.form-status');
+  if (editor) editor.dataset.uploading = 'true';
+  if (submit) submit.disabled = true;
+  if (status) status.textContent = '이미지를 첨부하고 있어요…';
+  input.disabled = true;
   try {
     const form = new FormData();
     form.set('file', file);
@@ -367,13 +391,26 @@ document.addEventListener('change', async (event) => {
     });
     const data = await response.json();
     if (!response.ok) throw new Error(data.error);
-    const body = $<HTMLTextAreaElement>('textarea[name=body]');
-    if (body) body.value += '\n\n![제작 화면](' + data.url + ')\n';
-    toast('이미지를 첨부했어요. 글을 게시하면 함께 공개됩니다.');
+    if (editor) {
+      editor.querySelector<HTMLInputElement>('input[name=image]')!.value = data.url;
+      const preview = editor.querySelector<HTMLImageElement>('[data-service-image-preview]')!;
+      preview.src = data.url;
+      preview.hidden = false;
+      editor.querySelector<HTMLElement>('[data-service-image-remove]')!.hidden = false;
+      if (status) status.textContent = '이미지를 첨부했어요.';
+    } else {
+      const body = $<HTMLTextAreaElement>('textarea[name=body]');
+      if (body) body.value += '\n\n![제작 화면](' + data.url + ')\n';
+      toast('이미지를 첨부했어요. 글을 게시하면 함께 공개됩니다.');
+    }
   } catch (e) {
+    if (status) status.textContent = (e as Error).message;
     toast((e as Error).message);
   } finally {
     input.value = '';
+    input.disabled = false;
+    if (editor) delete editor.dataset.uploading;
+    if (submit) submit.disabled = false;
   }
 });
 

@@ -2,10 +2,17 @@
 import Base from '../layouts/Base.astro';
 import AdminAction from '../components/AdminAction.astro';
 import { all } from '../lib/db';
+import { serviceStatuses, servicePricing } from '../lib/service-schema';
+import { categoryName } from '../lib/apps';
 const allowed = Astro.locals.user?.role === 'admin';
 if (!allowed) Astro.response.status = 403;
 const reports = allowed ? await all('SELECT * FROM reports ORDER BY id DESC LIMIT 100') : [];
 const suggestions = allowed ? await all('SELECT * FROM suggestions ORDER BY id DESC LIMIT 100') : [];
+const services = allowed
+  ? await all(
+      "SELECT s.*,u.nickname FROM services s JOIN users u ON u.id=s.user_id ORDER BY CASE WHEN s.status='pending' THEN 0 ELSE 1 END,s.updated_at DESC LIMIT 100",
+    )
+  : [];
 const users = allowed
   ? await all('SELECT id,nickname,email,status,role FROM users ORDER BY created_at DESC LIMIT 100')
   : [];
@@ -21,6 +28,12 @@ const comments = allowed
   : [];
 const actions = allowed ? await all('SELECT * FROM audit ORDER BY id DESC LIMIT 50') : [];
 const actionLabels: Record<string, string> = {
+  'service-submit': 'SaaS 등록 요청',
+  'service-update': 'SaaS 정보 수정',
+  'service-delete': 'SaaS 등록 삭제',
+  'service-publish': 'SaaS 공개',
+  'service-reject': 'SaaS 보완 요청',
+  'service-hide': 'SaaS 공개 중지',
   'user-suspend': '회원 이용 제한',
   'user-restore': '회원 이용 제한 해제',
   'post-hide': '글 숨김',
@@ -66,7 +79,10 @@ const statuses: Record<string, string> = {
           </header>
           <nav class="tabs">
             <>
-              <a href="#reports">신고</a>
+              <>
+                <a href="#services">SaaS 등록</a>
+                <a href="#reports">신고</a>
+              </>
               <a href="#suggestions">도구 제안</a>
               <a href="#users">사용자</a>
               <a href="#posts">게시글</a>
@@ -74,6 +90,76 @@ const statuses: Record<string, string> = {
               <a href="#audit">운영 기록</a>
             </>
           </nav>
+          <section id="services" class="section">
+            <h2>SaaS 등록 검토</h2>
+            <p class="muted small">
+              공식 주소와 소개·이미지를 확인한 뒤 공개해 주세요. 공개하면 SaaS 목록에 바로 표시됩니다.
+            </p>
+            {services.map((s) => (
+              <article class="admin-row service-admin-row" data-service-id={s.id}>
+                <span class="badge">{serviceStatuses[s.status]}</span>
+                <h3>{s.name}</h3>
+                <p>
+                  {s.nickname} · {s.relationship === 'maker' ? '직접 만든 서비스' : '사용자 추천'} ·{' '}
+                  {categoryName(s.category)} · {servicePricing[s.pricing]}
+                </p>
+                <p>
+                  <a href={s.website_url} target="_blank" rel="noopener noreferrer nofollow">
+                    {s.website_url} ↗
+                  </a>{' '}
+                  · <a href={'/services/' + s.id}>등록 화면 보기</a>
+                </p>
+                <p>{s.tagline}</p>
+                <details>
+                  <summary>상세 소개와 이미지</summary>
+                  <p class="service-admin-summary">{s.description}</p>
+                  {s.image_id && (
+                    <img
+                      class="service-image-preview"
+                      src={'/media/' + s.image_id}
+                      alt={s.name + ' 등록 이미지'}
+                      loading="lazy"
+                    />
+                  )}
+                </details>
+                {s.review_note && <p class="service-review-note muted">이전 안내: {s.review_note}</p>}
+                {s.status !== 'rejected' && (
+                  <form class="service-review-form" data-api action="/api/services/review" method="post">
+                    <input type="hidden" name="csrf" value={Astro.locals.csrf} />
+                    <input type="hidden" name="id" value={s.id} />
+                    <input type="hidden" name="revision" value={s.revision} />
+                    <label class="form-field">
+                      <span>처리</span>
+                      <select name="operation" aria-label={s.name + ' 처리'}>
+                        {s.status === 'published' ? (
+                          <option value="hide">공개 중지</option>
+                        ) : (
+                          <>
+                            <option value="publish">검토 완료 · 공개하기</option>
+                            <option value="reject">보완 요청</option>
+                          </>
+                        )}
+                      </select>
+                    </label>
+                    <label class="form-field">
+                      <span>등록자에게 남길 안내</span>
+                      <textarea
+                        name="note"
+                        maxlength="1000"
+                        rows="2"
+                        placeholder="보완 요청이나 공개 중지 시 이유를 5자 이상 적어주세요."
+                      />
+                    </label>
+                    <button type="submit" class="button secondary">
+                      검토 결과 적용
+                    </button>
+                    <p class="form-status" role="status" />
+                  </form>
+                )}
+              </article>
+            ))}
+            {!services.length && <p class="empty">새로 접수된 SaaS가 없어요.</p>}
+          </section>
           <section id="reports" class="section">
             <h2>신고 접수</h2>
             {reports.map((r) => (

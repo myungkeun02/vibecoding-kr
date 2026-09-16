@@ -993,6 +993,11 @@
 }
 
 @media (max-width: 760px) {
+  html:not([data-enhanced]) .mobile-tabbar {
+    position: static;
+    border-top: 0;
+    border-bottom: 1px solid var(--line);
+  }
   html:not([data-enhanced]) .mobile-filter-trigger,
   html:not([data-enhanced]) [data-close-sheet] {
     display: none;
